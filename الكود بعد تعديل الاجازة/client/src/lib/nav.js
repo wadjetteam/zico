@@ -57,7 +57,6 @@ export const NAV_SECTIONS = [
     icon: ShieldCheck,
     items: [
       { to: "/controls/management", label: "Control Library" },
-      { to: "/controls/detail/:id", label: "Control Detail" },
     ],
   },
   {

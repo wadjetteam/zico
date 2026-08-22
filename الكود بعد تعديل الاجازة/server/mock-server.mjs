@@ -2547,6 +2547,60 @@ if (parts.length === 5 && parts[0] === "governance" && parts[1] === "roles" && p
     }
   }
 
+  // Controls-specific validation
+  if ((path === "controls" || path === "compliance/controls") && method === "POST") {
+    const body = await readBody(req);
+    const errors = [];
+    if (!body.controlId) errors.push("Control ID is required");
+    if (!body.name) errors.push("Name is required");
+    if (!body.category) errors.push("Category is required");
+    if (!body.status) errors.push("Status is required");
+    if (!body.owner) errors.push("Owner is required");
+    if (errors.length) return json(res, 422, { message: "Validation failed", errors });
+    const exists = CONTROLS.find((c) => c.controlId === body.controlId);
+    if (exists) return json(res, 422, { message: `Control ID '${body.controlId}' already exists` });
+    const progress = body.progress ?? 0;
+    let status = body.status;
+    if (progress === 0) status = "Inactive / Planned";
+    else if (progress === 100) status = "Active / Implemented";
+    else status = "In Progress / Under Implementation";
+    const designEff = body.effectiveness?.design ?? 0;
+    const operatingEff = body.effectiveness?.operating ?? 0;
+    const coverage = body.effectiveness?.coverage ?? 0;
+    const testing = body.effectiveness?.testing ?? 0;
+    const overall = Math.round(designEff * 0.25 + operatingEff * 0.35 + coverage * 0.25 + testing * 0.15);
+    const newControl = {
+      _id: newId("ctl"),
+      ...body,
+      status,
+      progress,
+      effectiveness: { design: designEff, operating: operatingEff, coverage, testing, overall },
+      createdAt: new Date().toISOString(),
+    };
+    CONTROLS.unshift(newControl);
+    return json(res, 200, withJoins(newControl));
+  }
+
+  if (parts.length === 2 && (parts[0] === "controls" || parts[0] === "compliance/controls") && method === "PUT") {
+    const id = parts[1];
+    const idx = CONTROLS.findIndex((c) => c._id === id);
+    if (idx < 0) return json(res, 404, { message: "Control not found" });
+    const body = await readBody(req);
+    const progress = body.progress ?? CONTROLS[idx].progress ?? 0;
+    let status = body.status || CONTROLS[idx].status;
+    if (progress === 0) status = "Inactive / Planned";
+    else if (progress === 100) status = "Active / Implemented";
+    else status = "In Progress / Under Implementation";
+    const designEff = body.effectiveness?.design ?? CONTROLS[idx].effectiveness?.design ?? 0;
+    const operatingEff = body.effectiveness?.operating ?? CONTROLS[idx].effectiveness?.operating ?? 0;
+    const coverage = body.effectiveness?.coverage ?? CONTROLS[idx].effectiveness?.coverage ?? 0;
+    const testing = body.effectiveness?.testing ?? CONTROLS[idx].effectiveness?.testing ?? 0;
+    const overall = Math.round(designEff * 0.25 + operatingEff * 0.35 + coverage * 0.25 + testing * 0.15);
+    const updated = { ...CONTROLS[idx], ...body, status, progress, effectiveness: { design: designEff, operating: operatingEff, coverage, testing, overall }, updatedAt: new Date().toISOString() };
+    CONTROLS[idx] = updated;
+    return json(res, 200, withJoins(updated));
+  }
+
   console.warn(`[wadjet:mock] Unhandled route (404): ${method} /api/${path}`);
   return json(res, 404, { message: `Not found: ${method} /${path}` });
 };

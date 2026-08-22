@@ -1,0 +1,610 @@
+- generic [ref=f37e9]:
+  - banner [ref=f37e10]:
+    - button "Toggle navigation" [ref=f37e11] [cursor=pointer]
+    - generic [ref=f37e14]:
+      - img "WADJET" [ref=f37e16]
+      - generic [ref=f37e17]:
+        - generic [ref=f37e18]: WADJET
+        - generic [ref=f37e19]: Eyes on Risk. Control in Action.
+    - textbox "Search modules" [ref=f37e21]:
+      - /placeholder: Search modules…
+    - generic [ref=f37e22]:
+      - button "Help" [ref=f37e23] [cursor=pointer]
+      - button "Settings" [ref=f37e27] [cursor=pointer]
+      - button "S admin" [ref=f37e32] [cursor=pointer]:
+        - generic [ref=f37e33]: S
+        - generic [ref=f37e34]: admin
+  - generic [ref=f37e35]:
+    - complementary [ref=f37e36]:
+      - navigation [ref=f37e37]:
+        - generic [ref=f37e38]:
+          - link "Dashboard" [ref=f37e39] [cursor=pointer]:
+            - /url: /dashboard
+          - button "Context Organization" [ref=f37e47] [cursor=pointer]
+          - button "Governance" [ref=f37e57] [cursor=pointer]
+          - button "Risk Management" [ref=f37e65] [cursor=pointer]
+          - generic [ref=f37e72]:
+            - button "Control Management" [ref=f37e73] [cursor=pointer]
+            - list [ref=f37e81]:
+              - listitem [ref=f37e82]:
+                - link "Control Library" [ref=f37e83] [cursor=pointer]:
+                  - /url: /controls/management
+              - listitem [ref=f37e84]:
+                - link "Control Detail" [ref=f37e85] [cursor=pointer]:
+                  - /url: /controls/detail/:id
+          - button "Compliance" [ref=f37e87] [cursor=pointer]
+          - button "Audit" [ref=f37e97] [cursor=pointer]
+          - button "Asset Management" [ref=f37e107] [cursor=pointer]
+          - button "Artificial Intelligence" [ref=f37e123] [cursor=pointer]
+          - button "Assessments" [ref=f37e131] [cursor=pointer]
+          - button "Reporting" [ref=f37e140] [cursor=pointer]
+          - button "Settings" [ref=f37e148] [cursor=pointer]
+        - generic [ref=f37e156]: Eyes on Risk. Control in Action.
+    - main [ref=f37e157]:
+      - generic [ref=f37e158]:
+        - generic [ref=f37e159]:
+          - generic [ref=f37e160]:
+            - heading "Control Management" [level=1] [ref=f37e161]
+            - paragraph [ref=f37e162]: Centralized control library — design, assess, and map controls to risks and frameworks.
+          - button "New Control" [active] [ref=f37e164] [cursor=pointer]
+        - generic [ref=f37e166]:
+          - generic [ref=f37e172]:
+            - paragraph [ref=f37e173]: "31"
+            - paragraph [ref=f37e174]: Total Controls
+          - generic [ref=f37e180]:
+            - paragraph [ref=f37e181]: "24"
+            - paragraph [ref=f37e182]: Active
+          - generic [ref=f37e188]:
+            - paragraph [ref=f37e189]: "7"
+            - paragraph [ref=f37e190]: In Progress
+          - generic [ref=f37e202]:
+            - paragraph [ref=f37e203]: "0"
+            - paragraph [ref=f37e204]: Planned
+          - generic [ref=f37e209]:
+            - paragraph [ref=f37e210]: 93%
+            - paragraph [ref=f37e211]: Avg Progress
+        - generic [ref=f37e213]:
+          - textbox "Search by ID, name, description, or owner..." [ref=f37e215]
+          - button "Filters" [ref=f37e216] [cursor=pointer]
+          - generic [ref=f37e219]: 31 of 31 controls
+        - table [ref=f37e221]:
+          - rowgroup [ref=f37e222]:
+            - row [ref=f37e223]:
+              - columnheader "ID" [ref=f37e224] [cursor=pointer]
+              - columnheader "Name" [ref=f37e228] [cursor=pointer]
+              - columnheader "Category" [ref=f37e232] [cursor=pointer]
+              - columnheader "Type" [ref=f37e236] [cursor=pointer]
+              - columnheader "Status" [ref=f37e240] [cursor=pointer]
+              - columnheader "Progress" [ref=f37e244] [cursor=pointer]
+              - columnheader "Owner" [ref=f37e248] [cursor=pointer]
+              - columnheader "Assets" [ref=f37e252]
+              - columnheader "Frameworks" [ref=f37e253]
+              - columnheader "Actions" [ref=f37e254]
+          - rowgroup [ref=f37e255]:
+            - row [ref=f37e256]:
+              - cell "ORG-01" [ref=f37e257]
+              - cell "Information Security Policy Preventive control for Organizational domain — Information Security Policy." [ref=f37e258]:
+                - generic [ref=f37e259]: Information Security Policy
+                - generic [ref=f37e260]: Preventive control for Organizational domain — Information Security Policy.
+              - cell "Organizational" [ref=f37e261]
+              - cell "Preventive" [ref=f37e263]
+              - cell "Active" [ref=f37e264]
+              - cell "100%" [ref=f37e269]
+              - cell "CISO" [ref=f37e274]
+              - cell "3" [ref=f37e275]
+              - cell "2" [ref=f37e276]
+              - cell [ref=f37e277]:
+                - generic [ref=f37e278]:
+                  - button "View details" [ref=f37e279] [cursor=pointer]
+                  - button "Edit" [ref=f37e283] [cursor=pointer]
+                  - button "Delete" [ref=f37e287] [cursor=pointer]
+            - row [ref=f37e291]:
+              - cell "ORG-02" [ref=f37e292]
+              - cell "Access Control Policy Preventive control for Organizational domain — Access Control Policy." [ref=f37e293]:
+                - generic [ref=f37e294]: Access Control Policy
+                - generic [ref=f37e295]: Preventive control for Organizational domain — Access Control Policy.
+              - cell "Organizational" [ref=f37e296]
+              - cell "Preventive" [ref=f37e298]
+              - cell "Active" [ref=f37e299]
+              - cell "100%" [ref=f37e304]
+              - cell "Head of IT Security" [ref=f37e309]
+              - cell "3" [ref=f37e310]
+              - cell "2" [ref=f37e311]
+              - cell [ref=f37e312]:
+                - generic [ref=f37e313]:
+                  - button "View details" [ref=f37e314] [cursor=pointer]
+                  - button "Edit" [ref=f37e318] [cursor=pointer]
+                  - button "Delete" [ref=f37e322] [cursor=pointer]
+            - row [ref=f37e326]:
+              - cell "ORG-03" [ref=f37e327]
+              - cell "Risk Assessment Process Preventive control for Organizational domain — Risk Assessment Process." [ref=f37e328]:
+                - generic [ref=f37e329]: Risk Assessment Process
+                - generic [ref=f37e330]: Preventive control for Organizational domain — Risk Assessment Process.
+              - cell "Organizational" [ref=f37e331]
+              - cell "Preventive" [ref=f37e333]
+              - cell "Active" [ref=f37e334]
+              - cell "100%" [ref=f37e339]
+              - cell "CISO" [ref=f37e344]
+              - cell "3" [ref=f37e345]
+              - cell "2" [ref=f37e346]
+              - cell [ref=f37e347]:
+                - generic [ref=f37e348]:
+                  - button "View details" [ref=f37e349] [cursor=pointer]
+                  - button "Edit" [ref=f37e353] [cursor=pointer]
+                  - button "Delete" [ref=f37e357] [cursor=pointer]
+            - row [ref=f37e361]:
+              - cell "ORG-04" [ref=f37e362]
+              - cell "Supplier Security Assessment Preventive control for Organizational domain — Supplier Security Assessment." [ref=f37e363]:
+                - generic [ref=f37e364]: Supplier Security Assessment
+                - generic [ref=f37e365]: Preventive control for Organizational domain — Supplier Security Assessment.
+              - cell "Organizational" [ref=f37e366]
+              - cell "Preventive" [ref=f37e368]
+              - cell "In Progress" [ref=f37e369]
+              - cell "65%" [ref=f37e374]
+              - cell "Procurement Director" [ref=f37e379]
+              - cell "2" [ref=f37e380]
+              - cell "2" [ref=f37e381]
+              - cell [ref=f37e382]:
+                - generic [ref=f37e383]:
+                  - button "View details" [ref=f37e384] [cursor=pointer]
+                  - button "Edit" [ref=f37e388] [cursor=pointer]
+                  - button "Delete" [ref=f37e392] [cursor=pointer]
+            - row [ref=f37e396]:
+              - cell "ORG-05" [ref=f37e397]
+              - cell "Data Classification Policy Preventive control for Organizational domain — Data Classification Policy." [ref=f37e398]:
+                - generic [ref=f37e399]: Data Classification Policy
+                - generic [ref=f37e400]: Preventive control for Organizational domain — Data Classification Policy.
+              - cell "Organizational" [ref=f37e401]
+              - cell "Preventive" [ref=f37e403]
+              - cell "Active" [ref=f37e404]
+              - cell "100%" [ref=f37e409]
+              - cell "Data Office" [ref=f37e414]
+              - cell "2" [ref=f37e415]
+              - cell "2" [ref=f37e416]
+              - cell [ref=f37e417]:
+                - generic [ref=f37e418]:
+                  - button "View details" [ref=f37e419] [cursor=pointer]
+                  - button "Edit" [ref=f37e423] [cursor=pointer]
+                  - button "Delete" [ref=f37e427] [cursor=pointer]
+            - row [ref=f37e431]:
+              - cell "ORG-06" [ref=f37e432]
+              - cell "Business Continuity Policy Corrective control for Organizational domain — Business Continuity Policy." [ref=f37e433]:
+                - generic [ref=f37e434]: Business Continuity Policy
+                - generic [ref=f37e435]: Corrective control for Organizational domain — Business Continuity Policy.
+              - cell "Organizational" [ref=f37e436]
+              - cell "Corrective" [ref=f37e438]
+              - cell "Active" [ref=f37e439]
+              - cell "100%" [ref=f37e444]
+              - cell "BCP Coordinator" [ref=f37e449]
+              - cell "2" [ref=f37e450]
+              - cell "2" [ref=f37e451]
+              - cell [ref=f37e452]:
+                - generic [ref=f37e453]:
+                  - button "View details" [ref=f37e454] [cursor=pointer]
+                  - button "Edit" [ref=f37e458] [cursor=pointer]
+                  - button "Delete" [ref=f37e462] [cursor=pointer]
+            - row [ref=f37e466]:
+              - cell "ORG-07" [ref=f37e467]
+              - cell "Incident Response Policy Corrective control for Organizational domain — Incident Response Policy." [ref=f37e468]:
+                - generic [ref=f37e469]: Incident Response Policy
+                - generic [ref=f37e470]: Corrective control for Organizational domain — Incident Response Policy.
+              - cell "Organizational" [ref=f37e471]
+              - cell "Corrective" [ref=f37e473]
+              - cell "Active" [ref=f37e474]
+              - cell "100%" [ref=f37e479]
+              - cell "Head of IT Security" [ref=f37e484]
+              - cell "3" [ref=f37e485]
+              - cell "2" [ref=f37e486]
+              - cell [ref=f37e487]:
+                - generic [ref=f37e488]:
+                  - button "View details" [ref=f37e489] [cursor=pointer]
+                  - button "Edit" [ref=f37e493] [cursor=pointer]
+                  - button "Delete" [ref=f37e497] [cursor=pointer]
+            - row [ref=f37e501]:
+              - cell "PEO-01" [ref=f37e502]
+              - cell "Security Awareness Training Preventive control for People domain — Security Awareness Training." [ref=f37e503]:
+                - generic [ref=f37e504]: Security Awareness Training
+                - generic [ref=f37e505]: Preventive control for People domain — Security Awareness Training.
+              - cell "People" [ref=f37e506]
+              - cell "Preventive" [ref=f37e508]
+              - cell "Active" [ref=f37e509]
+              - cell "100%" [ref=f37e514]
+              - cell "CISO" [ref=f37e519]
+              - cell "2" [ref=f37e520]
+              - cell "2" [ref=f37e521]
+              - cell [ref=f37e522]:
+                - generic [ref=f37e523]:
+                  - button "View details" [ref=f37e524] [cursor=pointer]
+                  - button "Edit" [ref=f37e528] [cursor=pointer]
+                  - button "Delete" [ref=f37e532] [cursor=pointer]
+            - row [ref=f37e536]:
+              - cell "PEO-02" [ref=f37e537]
+              - cell "Phishing Simulation Detective control for People domain — Phishing Simulation." [ref=f37e538]:
+                - generic [ref=f37e539]: Phishing Simulation
+                - generic [ref=f37e540]: Detective control for People domain — Phishing Simulation.
+              - cell "People" [ref=f37e541]
+              - cell "Detective" [ref=f37e543]
+              - cell "Active" [ref=f37e544]
+              - cell "100%" [ref=f37e549]
+              - cell "CISO" [ref=f37e554]
+              - cell "2" [ref=f37e555]
+              - cell "2" [ref=f37e556]
+              - cell [ref=f37e557]:
+                - generic [ref=f37e558]:
+                  - button "View details" [ref=f37e559] [cursor=pointer]
+                  - button "Edit" [ref=f37e563] [cursor=pointer]
+                  - button "Delete" [ref=f37e567] [cursor=pointer]
+            - row [ref=f37e571]:
+              - cell "PEO-03" [ref=f37e572]
+              - cell "Background Verification Preventive control for People domain — Background Verification." [ref=f37e573]:
+                - generic [ref=f37e574]: Background Verification
+                - generic [ref=f37e575]: Preventive control for People domain — Background Verification.
+              - cell "People" [ref=f37e576]
+              - cell "Preventive" [ref=f37e578]
+              - cell "Active" [ref=f37e579]
+              - cell "100%" [ref=f37e584]
+              - cell "HR Director" [ref=f37e589]
+              - cell "1" [ref=f37e590]
+              - cell "1" [ref=f37e591]
+              - cell [ref=f37e592]:
+                - generic [ref=f37e593]:
+                  - button "View details" [ref=f37e594] [cursor=pointer]
+                  - button "Edit" [ref=f37e598] [cursor=pointer]
+                  - button "Delete" [ref=f37e602] [cursor=pointer]
+            - row [ref=f37e606]:
+              - cell "PEO-04" [ref=f37e607]
+              - cell "Joiner-Mover-Leaver Process Preventive control for People domain — Joiner-Mover-Leaver Process." [ref=f37e608]:
+                - generic [ref=f37e609]: Joiner-Mover-Leaver Process
+                - generic [ref=f37e610]: Preventive control for People domain — Joiner-Mover-Leaver Process.
+              - cell "People" [ref=f37e611]
+              - cell "Preventive" [ref=f37e613]
+              - cell "Active" [ref=f37e614]
+              - cell "100%" [ref=f37e619]
+              - cell "HR Director" [ref=f37e624]
+              - cell "2" [ref=f37e625]
+              - cell "2" [ref=f37e626]
+              - cell [ref=f37e627]:
+                - generic [ref=f37e628]:
+                  - button "View details" [ref=f37e629] [cursor=pointer]
+                  - button "Edit" [ref=f37e633] [cursor=pointer]
+                  - button "Delete" [ref=f37e637] [cursor=pointer]
+            - row [ref=f37e641]:
+              - cell "PEO-05" [ref=f37e642]
+              - cell "Privileged User Training Preventive control for People domain — Privileged User Training." [ref=f37e643]:
+                - generic [ref=f37e644]: Privileged User Training
+                - generic [ref=f37e645]: Preventive control for People domain — Privileged User Training.
+              - cell "People" [ref=f37e646]
+              - cell "Preventive" [ref=f37e648]
+              - cell "In Progress" [ref=f37e649]
+              - cell "45%" [ref=f37e654]
+              - cell "Head of IT Security" [ref=f37e659]
+              - cell "2" [ref=f37e660]
+              - cell "1" [ref=f37e661]
+              - cell [ref=f37e662]:
+                - generic [ref=f37e663]:
+                  - button "View details" [ref=f37e664] [cursor=pointer]
+                  - button "Edit" [ref=f37e668] [cursor=pointer]
+                  - button "Delete" [ref=f37e672] [cursor=pointer]
+            - row [ref=f37e676]:
+              - cell "PHY-01" [ref=f37e677]
+              - cell "Data Center Access Control Preventive control for Physical domain — Data Center Access Control." [ref=f37e678]:
+                - generic [ref=f37e679]: Data Center Access Control
+                - generic [ref=f37e680]: Preventive control for Physical domain — Data Center Access Control.
+              - cell "Physical" [ref=f37e681]
+              - cell "Preventive" [ref=f37e683]
+              - cell "Active" [ref=f37e684]
+              - cell "100%" [ref=f37e689]
+              - cell "Head of IT Security" [ref=f37e694]
+              - cell "2" [ref=f37e695]
+              - cell "2" [ref=f37e696]
+              - cell [ref=f37e697]:
+                - generic [ref=f37e698]:
+                  - button "View details" [ref=f37e699] [cursor=pointer]
+                  - button "Edit" [ref=f37e703] [cursor=pointer]
+                  - button "Delete" [ref=f37e707] [cursor=pointer]
+            - row [ref=f37e711]:
+              - cell "PHY-02" [ref=f37e712]
+              - cell "CCTV Surveillance Detective control for Physical domain — CCTV Surveillance." [ref=f37e713]:
+                - generic [ref=f37e714]: CCTV Surveillance
+                - generic [ref=f37e715]: Detective control for Physical domain — CCTV Surveillance.
+              - cell "Physical" [ref=f37e716]
+              - cell "Detective" [ref=f37e718]
+              - cell "Active" [ref=f37e719]
+              - cell "100%" [ref=f37e724]
+              - cell "Security Manager" [ref=f37e729]
+              - cell "1" [ref=f37e730]
+              - cell "1" [ref=f37e731]
+              - cell [ref=f37e732]:
+                - generic [ref=f37e733]:
+                  - button "View details" [ref=f37e734] [cursor=pointer]
+                  - button "Edit" [ref=f37e738] [cursor=pointer]
+                  - button "Delete" [ref=f37e742] [cursor=pointer]
+            - row [ref=f37e746]:
+              - cell "PHY-03" [ref=f37e747]
+              - cell "Visitor Management Preventive control for Physical domain — Visitor Management." [ref=f37e748]:
+                - generic [ref=f37e749]: Visitor Management
+                - generic [ref=f37e750]: Preventive control for Physical domain — Visitor Management.
+              - cell "Physical" [ref=f37e751]
+              - cell "Preventive" [ref=f37e753]
+              - cell "Active" [ref=f37e754]
+              - cell "100%" [ref=f37e759]
+              - cell "Security Manager" [ref=f37e764]
+              - cell "1" [ref=f37e765]
+              - cell "1" [ref=f37e766]
+              - cell [ref=f37e767]:
+                - generic [ref=f37e768]:
+                  - button "View details" [ref=f37e769] [cursor=pointer]
+                  - button "Edit" [ref=f37e773] [cursor=pointer]
+                  - button "Delete" [ref=f37e777] [cursor=pointer]
+            - row [ref=f37e781]:
+              - cell "PHY-04" [ref=f37e782]
+              - cell "Fire Detection & Suppression Corrective control for Physical domain — Fire Detection & Suppression." [ref=f37e783]:
+                - generic [ref=f37e784]: Fire Detection & Suppression
+                - generic [ref=f37e785]: Corrective control for Physical domain — Fire Detection & Suppression.
+              - cell "Physical" [ref=f37e786]
+              - cell "Corrective" [ref=f37e788]
+              - cell "Active" [ref=f37e789]
+              - cell "100%" [ref=f37e794]
+              - cell "Facilities Manager" [ref=f37e799]
+              - cell "1" [ref=f37e800]
+              - cell "1" [ref=f37e801]
+              - cell [ref=f37e802]:
+                - generic [ref=f37e803]:
+                  - button "View details" [ref=f37e804] [cursor=pointer]
+                  - button "Edit" [ref=f37e808] [cursor=pointer]
+                  - button "Delete" [ref=f37e812] [cursor=pointer]
+            - row [ref=f37e816]:
+              - cell "PHY-05" [ref=f37e817]
+              - cell "UPS & Generator Corrective control for Physical domain — UPS & Generator." [ref=f37e818]:
+                - generic [ref=f37e819]: UPS & Generator
+                - generic [ref=f37e820]: Corrective control for Physical domain — UPS & Generator.
+              - cell "Physical" [ref=f37e821]
+              - cell "Corrective" [ref=f37e823]
+              - cell "Active" [ref=f37e824]
+              - cell "100%" [ref=f37e829]
+              - cell "Facilities Manager" [ref=f37e834]
+              - cell "1" [ref=f37e835]
+              - cell "1" [ref=f37e836]
+              - cell [ref=f37e837]:
+                - generic [ref=f37e838]:
+                  - button "View details" [ref=f37e839] [cursor=pointer]
+                  - button "Edit" [ref=f37e843] [cursor=pointer]
+                  - button "Delete" [ref=f37e847] [cursor=pointer]
+            - row [ref=f37e851]:
+              - cell "PHY-06" [ref=f37e852]
+              - cell "Environmental Monitoring Detective control for Physical domain — Environmental Monitoring." [ref=f37e853]:
+                - generic [ref=f37e854]: Environmental Monitoring
+                - generic [ref=f37e855]: Detective control for Physical domain — Environmental Monitoring.
+              - cell "Physical" [ref=f37e856]
+              - cell "Detective" [ref=f37e858]
+              - cell "In Progress" [ref=f37e859]
+              - cell "80%" [ref=f37e864]
+              - cell "Facilities Manager" [ref=f37e869]
+              - cell "1" [ref=f37e870]
+              - cell "1" [ref=f37e871]
+              - cell [ref=f37e872]:
+                - generic [ref=f37e873]:
+                  - button "View details" [ref=f37e874] [cursor=pointer]
+                  - button "Edit" [ref=f37e878] [cursor=pointer]
+                  - button "Delete" [ref=f37e882] [cursor=pointer]
+            - row [ref=f37e886]:
+              - cell "TECH-01" [ref=f37e887]
+              - cell "Multi-Factor Authentication (MFA) Preventive control for Technological domain — Multi-Factor Authentication (MFA)." [ref=f37e888]:
+                - generic [ref=f37e889]: Multi-Factor Authentication (MFA)
+                - generic [ref=f37e890]: Preventive control for Technological domain — Multi-Factor Authentication (MFA).
+              - cell "Technological" [ref=f37e891]
+              - cell "Preventive" [ref=f37e893]
+              - cell "Active" [ref=f37e894]
+              - cell "100%" [ref=f37e899]
+              - cell "Head of IT Security" [ref=f37e904]
+              - cell "3" [ref=f37e905]
+              - cell "3" [ref=f37e906]
+              - cell [ref=f37e907]:
+                - generic [ref=f37e908]:
+                  - button "View details" [ref=f37e909] [cursor=pointer]
+                  - button "Edit" [ref=f37e913] [cursor=pointer]
+                  - button "Delete" [ref=f37e917] [cursor=pointer]
+            - row [ref=f37e921]:
+              - cell "TECH-02" [ref=f37e922]
+              - cell "Privileged Access Management (PAM) Preventive control for Technological domain — Privileged Access Management (PAM)." [ref=f37e923]:
+                - generic [ref=f37e924]: Privileged Access Management (PAM)
+                - generic [ref=f37e925]: Preventive control for Technological domain — Privileged Access Management (PAM).
+              - cell "Technological" [ref=f37e926]
+              - cell "Preventive" [ref=f37e928]
+              - cell "In Progress" [ref=f37e929]
+              - cell "85%" [ref=f37e934]
+              - cell "Head of IT Security" [ref=f37e939]
+              - cell "3" [ref=f37e940]
+              - cell "2" [ref=f37e941]
+              - cell [ref=f37e942]:
+                - generic [ref=f37e943]:
+                  - button "View details" [ref=f37e944] [cursor=pointer]
+                  - button "Edit" [ref=f37e948] [cursor=pointer]
+                  - button "Delete" [ref=f37e952] [cursor=pointer]
+            - row [ref=f37e956]:
+              - cell "TECH-03" [ref=f37e957]
+              - cell "Role-Based Access Control (RBAC) Preventive control for Technological domain — Role-Based Access Control (RBAC)." [ref=f37e958]:
+                - generic [ref=f37e959]: Role-Based Access Control (RBAC)
+                - generic [ref=f37e960]: Preventive control for Technological domain — Role-Based Access Control (RBAC).
+              - cell "Technological" [ref=f37e961]
+              - cell "Preventive" [ref=f37e963]
+              - cell "Active" [ref=f37e964]
+              - cell "100%" [ref=f37e969]
+              - cell "Head of IT Security" [ref=f37e974]
+              - cell "3" [ref=f37e975]
+              - cell "2" [ref=f37e976]
+              - cell [ref=f37e977]:
+                - generic [ref=f37e978]:
+                  - button "View details" [ref=f37e979] [cursor=pointer]
+                  - button "Edit" [ref=f37e983] [cursor=pointer]
+                  - button "Delete" [ref=f37e987] [cursor=pointer]
+            - row [ref=f37e991]:
+              - cell "TECH-04" [ref=f37e992]
+              - cell "Vulnerability Management Detective control for Technological domain — Vulnerability Management." [ref=f37e993]:
+                - generic [ref=f37e994]: Vulnerability Management
+                - generic [ref=f37e995]: Detective control for Technological domain — Vulnerability Management.
+              - cell "Technological" [ref=f37e996]
+              - cell "Detective" [ref=f37e998]
+              - cell "In Progress" [ref=f37e999]
+              - cell "75%" [ref=f37e1004]
+              - cell "CISO" [ref=f37e1009]
+              - cell "4" [ref=f37e1010]
+              - cell "2" [ref=f37e1011]
+              - cell [ref=f37e1012]:
+                - generic [ref=f37e1013]:
+                  - button "View details" [ref=f37e1014] [cursor=pointer]
+                  - button "Edit" [ref=f37e1018] [cursor=pointer]
+                  - button "Delete" [ref=f37e1022] [cursor=pointer]
+            - row [ref=f37e1026]:
+              - cell "TECH-05" [ref=f37e1027]
+              - cell "Firewall Preventive control for Technological domain — Firewall." [ref=f37e1028]:
+                - generic [ref=f37e1029]: Firewall
+                - generic [ref=f37e1030]: Preventive control for Technological domain — Firewall.
+              - cell "Technological" [ref=f37e1031]
+              - cell "Preventive" [ref=f37e1033]
+              - cell "Active" [ref=f37e1034]
+              - cell "100%" [ref=f37e1039]
+              - cell "Head of IT Security" [ref=f37e1044]
+              - cell "2" [ref=f37e1045]
+              - cell "2" [ref=f37e1046]
+              - cell [ref=f37e1047]:
+                - generic [ref=f37e1048]:
+                  - button "View details" [ref=f37e1049] [cursor=pointer]
+                  - button "Edit" [ref=f37e1053] [cursor=pointer]
+                  - button "Delete" [ref=f37e1057] [cursor=pointer]
+            - row [ref=f37e1061]:
+              - cell "TECH-06" [ref=f37e1062]
+              - cell "Intrusion Detection System (IDS) Detective control for Technological domain — Intrusion Detection System (IDS)." [ref=f37e1063]:
+                - generic [ref=f37e1064]: Intrusion Detection System (IDS)
+                - generic [ref=f37e1065]: Detective control for Technological domain — Intrusion Detection System (IDS).
+              - cell "Technological" [ref=f37e1066]
+              - cell "Detective" [ref=f37e1068]
+              - cell "Active" [ref=f37e1069]
+              - cell "100%" [ref=f37e1074]
+              - cell "CISO" [ref=f37e1079]
+              - cell "2" [ref=f37e1080]
+              - cell "2" [ref=f37e1081]
+              - cell [ref=f37e1082]:
+                - generic [ref=f37e1083]:
+                  - button "View details" [ref=f37e1084] [cursor=pointer]
+                  - button "Edit" [ref=f37e1088] [cursor=pointer]
+                  - button "Delete" [ref=f37e1092] [cursor=pointer]
+            - row [ref=f37e1096]:
+              - cell "TECH-07" [ref=f37e1097]
+              - cell "Endpoint Detection & Response (EDR) Detective control for Technological domain — Endpoint Detection & Response (EDR)." [ref=f37e1098]:
+                - generic [ref=f37e1099]: Endpoint Detection & Response (EDR)
+                - generic [ref=f37e1100]: Detective control for Technological domain — Endpoint Detection & Response (EDR).
+              - cell "Technological" [ref=f37e1101]
+              - cell "Detective" [ref=f37e1103]
+              - cell "In Progress" [ref=f37e1104]
+              - cell "70%" [ref=f37e1109]
+              - cell "Head of IT Security" [ref=f37e1114]
+              - cell "1" [ref=f37e1115]
+              - cell "2" [ref=f37e1116]
+              - cell [ref=f37e1117]:
+                - generic [ref=f37e1118]:
+                  - button "View details" [ref=f37e1119] [cursor=pointer]
+                  - button "Edit" [ref=f37e1123] [cursor=pointer]
+                  - button "Delete" [ref=f37e1127] [cursor=pointer]
+            - row [ref=f37e1131]:
+              - cell "TECH-08" [ref=f37e1132]
+              - cell "Data Encryption at Rest Preventive control for Technological domain — Data Encryption at Rest." [ref=f37e1133]:
+                - generic [ref=f37e1134]: Data Encryption at Rest
+                - generic [ref=f37e1135]: Preventive control for Technological domain — Data Encryption at Rest.
+              - cell "Technological" [ref=f37e1136]
+              - cell "Preventive" [ref=f37e1138]
+              - cell "Active" [ref=f37e1139]
+              - cell "100%" [ref=f37e1144]
+              - cell "Head of IT Security" [ref=f37e1149]
+              - cell "2" [ref=f37e1150]
+              - cell "2" [ref=f37e1151]
+              - cell [ref=f37e1152]:
+                - generic [ref=f37e1153]:
+                  - button "View details" [ref=f37e1154] [cursor=pointer]
+                  - button "Edit" [ref=f37e1158] [cursor=pointer]
+                  - button "Delete" [ref=f37e1162] [cursor=pointer]
+            - row [ref=f37e1166]:
+              - cell "TECH-09" [ref=f37e1167]
+              - cell "Data Encryption in Transit Preventive control for Technological domain — Data Encryption in Transit." [ref=f37e1168]:
+                - generic [ref=f37e1169]: Data Encryption in Transit
+                - generic [ref=f37e1170]: Preventive control for Technological domain — Data Encryption in Transit.
+              - cell "Technological" [ref=f37e1171]
+              - cell "Preventive" [ref=f37e1173]
+              - cell "Active" [ref=f37e1174]
+              - cell "100%" [ref=f37e1179]
+              - cell "Head of IT Security" [ref=f37e1184]
+              - cell "3" [ref=f37e1185]
+              - cell "2" [ref=f37e1186]
+              - cell [ref=f37e1187]:
+                - generic [ref=f37e1188]:
+                  - button "View details" [ref=f37e1189] [cursor=pointer]
+                  - button "Edit" [ref=f37e1193] [cursor=pointer]
+                  - button "Delete" [ref=f37e1197] [cursor=pointer]
+            - row [ref=f37e1201]:
+              - cell "TECH-10" [ref=f37e1202]
+              - cell "Security Information & Event Management (SIEM) Detective control for Technological domain — Security Information & Event Management (SIEM)." [ref=f37e1203]:
+                - generic [ref=f37e1204]: Security Information & Event Management (SIEM)
+                - generic [ref=f37e1205]: Detective control for Technological domain — Security Information & Event Management (SIEM).
+              - cell "Technological" [ref=f37e1206]
+              - cell "Detective" [ref=f37e1208]
+              - cell "Active" [ref=f37e1209]
+              - cell "100%" [ref=f37e1214]
+              - cell "CISO" [ref=f37e1219]
+              - cell "3" [ref=f37e1220]
+              - cell "3" [ref=f37e1221]
+              - cell [ref=f37e1222]:
+                - generic [ref=f37e1223]:
+                  - button "View details" [ref=f37e1224] [cursor=pointer]
+                  - button "Edit" [ref=f37e1228] [cursor=pointer]
+                  - button "Delete" [ref=f37e1232] [cursor=pointer]
+            - row [ref=f37e1236]:
+              - cell "TECH-11" [ref=f37e1237]
+              - cell "Backup & Recovery Corrective control for Technological domain — Backup & Recovery." [ref=f37e1238]:
+                - generic [ref=f37e1239]: Backup & Recovery
+                - generic [ref=f37e1240]: Corrective control for Technological domain — Backup & Recovery.
+              - cell "Technological" [ref=f37e1241]
+              - cell "Corrective" [ref=f37e1243]
+              - cell "Active" [ref=f37e1244]
+              - cell "100%" [ref=f37e1249]
+              - cell "Head of IT Security" [ref=f37e1254]
+              - cell "3" [ref=f37e1255]
+              - cell "2" [ref=f37e1256]
+              - cell [ref=f37e1257]:
+                - generic [ref=f37e1258]:
+                  - button "View details" [ref=f37e1259] [cursor=pointer]
+                  - button "Edit" [ref=f37e1263] [cursor=pointer]
+                  - button "Delete" [ref=f37e1267] [cursor=pointer]
+            - row [ref=f37e1271]:
+              - cell "TECH-12" [ref=f37e1272]
+              - cell "Patch Management Preventive control for Technological domain — Patch Management." [ref=f37e1273]:
+                - generic [ref=f37e1274]: Patch Management
+                - generic [ref=f37e1275]: Preventive control for Technological domain — Patch Management.
+              - cell "Technological" [ref=f37e1276]
+              - cell "Preventive" [ref=f37e1278]
+              - cell "In Progress" [ref=f37e1279]
+              - cell "60%" [ref=f37e1284]
+              - cell "Head of IT Security" [ref=f37e1289]
+              - cell "3" [ref=f37e1290]
+              - cell "2" [ref=f37e1291]
+              - cell [ref=f37e1292]:
+                - generic [ref=f37e1293]:
+                  - button "View details" [ref=f37e1294] [cursor=pointer]
+                  - button "Edit" [ref=f37e1298] [cursor=pointer]
+                  - button "Delete" [ref=f37e1302] [cursor=pointer]
+            - row [ref=f37e1306]:
+              - cell "TECH-13" [ref=f37e1307]
+              - cell "Multi-Factor Authentication (MFA) Preventive control for Technological domain — Multi-Factor Authentication (MFA)." [ref=f37e1308]:
+                - generic [ref=f37e1309]: Multi-Factor Authentication (MFA)
+                - generic [ref=f37e1310]: Preventive control for Technological domain — Multi-Factor Authentication (MFA).
+              - cell "Technological" [ref=f37e1311]
+              - cell "Preventive" [ref=f37e1313]
+              - cell "Active" [ref=f37e1314]
+              - cell "100%" [ref=f37e1319]
+              - cell "Head of Payments" [ref=f37e1324]
+              - cell "1" [ref=f37e1325]
+              - cell "2" [ref=f37e1326]
+              - cell [ref=f37e1327]:
+                - generic [ref=f37e1328]:
+                  - button "View details" [ref=f37e1329] [cursor=pointer]
+                  - button "Edit" [ref=f37e1333] [cursor=pointer]
+                  - button "Delete" [ref=f37e1337] [cursor=pointer]

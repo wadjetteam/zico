@@ -26,7 +26,6 @@ import PastAudits from "./pages/audit/PastAudits";
 import AuditEngagementDetail from "./pages/audit/AuditEngagementDetail";
 import ComplianceDashboard from "./pages/compliance/ComplianceDashboard";
 import GapConflictCenter from "./pages/compliance/GapConflictCenter";
-import ControlDetail from "./pages/controls/ControlDetail";
 import ControlManagement from "./pages/controls/ControlManagement";
 import Campaigns from "./pages/compliance/Campaigns";
 import Gaps from "./pages/compliance/Gaps";
@@ -99,7 +98,6 @@ export default function App() {
           <Route path="/compliance/dashboard" element={<ComplianceDashboard />} />
 
           <Route path="/controls/management" element={<ControlManagement />} />
-          <Route path="/controls/detail/:id" element={<ControlDetail />} />
 
           <Route path="/audit/manage" element={<ManageAudits />} />
           <Route path="/audit/active" element={<ActiveAudits />} />

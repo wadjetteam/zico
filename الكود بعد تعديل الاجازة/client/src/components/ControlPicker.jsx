@@ -5,17 +5,15 @@ import { EFFECTIVENESS_OPTIONS, LINK_TYPES, effectivenessChipClass } from "../li
 import { chipClass, titleCase } from "../lib/format";
 
 const DOMAIN_ICONS = {
-  Organizational: Building,
-  People: Users,
+  Administrative: Building,
+  Technical: Cpu,
   Physical: Shield,
-  Technological: Cpu,
 };
 
 const DOMAIN_COLORS = {
-  Organizational: "border-sky-800/60 bg-sky-950/40 text-sky-300",
-  People: "border-violet-800/60 bg-violet-950/40 text-violet-300",
+  Technical: "border-sky-800/60 bg-sky-950/40 text-sky-300",
+  Administrative: "border-gold/30 bg-gold/5 text-gold-light",
   Physical: "border-emerald-800/60 bg-emerald-950/40 text-emerald-300",
-  Technological: "border-amber-800/60 bg-amber-950/40 text-amber-300",
 };
 
 /**

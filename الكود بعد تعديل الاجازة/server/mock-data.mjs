@@ -250,44 +250,44 @@ const CONTROL_FRAMEWORK_MAPPINGS = {
 };
 
 const controlSeed = [
-  // === ORGANIZATIONAL CONTROLS ===
-  ["ORG-01", "Information Security Policy", "f-1", "Organizational", "Preventive", "CISO", "Annually", "Fully Implemented", 4, 90, 85, 95, 100],
-  ["ORG-02", "Access Control Policy", "f-1", "Organizational", "Preventive", "Head of IT Security", "Annually", "Fully Implemented", 4, 95, 90, 100, 100],
-  ["ORG-03", "Risk Assessment Process", "f-1", "Organizational", "Preventive", "CISO", "Semi-Annual", "Fully Implemented", 4, 85, 80, 90, 95],
-  ["ORG-04", "Supplier Security Assessment", "f-1", "Organizational", "Preventive", "Procurement Director", "Annually", "Partially Implemented", 2, 70, 60, 75, 80],
-  ["ORG-05", "Data Classification Policy", "f-1", "Organizational", "Preventive", "Data Office", "Annually", "Largely Implemented", 3, 80, 75, 85, 90],
-  ["ORG-06", "Business Continuity Policy", "f-1", "Organizational", "Corrective", "BCP Coordinator", "Annually", "Largely Implemented", 3, 75, 70, 80, 85],
-  ["ORG-07", "Incident Response Policy", "f-1", "Organizational", "Corrective", "Head of IT Security", "Annually", "Fully Implemented", 4, 90, 85, 95, 100],
+  // === ADMINISTRATIVE CONTROLS ===
+  ["ORG-01", "Information Security Policy", "f-1", "Administrative", "Preventive", "CISO", "Annually", "Active / Implemented", 100, 4, 90, 85, 95, 100, ["AST-001", "AST-002", "AST-003"]],
+  ["ORG-02", "Access Control Policy", "f-1", "Administrative", "Preventive", "Head of IT Security", "Annually", "Active / Implemented", 100, 4, 95, 90, 100, 100, ["AST-001", "AST-003", "AST-004"]],
+  ["ORG-03", "Risk Assessment Process", "f-1", "Administrative", "Preventive", "CISO", "Semi-Annual", "Active / Implemented", 100, 4, 85, 80, 90, 95, ["AST-001", "AST-002", "AST-004"]],
+  ["ORG-04", "Supplier Security Assessment", "f-1", "Administrative", "Preventive", "Procurement Director", "Annually", "In Progress / Under Implementation", 65, 2, 70, 60, 75, 80, ["AST-005", "AST-006"]],
+  ["ORG-05", "Data Classification Policy", "f-1", "Administrative", "Preventive", "Data Office", "Annually", "Active / Implemented", 100, 3, 80, 75, 85, 90, ["AST-004", "AST-005"]],
+  ["ORG-06", "Business Continuity Policy", "f-1", "Administrative", "Corrective", "BCP Coordinator", "Annually", "Active / Implemented", 100, 3, 75, 70, 80, 85, ["AST-001", "AST-007"]],
+  ["ORG-07", "Incident Response Policy", "f-1", "Administrative", "Corrective", "Head of IT Security", "Annually", "Active / Implemented", 100, 4, 90, 85, 95, 100, ["AST-001", "AST-002", "AST-003"]],
 
-  // === PEOPLE CONTROLS ===
-  ["PEO-01", "Security Awareness Training", "f-1", "People", "Preventive", "CISO", "Quarterly", "Fully Implemented", 4, 90, 88, 95, 100],
-  ["PEO-02", "Phishing Simulation", "f-1", "People", "Detective", "CISO", "Monthly", "Largely Implemented", 3, 85, 80, 90, 95],
-  ["PEO-03", "Background Verification", "f-1", "People", "Preventive", "HR Director", "At Hiring", "Fully Implemented", 4, 95, 95, 100, 100],
-  ["PEO-04", "Joiner-Mover-Leaver Process", "f-1", "People", "Preventive", "HR Director", "Continuous", "Fully Implemented", 4, 90, 85, 100, 100],
-  ["PEO-05", "Privileged User Training", "f-1", "People", "Preventive", "Head of IT Security", "Semi-Annual", "Partially Implemented", 2, 70, 65, 80, 75],
+  // === ADMINISTRATIVE CONTROLS (PEOPLE) ===
+  ["PEO-01", "Security Awareness Training", "f-1", "Administrative", "Preventive", "CISO", "Quarterly", "Active / Implemented", 100, 4, 90, 88, 95, 100, ["AST-003", "AST-008"]],
+  ["PEO-02", "Phishing Simulation", "f-1", "Administrative", "Detective", "CISO", "Monthly", "Active / Implemented", 100, 3, 85, 80, 90, 95, ["AST-003", "AST-008"]],
+  ["PEO-03", "Background Verification", "f-1", "Administrative", "Preventive", "HR Director", "At Hiring", "Active / Implemented", 100, 4, 95, 95, 100, 100, ["AST-003"]],
+  ["PEO-04", "Joiner-Mover-Leaver Process", "f-1", "Administrative", "Preventive", "HR Director", "Continuous", "Active / Implemented", 100, 4, 90, 85, 100, 100, ["AST-003", "AST-005"]],
+  ["PEO-05", "Privileged User Training", "f-1", "Administrative", "Preventive", "Head of IT Security", "Semi-Annual", "In Progress / Under Implementation", 45, 2, 70, 65, 80, 75, ["AST-001", "AST-003"]],
 
   // === PHYSICAL CONTROLS ===
-  ["PHY-01", "Data Center Access Control", "f-1", "Physical", "Preventive", "Head of IT Security", "Continuous", "Fully Implemented", 5, 95, 95, 100, 100],
-  ["PHY-02", "CCTV Surveillance", "f-1", "Physical", "Detective", "Security Manager", "Continuous", "Fully Implemented", 4, 90, 90, 95, 100],
-  ["PHY-03", "Visitor Management", "f-1", "Physical", "Preventive", "Security Manager", "Continuous", "Fully Implemented", 4, 85, 85, 100, 100],
-  ["PHY-04", "Fire Detection & Suppression", "f-1", "Physical", "Corrective", "Facilities Manager", "Quarterly", "Fully Implemented", 4, 95, 95, 100, 100],
-  ["PHY-05", "UPS & Generator", "f-1", "Physical", "Corrective", "Facilities Manager", "Monthly", "Fully Implemented", 4, 90, 90, 100, 100],
-  ["PHY-06", "Environmental Monitoring", "f-1", "Physical", "Detective", "Facilities Manager", "Continuous", "Largely Implemented", 3, 85, 80, 90, 95],
+  ["PHY-01", "Data Center Access Control", "f-1", "Physical", "Preventive", "Head of IT Security", "Continuous", "Active / Implemented", 100, 5, 95, 95, 100, 100, ["AST-001", "AST-007"]],
+  ["PHY-02", "CCTV Surveillance", "f-1", "Physical", "Detective", "Security Manager", "Continuous", "Active / Implemented", 100, 4, 90, 90, 95, 100, ["AST-007"]],
+  ["PHY-03", "Visitor Management", "f-1", "Physical", "Preventive", "Security Manager", "Continuous", "Active / Implemented", 100, 4, 85, 85, 100, 100, ["AST-007"]],
+  ["PHY-04", "Fire Detection & Suppression", "f-1", "Physical", "Corrective", "Facilities Manager", "Quarterly", "Active / Implemented", 100, 4, 95, 95, 100, 100, ["AST-007"]],
+  ["PHY-05", "UPS & Generator", "f-1", "Physical", "Corrective", "Facilities Manager", "Monthly", "Active / Implemented", 100, 4, 90, 90, 100, 100, ["AST-007"]],
+  ["PHY-06", "Environmental Monitoring", "f-1", "Physical", "Detective", "Facilities Manager", "Continuous", "In Progress / Under Implementation", 80, 3, 85, 80, 90, 95, ["AST-007"]],
 
-  // === TECHNOLOGICAL CONTROLS ===
-  ["TECH-01", "Multi-Factor Authentication (MFA)", "f-1", "Technological", "Preventive", "Head of IT Security", "Continuous", "Fully Implemented", 4, 90, 85, 92, 100],
-  ["TECH-02", "Privileged Access Management (PAM)", "f-1", "Technological", "Preventive", "Head of IT Security", "Continuous", "Largely Implemented", 3, 85, 80, 85, 90],
-  ["TECH-03", "Role-Based Access Control (RBAC)", "f-1", "Technological", "Preventive", "Head of IT Security", "Quarterly", "Fully Implemented", 4, 90, 88, 95, 100],
-  ["TECH-04", "Vulnerability Management", "f-1", "Technological", "Detective", "CISO", "Monthly", "Largely Implemented", 3, 80, 75, 85, 90],
-  ["TECH-05", "Firewall", "f-1", "Technological", "Preventive", "Head of IT Security", "Quarterly", "Fully Implemented", 4, 95, 90, 100, 100],
-  ["TECH-06", "Intrusion Detection System (IDS)", "f-1", "Technological", "Detective", "CISO", "Continuous", "Fully Implemented", 4, 85, 85, 90, 95],
-  ["TECH-07", "Endpoint Detection & Response (EDR)", "f-1", "Technological", "Detective", "Head of IT Security", "Continuous", "Largely Implemented", 3, 80, 78, 88, 90],
-  ["TECH-08", "Data Encryption at Rest", "f-1", "Technological", "Preventive", "Head of IT Security", "Continuous", "Fully Implemented", 4, 90, 90, 95, 100],
-  ["TECH-09", "Data Encryption in Transit", "f-1", "Technological", "Preventive", "Head of IT Security", "Continuous", "Fully Implemented", 4, 95, 95, 100, 100],
-  ["TECH-10", "Security Information & Event Management (SIEM)", "f-1", "Technological", "Detective", "CISO", "Continuous", "Fully Implemented", 4, 85, 82, 90, 95],
-  ["TECH-11", "Backup & Recovery", "f-1", "Technological", "Corrective", "Head of IT Security", "Daily", "Fully Implemented", 4, 90, 88, 95, 100],
-  ["TECH-12", "Patch Management", "f-1", "Technological", "Preventive", "Head of IT Security", "Weekly", "Largely Implemented", 3, 80, 75, 85, 90],
-  ["TECH-13", "Multi-Factor Authentication (MFA)", "f-3", "Technological", "Preventive", "Head of Payments", "Continuous", "Fully Implemented", 5, 95, 92, 100, 100],
+  // === TECHNICAL CONTROLS ===
+  ["TECH-01", "Multi-Factor Authentication (MFA)", "f-1", "Technical", "Preventive", "Head of IT Security", "Continuous", "Active / Implemented", 100, 4, 90, 85, 92, 100, ["AST-001", "AST-003", "AST-008"]],
+  ["TECH-02", "Privileged Access Management (PAM)", "f-1", "Technical", "Preventive", "Head of IT Security", "Continuous", "In Progress / Under Implementation", 85, 3, 85, 80, 85, 90, ["AST-001", "AST-003", "AST-004"]],
+  ["TECH-03", "Role-Based Access Control (RBAC)", "f-1", "Technical", "Preventive", "Head of IT Security", "Quarterly", "Active / Implemented", 100, 4, 90, 88, 95, 100, ["AST-003", "AST-004", "AST-005"]],
+  ["TECH-04", "Vulnerability Management", "f-1", "Technical", "Detective", "CISO", "Monthly", "In Progress / Under Implementation", 75, 3, 80, 75, 85, 90, ["AST-001", "AST-002", "AST-004", "AST-007"]],
+  ["TECH-05", "Firewall", "f-1", "Technical", "Preventive", "Head of IT Security", "Quarterly", "Active / Implemented", 100, 4, 95, 90, 100, 100, ["AST-001", "AST-002"]],
+  ["TECH-06", "Intrusion Detection System (IDS)", "f-1", "Technical", "Detective", "CISO", "Continuous", "Active / Implemented", 100, 4, 85, 85, 90, 95, ["AST-001", "AST-002"]],
+  ["TECH-07", "Endpoint Detection & Response (EDR)", "f-1", "Technical", "Detective", "Head of IT Security", "Continuous", "In Progress / Under Implementation", 70, 3, 80, 78, 88, 90, ["AST-008"]],
+  ["TECH-08", "Data Encryption at Rest", "f-1", "Technical", "Preventive", "Head of IT Security", "Continuous", "Active / Implemented", 100, 4, 90, 90, 95, 100, ["AST-004", "AST-005"]],
+  ["TECH-09", "Data Encryption in Transit", "f-1", "Technical", "Preventive", "Head of IT Security", "Continuous", "Active / Implemented", 100, 4, 95, 95, 100, 100, ["AST-001", "AST-002", "AST-006"]],
+  ["TECH-10", "Security Information & Event Management (SIEM)", "f-1", "Technical", "Detective", "CISO", "Continuous", "Active / Implemented", 100, 4, 85, 82, 90, 95, ["AST-001", "AST-002", "AST-004"]],
+  ["TECH-11", "Backup & Recovery", "f-1", "Technical", "Corrective", "Head of IT Security", "Daily", "Active / Implemented", 100, 4, 90, 88, 95, 100, ["AST-004", "AST-005", "AST-007"]],
+  ["TECH-12", "Patch Management", "f-1", "Technical", "Preventive", "Head of IT Security", "Weekly", "In Progress / Under Implementation", 60, 3, 80, 75, 85, 90, ["AST-001", "AST-002", "AST-007"]],
+  ["TECH-13", "Multi-Factor Authentication (MFA)", "f-3", "Technical", "Preventive", "Head of Payments", "Continuous", "Active / Implemented", 100, 5, 95, 92, 100, 100, ["AST-006"]],
 ];
 
 const ANNEX = {
@@ -299,12 +299,12 @@ const ANNEX = {
   "TECH-11": "A.8.14", "TECH-12": "A.8.8", "TECH-13": "A.8.5",
 };
 
-export const CONTROLS = controlSeed.map(([controlId, name, fId, domain, controlType, owner, testingFrequency, implementationStatus, maturityLevel, designEff, operatingEff, coverage, testingResult], i) => {
+export const CONTROLS = controlSeed.map(([controlId, name, fId, domain, controlType, owner, testingFrequency, status, progress, maturityLevel, designEff, operatingEff, coverage, testingResult, targetAssets], i) => {
   const fw = FRAMEWORKS.find((f) => f._id === fId);
   const overallEff = Math.round((designEff * 0.25) + (operatingEff * 0.35) + (coverage * 0.25) + (testingResult * 0.15));
   const mappings = (CONTROL_FRAMEWORK_MAPPINGS[controlId] || []).map(m => {
     const mFw = FRAMEWORKS.find((f) => f._id === m.fId);
-    return { framework: { _id: mFw?._id, name: mFw?.name }, annexCode: m.annex };
+    return { framework: { _id: mFw?._id, name: mFw?.name }, requirement: m.annex };
   });
   return {
     _id: `c-${i + 1}`,
@@ -312,12 +312,15 @@ export const CONTROLS = controlSeed.map(([controlId, name, fId, domain, controlT
     annexCode: ANNEX[controlId] || null,
     name,
     description: `${controlType} control for ${domain} domain — ${name}.`,
+    category: domain,
     domain,
     controlType,
     owner,
     testingFrequency,
-    implementationStatus,
+    status,
+    progress,
     maturityLevel,
+    targetAssets: targetAssets || [],
     effectiveness: {
       design: designEff,
       operating: operatingEff,
@@ -326,7 +329,7 @@ export const CONTROLS = controlSeed.map(([controlId, name, fId, domain, controlT
       overall: overallEff,
     },
     framework: { _id: fw._id, name: fw.name },
-    frameworkMappings: mappings.length > 0 ? mappings : [{ framework: { _id: fw._id, name: fw.name }, annexCode: ANNEX[controlId] || null }],
+    frameworkMappings: mappings.length > 0 ? mappings : [{ framework: { _id: fw._id, name: fw.name }, requirement: ANNEX[controlId] || null }],
     lastTestedAt: daysAgo(60 - i * 3),
     nextTestDueAt: i % 3 === 0 ? daysAgo(10) : daysAhead(30 + i * 10),
     createdAt: daysAgo(200 - i * 3),
@@ -335,17 +338,7 @@ export const CONTROLS = controlSeed.map(([controlId, name, fId, domain, controlT
   };
 });
 
-export const LINKS = [
-  { _id: "rcl-1", risk_id: "risk-1", control_id: "c-1", link_type: "existing", effectiveness: "Effective", testedEffectiveness: null, testedEffectivenessSource: null, added_by: "admin", added_at: daysAgo(40), assessed_by: "analyst", assessed_at: daysAgo(5) },
-  { _id: "rcl-2", risk_id: "risk-1", control_id: "c-11", link_type: "proposed", effectiveness: "Not Assessed", testedEffectiveness: null, testedEffectivenessSource: null, added_by: "analyst", added_at: daysAgo(10), assessed_by: null, assessed_at: null },
-  { _id: "rcl-3", risk_id: "risk-2", control_id: "c-4", link_type: "existing", effectiveness: "Partially Effective", testedEffectiveness: null, testedEffectivenessSource: null, added_by: "admin", added_at: daysAgo(35), assessed_by: "auditor", assessed_at: daysAgo(3) },
-  { _id: "rcl-4", risk_id: "risk-3", control_id: "c-6", link_type: "existing", effectiveness: "Partially Effective", testedEffectiveness: null, testedEffectivenessSource: null, added_by: "admin", added_at: daysAgo(30), assessed_by: null, assessed_at: null },
-  { _id: "rcl-5", risk_id: "risk-4", control_id: "c-3", link_type: "existing", effectiveness: "Partially Effective", testedEffectiveness: null, testedEffectivenessSource: null, added_by: "analyst", added_at: daysAgo(25), assessed_by: "analyst", assessed_at: daysAgo(2) },
-  { _id: "rcl-6", risk_id: "risk-8", control_id: "c-4", link_type: "existing", effectiveness: "Effective", testedEffectiveness: null, testedEffectivenessSource: null, added_by: "admin", added_at: daysAgo(20), assessed_by: "auditor", assessed_at: daysAgo(7) },
-  { _id: "rcl-7", risk_id: "risk-13", control_id: "c-1", link_type: "proposed", effectiveness: "Not Assessed", testedEffectiveness: null, testedEffectivenessSource: null, added_by: "analyst", added_at: daysAgo(8), assessed_by: null, assessed_at: null },
-  { _id: "rcl-8", risk_id: "risk-15", control_id: "c-9", link_type: "existing", effectiveness: "Effective", testedEffectiveness: null, testedEffectivenessSource: null, added_by: "admin", added_at: daysAgo(60), assessed_by: "auditor", assessed_at: daysAgo(15) },
-  { _id: "rcl-9", risk_id: "risk-6", control_id: "c-8", link_type: "proposed", effectiveness: "Not Assessed", testedEffectiveness: null, testedEffectivenessSource: null, added_by: "analyst", added_at: daysAgo(12), assessed_by: null, assessed_at: null },
-];
+export const LINKS = [];
 
 export const GAPS = [
   { _id: "g-1", gapId: "G-001", description: "No formal supplier security assessment program", control: { _id: "c-3", name: "Supplier security assessment" }, severity: "High", owner: "Procurement Director", dueDate: daysAhead(45), status: "Open", createdAt: daysAgo(30) },
