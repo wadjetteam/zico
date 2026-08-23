@@ -1,403 +1,251 @@
-import { useMemo, useCallback } from "react";
-import { Field, Select } from "./Field";
-import { calculateRiskAssessment, CONTROL_TYPES, DEFAULT_THRESHOLDS } from "../lib/riskAssessment";
-import { chipClass } from "../lib/format";
-
-const SCALE = [1, 2, 3, 4, 5].map((n) => ({ value: n, label: String(n) }));
-
-// Default CE bands — overridden by domain param if available
-const DEFAULT_CE_BANDS = {
-  Effective: 75,
-  "Partially Effective": 50,
-  Ineffective: 25,
-  "Not Assessed": 0,
-};
-
-const CRITERIA_LABELS = {
-  Financial: "Financial",
-  Regulatory: "Regulatory",
-  Reputational: "Reputational",
-  Safety: "Safety",
-  Operational: "Operational",
-  Confidentiality: "Confidentiality",
-  Integrity: "Integrity",
-  Availability: "Availability",
-};
-
-const LEVEL_COLORS = {
-  Low: "border-emerald-800/60 bg-emerald-950/40 text-emerald-300",
-  Medium: "border-amber-800/60 bg-amber-950/40 text-amber-300",
-  High: "border-orange-800/60 bg-orange-950/40 text-orange-300",
-  Critical: "border-red-800/60 bg-red-950/40 text-red-300",
-};
-
-const APPETITE_COLORS = {
-  "Within Appetite": "border-emerald-800/60 bg-emerald-950/40 text-emerald-300",
-  "Exceeds Appetite": "border-red-800/60 bg-red-950/40 text-red-300",
-};
-
-function Tooltip({ children, text }) {
-  return (
-    <span className="relative inline-flex items-center" tabIndex={0}>
-      {children}
-      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs px-2 py-1.5 text-[10px] text-neutral-100 bg-ink-deep border border-line rounded shadow-lg opacity-0 invisible transition-opacity group-hover:opacity-100 group-hover:visible z-10 whitespace-normal leading-snug">
-        {text}
-      </span>
-    </span>
-  );
-}
-
-function ReadOnlyField({ label, value, hint, tooltip }) {
-  return (
-    <Field label={label} hint={hint}>
-      <div className="input bg-white/[0.02] border-neutral-800 text-neutral-400 cursor-not-allowed select-none">
-        {value ?? "—"}
-      </div>
-      {tooltip && <Tooltip text={tooltip}><span className="ml-1.5 text-neutral-500 hover:text-gold cursor-help">ℹ️</span></Tooltip>}
-    </Field>
-  );
-}
-
-function ScoreDisplay({ label, score, level, subLabel }) {
-  return (
-    <div className="flex flex-col items-center gap-1 p-3 rounded-lg border bg-white/[0.02] min-w-[100px]">
-      <span className="text-[10px] uppercase tracking-wider text-neutral-500">{label}</span>
-      <span className="text-3xl font-mono font-bold text-neutral-100">{score}</span>
-      <span className={`chip text-xs ${LEVEL_COLORS[level] || "border-neutral-700 bg-neutral-900 text-neutral-400"}`}>
-        {level}
-      </span>
-      {subLabel && <span className="text-[10px] text-neutral-500">{subLabel}</span>}
-    </div>
-  );
-}
-
-export function ControlEffectivenessInput({
-  controls = [],
-  onChange,
-  readOnly = false,
-  domainParam,
-}) {
-  // Build CE band map from domain param if available, else use defaults
-  const bandMap = useMemo(() => {
-    const weights = domainParam?.controlEffectivenessWeights;
-    if (weights && Object.keys(weights).length) {
-      return Object.fromEntries(
-        Object.entries(weights).map(([label, val]) => [label, Math.round(Number(val) * 100)])
-      );
-    }
-    return { ...DEFAULT_CE_BANDS };
-  }, [domainParam]);
-
-  const bandOptions = useMemo(() =>
-    Object.entries(bandMap).map(([label, pct]) => ({
-      value: label,
-      label: `${label} (${pct}%)`,
-    })),
-    [bandMap]
-  );
-
-  // Derive band label from stored numeric CE value
-  const getBandFromCE = (ceValue) => {
-    const entry = Object.entries(bandMap).find(([, pct]) => pct === ceValue);
-    return entry ? entry[0] : "Not Assessed";
-  };
-
-  return (
-    <div className="space-y-3">
-      <div className="flex items-center justify-between">
-        <span className="label">Linked Controls & Effectiveness</span>
-        {controls.length === 0 && (
-          <span className="text-[11px] text-neutral-500">No controls linked. Add controls to enable residual risk calculation.</span>
-        )}
-      </div>
-
-      {controls.length === 0 ? (
-        <p className="text-sm text-neutral-500 text-center py-4">
-          Link controls from the Control Picker to calculate residual risk.
-        </p>
-      ) : (
-        <div className="space-y-2">
-          {controls.map((control, index) => (
-            <div key={control.controlId || control._id || index} className="rounded-lg border border-line bg-white/[0.02] p-3">
-              <div className="flex flex-wrap items-center gap-3 mb-2">
-                <span className="font-mono text-xs font-semibold text-gold">
-                  {control.annexCode || control.controlId || `Control ${index + 1}`}
-                </span>
-                <span className="flex-1 truncate text-sm text-neutral-300">{control.name || "Unnamed Control"}</span>
-                <span className={`chip text-[10px] ${chipClass(control.implementationStatus)}`}>
-                  {control.implementationStatus || "—"}
-                </span>
-                <span className="text-[10px] text-neutral-500">
-                  {control.framework?.name || "—"}
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <Field label="Effectiveness Rating" hint="Domain-defined bands — system converts to numeric value automatically">
-                  {!readOnly ? (
-                    <Select
-                      value={getBandFromCE(control.ce ?? 0)}
-                      onChange={(e) => {
-                        const band = e.target.value;
-                        const numericCE = bandMap[band] ?? 0;
-                        onChange(control.controlId || control._id || index, "ce", numericCE);
-                        onChange(control.controlId || control._id || index, "effectivenessRating", band);
-                      }}
-                      options={bandOptions}
-                    />
-                  ) : (
-                    <div className="input bg-white/[0.02] border-neutral-800 text-neutral-400 cursor-not-allowed">
-                      {getBandFromCE(control.ce ?? 0)}
-                    </div>
-                  )}
-                </Field>
-
-                <Field label="CE Value (auto)" hint="Numeric value derived from the selected band — read-only">
-                  <div className="input bg-white/[0.02] border-neutral-800 text-neutral-400 cursor-not-allowed">
-                    {control.ce ?? 0}%
-                  </div>
-                </Field>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
+import { Field, Select, TextArea, TextInput } from "./Field";
+import { SCALE, SCALE_LABELS, STANDARD_CRITERIA, CATEGORIES, STATUSES, TREATMENTS } from "../pages/risk/constants";
+import {
+  impactValues,
+  impactSum,
+  blendedImpact,
+  defaultImpact,
+  impactFor,
+  levelOf,
+  riskScoreFor,
+  residualAxesFor,
+  requiresJustification,
+  JUSTIFICATION_MIN_LENGTH,
+} from "../lib/riskEngine";
 
 export default function RiskAssessmentForm({
   form,
   onChange,
-  domainParam,
+  domainParam = {},
   domainName,
-  impactMethod,
+  impactMethod = "weighted",
   linkedControls = [],
   onControlCEChange,
   readOnly = false,
   showControlsSection = true,
-  onAssessmentChange,
 }) {
-  const criteria = domainParam?.criteria || [];
-  const thresholds = domainParam?.thresholds || DEFAULT_THRESHOLDS;
-  const appetiteLimit = domainParam?.appetiteLimit;
+  const set = (k) => (e) => {
+    const v = e.target.value;
+    onChange(k, k === "likelihood" ? Number(v) : v);
+  };
 
-  const impacts = form?.impacts || {};
+  const setImpact = (name) => (e) =>
+    onChange("impacts", { ...(form.impacts || {}), [name]: Number(e.target.value) });
 
-  const assessment = useMemo(() => {
-    if (!form?.likelihood || !criteria.length) return null;
-    try {
-      return calculateRiskAssessment({
-        likelihood: form.likelihood,
-        impacts,
-        criteria,
-        impactMethod: impactMethod || domainParam?.scoringMethod || "weighted",
-        controls: linkedControls.map((c) => ({
-          ce: c.ce ?? 0,
-          type: c.type || CONTROL_TYPES.OTHER,
-          controlId: c.controlId || c._id,
-        })),
-        thresholds,
-        useAxisAware: true,
-        appetiteLimit,
-      });
-    } catch (e) {
-      console.warn("Risk assessment calculation error:", e.message);
-      return null;
-    }
-  }, [form?.likelihood, impacts, criteria, impactMethod, domainParam?.scoringMethod, linkedControls, thresholds, appetiteLimit]);
+  const criteria = domainParam?.criteria || STANDARD_CRITERIA;
+  const thresholds = domainParam?.thresholds || { critical: 20, high: 12, medium: 6 };
+  const appetiteLimit = domainParam?.appetiteLimit != null ? Number(domainParam.appetiteLimit) : null;
 
-  const handleImpactChange = useCallback(
-    (criterionName, value) => {
-      onChange("impacts", { ...impacts, [criterionName]: Number(value) });
+  const overallScore = impactSum(form, criteria);
+  const impact = impactFor(form, impactMethod, criteria);
+  const riskScore = riskScoreFor({ likelihood: form.likelihood, impact, param: domainParam });
+  const axes = residualAxesFor({
+    likelihood: form.likelihood,
+    impact,
+    links: linkedControls,
+    controlOf: (id) => {
+      const link = linkedControls.find((l) => l.control?._id === id || l.control_id === id);
+      return link?.control || null;
     },
-    [impacts, onChange]
-  );
-
-  const handleCEChange = useCallback(
-    (controlId, field, value) => {
-      if (onControlCEChange) onControlCEChange(controlId, field, value);
+    cfg: {
+      weights: domainParam?.controlEffectivenessWeights,
+      capReduction: domainParam?.residualCapReduction,
     },
-    [onControlCEChange]
-  );
+  });
+  const suggested = axes.score;
+  const hasUserResidual = form.residualScore !== "" && form.residualScore != null;
+  const effectiveResidual = hasUserResidual ? Number(form.residualScore) : suggested;
+  const residualDeviation = hasUserResidual && requiresJustification(Number(form.residualScore), suggested);
+  const inherentLevel = levelOf(riskScore, thresholds);
+  const residualLevel = levelOf(effectiveResidual, thresholds);
+  const methodLabel =
+    domainParam?.riskScoreMethod === "weighted_additive"
+      ? "weighted additive (×5, weights sum to 1)"
+      : domainParam?.riskScoreMethod === "matrix_lookup"
+        ? "matrix lookup (5×5)"
+        : "likelihood × impact";
+  const methodName = domainParam?.riskScoreMethod || "multiplicative";
 
-  if (!criteria.length) {
-    return (
-      <div className="rounded-lg border border-amber-800/60 bg-amber-950/30 p-4 text-sm text-amber-300">
-        No active parameter found for the selected domain. Risk assessment cannot be calculated.
-      </div>
-    );
-  }
+  const useSuggestion = () => {
+    onChange("residualScore", "");
+    onChange("residualJustification", "");
+  };
 
   return (
     <div className="space-y-6">
-      {/* Domain Parameter Panel (Read-Only) */}
-      <div className="rounded-xl border border-gold/30 bg-gold/[0.02] p-4">
-        <div className="flex items-center gap-2 text-gold mb-3">
-          <span className="label">Domain Parameter (Read-Only)</span>
-          <span className="chip text-[10px] border-gold/40 bg-gold/10 text-gold">{domainName || "Unknown"}</span>
+      <div>
+        <p className="label border-b border-line pb-2">Identification</p>
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Field label="Risk ID" hint="e.g. R-049">
+            <TextInput value={form.riskId || ""} onChange={set("riskId")} placeholder="Auto-assigned if blank" readOnly={readOnly} />
+          </Field>
+          <Field label="Risk title">
+            <TextInput value={form.title || ""} onChange={set("title")} required placeholder="e.g. Unauthorised access to customer data" readOnly={readOnly} />
+          </Field>
+          <Field label="Process">
+            <TextInput value={form.process || ""} onChange={set("process")} placeholder="e.g. Customer Onboarding" readOnly={readOnly} />
+          </Field>
+          <Field label="Sub-Process">
+            <TextInput value={form.subProcess || ""} onChange={set("subProcess")} placeholder="e.g. KYC Verification" readOnly={readOnly} />
+          </Field>
+          <Field label="Asset / System">
+            <TextInput value={form.assetSystem || ""} onChange={set("assetSystem")} placeholder="e.g. Mobile Banking App" readOnly={readOnly} />
+          </Field>
+          <Field label="Owner Team">
+            <TextInput value={form.ownerTeam || ""} onChange={set("ownerTeam")} placeholder="e.g. Digital Banking" readOnly={readOnly} />
+          </Field>
+          <Field label="Risk category">
+            <Select value={form.category || "Cybersecurity"} onChange={set("category")} options={CATEGORIES} disabled={readOnly} />
+          </Field>
+          <Field label="Risk date">
+            <TextInput type="date" value={form.riskDate || ""} onChange={set("riskDate")} readOnly={readOnly} />
+          </Field>
+          <Field label="Owner" hint="Accountable owner — required">
+            <TextInput value={form.owner || ""} onChange={set("owner")} placeholder="e.g. Head of Digital" required readOnly={readOnly} />
+          </Field>
         </div>
-        <p className="text-[11px] text-neutral-500 mb-4">
-          The following values are derived from the domain's active parameter and cannot be edited here.
-          They are used automatically in the risk calculation below.
-        </p>
+      </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <ReadOnlyField
-            label="Impact Method"
-            value={impactMethod === "weighted" ? "Weighted Average" : impactMethod === "max" ? "Maximum" : "Advanced (70/30 Blend)"}
-            hint="How individual impacts combine into a single Impact score"
-            tooltip="Weighted: Σ(value × weight)/Σweights | Max: highest value | Advanced: 70% max + 30% weighted"
-          />
-          <ReadOnlyField
-            label="Risk Score Method"
-            value={
-              domainParam?.riskScoreMethod === "weighted_additive"
-                ? "Weighted Additive"
-                : domainParam?.riskScoreMethod === "matrix_lookup"
-                ? "Matrix Lookup"
-                : "Multiplicative (L × I)"
-            }
-            hint="How Likelihood + Impact produce Risk Score"
-          />
-          <ReadOnlyField
-            label="Thresholds"
-            value={`C≥${thresholds.critical} H≥${thresholds.high} M≥${thresholds.medium}`}
-            hint="Score boundaries for risk levels"
-            tooltip="Critical ≥ 20 | High ≥ 12 | Medium ≥ 6 | Low < 6 (defaults shown, domain may override)"
-          />
-          <ReadOnlyField
-            label="Risk Appetite"
-            value={appetiteLimit ? `≤ ${appetiteLimit}` : "Not Set"}
-            hint="Maximum acceptable residual risk score"
-            tooltip="If residual score exceeds appetite, risk requires treatment or acceptance approval"
-          />
-        </div>
-
-        <div className="mt-4 pt-4 border-t border-line">
-          <span className="label text-[11px]">Impact Weights (per criterion)</span>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {criteria.map((c) => (
-              <span key={c.name} className="chip text-[10px] border-line bg-white/[0.03] text-neutral-400">
-                {CRITERIA_LABELS[c.name] || c.name}: {Number(c.weight).toFixed(3)}
-              </span>
-            ))}
+      <div>
+        <p className="label border-b border-line pb-2">Threat & vulnerability</p>
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="sm:col-span-2 lg:col-span-3">
+            <Field label="Threat">
+              <TextArea value={form.threat || ""} onChange={set("threat")} placeholder="The threat actor or event that could exploit the vulnerability." readOnly={readOnly} />
+            </Field>
+          </div>
+          <div className="sm:col-span-2 lg:col-span-3">
+            <Field label="Vulnerability">
+              <TextArea value={form.vulnerability || ""} onChange={set("vulnerability")} placeholder="The weakness that could be exploited." readOnly={readOnly} />
+            </Field>
           </div>
         </div>
       </div>
 
-      {/* User Input: Likelihood & Impacts */}
       <div className="rounded-xl border border-dashed border-gold/30 bg-gold/[0.02] p-4">
-        <div className="flex items-center gap-2 text-gold mb-3">
-          <span className="label">Your Assessment for This Risk</span>
-        </div>
-        <p className="text-[11px] text-neutral-500 mb-4">
-          Enter the likelihood (1–5) and impact per criterion (1–5). All scores below update instantly.
+        <p className="label text-gold">Your assessment for this risk</p>
+        <p className="mt-1 text-[11px] leading-relaxed text-neutral-500">
+          Rate this risk only: how likely it is (1–5) and its impact per criterion (1 = minimal · 5 = severe).
+          {domainName ? ` Domain: ${domainName}` : ""}
         </p>
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Field label="Likelihood" hint="How likely is this risk to occur? (1 = Rare, 5 = Almost Certain)">
-            <Select
-              value={form?.likelihood || 3}
-              onChange={(e) => onChange("likelihood", Number(e.target.value))}
-              options={SCALE}
-              disabled={readOnly}
-            />
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Field label="Likelihood" hint={SCALE_LABELS[form.likelihood]}>
+            <Select value={form.likelihood || 3} onChange={set("likelihood")} options={SCALE} disabled={readOnly} />
           </Field>
-
-          {criteria.map((c) => (
-            <Field key={c.name} label={`Impact · ${CRITERIA_LABELS[c.name] || c.name}`} hint={`Weight: ${Number(c.weight).toFixed(3)}`}>
-              <Select
-                value={impacts[c.name] || 3}
-                onChange={(e) => handleImpactChange(c.name, e.target.value)}
-                options={SCALE}
-                disabled={readOnly}
-              />
+          {(criteria || []).map((c) => (
+            <Field key={c.name} label={`Impact · ${c.name}`}>
+              <Select value={form.impacts?.[c.name] || 1} onChange={setImpact(c.name)} options={SCALE} disabled={readOnly} />
             </Field>
           ))}
         </div>
+        <div className="sm:col-span-2 lg:col-span-3">
+          <div className="flex flex-wrap gap-3 rounded-lg border border-line bg-white/[0.02] p-3 text-sm">
+            <span className="text-neutral-500">
+              Overall score: <strong className="text-neutral-100">{overallScore}</strong>
+            </span>
+            <span className="text-neutral-500">
+              Risk score ({methodLabel}): <strong className="text-neutral-100">{riskScore}</strong>
+            </span>
+            <span className="text-neutral-500">
+              Impact: <strong className="text-neutral-100">{impact}</strong>
+            </span>
+            <span className="text-neutral-500">
+              Inherent level: <strong className="text-neutral-100">{inherentLevel}</strong>
+            </span>
+            {linkedControls.length > 0 && (
+              <>
+                <span className="text-neutral-500">
+                  Residual L: <strong className="text-neutral-100">{axes.residualLikelihood}</strong>
+                </span>
+                <span className="text-neutral-500">
+                  Residual I: <strong className="text-neutral-100">{axes.residualImpact}</strong>
+                </span>
+              </>
+            )}
+            <span className="text-neutral-500">
+              Residual level: <strong className="text-neutral-100">{residualLevel}</strong>
+            </span>
+            {appetiteLimit != null && (
+              <span className="text-neutral-500">
+                Appetite: <strong className={effectiveResidual > appetiteLimit ? "text-amber-300" : "text-neutral-100"}>
+                  ≤ {appetiteLimit}{effectiveResidual > appetiteLimit ? " · exceeded" : ""}
+                </strong>
+              </span>
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* Calculated Results — Read-Only */}
-      {assessment && (
-        <div className="rounded-xl border border-line bg-white/[0.02] p-4">
-          <span className="label flex items-center gap-2">
-            Calculated Risk Metrics (Auto-Updated)
-            <Tooltip text="These values are calculated in real-time from your inputs above and the linked controls' effectiveness.">
-              <span className="ml-1.5 text-neutral-500 hover:text-gold cursor-help">ℹ️</span>
-            </Tooltip>
-          </span>
-
-          {/* Row 1: Inherent */}
-          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <ScoreDisplay
-              label="Impact (Weighted)"
-              score={assessment.impact}
-              level={assessment.inherentLevel}
-              subLabel={impactMethod}
-            />
-            <ScoreDisplay
-              label="Inherent Score"
-              score={assessment.inherentScore}
-              level={assessment.inherentLevel}
-              subLabel="L × I"
-            />
-            <ScoreDisplay
-              label="Residual Score"
-              score={assessment.residualScore}
-              level={assessment.residualLevel}
-              subLabel="Inherent × (1 − CE)"
-            />
-          </div>
-
-          {/* Row 2: Combined CE + Appetite Status */}
-          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <div className="flex flex-col items-center gap-1 p-3 rounded-lg border bg-white/[0.02]">
-              <span className="text-[10px] uppercase tracking-wider text-neutral-500">Combined CE</span>
-              <span className="text-3xl font-mono font-bold text-neutral-100">
-                {linkedControls.length > 0
-                  ? `${Math.round((1 - (1 - (assessment.likelihoodCE ?? 0) / 100) * (1 - (assessment.impactCE ?? 0) / 100)) * 100)}%`
-                  : "0%"}
-              </span>
-              <span className="text-[10px] text-neutral-500">Control Effectiveness</span>
-            </div>
-
-            <div className="flex flex-col items-center gap-2 p-3 rounded-lg border bg-white/[0.02]">
-              <span className="text-[10px] uppercase tracking-wider text-neutral-500">Appetite Status</span>
-              {assessment.appetiteStatus ? (
-                <>
-                  <span className={`chip mt-1 ${APPETITE_COLORS[assessment.appetiteStatus] || "border-neutral-700 bg-neutral-900 text-neutral-400"}`}>
-                    {assessment.appetiteStatus === "Within Appetite" ? "✅" : "⚠️"} {assessment.appetiteStatus}
-                  </span>
-                  <span className="text-[10px] text-neutral-500">≤ {appetiteLimit}</span>
-                </>
-              ) : (
-                <span className="text-sm text-neutral-500">Appetite not set</span>
-              )}
-            </div>
-          </div>
-
-          {assessment.appetiteStatus === "Exceeds Appetite" && (
-            <div className="mt-4 rounded-lg border border-amber-800/60 bg-amber-950/30 px-3 py-2 text-sm text-amber-300">
-              ⚠️ Residual Score ({assessment.residualScore}) exceeds Risk Appetite (≤ {appetiteLimit}).
-              Treatment, transfer, or formal acceptance required.
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Controls & CE Section */}
       {showControlsSection && (
-        <ControlEffectivenessInput
-          controls={linkedControls}
-          onChange={handleCEChange}
-          readOnly={readOnly}
-          domainParam={domainParam}
-        />
-      )}
-
-      {assessment && onAssessmentChange && (
-        <input type="hidden" onChange={() => onAssessmentChange(assessment)} />
+        <div>
+          <p className="label border-b border-line pb-2">Controls & treatment</p>
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="sm:col-span-2 lg:col-span-3">
+              <Field label="Existing controls">
+                <TextArea value={form.existingControls || ""} onChange={set("existingControls")} placeholder="Current controls in place to reduce the risk." readOnly={readOnly} />
+              </Field>
+            </div>
+            <div className="sm:col-span-2 lg:col-span-3">
+              <Field label="Mitigation actions">
+                <TextArea value={form.mitigationActions || ""} onChange={set("mitigationActions")} placeholder="Planned actions to mitigate the risk." readOnly={readOnly} />
+              </Field>
+            </div>
+            <Field label="Treatment">
+              <Select value={form.treatment || "Mitigate"} onChange={set("treatment")} options={TREATMENTS.map((t) => ({ value: t, label: t }))} disabled={readOnly} />
+            </Field>
+            <Field label="Status">
+              <Select value={form.status || "Open"} onChange={set("status")} options={STATUSES} disabled={readOnly} />
+            </Field>
+            <Field label="Treatment owner" hint="Required when residual exposure exceeds appetite">
+              <TextInput value={form.treatmentOwner || ""} onChange={set("treatmentOwner")} placeholder="e.g. Head of IT Security" readOnly={readOnly} />
+            </Field>
+            <Field label="Treatment due date" hint="Required when residual exposure exceeds appetite">
+              <TextInput type="date" value={form.treatmentDueDate || ""} onChange={set("treatmentDueDate")} readOnly={readOnly} />
+            </Field>
+            <Field label="Treatment effectiveness" hint="Assessed at treatment review">
+              <Select
+                value={form.treatmentEffectiveness || "Not Assessed"}
+                onChange={set("treatmentEffectiveness")}
+                options={["Not Assessed", "Effective", "Partially Effective", "Ineffective"]}
+                disabled={readOnly}
+              />
+            </Field>
+            <Field label="Residual score" hint={linkedControls.length > 0 ? `L(${axes.residualLikelihood}) × I(${axes.residualImpact}) = ${suggested} · leave blank to use` : "No linked controls — residual equals inherent"}>
+              <div className="flex items-center gap-2">
+                <TextInput type="number" min="1" max="25" value={form.residualScore ?? ""} onChange={set("residualScore")} readOnly={readOnly} />
+                {!hasUserResidual && (
+                  <span className="chip border-line bg-white/[0.03] text-neutral-400">suggested {suggested}</span>
+                )}
+              </div>
+            </Field>
+            {residualDeviation && (
+              <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-3 sm:col-span-2 lg:col-span-3">
+                <p className="text-xs text-amber-200">
+                  Your residual ({Number(form.residualScore)}) deviates more than 20% from the control-driven suggestion ({suggested}) for the {methodName} method. This deviation must be justified.
+                </p>
+                <div className="mt-3 grid grid-cols-1 gap-3">
+                  <TextArea
+                    value={form.residualJustification || ""}
+                    onChange={set("residualJustification")}
+                    placeholder={`Required — at least ${JUSTIFICATION_MIN_LENGTH} characters.`}
+                    readOnly={readOnly}
+                  />
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-[11px] text-amber-200/70">
+                      {form.residualJustification ? form.residualJustification.trim().length : 0} / {JUSTIFICATION_MIN_LENGTH} characters
+                    </p>
+                    <button type="button" onClick={useSuggestion} className="chip border-amber-500/40 bg-amber-950/40 text-amber-200 hover:bg-amber-900/40">
+                      Use suggestion ({suggested})
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+            <Field label="Deadline">
+              <TextInput type="date" value={form.deadline || ""} onChange={set("deadline")} readOnly={readOnly} />
+            </Field>
+          </div>
+        </div>
       )}
     </div>
   );

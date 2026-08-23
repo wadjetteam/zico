@@ -11,6 +11,7 @@ export default defineConfig({
     allowedHosts: true,
     proxy: {
       "/api": { target: "http://localhost:5000", changeOrigin: true },
+      "/audit-api": { target: "http://localhost:5002", changeOrigin: true, rewrite: (p) => p.replace(/^\/audit-api/, "/api/audit") },
     },
   },
 });

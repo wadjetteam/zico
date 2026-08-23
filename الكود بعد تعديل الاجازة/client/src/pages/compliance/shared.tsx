@@ -92,17 +92,6 @@ export function fmtDate(d: string | null | undefined): string {
   return new Date(d).toISOString().slice(0, 10);
 }
 
-const inputStyle = (extra = {}) => ({
-  background: T.inputBg, border: `1px solid ${T.panelBorder}`, borderRadius: 8,
-  color: T.textPrimary, fontSize: 12.5, padding: "9px 11px", outline: "none",
-  fontFamily: FONT_STACK, width: "100%", boxSizing: "border-box", ...extra,
-});
-
-const secondaryBtnStyle = {
-  background: "transparent", color: T.textSecondary, border: `1px solid ${T.panelBorder}`,
-  borderRadius: 8, padding: "9px 16px", fontSize: 12.5, fontWeight: 600, cursor: "pointer",
-};
-
 export function Badge({ label, color, bg, Icon }: any) {
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: 5, padding: "3px 9px", borderRadius: 20, background: bg, color, fontSize: 11.5, fontWeight: 600, whiteSpace: "nowrap" }}>
@@ -222,6 +211,15 @@ export function DataTable({ columns, rows, sort, onSort, onRowClick, renderActio
   );
 }
 
+export function PageHeading({ title, subtitle }: any) {
+  return (
+    <div style={{ marginBottom: 20 }}>
+      <h1 style={{ fontSize: 22, fontWeight: 700, color: T.textPrimary, marginBottom: 4 }}>{title}</h1>
+      {subtitle && <p style={{ fontSize: 12.5, color: T.textSecondary }}>{subtitle}</p>}
+    </div>
+  );
+}
+
 export function HBarChart({ data, max, colorFn }: any) {
   const m = max ?? Math.max(1, ...data.map((d: any) => d.value));
   return (
@@ -262,13 +260,31 @@ export function DonutChart({ segments, size = 128, centerLabel, centerValue }: a
       </svg>
       <div>
         {segments.map((seg: any) => (
-          <div key={seg.label} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-            <span style={{ width: 10, height: 10, borderRadius: 3, background: seg.color, display: "inline-block" }} />
-            <span style={{ fontSize: 11.5, color: T.textSecondary }}>{seg.label}</span>
-            <span style={{ fontSize: 11.5, color: T.textPrimary, fontWeight: 600 }}>{seg.value}</span>
+          <div key={seg.label} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 11.5 }}>
+            <span style={{ width: 8, height: 8, borderRadius: 2, background: seg.color, display: "inline-block" }} />
+            <span style={{ color: T.textSecondary }}>{seg.label}</span>
+            <span style={{ color: T.textPrimary, fontWeight: 600 }}>{seg.value}</span>
           </div>
         ))}
       </div>
     </div>
   );
 }
+
+export function DetailRow({ k, v }: any) {
+  return <div style={{ display: "flex", justifyContent: "space-between", gap: 12, fontSize: 12, borderBottom: `1px solid ${T.panelBorder}`, paddingBottom: 8 }}><span style={{ color: T.textMuted }}>{k}</span><span style={{ color: T.textPrimary, textAlign: "right" }}>{v}</span></div>;
+}
+
+export const inputStyle = (extra = {}) => ({
+  background: T.inputBg, border: `1px solid ${T.panelBorder}`, borderRadius: 8,
+  color: T.textPrimary, fontSize: 12.5, padding: "9px 11px", outline: "none",
+  fontFamily: T.fontStack || "", width: "100%", boxSizing: "border-box", ...extra,
+});
+
+export const selectStyle = (extra = {}) => ({ ...inputStyle(extra), appearance: "auto" });
+
+export const primaryBtnStyle: any = { background: T.accent, color: "#1a1508", border: "none", borderRadius: 8, padding: "9px 16px", fontSize: 12.5, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center" };
+
+export const secondaryBtnStyle: any = { background: "transparent", color: T.textSecondary, border: `1px solid ${T.panelBorder}`, borderRadius: 8, padding: "9px 16px", fontSize: 12.5, fontWeight: 600, cursor: "pointer" };
+
+export const iconBtnStyle: any = { border: `1px solid ${T.panelBorder}`, background: T.inputBg, borderRadius: 7, padding: 8, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" };

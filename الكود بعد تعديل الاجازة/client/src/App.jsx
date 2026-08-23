@@ -22,26 +22,15 @@ import ManagementReviews from "./pages/risk/ManagementReviews";
 import CloseRisks from "./pages/risk/CloseRisks";
 import POAM from "./pages/risk/POAM";
 import ScoreHistory from "./pages/risk/ScoreHistory";
-import ManageAudits from "./pages/audit/ManageAudits";
-import ActiveAudits from "./pages/audit/ActiveAudits";
-import PastAudits from "./pages/audit/PastAudits";
-import AuditEngagementDetail from "./pages/audit/AuditEngagementDetail";
 import { useParams } from "react-router";
 import ComplianceModule from "./pages/compliance-full/ComplianceModule";
+import AuditModule from "./pages/audit/AuditModule";
+import ReportsPage from "./pages/reports/ReportsPage";
 import ControlManagement from "./pages/controls/ControlManagement";
 import ManageAssets from "./pages/assets/ManageAssets";
 import AssetGroups from "./pages/assets/AssetGroups";
 import Insights from "./pages/ai/Insights";
 import Assistant from "./pages/ai/Assistant";
-import RiskAssessments from "./pages/assessments/RiskAssessments";
-import RiskAssessmentDetail from "./pages/assessments/RiskAssessmentDetail";
-import Questionnaires from "./pages/assessments/Questionnaires";
-import QuestionnaireDetail from "./pages/assessments/QuestionnaireDetail";
-import ThirdParty from "./pages/assessments/ThirdParty";
-import ThirdPartyDetail from "./pages/assessments/ThirdPartyDetail";
-import Respond from "./pages/assessments/Respond";
-import DynamicRiskReport from "./pages/reporting/DynamicRiskReport";
-import ComplianceReports from "./pages/reporting/ComplianceReports";
 import Organizations from "./pages/context/Organizations";
 import OrganizationDetail from "./pages/context/OrganizationDetail";
 import Domains from "./pages/context/Domains";
@@ -102,11 +91,9 @@ export default function App() {
 
             <Route path="/controls/management" element={<ControlManagement />} />
 
-            <Route path="/audit/manage" element={<ManageAudits />} />
-            <Route path="/audit/active" element={<ActiveAudits />} />
-            <Route path="/audit/past" element={<PastAudits />} />
-            <Route path="/audit/engagements/:id" element={<AuditEngagementDetail />} />
-            <Route path="/audit/universe" element={<Navigate to="/audit/manage" replace />} />
+            <Route path="/audit-module" element={<AuditModule />} />
+            <Route path="/audit-module/:page" element={<AuditModule />} />
+            <Route path="/audit/*" element={<Navigate to="/audit-module" replace />} />
 
             <Route path="/assets/manage" element={<ManageAssets />} />
             <Route path="/assets/groups" element={<AssetGroups />} />
@@ -114,17 +101,14 @@ export default function App() {
             <Route path="/ai/insights" element={<Insights />} />
             <Route path="/ai/assistant" element={<Assistant />} />
 
-            <Route path="/assessments/risk" element={<RiskAssessments />} />
-            <Route path="/assessments/risk/:id" element={<RiskAssessmentDetail />} />
-            <Route path="/assessments/questionnaires" element={<Questionnaires />} />
-            <Route path="/assessments/questionnaires/:id" element={<QuestionnaireDetail />} />
-            <Route path="/assessments/third-party" element={<ThirdParty />} />
-            <Route path="/assessments/third-party/:id" element={<ThirdPartyDetail />} />
-            <Route path="/assessments/respond/:token" element={<Respond />} />
-
             <Route path="/reporting/executive" element={<Dashboard />} />
-            <Route path="/reporting/dynamic-risk" element={<DynamicRiskReport />} />
-            <Route path="/reporting/compliance" element={<ComplianceReports />} />
+
+            <Route path="/reports/all" element={<ReportsPage moduleFilter="all" />} />
+            <Route path="/reports/compliance" element={<ReportsPage moduleFilter="compliance" />} />
+            <Route path="/reports/risk" element={<ReportsPage moduleFilter="risk" />} />
+            <Route path="/reports/audit" element={<ReportsPage moduleFilter="audit" />} />
+            <Route path="/reports/asset" element={<ReportsPage moduleFilter="asset" />} />
+            <Route path="/reports/platform" element={<ReportsPage moduleFilter="platform" />} />
 
             <Route path="/settings/mail" element={<Mail />} />
             <Route path="/settings/backup" element={<Backup />} />

@@ -87,10 +87,10 @@ const SEED_ASSESSMENTS = [
 ];
 
 const SEED_EVIDENCE = [
-  { id: "EVD-001", name: "MFA Enforcement Policy Export.pdf", requirementId: "REQ-101", controlId: "CTL-001", type: "Document", owner: "IAM Manager", uploadDate: "2026-05-18", expirationDate: "2027-05-18", status: "Approved", verificationStatus: "Verified", reviewer: "CISO", comments: "Confirms MFA enforced." },
-  { id: "EVD-002", name: "WAF Ruleset Configuration.png", requirementId: "REQ-102", controlId: "CTL-002", type: "Screenshot", owner: "Network Security Lead", uploadDate: "2026-04-30", expirationDate: "2027-04-30", status: "Approved", verificationStatus: "Verified", reviewer: "CISO", comments: "" },
-  { id: "EVD-003", name: "RBAC Access Review Q2.xlsx", requirementId: "REQ-103", controlId: "CTL-003", type: "Log Export", owner: "IT Operations Manager", uploadDate: "2026-06-01", expirationDate: "2026-12-01", status: "Under Review", verificationStatus: "Pending", reviewer: "Compliance Manager", comments: "Awaiting confirmation." },
-  { id: "EVD-004", name: "Vulnerability Scan Report.pdf", requirementId: "REQ-104", controlId: "CTL-004", type: "Document", owner: "Vulnerability Management Lead", uploadDate: "", expirationDate: "", status: "Missing", verificationStatus: "Pending", reviewer: "", comments: "No scan report on file." },
+  { id: "EVD-001", name: "MFA Enforcement Policy Export.pdf", requirementId: "REQ-101", controlId: "CTL-001", type: "Document", owner: "IAM Manager", uploadDate: "2026-05-18", expirationDate: "2027-05-18", status: "Approved", verificationStatus: "Verified", reviewer: "CISO", comments: "Confirms MFA enforced.", attachment: { name: "MFA_Policy_Export.pdf", size: 245760, type: "application/pdf", data: null } },
+  { id: "EVD-002", name: "WAF Ruleset Configuration.png", requirementId: "REQ-102", controlId: "CTL-002", type: "Screenshot", owner: "Network Security Lead", uploadDate: "2026-04-30", expirationDate: "2027-04-30", status: "Approved", verificationStatus: "Verified", reviewer: "CISO", comments: "", attachment: { name: "WAF_Ruleset_Config.png", size: 102400, type: "image/png", data: null } },
+  { id: "EVD-003", name: "RBAC Access Review Q2.xlsx", requirementId: "REQ-103", controlId: "CTL-003", type: "Log Export", owner: "IT Operations Manager", uploadDate: "2026-06-01", expirationDate: "2026-12-01", status: "Under Review", verificationStatus: "Pending", reviewer: "Compliance Manager", comments: "Awaiting confirmation.", attachment: null },
+  { id: "EVD-004", name: "Vulnerability Scan Report.pdf", requirementId: "REQ-104", controlId: "CTL-004", type: "Document", owner: "Vulnerability Management Lead", uploadDate: "", expirationDate: "", status: "Missing", verificationStatus: "Pending", reviewer: "", comments: "No scan report on file.", attachment: null },
 ];
 
 const SEED_GAPS = [
@@ -275,8 +275,8 @@ function DataTable({ columns, rows, sort, onSort, onRowClick, renderActions }) {
           </tr></thead>
           <tbody>
             {rows.length === 0 ? (<tr><td colSpan={columns.length + 1}><EmptyState label="No records match your search or filters." /></td></tr>) : (
-              rows.map((row) => (
-                <tr key={row.id} onClick={() => onRowClick && onRowClick(row)} style={{ borderBottom: `1px solid ${T.panelBorder}`, cursor: onRowClick ? "pointer" : "default" }} onMouseEnter={(e) => (e.currentTarget.style.background = T.rowHover)} onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}>
+              rows.map((row, idx) => (
+                <tr key={row.id || row._id || idx} onClick={() => onRowClick && onRowClick(row)} style={{ borderBottom: `1px solid ${T.panelBorder}`, cursor: onRowClick ? "pointer" : "default" }} onMouseEnter={(e) => (e.currentTarget.style.background = T.rowHover)} onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}>
                   {columns.map((col) => <td key={col.key} style={{ padding: "12px 16px", fontSize: 12, verticalAlign: "middle" }}>{col.render ? col.render(row) : row[col.key]}</td>)}
                   {renderActions && <td style={{ padding: "12px 16px" }} onClick={(e) => e.stopPropagation()}>{renderActions(row)}</td>}
                 </tr>
@@ -642,7 +642,7 @@ function AssessmentFormDrawer({ requirements, onClose, onSave }) {
 }
 
 function CrossMappingPage({ data }) {
-  const { requirements, frameworks } = data;
+  const { requirements, frameworks, evidence } = data;
   const [search, setSearch] = useState("");
   const [frameworkFilter, setFrameworkFilter] = useState("All");
   const filtered = requirements.filter((r) => {
@@ -651,25 +651,120 @@ function CrossMappingPage({ data }) {
   });
   return (
     <div>
-      <PageHeading title="Cross-Mapping" subtitle="Visualize requirement relationships across framework → control → policy → risk → asset → evidence." />
-      <Toolbar search={search} onSearch={setSearch} placeholder="Search requirements…" resultCount={filtered.length} totalCount={requirements.length} right={<FilterSelect label="" value={frameworkFilter} options={["All", ...frameworks.map((f) => f.id)]} onChange={setFrameworkFilter} />} />
+      <PageHeading title="Cross-Mapping" subtitle="Requirement → Control → Policy → Risk → Asset → Evidence → Compliance Status, in one traceable chain." />
+      <Toolbar search={search} onSearch={setSearch} placeholder="Search requirement…" resultCount={filtered.length} totalCount={requirements.length} right={<FilterSelect label="" value={frameworkFilter} options={["All", ...frameworks.map((f) => f.id)]} onChange={setFrameworkFilter} />} />
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {filtered.map((req) => {
-          const meta = reqStatusMeta(req.status);
-          return (
-            <div key={req.id} style={{ background: T.panelBg, border: `1px solid ${T.panelBorder}`, borderRadius: 10, padding: 16 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}><div><span style={{ fontSize: 11, color: T.accent, fontWeight: 600 }}>{req.id}</span> <span style={{ fontSize: 13, fontWeight: 600, marginLeft: 8 }}>{req.title}</span></div><Badge {...meta} label={req.status} /></div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-                <Node color={T.purple} label="FRAMEWORK" value={nameOf(frameworks, req.frameworkId)} />
-                <ArrowRight size={14} color={T.textMuted} /><Node color={T.blue} label="CONTROLS" value={req.mappedControls.map((c) => nameOf(EXISTING_CONTROLS, c)).join(", ") || "None"} />
-                <ArrowRight size={14} color={T.textMuted} /><Node color={T.accent} label="POLICIES" value={req.relatedPolicies.map((p) => nameOf(EXISTING_POLICIES, p)).join(", ") || "None"} />
-                <ArrowRight size={14} color={T.textMuted} /><Node color={T.red} label="RISKS" value={req.relatedRisks.map((r) => nameOf(EXISTING_RISKS, r)).join(", ") || "None"} />
-                <ArrowRight size={14} color={T.textMuted} /><Node color={T.grey} label="ASSETS" value={req.relatedAssets.length > 0 ? `${req.relatedAssets.length} linked` : "None"} />
-              </div>
-            </div>
-          );
-        })}
+        {filtered.length === 0 && <EmptyState label="No requirements match your search or filters." />}
+        {filtered.map((r) => (
+          <MappingChain key={r.id} requirement={r} framework={frameworks.find((f) => f.id === r.frameworkId)} evidenceItems={evidence.filter((e) => e.requirementId === r.id)} />
+        ))}
       </div>
+    </div>
+  );
+}
+
+function MappingChain({ requirement, framework, evidenceItems }) {
+  const meta = reqStatusMeta(requirement.status);
+  const [evidenceOpen, setEvidenceOpen] = useState(false);
+  const evidenceCount = evidenceItems.length;
+
+  const nodes = [
+    { label: framework?.name || "Unknown", sub: requirement.title, Icon: Landmark, color: T.purple },
+    { label: requirement.mappedControls.length ? requirement.mappedControls.map((id) => nameOf(EXISTING_CONTROLS, id)).join(", ") : "No control mapped", sub: "Internal Control", Icon: ShieldCheck, color: T.blue },
+    { label: requirement.relatedPolicies.length ? requirement.relatedPolicies.map((id) => nameOf(EXISTING_POLICIES, id)).join(", ") : "No policy linked", sub: "Policy", Icon: FileText, color: T.accent },
+    { label: requirement.relatedRisks.length ? requirement.relatedRisks.map((id) => nameOf(EXISTING_RISKS, id)).join(", ") : "No risk linked", sub: "Risk", Icon: AlertTriangle, color: T.red },
+    { label: requirement.relatedAssets.length ? `${requirement.relatedAssets.length} asset(s)` : "No asset linked", sub: "Asset", Icon: Boxes, color: T.grey },
+    { label: evidenceCount ? `${evidenceCount} item(s)` : "No evidence", sub: "Evidence", Icon: FolderCheck, color: T.amber, interactive: true },
+  ];
+
+  return (
+    <div style={{ background: T.panelBg, border: `1px solid ${T.panelBorder}`, borderRadius: 10, padding: 16 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+        <div style={{ fontSize: 11, color: T.textMuted, fontWeight: 600 }}>{requirement.id}</div>
+        <Badge {...meta} label={requirement.status} />
+      </div>
+      <div style={{ display: "flex", alignItems: "stretch", gap: 6, overflowX: "auto", paddingBottom: 4 }}>
+        {nodes.map((n, i) => (
+          <React.Fragment key={i}>
+            <div
+              onClick={() => n.interactive && setEvidenceOpen((v) => !v)}
+              style={{
+                minWidth: 150,
+                maxWidth: 190,
+                background: n.interactive && evidenceOpen ? T.amberSoft : T.cardBg,
+                border: n.interactive && evidenceOpen ? `1px solid ${T.amber}` : `1px solid ${T.panelBorder}`,
+                borderRadius: 8,
+                padding: "10px 12px",
+                flexShrink: 0,
+                cursor: n.interactive ? "pointer" : "default",
+                transition: "all 0.15s ease",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
+                <n.Icon size={12} color={n.color} />
+                <span style={{ fontSize: 9.5, color: T.textMuted, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.4 }}>{n.sub}</span>
+                {n.interactive && (
+                  <ChevronDown size={11} color={T.textMuted} style={{ marginLeft: "auto", transition: "transform 0.2s ease", transform: evidenceOpen ? "rotate(180deg)" : "rotate(0deg)" }} />
+                )}
+              </div>
+              <div style={{ fontSize: 11.5, color: T.textPrimary, lineHeight: 1.4 }}>{n.label}</div>
+            </div>
+            {i < nodes.length - 1 && (
+              <div style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
+                <ArrowRight size={14} color={T.textMuted} />
+              </div>
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+      {evidenceOpen && (
+        <div style={{ marginTop: 12, borderTop: `1px solid ${T.panelBorder}`, paddingTop: 12 }}>
+          {evidenceCount === 0 ? (
+            <div style={{ textAlign: "center", padding: "20px 0", color: T.textMuted, fontSize: 12 }}>No evidence items linked to this requirement.</div>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              {evidenceItems.map((e) => {
+                const expired = e.expirationDate && new Date(e.expirationDate) < new Date("2026-08-23");
+                const statusMeta = evidenceStatusMeta(e.status);
+                return (
+                  <div key={e.id} style={{ display: "flex", alignItems: "center", gap: 12, background: T.cardBg, border: `1px solid ${T.panelBorder}`, borderRadius: 8, padding: "10px 14px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, flex: 1, minWidth: 0 }}>
+                      {e.attachment && e.attachment.type && e.attachment.type.startsWith("image") && e.attachment.data ? (
+                        <img src={e.attachment.data} alt={e.name} style={{ width: 36, height: 36, borderRadius: 6, objectFit: "cover", flexShrink: 0, border: `1px solid ${T.panelBorder}` }} />
+                      ) : (
+                        <FolderCheck size={14} color={T.amber} style={{ flexShrink: 0 }} />
+                      )}
+                      <div style={{ minWidth: 0, flex: 1 }}>
+                        <div style={{ fontSize: 12, fontWeight: 600, color: T.textPrimary, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{e.name}</div>
+                        <div style={{ fontSize: 10.5, color: T.textMuted, marginTop: 2 }}>
+                          {e.type && <span style={{ marginRight: 12 }}>{e.type}</span>}
+                          {e.owner && <span style={{ marginRight: 12 }}>Owner: {e.owner}</span>}
+                          {e.controlId && <span>Control: {nameOf(EXISTING_CONTROLS, e.controlId)}</span>}
+                        </div>
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
+                      {e.uploadDate && (
+                        <div style={{ textAlign: "right" }}>
+                          <div style={{ fontSize: 9.5, color: T.textMuted, textTransform: "uppercase", letterSpacing: 0.3 }}>Uploaded</div>
+                          <div style={{ fontSize: 11, color: T.textSecondary }}>{e.uploadDate}</div>
+                        </div>
+                      )}
+                      {e.expirationDate && (
+                        <div style={{ textAlign: "right" }}>
+                          <div style={{ fontSize: 9.5, color: T.textMuted, textTransform: "uppercase", letterSpacing: 0.3 }}>Expires</div>
+                          <div style={{ fontSize: 11, color: expired ? T.red : T.textSecondary }}>{e.expirationDate}</div>
+                        </div>
+                      )}
+                      <Pill label={e.status} {...statusMeta} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -682,49 +777,257 @@ function EvidencePage({ data, setData }) {
   const { evidence, requirements } = data;
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
+  const [typeFilter, setTypeFilter] = useState("All");
   const [creating, setCreating] = useState(false);
+  const [expandedId, setExpandedId] = useState(null);
+  const [historyLog, setHistoryLog] = useState({});
   const { sort, toggle, apply } = useSort("uploadDate");
-  const rows = apply(evidence.filter((e) => { const q = search.trim().toLowerCase(); return (!q || e.name.toLowerCase().includes(q) || e.owner.toLowerCase().includes(q)) && (statusFilter === "All" || e.status === statusFilter); }));
-  const setStatus = (id, status) => setData((d) => ({ ...d, evidence: d.evidence.map((e) => e.id === id ? { ...e, status } : e) }));
-  const addEvidence = (form) => { setData((d) => ({ ...d, evidence: [{ ...form, id: `EVD-${Math.random().toString(36).slice(2, 5).toUpperCase()}` }, ...d.evidence] })); setCreating(false); };
-  const columns = [
-    { key: "name", label: "Evidence", render: (r) => <span style={{ fontWeight: 600 }}>{r.name}</span> }, { key: "requirementId", label: "Requirement", render: (r) => nameOf(requirements, r.requirementId) },
-    { key: "controlId", label: "Control", render: (r) => nameOf(EXISTING_CONTROLS, r.controlId) }, { key: "type", label: "Type" }, { key: "owner", label: "Owner" },
-    { key: "uploadDate", label: "Uploaded", render: (r) => r.uploadDate || "—" }, { key: "expirationDate", label: "Expires", render: (r) => <span style={{ color: r.expirationDate && new Date(r.expirationDate) < new Date() ? T.red : T.textSecondary }}>{r.expirationDate || "—"}</span> },
-    { key: "status", label: "Status", render: (r) => <Pill label={r.status} {...evidenceStatusMeta(r.status)} /> },
+
+  const types = [...new Set(evidence.map((e) => e.type).filter(Boolean))];
+  const filtered = apply(evidence.filter((e) => {
+    const q = search.trim().toLowerCase();
+    const matchesSearch = !q || e.name.toLowerCase().includes(q) || e.owner.toLowerCase().includes(q) || e.id.toLowerCase().includes(q);
+    const matchesStatus = statusFilter === "All" || e.status === statusFilter;
+    const matchesType = typeFilter === "All" || e.type === typeFilter;
+    return matchesSearch && matchesStatus && matchesType;
+  }));
+
+  const setStatus = (id, status) => {
+    setData((d) => ({ ...d, evidence: d.evidence.map((e) => e.id === id ? { ...e, status } : e) }));
+    setHistoryLog((prev) => ({ ...prev, [id]: [{ action: `Status changed to ${status}`, date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "2-digit", minute: "2-digit" }), user: "Current User" }, ...(prev[id] || [])] }));
+  };
+
+  const addEvidence = (form) => {
+    setData((d) => ({ ...d, evidence: [{ ...form, id: `EVD-${Math.random().toString(36).slice(2, 5).toUpperCase()}` }, ...d.evidence] }));
+    setCreating(false);
+  };
+
+  const getStats = () => {
+    const total = evidence.length;
+    const approved = evidence.filter((e) => e.status === "Approved").length;
+    const pending = evidence.filter((e) => ["Submitted", "Under Review", "Requested"].includes(e.status)).length;
+    const rejected = evidence.filter((e) => e.status === "Rejected").length;
+    const expired = evidence.filter((e) => e.expirationDate && new Date(e.expirationDate) < new Date()).length;
+    return { total, approved, pending, rejected, expired };
+  };
+
+  const stats = getStats();
+
+  const statusChips = [
+    { label: "All", count: stats.total, color: T.textSecondary },
+    { label: "Approved", count: stats.approved, color: T.green },
+    { label: "Submitted", count: evidence.filter((e) => e.status === "Submitted").length, color: T.amber },
+    { label: "Under Review", count: evidence.filter((e) => e.status === "Under Review").length, color: T.blue },
+    { label: "Rejected", count: stats.rejected, color: T.red },
+    { label: "Expired", count: stats.expired, color: T.red },
+    { label: "Missing", count: evidence.filter((e) => e.status === "Missing").length, color: T.grey },
   ];
+
   return (
     <div>
-      <PageHeading title="Evidence" subtitle="Supporting artifacts for assessments." action={<button onClick={() => setCreating(true)} style={{ ...primaryBtnStyle, padding: "10px 16px" }}><Upload size={14} style={{ marginRight: 6 }} /> Upload Evidence</button>} />
-      <Toolbar search={search} onSearch={setSearch} placeholder="Search evidence…" resultCount={rows.length} totalCount={evidence.length} right={<FilterSelect label="" value={statusFilter} options={["All", ...EVIDENCE_STATUSES]} onChange={setStatusFilter} />} />
-      <DataTable columns={columns} rows={rows} sort={sort} onSort={toggle} renderActions={(r) => (
-        <div style={{ display: "flex", gap: 6 }}>
-          <button onClick={() => setStatus(r.id, "Approved")} style={iconBtnStyle} title="Approve"><CheckCircle2 size={13} color={T.green} /></button>
-          <button onClick={() => setStatus(r.id, "Rejected")} style={iconBtnStyle} title="Reject"><XCircle size={13} color={T.red} /></button>
-          <button style={iconBtnStyle} title="Download"><Download size={13} color={T.textSecondary} /></button>
-          <button onClick={() => setStatus(r.id, "Requested")} style={iconBtnStyle} title="Request Update"><RefreshCw size={13} color={T.textSecondary} /></button>
-        </div>
-      )} />
+      <PageHeading title="Evidence" subtitle="Supporting artifacts for assessments — evidence supports a decision, it doesn't replace it." action={<button onClick={() => setCreating(true)} style={{ ...primaryBtnStyle, padding: "10px 16px" }}><Upload size={14} style={{ marginRight: 6 }} /> Upload Evidence</button>} />
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 10, marginBottom: 16 }}>
+        {statusChips.map((chip) => (
+          <div key={chip.label} onClick={() => setStatusFilter(chip.label)} style={{ background: statusFilter === chip.label ? `${chip.color}15` : T.cardBg, border: `1px solid ${statusFilter === chip.label ? chip.color : T.panelBorder}`, borderRadius: 8, padding: "12px 14px", cursor: "pointer", transition: "all 0.15s ease" }}>
+            <div style={{ fontSize: 20, fontWeight: 700, color: statusFilter === chip.label ? chip.color : T.textPrimary }}>{chip.count}</div>
+            <div style={{ fontSize: 10, color: T.textMuted, marginTop: 2, fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.3 }}>{chip.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <Toolbar search={search} onSearch={setSearch} placeholder="Search evidence…" resultCount={filtered.length} totalCount={evidence.length} right={<FilterSelect label="" value={typeFilter} options={["All", ...types]} onChange={setTypeFilter} />} />
+
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {filtered.length === 0 && <EmptyState label="No evidence matches your search or filters." />}
+        {filtered.map((e) => {
+          const expired = e.expirationDate && new Date(e.expirationDate) < new Date("2026-08-23");
+          const isExpanded = expandedId === e.id;
+          const statusMeta = evidenceStatusMeta(e.status);
+          const log = historyLog[e.id] || [];
+          return (
+            <div key={e.id} style={{ background: T.panelBg, border: `1px solid ${isExpanded ? statusMeta.color : T.panelBorder}`, borderRadius: 10, overflow: "hidden", transition: "border-color 0.15s ease" }}>
+              <div onClick={() => setExpandedId(isExpanded ? null : e.id)} style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 16px", cursor: "pointer" }}>
+                <div style={{ transition: "transform 0.2s ease", transform: isExpanded ? "rotate(90deg)" : "rotate(0deg)", flexShrink: 0 }}><ChevronRight size={14} color={T.textMuted} /></div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
+                    <span style={{ fontSize: 12, fontWeight: 600, color: T.textPrimary, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{e.name}</span>
+                    <span style={{ fontSize: 10, color: T.textMuted, flexShrink: 0 }}>{e.id}</span>
+                  </div>
+                  <div style={{ fontSize: 10.5, color: T.textMuted, marginTop: 2, display: "flex", gap: 10, flexWrap: "wrap" }}>
+                    {e.type && <span>{e.type}</span>}
+                    {e.owner && <span>Owner: {e.owner}</span>}
+                    <span style={{ color: T.textSecondary }}>{nameOf(requirements, e.requirementId)}</span>
+                  </div>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+                  {expired && <span style={{ fontSize: 9.5, color: T.red, fontWeight: 700, textTransform: "uppercase" }}>Expired</span>}
+                  <Pill label={e.status} {...statusMeta} />
+                  <div style={{ display: "flex", gap: 4 }}>
+                    {(e.status === "Submitted" || e.status === "Under Review" || e.status === "Requested") && (
+                      <button onClick={(ev) => { ev.stopPropagation(); setStatus(e.id, "Approved"); }} style={{ ...iconBtnStyle, padding: "4px 6px" }} title="Approve"><CheckCircle2 size={12} color={T.green} /></button>
+                    )}
+                    {e.status !== "Rejected" && e.status !== "Approved" && (
+                      <button onClick={(ev) => { ev.stopPropagation(); setStatus(e.id, "Rejected"); }} style={{ ...iconBtnStyle, padding: "4px 6px" }} title="Reject"><XCircle size={12} color={T.red} /></button>
+                    )}
+                    {e.status === "Approved" && (
+                      <button onClick={(ev) => { ev.stopPropagation(); setStatus(e.id, "Under Review"); }} style={{ ...iconBtnStyle, padding: "4px 6px" }} title="Re-review"><RefreshCw size={12} color={T.textSecondary} /></button>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {isExpanded && (
+                <div style={{ borderTop: `1px solid ${T.panelBorder}`, background: T.cardBg }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, padding: "16px 20px" }}>
+                    <div>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: T.textMuted, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>Evidence Details</div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                        <DetailRow k="Control" v={nameOf(EXISTING_CONTROLS, e.controlId) || "—"} />
+                        <DetailRow k="Requirement" v={nameOf(requirements, e.requirementId) || "—"} />
+                        <DetailRow k="Type" v={e.type || "—"} />
+                        <DetailRow k="Owner" v={e.owner || "—"} />
+                        <DetailRow k="Upload Date" v={e.uploadDate || "—"} />
+                        <DetailRow k="Expiration" v={e.expirationDate ? <span style={{ color: expired ? T.red : T.textPrimary }}>{e.expirationDate}{expired ? " (Expired)" : ""}</span> : "—"} />
+                      </div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: T.textMuted, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>Verification</div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                        <DetailRow k="Status" v={<Pill label={e.status} {...statusMeta} />} />
+                        <DetailRow k="Verification" v={<span style={{ fontWeight: 600, color: e.verificationStatus === "Verified" ? T.green : T.amber }}>{e.verificationStatus || "Pending"}</span>} />
+                        <DetailRow k="Reviewer" v={e.reviewer || "—"} />
+                        <DetailRow k="Comments" v={e.comments ? <span style={{ fontSize: 11, color: T.textSecondary }}>{e.comments}</span> : "—"} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {e.attachment && (
+                    <div style={{ borderTop: `1px solid ${T.panelBorder}`, padding: "16px 20px" }}>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: T.textMuted, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>Attachment Preview</div>
+                      {e.attachment.type && e.attachment.type.startsWith("image") ? (
+                        <div style={{ position: "relative" }}>
+                          <img src={e.attachment.data} alt={e.attachment.name} style={{ maxWidth: "100%", maxHeight: 300, borderRadius: 8, border: `1px solid ${T.panelBorder}`, display: "block" }} />
+                          <div style={{ position: "absolute", bottom: 8, right: 8, background: "rgba(0,0,0,0.7)", borderRadius: 6, padding: "4px 10px", fontSize: 10, color: "#fff", fontWeight: 600 }}>{e.attachment.name}</div>
+                        </div>
+                      ) : (
+                        <div style={{ display: "flex", alignItems: "center", gap: 12, background: T.inputBg, border: `1px solid ${T.panelBorder}`, borderRadius: 8, padding: "14px 16px" }}>
+                          <div style={{ width: 40, height: 40, borderRadius: 8, background: T.amberSoft, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><FileText size={20} color={T.amber} /></div>
+                          <div style={{ flex: 1, minWidth: 0 }}>
+                            <div style={{ fontSize: 12, fontWeight: 600, color: T.textPrimary, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{e.attachment.name}</div>
+                            <div style={{ fontSize: 11, color: T.textMuted }}>{e.attachment.size ? `${Math.round(e.attachment.size / 1024)} KB` : "Document"} • {e.attachment.type || "Unknown type"}</div>
+                          </div>
+                          <button style={{ ...secondaryBtnStyle, padding: "6px 12px", fontSize: 11 }}><Download size={12} style={{ marginRight: 4 }} /> Download</button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {log.length > 0 && (
+                    <div style={{ borderTop: `1px solid ${T.panelBorder}`, padding: "12px 20px" }}>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: T.textMuted, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 8 }}>Activity Log</div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                        {log.map((entry, i) => (
+                          <div key={i} style={{ display: "flex", gap: 10, fontSize: 11, color: T.textSecondary }}>
+                            <span style={{ color: T.textMuted, flexShrink: 0 }}>{entry.date}</span>
+                            <span>{entry.action}</span>
+                            <span style={{ color: T.textMuted }}>— {entry.user}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div style={{ borderTop: `1px solid ${T.panelBorder}`, padding: "12px 20px", display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    <button onClick={() => setStatus(e.id, "Approved")} style={{ ...secondaryBtnStyle, padding: "6px 12px", fontSize: 11 }}><CheckCircle2 size={12} style={{ marginRight: 4 }} color={T.green} /> Approve</button>
+                    <button onClick={() => setStatus(e.id, "Rejected")} style={{ ...secondaryBtnStyle, padding: "6px 12px", fontSize: 11 }}><XCircle size={12} style={{ marginRight: 4 }} color={T.red} /> Reject</button>
+                    <button onClick={() => setStatus(e.id, "Requested")} style={{ ...secondaryBtnStyle, padding: "6px 12px", fontSize: 11 }}><RefreshCw size={12} style={{ marginRight: 4 }} color={T.textSecondary} /> Request Update</button>
+                    <button onClick={() => setStatus(e.id, "Under Review")} style={{ ...secondaryBtnStyle, padding: "6px 12px", fontSize: 11 }}><Eye size={12} style={{ marginRight: 4 }} color={T.textSecondary} /> Send to Review</button>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
       {creating && <EvidenceFormDrawer requirements={requirements} onClose={() => setCreating(false)} onSave={addEvidence} />}
     </div>
   );
 }
 
 function EvidenceFormDrawer({ requirements, onClose, onSave }) {
-  const [form, setForm] = useState({ name: "", requirementId: requirements[0]?.id || "", controlId: EXISTING_CONTROLS[0].id, type: "Document", owner: "", uploadDate: "2026-08-22", expirationDate: "", status: "Submitted", verificationStatus: "Pending", reviewer: "", comments: "" });
-  const set = (f, v) => setForm((x) => ({ ...x, [f]: v }));
+  const [form, setForm] = useState({ name: "", requirementId: requirements[0]?.id || "", controlId: EXISTING_CONTROLS[0].id, type: "Document", owner: "", uploadDate: "2026-08-23", expirationDate: "", status: "Submitted", verificationStatus: "Pending", reviewer: "", comments: "" });
+  const [attachment, setAttachment] = useState(null);
+  const [dragOver, setDragOver] = useState(false);
   const [error, setError] = useState("");
-  const save = () => { if (!form.name.trim()) return setError("Evidence Name is required."); onSave(form); };
+  const set = (f, v) => setForm((x) => ({ ...x, [f]: v }));
+  const fileToData = (file) => {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => { setAttachment({ name: file.name, size: file.size, type: file.type, data: reader.result }); };
+    reader.readAsDataURL(file);
+  };
+  const handleDrop = (e) => { e.preventDefault(); setDragOver(false); const file = e.dataTransfer.files[0]; if (file) fileToData(file); };
+  const handlePaste = (e) => { const item = e.clipboardData.items[0]; if (item && item.type.startsWith("image")) { const file = item.getAsFile(); fileToData(file); } };
+  const save = () => { if (!form.name.trim()) return setError("Evidence Name is required."); onSave({ ...form, attachment }); };
   return (
-    <div style={overlayStyle}><div style={{ ...drawerStyle, width: 480 }}>
+    <div style={overlayStyle}><div style={{ ...drawerStyle, width: 520 }}>
       <div style={drawerHeaderStyle}><div style={{ fontSize: 15, fontWeight: 700 }}>Upload Evidence</div><button onClick={onClose} style={iconBtnStyle}><X size={15} color={T.textSecondary} /></button></div>
-      <div style={{ padding: "4px 24px 24px", overflowY: "auto", flex: 1 }}>
+      <div style={{ padding: "4px 24px 24px", overflowY: "auto", flex: 1 }} onPaste={handlePaste}>
         <Field label="Evidence Name" required error={error}><input value={form.name} onChange={(e) => set("name", e.target.value)} style={inputStyle()} /></Field>
         <Field label="Requirement"><select value={form.requirementId} onChange={(e) => set("requirementId", e.target.value)} style={selectStyle()}>{requirements.map((r) => <option key={r.id} value={r.id}>{r.id} — {r.title}</option>)}</select></Field>
         <Field label="Control"><select value={form.controlId} onChange={(e) => set("controlId", e.target.value)} style={selectStyle()}>{EXISTING_CONTROLS.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select></Field>
         <Field label="Type"><select value={form.type} onChange={(e) => set("type", e.target.value)} style={selectStyle()}>{EVIDENCE_TYPES.map((t) => <option key={t}>{t}</option>)}</select></Field>
         <Field label="Owner"><input value={form.owner} onChange={(e) => set("owner", e.target.value)} style={inputStyle()} /></Field>
         <div style={{ display: "flex", gap: 12 }}><div style={{ flex: 1 }}><Field label="Upload Date"><input type="date" value={form.uploadDate} onChange={(e) => set("uploadDate", e.target.value)} style={inputStyle()} /></Field></div><div style={{ flex: 1 }}><Field label="Expiration Date"><input type="date" value={form.expirationDate} onChange={(e) => set("expirationDate", e.target.value)} style={inputStyle()} /></Field></div></div>
+
+        <div style={{ marginBottom: 12 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: T.textSecondary, marginBottom: 6 }}>ATTACHMENT — Screenshot / File</div>
+          <div
+            onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+            onDragLeave={() => setDragOver(false)}
+            onDrop={handleDrop}
+            onClick={() => document.getElementById("evidence-file-input").click()}
+            style={{
+              border: `2px dashed ${dragOver ? T.amber : T.panelBorder}`,
+              borderRadius: 10,
+              padding: attachment ? "12px" : "24px",
+              textAlign: "center",
+              cursor: "pointer",
+              background: dragOver ? T.amberSoft : T.inputBg,
+              transition: "all 0.15s ease",
+            }}
+          >
+            {attachment ? (
+              <div>
+                {attachment.type && attachment.type.startsWith("image") ? (
+                  <div style={{ marginBottom: 8 }}>
+                    <img src={attachment.data} alt={attachment.name} style={{ maxWidth: "100%", maxHeight: 200, borderRadius: 8, border: `1px solid ${T.panelBorder}` }} />
+                  </div>
+                ) : (
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, justifyContent: "center" }}>
+                    <FileText size={20} color={T.amber} />
+                    <span style={{ fontSize: 13, fontWeight: 600, color: T.textPrimary }}>{attachment.name}</span>
+                  </div>
+                )}
+                <div style={{ fontSize: 11, color: T.textMuted }}>
+                  {attachment.type && attachment.type.startsWith("image") ? "Image" : attachment.name} • {attachment.size ? `${Math.round(attachment.size / 1024)} KB` : ""}
+                </div>
+                <button onClick={(e) => { e.stopPropagation(); setAttachment(null); }} style={{ ...secondaryBtnStyle, padding: "4px 12px", fontSize: 11, marginTop: 8 }}>Remove</button>
+              </div>
+            ) : (
+              <div>
+                <Upload size={28} color={T.textMuted} style={{ marginBottom: 8 }} />
+                <div style={{ fontSize: 12, color: T.textSecondary, fontWeight: 600 }}>Drop file here or click to browse</div>
+                <div style={{ fontSize: 11, color: T.textMuted, marginTop: 4 }}>or paste screenshot with Ctrl+V</div>
+                <div style={{ fontSize: 10, color: T.textMuted, marginTop: 4 }}>PNG, JPG, PDF — max 10MB</div>
+              </div>
+            )}
+            <input id="evidence-file-input" type="file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx" style={{ display: "none" }} onChange={(e) => { if (e.target.files[0]) fileToData(e.target.files[0]); }} />
+          </div>
+        </div>
+
         <Field label="Status"><select value={form.status} onChange={(e) => set("status", e.target.value)} style={selectStyle()}>{EVIDENCE_STATUSES.map((s) => <option key={s}>{s}</option>)}</select></Field>
         <Field label="Verification Status"><select value={form.verificationStatus} onChange={(e) => set("verificationStatus", e.target.value)} style={selectStyle()}>{["Verified", "Pending"].map((s) => <option key={s}>{s}</option>)}</select></Field>
         <Field label="Reviewer"><input value={form.reviewer} onChange={(e) => set("reviewer", e.target.value)} style={inputStyle()} /></Field>

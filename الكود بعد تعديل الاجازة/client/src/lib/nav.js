@@ -6,10 +6,10 @@ import {
   ClipboardCheck,
   Boxes,
   Sparkles,
-  ListChecks,
   BarChart3,
   Settings,
   SearchCheck,
+  FileBarChart2,
 } from "lucide-react";
 
 export const NAV_SECTIONS = [
@@ -81,9 +81,15 @@ export const NAV_SECTIONS = [
     label: "Audit",
     icon: SearchCheck,
     items: [
-      { to: "/audit/manage", label: "Manage Audits" },
-      { to: "/audit/active", label: "Active Audits" },
-      { to: "/audit/past", label: "Past Audits" },
+      { to: "/audit-module", label: "Dashboard" },
+      { to: "/audit-module/plans", label: "Audit Plans" },
+      { to: "/audit-module/audits", label: "Audits" },
+      { to: "/audit-module/checklist", label: "Checklist" },
+      { to: "/audit-module/evidence", label: "Evidence" },
+      { to: "/audit-module/findings", label: "Findings" },
+      { to: "/audit-module/corrective", label: "Corrective Actions" },
+      { to: "/audit-module/reports", label: "Reports" },
+      { to: "/audit-module/history", label: "History" },
     ],
   },
   {
@@ -105,16 +111,6 @@ export const NAV_SECTIONS = [
     ],
   },
   {
-    id: "assessments",
-    label: "Assessments",
-    icon: ListChecks,
-    items: [
-      { to: "/assessments/risk", label: "Risk Assessments" },
-      { to: "/assessments/questionnaires", label: "Questionnaires" },
-      { to: "/assessments/third-party", label: "Third-Party Assessments" },
-    ],
-  },
-  {
     id: "reporting",
     label: "Reporting",
     icon: BarChart3,
@@ -122,6 +118,19 @@ export const NAV_SECTIONS = [
       { to: "/reporting/executive", label: "Executive Summary" },
       { to: "/reporting/dynamic-risk", label: "Dynamic Risk Report" },
       { to: "/reporting/compliance", label: "Compliance Reports" },
+    ],
+  },
+  {
+    id: "reports",
+    label: "Reports",
+    icon: FileBarChart2,
+    items: [
+      { to: "/reports/all", label: "All Reports" },
+      { to: "/reports/compliance", label: "Compliance Reports" },
+      { to: "/reports/risk", label: "Risk Reports" },
+      { to: "/reports/audit", label: "Audit Reports" },
+      { to: "/reports/asset", label: "Asset Reports" },
+      { to: "/reports/platform", label: "Platform Reports" },
     ],
   },
   {

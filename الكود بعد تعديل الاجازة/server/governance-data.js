@@ -111,7 +111,12 @@ export const POLICY_REVIEWS = [
   },
 ];
 
-export const POLICY_ACKNOWLEDGEMENTS = [];
+export const POLICY_ACKNOWLEDGEMENTS = [
+  { _id: "pa-1", policyId: "pol-1", userId: "u-admin", acknowledgedAt: "2026-08-10T09:00:00Z", status: "Completed" },
+  { _id: "pa-2", policyId: "pol-1", userId: "u-analyst", acknowledgedAt: "2026-08-11T14:30:00Z", status: "Completed" },
+  { _id: "pa-3", policyId: "pol-2", userId: "u-admin", acknowledgedAt: "2026-08-12T10:15:00Z", status: "Completed" },
+  { _id: "pa-4", policyId: "pol-8", userId: "u-officer", acknowledgedAt: null, status: "Pending" },
+];
 
 export const POLICY_AUDIT_LOG = [
   {
@@ -205,7 +210,12 @@ export const COMMITTEE_ACTIONS = [
 // GOVERNANCE AUDIT LOG
 // ============================================
 
-export const GOVERNANCE_AUDIT_LOG = [];
+export const GOVERNANCE_AUDIT_LOG = [
+  { _id: "gal-1", timestamp: "2026-08-20T10:00:00Z", action: "policy.created", entityType: "Policy", entityId: "pol-1", fromState: null, toState: "Draft", actorUserId: "u-admin", actorRoleAtTime: "board", reason: "Initial creation", metadata: { version: "3.2" }, ipAddress: "127.0.0.1" },
+  { _id: "gal-2", timestamp: "2026-08-20T11:00:00Z", action: "policy.published", entityType: "Policy", entityId: "pol-1", fromState: "Draft", toState: "Published", actorUserId: "u-admin", actorRoleAtTime: "board", reason: "Board approval received", metadata: { version: "3.2" }, ipAddress: "127.0.0.1" },
+  { _id: "gal-3", timestamp: "2026-08-21T09:00:00Z", action: "exception.created", entityType: "Exception", entityId: "exc-1", fromState: null, toState: "Draft", actorUserId: "u-manager", actorRoleAtTime: "cro", reason: "Legacy TLS exception", metadata: {}, ipAddress: "127.0.0.1" },
+  { _id: "gal-4", timestamp: "2026-08-22T14:00:00Z", action: "risk.mitigated", entityType: "Risk", entityId: "risk-1", fromState: "Open", toState: "In Progress", actorUserId: "u-analyst", actorRoleAtTime: "risk_owner", reason: "Controls implemented", metadata: { treatment: "Mitigate" }, ipAddress: "127.0.0.1" },
+];
 
 // ============================================
 // HELPER FUNCTIONS

@@ -1971,22 +1971,25 @@ function CrossMappingPage({ data }) {
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {rows.length === 0 && <EmptyState label="No requirements match your search or filters." />}
         {rows.map((r) => (
-          <MappingChain key={r.id} requirement={r} framework={byId(frameworks, r.frameworkId)} evidenceCount={evidence.filter((e) => e.requirementId === r.id).length} />
+          <MappingChain key={r.id} requirement={r} framework={byId(frameworks, r.frameworkId)} evidenceItems={evidence.filter((e) => e.requirementId === r.id)} />
         ))}
       </div>
     </div>
   );
 }
 
-function MappingChain({ requirement, framework, evidenceCount }) {
+function MappingChain({ requirement, framework, evidenceItems }) {
   const meta = reqStatusMeta(requirement.status);
+  const [evidenceOpen, setEvidenceOpen] = useState(false);
+  const evidenceCount = evidenceItems.length;
+
   const nodes = [
     { label: framework?.name, sub: requirement.title, Icon: Landmark, color: T.purple },
     { label: requirement.mappedControls.length ? requirement.mappedControls.map((id) => nameOf(EXISTING_CONTROLS, id)).join(", ") : "No control mapped", sub: "Internal Control", Icon: ShieldCheck, color: T.blue },
     { label: requirement.relatedPolicies.length ? requirement.relatedPolicies.map((id) => nameOf(EXISTING_POLICIES, id)).join(", ") : "No policy linked", sub: "Policy", Icon: FileText, color: T.accent },
     { label: requirement.relatedRisks.length ? requirement.relatedRisks.map((id) => nameOf(EXISTING_RISKS, id)).join(", ") : "No risk linked", sub: "Risk", Icon: AlertTriangle, color: T.red },
     { label: requirement.relatedAssets.length ? `${requirement.relatedAssets.length} asset(s)` : "No asset linked", sub: "Asset", Icon: Boxes, color: T.grey },
-    { label: evidenceCount ? `${evidenceCount} item(s)` : "No evidence", sub: "Evidence", Icon: FolderCheck, color: T.amber },
+    { label: evidenceCount ? `${evidenceCount} item(s)` : "No evidence", sub: "Evidence", Icon: FolderCheck, color: T.amber, interactive: true },
   ];
 
   return (
@@ -1999,19 +2002,25 @@ function MappingChain({ requirement, framework, evidenceCount }) {
         {nodes.map((n, i) => (
           <React.Fragment key={i}>
             <div
+              onClick={() => n.interactive && setEvidenceOpen((v) => !v)}
               style={{
                 minWidth: 150,
                 maxWidth: 190,
-                background: T.cardBg,
-                border: `1px solid ${T.panelBorder}`,
+                background: n.interactive && evidenceOpen ? T.amberSoft : T.cardBg,
+                border: n.interactive && evidenceOpen ? `1px solid ${T.amber}` : `1px solid ${T.panelBorder}`,
                 borderRadius: 8,
                 padding: "10px 12px",
                 flexShrink: 0,
+                cursor: n.interactive ? "pointer" : "default",
+                transition: "all 0.15s ease",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
                 <n.Icon size={12} color={n.color} />
                 <span style={{ fontSize: 9.5, color: T.textMuted, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.4 }}>{n.sub}</span>
+                {n.interactive && (
+                  <ChevronDown size={11} color={T.textMuted} style={{ marginLeft: "auto", transition: "transform 0.2s ease", transform: evidenceOpen ? "rotate(180deg)" : "rotate(0deg)" }} />
+                )}
               </div>
               <div style={{ fontSize: 11.5, color: T.textPrimary, lineHeight: 1.4 }}>{n.label}</div>
             </div>
@@ -2023,6 +2032,50 @@ function MappingChain({ requirement, framework, evidenceCount }) {
           </React.Fragment>
         ))}
       </div>
+      {evidenceOpen && (
+        <div style={{ marginTop: 12, borderTop: `1px solid ${T.panelBorder}`, paddingTop: 12 }}>
+          {evidenceCount === 0 ? (
+            <div style={{ textAlign: "center", padding: "20px 0", color: T.textMuted, fontSize: 12 }}>No evidence items linked to this requirement.</div>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              {evidenceItems.map((e) => {
+                const expired = e.expirationDate && new Date(e.expirationDate) < new Date("2026-08-22");
+                const statusMeta = evidenceStatusMeta(e.status);
+                return (
+                  <div key={e.id} style={{ display: "flex", alignItems: "center", gap: 12, background: T.cardBg, border: `1px solid ${T.panelBorder}`, borderRadius: 8, padding: "10px 14px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, flex: 1, minWidth: 0 }}>
+                      <FolderCheck size={14} color={T.amber} style={{ flexShrink: 0 }} />
+                      <div style={{ minWidth: 0, flex: 1 }}>
+                        <div style={{ fontSize: 12, fontWeight: 600, color: T.textPrimary, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{e.name}</div>
+                        <div style={{ fontSize: 10.5, color: T.textMuted, marginTop: 2 }}>
+                          {e.type && <span style={{ marginRight: 12 }}>{e.type}</span>}
+                          {e.owner && <span style={{ marginRight: 12 }}>Owner: {e.owner}</span>}
+                          {e.controlId && <span>Control: {nameOf(EXISTING_CONTROLS, e.controlId)}</span>}
+                        </div>
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
+                      {e.uploadDate && (
+                        <div style={{ textAlign: "right" }}>
+                          <div style={{ fontSize: 9.5, color: T.textMuted, textTransform: "uppercase", letterSpacing: 0.3 }}>Uploaded</div>
+                          <div style={{ fontSize: 11, color: T.textSecondary }}>{e.uploadDate}</div>
+                        </div>
+                      )}
+                      {e.expirationDate && (
+                        <div style={{ textAlign: "right" }}>
+                          <div style={{ fontSize: 9.5, color: T.textMuted, textTransform: "uppercase", letterSpacing: 0.3 }}>Expires</div>
+                          <div style={{ fontSize: 11, color: expired ? T.red : T.textSecondary }}>{e.expirationDate}</div>
+                        </div>
+                      )}
+                      <Pill label={e.status} {...statusMeta} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

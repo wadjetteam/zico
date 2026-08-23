@@ -18,10 +18,15 @@ import {
 } from "./data/policyVersionData.js";
 import { verifyAuditChainIntegrity } from "./data/policyVersionData.js";
 import * as compliance from "./compliance-data.js";
+import { getAllReports, generateReport } from "./services/reportsEngine.js";
+import "./services/reportDefinitions.js";
 import {
-  impactFor, riskScoreFor, suggestedResidual, requiresJustification, residualAxesFor,
-  DEFAULT_CEF_WEIGHTS, DEFAULT_RESIDUAL_CAP, JUSTIFICATION_MIN_LENGTH, computeRiskScore,
+  impactFor, riskScoreFor, requiresJustification, residualAxesFor,
+  JUSTIFICATION_MIN_LENGTH, computeRiskScore,
 } from "../client/src/lib/riskEngine.js";
+
+const DEFAULT_CEF_WEIGHTS = { Effective: 0.75, "Partially Effective": 0.5, Ineffective: 0.25, "Not Assessed": 0 };
+const DEFAULT_RESIDUAL_CAP = 0.75;
 import {
   RiskEngine as NewRiskEngine,
   ParameterEngine,
@@ -61,6 +66,45 @@ const NESTED_SUBS = ["members", "meetings", "decisions", "users", "versions", "d
   "control-mappings", "evidence", "risk-mappings", "procedures", "findings", "capas", "reports",
   "assessments", "risks", "approvals", "responses", "messages", "attachments", "questions",
   "attestations", "exceptions"];
+
+// ──────────────────────────────────────────────
+// Rate Limiting (in-memory, per-user)
+// ──────────────────────────────────────────────
+const rateLimits = new Map();
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX_REQUESTS = 30;
+
+function checkRateLimit(userId) {
+  const now = Date.now();
+  const entry = rateLimits.get(userId) || { count: 0, resetAt: now + RATE_LIMIT_WINDOW_MS };
+  if (now > entry.resetAt) {
+    entry.count = 0;
+    entry.resetAt = now + RATE_LIMIT_WINDOW_MS;
+  }
+  entry.count++;
+  rateLimits.set(userId, entry);
+  return entry.count <= RATE_LIMIT_MAX_REQUESTS;
+}
+
+// ──────────────────────────────────────────────
+// Report Audit Logging (uses central GOVERNANCE_AUDIT_LOG)
+// ──────────────────────────────────────────────
+function logReportGeneration(user, reportId, format, rowCount) {
+  GOVERNANCE_AUDIT_LOG.unshift({
+    _id: `rpt-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    timestamp: new Date().toISOString(),
+    action: "report.generated",
+    entityType: "Report",
+    entityId: reportId,
+    fromState: null,
+    toState: "Exported",
+    actorUserId: user?._id || "system",
+    actorRoleAtTime: user?.role || "system",
+    reason: `Exported as ${format.toUpperCase()} (${rowCount} rows)`,
+    metadata: { reportId, format, rowCount },
+    ipAddress: null,
+  });
+}
 
 const nested = new Map();
 const getNested = (key) => {
@@ -464,6 +508,16 @@ const json = (res, status, body) => {
   res.writeHead(status, { "Content-Type": "application/json" });
   res.end(JSON.stringify(body));
 };
+
+function getMimeTypeForFormat(format) {
+  switch (format) {
+    case "xlsx": return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+    case "pdf": return "application/pdf";
+    case "docx": return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    case "csv": return "text/csv";
+    default: return "application/octet-stream";
+  }
+}
 
 /**
  * Governance API handler wrapper
@@ -3148,6 +3202,52 @@ if (parts.length === 5 && parts[0] === "governance" && parts[1] === "roles" && p
   }
   if (path === "compliance/reference/audits" && method === "GET") {
     return json(res, 200, { items: C.COMPLIANCE_AUDITS });
+  }
+
+  // ──────────────────────────────────────────────
+  // REPORTS ROUTES (Universal Engine)
+  // ──────────────────────────────────────────────
+
+  if (path === "reports" && method === "GET") {
+    const { module } = query;
+    const reports = getAllReports(module || "all");
+    return json(res, 200, {
+      items: reports.map((r) => ({
+        id: r.id, name: r.name, module: r.module,
+        description: r.description, formats: r.supportedFormats, icon: r.icon,
+      })),
+      total: reports.length,
+    });
+  }
+
+  if (path === "reports/generate" && method === "GET") {
+    const user = tokenUser(req);
+    if (!user) return json(res, 401, { message: "Unauthorized — authentication required" });
+
+    if (!checkRateLimit(user._id)) {
+      return json(res, 429, { message: "Too many requests — please wait before generating another report" });
+    }
+
+    try {
+      const { reportId, format } = query;
+      if (!reportId || !format) {
+        return json(res, 400, { message: "reportId and format are required" });
+      }
+
+      const def = getAllReports("all").find((r) => r.id === reportId);
+      if (!def) return json(res, 404, { message: "Report not found" });
+
+      const buffer = await generateReport(reportId, format, null, user);
+      logReportGeneration(user, reportId, format, def.dataSource ? (await def.dataSource()).length : 0);
+
+      const safeName = def.name.replace(/[^\w\s-]/g, "").replace(/\s+/g, "_");
+      const filename = `${safeName}_${Date.now()}.${format}`;
+      res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+      res.setHeader("Content-Type", getMimeTypeForFormat(format));
+      return res.end(Buffer.from(buffer));
+    } catch (err) {
+      return json(res, 400, { message: err.message });
+    }
   }
 
   const collection = COLLECTIONS[path];
