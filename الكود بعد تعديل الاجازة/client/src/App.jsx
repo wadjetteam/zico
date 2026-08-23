@@ -13,6 +13,8 @@ import RoleDetail from "./pages/governance/RoleDetail";
 import Committees from "./pages/governance/Committees";
 import CommitteeDetail from "./pages/governance/CommitteeDetail";
 import ExecutiveDashboard from "./pages/governance/ExecutiveDashboard";
+import GovernanceDashboard from "./pages/governance/GovernanceDashboard";
+import ExceptionRegister from "./pages/governance/ExceptionRegister";
 import SubmitRisk from "./pages/risk/SubmitRisk";
 import ViewRisks from "./pages/risk/ViewRisks";
 import RiskScoring from "./pages/risk/RiskScoring";
@@ -70,9 +72,11 @@ export default function App() {
           <Route path="/context/groups" element={<Groups />} />
           <Route path="/context/groups/:id" element={<GroupDetail />} />
 
+          <Route path="/governance" element={<Navigate to="/governance/dashboard" replace />} />
+          <Route path="/governance/dashboard" element={<GovernanceDashboard />} />
           <Route path="/governance/policies" element={<PolicyManagement />} />
           <Route path="/governance/policies/:id" element={<PolicyDetail />} />
-          <Route path="/governance/exceptions" element={<DefineExceptions />} />
+          <Route path="/governance/exceptions" element={<ExceptionRegister />} />
           <Route path="/governance/documents" element={<DocumentProgram />} />
           <Route path="/governance/roles" element={<RolesPermissions />} />
           <Route path="/governance/roles/:id" element={<RoleDetail />} />

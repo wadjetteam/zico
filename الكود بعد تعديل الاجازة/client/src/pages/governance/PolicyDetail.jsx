@@ -1,107 +1,82 @@
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
-import {
-  ArrowLeft, BookOpen, CheckSquare, Download, FileText, GitBranch, History,
-  Landmark, ListTree, Network, Scale, ShieldCheck, FileSearch, Workflow,
-} from "lucide-react";
-import { resource } from "../../api/client";
-import { ErrorState, LoadingState } from "../../components/States";
-import { POLICY_STATUS_STYLES, POLICY_LIFECYCLE, stepIndex, fmtDay } from "../../lib/policy";
-import DetailsTab from "./tabs/DetailsTab";
+import { useParams, useNavigate } from "react-router";
+import { ArrowLeft, Eye, History, Shield, Paperclip, Network, FileText, ClipboardCheck, Layers } from "lucide-react";
+import api from "../../api/client";
+import PageHeader from "../../components/PageHeader";
+import { LoadingState } from "../../components/States";
+import { chipClass, fmtDate } from "../../lib/format";
 import WorkflowTab from "./tabs/WorkflowTab";
+import VersionsTab from "./tabs/VersionsTab";
+import AuditTab from "./tabs/AuditTab";
 import DocumentsTab from "./tabs/DocumentsTab";
-import RiskMappingsTab from "./tabs/RiskMappingsTab";
-import ControlMappingsTab from "./tabs/ControlMappingsTab";
 import EvidenceTab from "./tabs/EvidenceTab";
 import AttestationsTab from "./tabs/AttestationsTab";
-import VersionsTab from "./tabs/VersionsTab";
 import HierarchyTab from "./tabs/HierarchyTab";
-import AuditTab from "./tabs/AuditTab";
+import ControlMappingsTab from "./tabs/ControlMappingsTab";
+import RiskMappingsTab from "./tabs/RiskMappingsTab";
 
-const api = resource("policies");
-
-const TABS = [
-  { key: "details", label: "Policy Details", icon: FileText },
-  { key: "workflow", label: "Workflow & Approval", icon: Workflow },
-  { key: "documents", label: "Documents", icon: FileSearch },
-  { key: "risk", label: "Risk Mapping", icon: ShieldCheck },
-  { key: "control", label: "Control Mapping", icon: Network },
-  { key: "evidence", label: "Evidence Mapping", icon: Scale },
-  { key: "attestation", label: "Attestation & Exceptions", icon: CheckSquare },
-  { key: "versions", label: "Version History", icon: History },
-  { key: "compare", label: "Version Compare", icon: GitBranch },
-  { key: "hierarchy", label: "Hierarchy", icon: ListTree },
-  { key: "audit", label: "Audit History", icon: BookOpen },
-];
-
-export { POLICY_LIFECYCLE, stepIndex };
-
-/** Numbered lifecycle stepper: completed = gold, current = outlined + "Current", future = muted. */
-export function Stepper({ steps, current, compact = false }) {
-  const idx = current;
+export function Stepper({ steps, current }) {
   return (
-    <div className={`flex items-center ${compact ? "gap-1" : "gap-0"}`}>
-      {steps.map((s, i) => {
-        const done = i < idx;
-        const active = i === idx;
-        return (
-          <div key={s.key} className={`flex items-center ${i > 0 ? (compact ? "ml-1" : "flex-1") : ""}`}>
-            {i > 0 && (
-              <div className={`h-0.5 ${compact ? "w-3" : "flex-1"} ${done || active ? "bg-gold/70" : "bg-neutral-800"}`} />
-            )}
-            <div className="flex flex-col items-center gap-1">
-              <div
-                className={`flex items-center justify-center rounded-full border text-xs font-semibold ${
-                  done
-                    ? "border-gold bg-gold/15 text-gold"
-                    : active
-                      ? "border-gold bg-transparent text-gold"
-                      : "border-neutral-700 text-neutral-600"
-                } ${compact ? "h-6 w-6" : "h-8 w-8"}`}
-              >
-                {done ? "✓" : i + 1}
-              </div>
-              {!compact && (
-                <span className={`text-[10px] ${active ? "font-medium text-gold" : "text-neutral-500"}`}>{s.label}</span>
-              )}
-            </div>
-            {!compact && active && <span className="ml-1 text-[10px] uppercase tracking-wide text-gold">Current</span>}
+    <div className="flex items-center gap-1">
+      {steps.map((step, i) => (
+        <div key={step.key} className="flex items-center">
+          <div className={`flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${
+            i < current
+              ? "bg-emerald-900/40 text-emerald-300 border border-emerald-700"
+              : i === current
+              ? "bg-gold/20 text-gold border border-gold"
+              : "bg-neutral-900 text-neutral-500 border border-neutral-700"
+          }`}>
+            <span className="flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-bold">
+              {i < current ? "✓" : i + 1}
+            </span>
+            {step.label}
           </div>
-        );
-      })}
+          {i < steps.length - 1 && (
+            <div className={`mx-1 h-0.5 w-4 ${i < current ? "bg-emerald-700" : "bg-neutral-700"}`} />
+          )}
+        </div>
+      ))}
     </div>
   );
 }
 
-/** Render a policy to a print-friendly window and trigger the browser PDF dialog. */
-const exportPdf = (policy) => {
-  const w = window.open("", "_blank", "width=900,height=700");
-  if (!w) return;
-  const line = (label, value) =>
-    `<tr><td style="padding:6px 12px;color:#666;font-size:12px;width:200px">${label}</td><td style="padding:6px 12px;color:#111;font-size:13px">${value}</td></tr>`;
-  w.document.write(`<!doctype html><html><head><title>${policy.policyId} — ${policy.title}</title></head>
-  <body style="font-family:Segoe UI,Arial,sans-serif;max-width:800px;margin:40px auto;color:#111">
-    <h1 style="font-size:22px;margin:0">${policy.title}</h1>
-    <p style="color:#666;margin:4px 0 24px">${policy.policyId} · v${policy.version} · ${policy.status}</p>
-    <table style="border-collapse:collapse;width:100%">
-      ${line("Description", policy.description || "—")}
-      ${line("Category", policy.category || "—")}
-      ${line("Classification", policy.classification || "—")}
-      ${line("Owner", policy.owner || "—")}
-      ${line("Department", policy.department || "—")}
-      ${line("Effective date", fmtDay(policy.effectiveDate))}
-      ${line("Expiration date", fmtDay(policy.expirationDate))}
-      ${line("Applicable to", policy.applicableTo || "—")}
-      ${line("Regulatory basis", policy.regulatoryBasis || "—")}
-      ${line("Next review", fmtDay(policy.nextReviewAt))}
-    </table>
-    <h2 style="font-size:15px;margin-top:28px;border-bottom:1px solid #ddd;padding-bottom:6px">Content</h2>
-    <div style="white-space:pre-wrap;font-size:13px;line-height:1.6">${(policy.content || "No content").replace(/</g, "&lt;")}</div>
-  </body></html>`);
-  w.document.close();
-  w.focus();
-  setTimeout(() => w.print(), 400);
+const LIFECYCLE_STATUS_STYLES = {
+  DRAFT: "border-neutral-700 bg-neutral-900 text-neutral-400",
+  REVIEW: "border-amber-800/60 bg-amber-950/40 text-amber-300",
+  APPROVAL: "border-sky-800/60 bg-sky-950/40 text-sky-300",
+  APPROVED: "border-emerald-800/60 bg-emerald-950/40 text-emerald-300",
+  PUBLISHED: "border-violet-800/60 bg-violet-950/40 text-violet-300",
+  ACTIVE: "border-emerald-800/60 bg-emerald-950/40 text-emerald-300",
+  EXPIRED: "border-red-800/60 bg-red-950/40 text-red-300",
+  ARCHIVED: "border-neutral-700 bg-neutral-900 text-neutral-500",
+  SUPERSEDED: "border-neutral-700 bg-neutral-900 text-neutral-500",
 };
+
+const LIFECYCLE_LABELS = {
+  DRAFT: "Draft",
+  REVIEW: "Under Review",
+  APPROVAL: "Pending Approval",
+  APPROVED: "Approved",
+  PUBLISHED: "Published",
+  ACTIVE: "Active",
+  EXPIRED: "Expired",
+  ARCHIVED: "Archived",
+  SUPERSEDED: "Superseded",
+};
+
+const TABS = [
+  { id: "overview", label: "Overview", icon: Eye },
+  { id: "workflow", label: "Workflow & Approval", icon: ClipboardCheck },
+  { id: "versions", label: "Version History", icon: History },
+  { id: "documents", label: "Documents", icon: Paperclip },
+  { id: "risk-mappings", label: "Risk Mapping", icon: Layers },
+  { id: "control-mappings", label: "Control Mapping", icon: Shield },
+  { id: "evidence", label: "Evidence Mapping", icon: FileText },
+  { id: "attestations", label: "Attestation & Exceptions", icon: ClipboardCheck },
+  { id: "hierarchy", label: "Hierarchy", icon: Network },
+  { id: "audit", label: "Audit History", icon: Shield },
+];
 
 export default function PolicyDetail() {
   const { id } = useParams();
@@ -109,78 +84,118 @@ export default function PolicyDetail() {
   const [policy, setPolicy] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [tab, setTab] = useState("details");
+  const [activeTab, setActiveTab] = useState("overview");
 
-  const load = useCallback(() => {
+  const load = useCallback(async () => {
     setLoading(true);
-    api
-      .get(id)
-      .then(setPolicy)
-      .catch((e) => setError(e?.response?.data?.message || e.message))
-      .finally(() => setLoading(false));
+    setError(null);
+    try {
+      const { data } = await api.get(`/policies/${id}`);
+      setPolicy(data);
+    } catch (e) {
+      setError(e?.response?.data?.message || e.message);
+    } finally {
+      setLoading(false);
+    }
   }, [id]);
 
-  useEffect(load, [load]);
+  useEffect(() => { load(); }, [load]);
 
-  if (error) return <ErrorState message={error} onRetry={load} />;
-  if (loading || !policy) return <LoadingState label="Loading policy…" />;
+  if (loading) return <LoadingState label="Loading policy details..." />;
+  if (error) return <div className="card p-6 text-red-400">Error: {error}</div>;
+  if (!policy) return null;
+
+  const lifecycleState = policy.lifecycleState || "DRAFT";
+  const statusLabel = LIFECYCLE_LABELS[lifecycleState] || lifecycleState;
+  const statusStyle = LIFECYCLE_STATUS_STYLES[lifecycleState] || "border-neutral-700 bg-neutral-900 text-neutral-400";
 
   return (
-    <div>
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-start gap-3">
-          <button
-            onClick={() => navigate(-1)}
-            className="mt-1 rounded-lg border border-line p-2 text-neutral-400 transition hover:text-gold"
-            title="Back"
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </button>
-          <div>
-            <h1 className="heading text-2xl font-semibold text-neutral-100">{policy.title}</h1>
-            <p className="mt-1 flex items-center gap-2 text-sm text-neutral-500">
-              {policy.policyId} · v{policy.version} ·{" "}
-              <span className={`chip ${POLICY_STATUS_STYLES[policy.status] || POLICY_STATUS_STYLES.draft}`}>{policy.status}</span>
-            </p>
-          </div>
-        </div>
-        <button className="btn-ghost" onClick={() => exportPdf(policy)}>
-          <Download className="h-4 w-4" /> PDF Export
+    <>
+      <div className="mb-4">
+        <button className="btn-ghost text-sm" onClick={() => navigate("/governance/policies")}>
+          <ArrowLeft className="mr-2 h-4 w-4" /> Back to Policies
         </button>
       </div>
 
-      <div className="mt-6 flex gap-1 overflow-x-auto border-b border-line pb-px">
-        {TABS.map((t) => {
-          const Icon = t.icon;
-          const active = tab === t.key;
-          return (
-            <button
-              key={t.key}
-              onClick={() => setTab(t.key)}
-              className={`flex shrink-0 items-center gap-1.5 border-b-2 px-3 py-2 text-xs font-medium transition ${
-                active ? "border-gold text-gold" : "border-transparent text-neutral-500 hover:text-neutral-300"
-              }`}
-            >
-              <Icon className="h-3.5 w-3.5" />
-              {t.label}
-            </button>
-          );
-        })}
+      <PageHeader
+        title={policy.title}
+        subtitle={`${policy.policyNumber || policy.policyId || policy._id} • v${policy.currentActiveVersionNumber || policy.latestVersionNumber || "—"} • ${policy.category || "Uncategorized"}`}
+      />
+
+      {/* Status Banner */}
+      <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <div className="card p-4">
+          <span className="text-[10px] uppercase tracking-wider text-neutral-500">Status</span>
+          <span className={`chip mt-1 ${statusStyle}`}>{statusLabel}</span>
+          {policy.hasDraftVersion && lifecycleState === "ACTIVE" && (
+            <span className="chip mt-1 ml-1 text-xs border-neutral-700 bg-neutral-900 text-neutral-400">+ Draft</span>
+          )}
+        </div>
+        <div className="card p-4">
+          <span className="text-[10px] uppercase tracking-wider text-neutral-500">Next Review</span>
+          <p className="mt-1 text-sm text-neutral-200">{fmtDate(policy.nextReviewDate)}</p>
+          {policy.reviewStatus && (
+            <span className={`chip text-xs ${policy.reviewStatus === "Overdue" ? "border-red-800/60 bg-red-950/40 text-red-300" : policy.reviewStatus === "DueSoon" ? "border-amber-800/60 bg-amber-950/40 text-amber-300" : "border-emerald-800/60 bg-emerald-950/40 text-emerald-300"}`}>
+              {policy.reviewStatus}
+            </span>
+          )}
+        </div>
+        <div className="card p-4">
+          <span className="text-[10px] uppercase tracking-wider text-neutral-500">Current Version</span>
+          <p className="mt-1 text-sm text-neutral-200">v{policy.currentActiveVersionNumber || "—"}</p>
+        </div>
+        <div className="card p-4">
+          <span className="text-[10px] uppercase tracking-wider text-neutral-500">Latest Version</span>
+          <p className="mt-1 text-sm text-neutral-200">v{policy.latestVersionNumber || "—"}</p>
+        </div>
       </div>
 
-      <div className="mt-5">
-        {tab === "details" && <DetailsTab policy={policy} reload={load} />}
-        {tab === "workflow" && <WorkflowTab policy={policy} reload={load} />}
-        {tab === "documents" && <DocumentsTab policy={policy} />}
-        {tab === "risk" && <RiskMappingsTab policy={policy} />}
-        {tab === "control" && <ControlMappingsTab policy={policy} />}
-        {tab === "evidence" && <EvidenceTab policy={policy} />}
-        {tab === "attestation" && <AttestationsTab policy={policy} />}
-        {tab === "versions" && <VersionsTab policy={policy} reload={load} />}
-        {tab === "compare" && <VersionsTab policy={policy} reload={load} compareOnly />}
-        {tab === "hierarchy" && <HierarchyTab policy={policy} reload={load} />}
-        {tab === "audit" && <AuditTab policy={policy} />}
+      {/* Tabs */}
+      <div className="mb-4 flex gap-2 border-b border-line overflow-x-auto">
+        {TABS.map((tab) => (
+          <button
+            key={tab.id}
+            className={`flex items-center gap-2 px-4 py-2 text-sm transition whitespace-nowrap ${activeTab === tab.id ? "border-b-2 border-gold text-gold" : "text-neutral-400 hover:text-neutral-200"}`}
+            onClick={() => setActiveTab(tab.id)}
+          >
+            <tab.icon className="h-4 w-4" />
+            {tab.label}
+          </button>
+        ))}
       </div>
-    </div>
+
+      {/* Tab Content */}
+      <div className="card p-6">
+        {activeTab === "overview" && (
+          <div className="space-y-6">
+            <div>
+              <h3 className="mb-2 text-sm font-semibold text-neutral-200">Description</h3>
+              <p className="text-sm text-neutral-400">{policy.description || "No description"}</p>
+            </div>
+            <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+              <div><span className="text-xs text-neutral-500">Policy ID</span><p className="text-sm text-neutral-200">{policy.policyNumber || policy.policyId || policy._id}</p></div>
+              <div><span className="text-xs text-neutral-500">Lifecycle State</span><p className="text-sm text-neutral-200">{statusLabel}</p></div>
+              <div><span className="text-xs text-neutral-500">Category</span><p className="text-sm text-neutral-200">{policy.category || "—"}</p></div>
+              <div><span className="text-xs text-neutral-500">Classification</span><p className="text-sm text-neutral-200">{policy.classification || "—"}</p></div>
+              <div><span className="text-xs text-neutral-500">Department</span><p className="text-sm text-neutral-200">{policy.department || "—"}</p></div>
+              <div><span className="text-xs text-neutral-500">Review Period</span><p className="text-sm text-neutral-200">{policy.reviewPeriodDays || 365} days</p></div>
+              <div><span className="text-xs text-neutral-500">Has Draft Version</span><p className="text-sm text-neutral-200">{policy.hasDraftVersion ? "Yes" : "No"}</p></div>
+              <div><span className="text-xs text-neutral-500">Pending Review</span><p className="text-sm text-neutral-200">{policy.hasPendingReview ? "Yes" : "No"}</p></div>
+              <div><span className="text-xs text-neutral-500">Pending Approval</span><p className="text-sm text-neutral-200">{policy.hasPendingApproval ? "Yes" : "No"}</p></div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "workflow" && <WorkflowTab policy={policy} reload={load} />}
+        {activeTab === "versions" && <VersionsTab policy={policy} reload={load} />}
+        {activeTab === "documents" && <DocumentsTab policy={policy} reload={load} />}
+        {activeTab === "risk-mappings" && <RiskMappingsTab policy={policy} reload={load} />}
+        {activeTab === "control-mappings" && <ControlMappingsTab policy={policy} reload={load} />}
+        {activeTab === "evidence" && <EvidenceTab policy={policy} reload={load} />}
+        {activeTab === "attestations" && <AttestationsTab policy={policy} reload={load} />}
+        {activeTab === "hierarchy" && <HierarchyTab policy={policy} reload={load} />}
+        {activeTab === "audit" && <AuditTab policy={policy} reload={load} />}
+      </div>
+    </>
   );
 }

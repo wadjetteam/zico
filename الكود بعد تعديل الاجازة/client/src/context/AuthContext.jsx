@@ -24,7 +24,11 @@ export function AuthProvider({ children }) {
         setUser(data.user);
         localStorage.setItem(USER_KEY, JSON.stringify(data.user));
       })
-      .catch(() => setUser(null))
+      .catch(() => {
+        setUser(null);
+        localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(USER_KEY);
+      })
       .finally(() => setLoading(false));
   }, []);
 

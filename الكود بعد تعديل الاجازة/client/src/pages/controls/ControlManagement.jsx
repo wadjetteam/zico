@@ -420,7 +420,7 @@ export default function ControlManagement() {
 
             <div className="flex justify-end gap-3 border-t border-line pt-4">
               <button type="button" className="btn-ghost" onClick={() => setEditing(null)}>Cancel</button>
-              <button type="submit" className="btn-primary" disabled={saving}>{saving ? "Saving..." : "Save Control"}>
+              <button type="submit" className="btn-primary" disabled={saving}>
                 {saving ? "Saving..." : "Save Control"}
               </button>
             </div>

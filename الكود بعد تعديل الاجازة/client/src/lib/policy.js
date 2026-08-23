@@ -24,16 +24,19 @@ export const POLICY_CLASS_STYLES = {
 
 /** Lifecycle position for the steppers (1-based step index). */
 export const POLICY_LIFECYCLE = [
-  { key: "Draft", label: "Draft" },
-  { key: "Review", label: "Review" },
-  { key: "Approval", label: "Approval" },
-  { key: "Approved", label: "Approved" },
-  { key: "Published", label: "Published" },
+  { key: "DRAFT", label: "Draft" },
+  { key: "REVIEW", label: "Review" },
+  { key: "APPROVAL", label: "Approval" },
+  { key: "APPROVED", label: "Approved" },
+  { key: "PUBLISHED", label: "Published" },
+  { key: "ACTIVE", label: "Active" },
 ];
 
 export const stepIndex = (status) => {
-  if (status === "Archived" || status === "Retired") return POLICY_LIFECYCLE.length;
-  const i = POLICY_LIFECYCLE.findIndex((s) => s.key === status);
+  if (!status) return 0;
+  const key = String(status).toUpperCase();
+  if (key === "ARCHIVED" || key === "RETIRED" || key === "SUPERSEDED" || key === "EXPIRED") return POLICY_LIFECYCLE.length;
+  const i = POLICY_LIFECYCLE.findIndex((s) => s.key === key);
   return i === -1 ? 0 : i;
 };
 

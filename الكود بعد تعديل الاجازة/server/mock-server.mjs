@@ -9,6 +9,12 @@ import {
   daysAgo, daysAhead, levelOf, THRESHOLDS, CRITERIA,
 } from "./mock-data.mjs";
 import {
+  GOVERNANCE_AUDIT_LOG,
+} from "./governance-data.js";
+import {
+  POLICY_VERSIONS, POLICY_REVIEWS, POLICY_APPROVALS,
+} from "./data/policyVersionData.js";
+import {
   impactFor, riskScoreFor, suggestedResidual, requiresJustification, residualAxesFor,
   DEFAULT_CEF_WEIGHTS, DEFAULT_RESIDUAL_CAP, JUSTIFICATION_MIN_LENGTH, computeRiskScore,
 } from "../client/src/lib/riskEngine.js";
@@ -17,6 +23,19 @@ import {
   ParameterEngine,
   ControlEffectivenessEngine,
 } from "./riskEngine.js";
+import {
+  listPolicies, getPolicy, createPolicy, createPolicyVersion,
+  submitPolicyVersion, startPolicyReview, approvePolicyVersion,
+  publishPolicyVersion, archivePolicy,
+  uploadFile, downloadFile, deleteFile,
+  listRoles, createRole, updateRole, deleteRole,
+  listCommittees, createCommitteeMeeting, createCommitteeDecision,
+  listExceptions, createException, approveException,
+  getGovernanceDashboard,
+} from "./governance-api.js";
+import * as lifecycleService from "./services/policyLifecycleService.js";
+import * as validationService from "./services/policyValidationService.js";
+import * as versionService from "./services/policyVersionService.js";
 
 const PORT = 5000;
 const COLLECTIONS = {
@@ -441,6 +460,33 @@ const json = (res, status, body) => {
   res.end(JSON.stringify(body));
 };
 
+/**
+ * Governance API handler wrapper
+ * Adds authentication and user context to governance endpoints
+ */
+const handleGovernance = (req, res, handler) => {
+  // Authenticate user
+  const user = tokenUser(req);
+  if (!user) {
+    return json(res, 401, { message: "Unauthorized" });
+  }
+  
+  // Attach user to request for audit logging
+  req.user = user;
+  req.ip = req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "127.0.0.1";
+  
+  try {
+    const result = handler(req);
+    // If handler returns a response object, send it
+    if (result && typeof result === "object" && result.__response) {
+      return json(res, result.status, result.body);
+    }
+    return json(res, 200, result);
+  } catch (error) {
+    return json(res, 500, { message: error.message });
+  }
+};
+
 const tokenUser = (req) => {
   const auth = req.headers.authorization || "";
   const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
@@ -725,14 +771,15 @@ const handle = async (req, res, url) => {
   const parts = route(url.pathname);
   const method = req.method;
   const query = Object.fromEntries(url.searchParams.entries());
+  const path = parts.join("/");
+
+  // Debug: log all requests
 
   if (method === "OPTIONS") {
     res.writeHead(204, { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS", "Access-Control-Allow-Headers": "Content-Type,Authorization" });
     return res.end();
   }
   res.setHeader("Access-Control-Allow-Origin", "*");
-
-  const path = parts.join("/");
 
   if (path === "auth/login" && method === "POST") {
     const body = await readBody(req);
@@ -750,6 +797,7 @@ const handle = async (req, res, url) => {
   }
   if (!user && path !== "auth/logout") return json(res, 401, { message: "Unauthorized" });
 
+  
   if (parts.length === 3 && parts[0] === "risks" && parts[2] === "controls" && method === "GET") {
     const items = LINKS.filter((l) => l.risk_id === parts[1])
       .map((l) => {
@@ -1999,7 +2047,9 @@ if (parts.length === 5 && parts[0] === "governance" && parts[1] === "roles" && p
     return res.end(file.content);
   }
 
-  if (parts.length >= 2 && NESTED_SUBS.includes(parts[parts.length - 1]) && !COLLECTIONS[path]) {
+  const LIFECYCLE_SUBS = ["versions", "audit-history", "audit-chain", "workflow-config", "version-compare", "lifecycle"];
+  const GOVERNANCE_SUBS = ["exceptions"];
+  if (parts.length >= 2 && NESTED_SUBS.includes(parts[parts.length - 1]) && !COLLECTIONS[path] && !(parts[0] === "policies" && LIFECYCLE_SUBS.includes(parts[parts.length - 1])) && !(parts[0] === "governance" && GOVERNANCE_SUBS.includes(parts[parts.length - 1]))) {
     const parentPath = parts.slice(0, -2).join("/");
     const parentId = parts[parts.length - 2];
     const sub = parts[parts.length - 1];
@@ -2156,7 +2206,7 @@ if (parts.length === 5 && parts[0] === "governance" && parts[1] === "roles" && p
     return json(res, 200, { exceptionId: current._id, riskBindingStatus: "waived" });
   }
 
-  if (parts.length >= 4 && NESTED_SUBS.includes(parts[parts.length - 2])) {
+  if (parts.length >= 4 && NESTED_SUBS.includes(parts[parts.length - 2]) && !(parts[0] === "policies" && LIFECYCLE_SUBS.includes(parts[parts.length - 2]))) {
     const parentPath = parts.slice(0, -3).join("/");
     const parentId = parts[parts.length - 3];
     const sub = parts[parts.length - 2];
@@ -2333,7 +2383,7 @@ if (parts.length === 5 && parts[0] === "governance" && parts[1] === "roles" && p
       return json(res, 200, { ok: true });
     }
   }
-  if (path === "policies/stats" || (parts.length === 2 && parts[0] === "policies" && parts[1] === "stats")) return json(res, 200, statsFor("policies", POLICIES));
+  if (path === "policies/stats" || (parts.length === 2 && parts[0] === "policies" && parts[1] === "stats")) return json(res, 200, lifecycleService.getDashboardStats());
 
   if (parts.length === 3 && parts[0] === "questionnaires" && parts[1].length && parts[2] === "transition" && method === "POST") {
     const q = QUESTIONNAIRES.find((x) => x._id === parts[1]);
@@ -2512,11 +2562,428 @@ if (parts.length === 5 && parts[0] === "governance" && parts[1] === "roles" && p
     return json(res, 200, withJoins(newDomain));
   }
 
+  // ============================================
+  // POLICY LIFECYCLE API ENDPOINTS
+  // ============================================
+  
+  // Get policy summary (computed lifecycle state)
+  if (parts.length === 2 && parts[0] === "policies" && method === "GET" && !LIFECYCLE_SUBS.includes(parts[1]) && parts[1] !== "dashboard" && parts[1] !== "stats") {
+    try {
+      const summary = lifecycleService.getPolicySummary(parts[1]);
+      return json(res, 200, summary);
+    } catch (err) {
+      return json(res, err.code === "POLICY_NOT_FOUND" ? 404 : 400, { message: err.message, code: err.code });
+    }
+  }
+  
+  // Get policy versions
+  if (parts.length === 3 && parts[0] === "policies" && parts[2] === "versions" && method === "GET") {
+    const policyVersions = POLICY_VERSIONS.filter((v) => v.policyId === parts[1]);
+    return json(res, 200, { items: policyVersions, total: policyVersions.length });
+  }
+  
+  // Get single version
+  if (parts.length === 4 && parts[0] === "policies" && parts[2] === "versions" && method === "GET") {
+    const version = POLICY_VERSIONS.find((v) => v._id === parts[3]);
+    if (!version) return json(res, 404, { message: "Version not found" });
+    return json(res, 200, version);
+  }
+  
+  // Create new version
+  if (parts.length === 3 && parts[0] === "policies" && parts[2] === "versions" && method === "POST") {
+    try {
+      const body = await readBody(req);
+      const user = tokenUser(req);
+      const newVersion = lifecycleService.createNewVersion(parts[1], user?._id || "u-admin", body);
+      return json(res, 201, newVersion);
+    } catch (err) {
+      return json(res, err.code === "UNAUTHORIZED" ? 403 : 400, { message: err.message, code: err.code });
+    }
+  }
+  
+  // Submit for review
+  if (parts.length === 5 && parts[0] === "policies" && parts[2] === "versions" && parts[4] === "submit-review" && method === "POST") {
+    try {
+      const body = await readBody(req);
+      const user = tokenUser(req);
+      const result = lifecycleService.submitForReview(parts[1], parts[3], user?._id || "u-admin", body);
+      return json(res, 200, result);
+    } catch (err) {
+      return json(res, err.code === "UNAUTHORIZED" ? 403 : 400, { message: err.message, code: err.code });
+    }
+  }
+  
+  // Approve review
+  if (parts.length === 5 && parts[0] === "policies" && parts[2] === "versions" && parts[4] === "approve-review" && method === "POST") {
+    try {
+      const body = await readBody(req);
+      const user = tokenUser(req);
+      const result = lifecycleService.approveReview(parts[1], parts[3], user?._id || "u-admin", body);
+      return json(res, 200, result);
+    } catch (err) {
+      return json(res, err.code === "UNAUTHORIZED" ? 403 : 400, { message: err.message, code: err.code });
+    }
+  }
+  
+  // Reject policy
+  if (parts.length === 5 && parts[0] === "policies" && parts[2] === "versions" && parts[4] === "reject" && method === "POST") {
+    try {
+      const body = await readBody(req);
+      const user = tokenUser(req);
+      const result = lifecycleService.rejectPolicy(parts[1], parts[3], user?._id || "u-admin", body);
+      return json(res, 200, result);
+    } catch (err) {
+      return json(res, err.code === "UNAUTHORIZED" ? 403 : 400, { message: err.message, code: err.code });
+    }
+  }
+  
+  // Approve policy (final)
+  if (parts.length === 5 && parts[0] === "policies" && parts[2] === "versions" && parts[4] === "approve" && method === "POST") {
+    try {
+      const body = await readBody(req);
+      const user = tokenUser(req);
+      const result = lifecycleService.approvePolicy(parts[1], parts[3], user?._id || "u-admin", body);
+      return json(res, 200, result);
+    } catch (err) {
+      return json(res, err.code === "UNAUTHORIZED" ? 403 : 400, { message: err.message, code: err.code });
+    }
+  }
+  
+  // Publish policy
+  if (parts.length === 5 && parts[0] === "policies" && parts[2] === "versions" && parts[4] === "publish" && method === "POST") {
+    try {
+      const body = await readBody(req);
+      const user = tokenUser(req);
+      const result = lifecycleService.publishPolicy(parts[1], parts[3], user?._id || "u-admin", body);
+      return json(res, 200, result);
+    } catch (err) {
+      return json(res, err.code === "UNAUTHORIZED" ? 403 : 400, { message: err.message, code: err.code });
+    }
+  }
+  
+  // Archive policy version
+  if (parts.length === 5 && parts[0] === "policies" && parts[2] === "versions" && parts[4] === "archive" && method === "POST") {
+    try {
+      const body = await readBody(req);
+      const user = tokenUser(req);
+      const result = lifecycleService.archivePolicyVersion(parts[1], parts[3], user?._id || "u-admin", body);
+      return json(res, 200, result);
+    } catch (err) {
+      return json(res, err.code === "UNAUTHORIZED" ? 403 : 400, { message: err.message, code: err.code });
+    }
+  }
+  
+  // Get dashboard stats
+  if (path === "policies/dashboard" && method === "GET") {
+    const stats = lifecycleService.getDashboardStats();
+    return json(res, 200, stats);
+  }
+  
+  // Get audit history
+  if (parts.length === 3 && parts[0] === "policies" && parts[2] === "audit-history" && method === "GET") {
+    const auditEntries = GOVERNANCE_AUDIT_LOG.filter((a) => a.policyId === parts[1]);
+    return json(res, 200, { items: auditEntries, total: auditEntries.length });
+  }
+  
+  // Get reviews for a version
+  if (parts.length === 5 && parts[0] === "policies" && parts[2] === "versions" && parts[4] === "reviews" && method === "GET") {
+    const reviews = POLICY_REVIEWS.filter((r) => r.policyVersionId === parts[3]);
+    return json(res, 200, { items: reviews, total: reviews.length });
+  }
+  
+  // Get approvals for a version
+  if (parts.length === 5 && parts[0] === "policies" && parts[2] === "versions" && parts[4] === "approvals" && method === "GET") {
+    const approvals = POLICY_APPROVALS.filter((a) => a.policyVersionId === parts[3]);
+    return json(res, 200, { items: approvals, total: approvals.length });
+  }
+
+  // ============================================
+  // NEW LIFECYCLE ENDPOINTS
+  // ============================================
+
+  // Get available actions for a version
+  if (parts.length === 5 && parts[0] === "policies" && parts[2] === "versions" && parts[4] === "available-actions" && method === "GET") {
+    const user = tokenUser(req);
+    const actions = validationService.getAvailableActions(parts[1], parts[3], user?._id || "u-admin");
+    return json(res, 200, actions);
+  }
+
+  // Validate publication eligibility
+  if (parts.length === 5 && parts[0] === "policies" && parts[2] === "versions" && parts[4] === "validate-publication" && method === "GET") {
+    const user = tokenUser(req);
+    const result = validationService.validatePublicationEligibility(parts[1], parts[3], user?._id || "u-admin");
+    return json(res, 200, result);
+  }
+
+  // Compare versions
+  if (parts.length === 3 && parts[0] === "policies" && parts[2] === "version-compare" && method === "GET") {
+    const vA = query.vA;
+    const vB = query.vB;
+    if (!vA || !vB) return json(res, 400, { message: "vA and vB query params required" });
+    try {
+      const result = versionService.compareVersions(parts[1], vA, vB);
+      return json(res, 200, result);
+    } catch (err) {
+      return json(res, 404, { message: err.message, code: err.code });
+    }
+  }
+
+  // Restore version as new draft
+  if (parts.length === 5 && parts[0] === "policies" && parts[2] === "versions" && parts[4] === "restore" && method === "POST") {
+    try {
+      const body = await readBody(req);
+      const user = tokenUser(req);
+      const result = versionService.restoreVersionAsDraft(parts[1], parts[3], user?._id || "u-admin");
+      return json(res, 201, result);
+    } catch (err) {
+      return json(res, err.code === "VERSION_NOT_FOUND" ? 404 : 400, { message: err.message, code: err.code });
+    }
+  }
+
+  // Get workflow configuration
+  if (parts.length === 3 && parts[0] === "policies" && parts[2] === "workflow-config" && method === "GET") {
+    const config = validationService.getWorkflowConfigForPolicy(parts[1]);
+    return json(res, 200, config);
+  }
+
+  // Update workflow configuration
+  if (parts.length === 3 && parts[0] === "policies" && parts[2] === "workflow-config" && method === "PUT") {
+    const user = tokenUser(req);
+    if (!user || !["admin", "board"].includes(user.role)) {
+      return json(res, 403, { message: "Unauthorized" });
+    }
+    const body = await readBody(req);
+    const config = validationService.setWorkflowConfigForPolicy(parts[1], body);
+    return json(res, 200, config);
+  }
+
+  // Verify audit chain integrity
+  if (path === "policies/audit-chain/verify" && method === "GET") {
+    const { verifyAuditChainIntegrity } = await import("./data/policyVersionData.js");
+    const result = verifyAuditChainIntegrity(GOVERNANCE_AUDIT_LOG);
+    return json(res, 200, result);
+  }
+
+  // Process lifecycle dates (activation/expiration)
+  if (path === "policies/lifecycle/process-dates" && method === "POST") {
+    const changes = [];
+    for (const policy of POLICIES) {
+      const policyChanges = versionService.processLifecycleDates(policy._id);
+      changes.push(...policyChanges.map((c) => ({ ...c, policyId: policy._id })));
+    }
+    return json(res, 200, { processed: changes.length, changes });
+  }
+
+  // ============================================
+  // GOVERNANCE MODULE ROUTES (Roles, Committees, Exceptions, Dashboard)
+  // ============================================
+  
+  // Governance Dashboard
+  if (path === "governance/dashboard" && method === "GET") {
+    const stats = lifecycleService.getDashboardStats();
+    return json(res, 200, stats);
+  }
+  
+  // Roles Routes
+  if (path === "governance/roles" && method === "GET") {
+    const roles = ROLES.map((role) => {
+      const usersAssignedCount = USERS.filter((u) => u.role === role.name || u.role === role._id).length;
+      return { ...role, usersAssignedCount };
+    });
+    return json(res, 200, { items: roles, total: roles.length });
+  }
+  
+  if (path === "governance/roles" && method === "POST") {
+    const body = await readBody(req);
+    const user = tokenUser(req);
+    if (!user || !["admin", "board"].includes(user.role)) {
+      return json(res, 403, { message: "Unauthorized" });
+    }
+    const errors = [];
+    if (!body.name) errors.push("Name is required");
+    if (!body.description) errors.push("Description is required");
+    if (errors.length > 0) return json(res, 422, { message: "Validation failed", errors });
+    
+    const permissions = body.permissions || [];
+    const allowedPermissions = [
+      "policy.view", "policy.create", "policy.edit", "policy.submit", "policy.approve",
+      "policy.reject", "policy.publish", "policy.archive", "policy.acknowledge",
+      "role.view", "role.manage",
+      "committee.view", "committee.manage", "committee.recordDecision",
+      "exception.view", "exception.create", "exception.approve", "exception.reject",
+    ];
+    const invalidPermissions = permissions.filter((p) => !allowedPermissions.includes(p));
+    if (invalidPermissions.length > 0) {
+      return json(res, 422, { message: "Invalid permissions", invalidPermissions, allowedPermissions });
+    }
+    
+    const newRole = {
+      _id: `r-${Date.now()}`,
+      name: body.name,
+      description: body.description,
+      status: "Active",
+      permissions,
+      approvalAuthority: body.approvalAuthority || { canApprovePolicyClassification: ["Public", "Internal"], canApproveExceptions: false },
+      createdAt: new Date().toISOString(),
+    };
+    ROLES.push(newRole);
+    return json(res, 201, newRole);
+  }
+  
+  if (parts.length === 2 && parts[0] === "governance/roles" && method === "PUT") {
+    const role = ROLES.find((r) => r._id === parts[1]);
+    if (!role) return json(res, 404, { message: "Role not found" });
+    const body = await readBody(req);
+    if (body.name) role.name = body.name;
+    if (body.description) role.description = body.description;
+    if (body.permissions) role.permissions = body.permissions;
+    if (body.approvalAuthority) role.approvalAuthority = body.approvalAuthority;
+    return json(res, 200, role);
+  }
+  
+  if (parts.length === 2 && parts[0] === "governance/roles" && method === "DELETE") {
+    const role = ROLES.find((r) => r._id === parts[1]);
+    if (!role) return json(res, 404, { message: "Role not found" });
+    const usersAssignedCount = USERS.filter((u) => u.role === role.name || u.role === role._id).length;
+    if (usersAssignedCount > 0) {
+      return json(res, 400, { message: `Cannot delete role with ${usersAssignedCount} users assigned. Reassign users first.` });
+    }
+    role.status = "Inactive";
+    return json(res, 200, { message: "Role deactivated successfully" });
+  }
+  
+  // Committees Routes
+  if (path === "governance/committees" && method === "GET") {
+    const committees = COMMITTEES.map((c) => ({
+      ...c,
+      chairUser: USERS.find((u) => u._id === c.chairUserId),
+    }));
+    return json(res, 200, { items: committees, total: committees.length });
+  }
+  
+  if (parts.length === 3 && parts[0] === "governance/committees" && parts[2] === "meetings" && method === "POST") {
+    const committee = COMMITTEES.find((c) => c._id === parts[1]);
+    if (!committee) return json(res, 404, { message: "Committee not found" });
+    const body = await readBody(req);
+    const meetings = COMMITTEE_MEETINGS.filter((m) => m.committeeId === parts[1]);
+    const newMeeting = {
+      _id: `cmt-${Date.now()}`,
+      committeeId: parts[1],
+      meetingNumber: meetings.length + 1,
+      scheduledDate: body.scheduledDate,
+      actualDate: null,
+      attendeeUserIds: body.attendeeUserIds || [],
+      agendaItems: body.agendaItems || [],
+      minutesAttachmentId: null,
+      status: "Scheduled",
+    };
+    COMMITTEE_MEETINGS.push(newMeeting);
+    return json(res, 201, newMeeting);
+  }
+  
+  if (parts.length === 5 && parts[0] === "governance/committees" && parts[2] === "meetings" && parts[4] === "decisions" && method === "POST") {
+    const meeting = COMMITTEE_MEETINGS.find((m) => m._id === parts[3] && m.committeeId === parts[1]);
+    if (!meeting) return json(res, 404, { message: "Meeting not found" });
+    const committee = COMMITTEES.find((c) => c._id === parts[1]);
+    if (!committee) return json(res, 404, { message: "Committee not found" });
+    
+    // Check quorum
+    if (meeting.attendeeUserIds.length < committee.quorumRequired) {
+      return json(res, 400, { 
+        message: "Quorum not met — decision cannot be recorded",
+        attendees: meeting.attendeeUserIds.length,
+        required: committee.quorumRequired,
+      });
+    }
+    
+    const body = await readBody(req);
+    const newDecision = {
+      _id: `cd-${Date.now()}`,
+      meetingId: parts[3],
+      committeeId: parts[1],
+      description: body.description,
+      relatedEntityType: body.relatedEntityType || null,
+      relatedEntityId: body.relatedEntityId || null,
+      decisionType: body.decisionType || "Other",
+      votesFor: body.votesFor || meeting.attendeeUserIds.length,
+      votesAgainst: body.votesAgainst || 0,
+      decidedAt: new Date().toISOString(),
+    };
+    COMMITTEE_DECISIONS.push(newDecision);
+    return json(res, 201, newDecision);
+  }
+  
+  // Exceptions Routes
+  if (path === "governance/exceptions" && method === "GET") {
+    const exceptions = EXCEPTIONS.map((e) => ({
+      ...e,
+      requestedByUser: USERS.find((u) => u._id === e.requestedByUserId),
+      ownerUser: USERS.find((u) => u._id === e.ownerUserId),
+    }));
+    return json(res, 200, { items: exceptions, total: exceptions.length });
+  }
+  
+  if (path === "governance/exceptions" && method === "POST") {
+    const body = await readBody(req);
+    const errors = [];
+    if (!body.title) errors.push("Title is required");
+    if (!body.description) errors.push("Description is required");
+    if (!body.businessJustification) errors.push("Business justification is required");
+    if (!body.requestedUntil) errors.push("requestedUntil is required");
+    if (errors.length > 0) return json(res, 422, { message: "Validation failed", errors });
+    
+    const exceptionCode = `EXC-${String(EXCEPTIONS.length + 1).padStart(3, "0")}`;
+    const newException = {
+      _id: `exc-${Date.now()}`,
+      exceptionCode,
+      title: body.title,
+      description: body.description,
+      relatedPolicyId: body.relatedPolicyId || null,
+      relatedControlId: body.relatedControlId || null,
+      relatedRiskId: body.relatedRiskId || null,
+      exceptionEffectivenessOverride: body.exceptionEffectivenessOverride || null,
+      businessJustification: body.businessJustification,
+      compensatingControls: body.compensatingControls || "",
+      requestedByUserId: tokenUser(req)?._id || "u-admin",
+      ownerUserId: body.ownerUserId || tokenUser(req)?._id || "u-admin",
+      status: "Draft",
+      requestedFrom: body.requestedFrom || new Date().toISOString(),
+      requestedUntil: body.requestedUntil,
+      approverUserId: null, approvedAt: null, rejectionReason: null,
+      reviewDate: body.reviewDate || new Date().toISOString(),
+      attachmentIds: body.attachmentIds || [],
+    };
+    EXCEPTIONS.push(newException);
+    return json(res, 201, newException);
+  }
+
   const collection = COLLECTIONS[path];
+  if (collection && path === "policies" && method === "GET") {
+    try {
+      const { items, total, page, pageSize } = filterList(collection, query);
+      const enrichedItems = items.map((policy) => {
+        try {
+          const summary = lifecycleService.getPolicySummary(policy._id);
+          return { ...withJoins(policy), lifecycleState: summary.lifecycleState, currentActiveVersionNumber: summary.currentActiveVersionNumber, latestVersionNumber: summary.latestVersionNumber, reviewStatus: summary.reviewStatus, nextReviewDate: summary.nextReviewDate, hasDraftVersion: summary.hasDraftVersion, hasPendingReview: summary.hasPendingReview, hasPendingApproval: summary.hasPendingApproval };
+        } catch {
+          return withJoins(policy);
+        }
+      });
+      return json(res, 200, { items: enrichedItems, total, page, pageSize });
+    } catch (err) {
+      console.error("[ERROR] policy list error:", err.message, err.stack);
+      return json(res, 500, { message: "Internal error: " + err.message });
+    }
+  }
   if (collection) {
     if (method === "GET") {
-      const { items, total, page, pageSize } = filterList(collection, query);
-      return json(res, 200, { items: items.map(withJoins), total, page, pageSize });
+      try {
+        const { items, total, page, pageSize } = filterList(collection, query);
+        return json(res, 200, { items: items.map(withJoins), total, page, pageSize });
+      } catch (err) {
+        console.error("[ERROR] filterList/withJoins error:", err.message, err.stack);
+        return json(res, 500, { message: "Internal error: " + err.message });
+      }
     }
     if (method === "POST") {
       const body = await readBody(req);
@@ -2614,8 +3081,4 @@ http
     });
   })
   .listen(PORT, "0.0.0.0", () => {
-    console.log(`[wadjet:mock] API listening on http://localhost:${PORT}`);
-    console.log("  admin   / admin123   (admin)");
-    console.log("  analyst / analyst123 (user)");
-    console.log("  auditor / auditor123 (auditor)");
   });

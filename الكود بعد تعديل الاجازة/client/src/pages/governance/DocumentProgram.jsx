@@ -31,7 +31,18 @@ export default function DocumentProgram() {
     setLoading(true);
     try {
       const { data } = await api.get("/governance/document-program");
-      setSettings(data);
+      setSettings({
+        classificationSchema: [],
+        retentionSchema: [],
+        approvalWorkflow: false,
+        autoVersioning: false,
+        reviewReminders: false,
+        reminderDays: 30,
+        retentionYears: 7,
+        ...data,
+        classificationSchema: Array.isArray(data?.classificationSchema) ? data.classificationSchema : [],
+        retentionSchema: Array.isArray(data?.retentionSchema) ? data.retentionSchema : [],
+      });
     } catch (err) {
       alert(err?.response?.data?.message || err.message);
     } finally {

@@ -9,6 +9,30 @@ import { ErrorState } from "../../components/States";
 import { Field, Select, TextArea, TextInput } from "../../components/Field";
 import { fmtDay, orDash, POLICY_STATUS_STYLES, downloadCsv } from "../../lib/policy";
 
+const LIFECYCLE_STATUS_STYLES = {
+  DRAFT: "border-neutral-700 bg-neutral-900 text-neutral-400",
+  REVIEW: "border-amber-800/60 bg-amber-950/40 text-amber-300",
+  APPROVAL: "border-sky-800/60 bg-sky-950/40 text-sky-300",
+  APPROVED: "border-emerald-800/60 bg-emerald-950/40 text-emerald-300",
+  PUBLISHED: "border-violet-800/60 bg-violet-950/40 text-violet-300",
+  ACTIVE: "border-emerald-800/60 bg-emerald-950/40 text-emerald-300",
+  EXPIRED: "border-red-800/60 bg-red-950/40 text-red-300",
+  ARCHIVED: "border-neutral-700 bg-neutral-900 text-neutral-500",
+  SUPERSEDED: "border-neutral-700 bg-neutral-900 text-neutral-500",
+};
+
+const LIFECYCLE_LABELS = {
+  DRAFT: "Draft",
+  REVIEW: "Under Review",
+  APPROVAL: "Pending Approval",
+  APPROVED: "Approved",
+  PUBLISHED: "Published",
+  ACTIVE: "Active",
+  EXPIRED: "Expired",
+  ARCHIVED: "Archived",
+  SUPERSEDED: "Superseded",
+};
+
 const api = resource("policies");
 
 const CATEGORIES = ["Information Security", "Data Privacy", "Operational", "Financial", "Human Resources", "IT", "Compliance", "Third-Party"];
@@ -162,7 +186,11 @@ export default function PolicyManagement() {
     {
       key: "status",
       header: "Status",
-      render: (r) => <span className={`chip whitespace-nowrap ${POLICY_STATUS_STYLES[r.status] || POLICY_STATUS_STYLES.draft}`}>{r.status}</span>,
+      render: (r) => {
+        const state = r.lifecycleState || r.status || "DRAFT";
+        const label = LIFECYCLE_LABELS[state] || state;
+        return <span className={`chip whitespace-nowrap ${LIFECYCLE_STATUS_STYLES[state] || "border-neutral-700 bg-neutral-900 text-neutral-400"}`}>{label}</span>;
+      },
     },
     { key: "category", header: "Category", render: (r) => <span className="whitespace-nowrap text-neutral-400">{orDash(r.category)}</span> },
     { key: "version", header: "Version", render: (r) => <span className="whitespace-nowrap font-mono text-xs">v{r.version}</span> },

@@ -18,7 +18,7 @@ export default function WorkflowTab({ policy, reload }) {
   const [history, setHistory] = useState([]);
   const [rejectOpen, setRejectOpen] = useState(false);
   const [rejectComment, setRejectComment] = useState("");
-  const idx = stepIndex(policy.status);
+  const idx = stepIndex(policy.lifecycleState || policy.status);
 
   useEffect(() => {
     api.get(`${policy._id}/audit-logs`).then((d) => setHistory(d.items.filter((l) => APPROVAL_ACTIONS.includes(l.actionType)))).catch(() => {});
