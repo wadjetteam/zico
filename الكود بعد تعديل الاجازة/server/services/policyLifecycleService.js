@@ -25,6 +25,7 @@ import {
   isValidTransition,
 } from "../data/policyVersionData.js";
 import { USERS, POLICIES } from "../mock-data.mjs";
+import { checkSoDConstraint } from "./sodService.js";
 
 // ============================================
 // ERROR CODES
@@ -280,10 +281,13 @@ export function approveReview(policyId, versionId, actorUserId, metadata = {}) {
     throw { code: POLICY_ERRORS.UNAUTHORIZED, message: "You do not have permission to review" };
   }
   
-  // Check self-approval
+  // SoD Check: Reviewer cannot be the same as creator
   const version = getVersion(versionId);
-  if (version && version.createdByUserId === actorUserId && !metadata.allowSelfApproval) {
-    throw { code: POLICY_ERRORS.SELF_APPROVAL_NOT_ALLOWED, message: "You cannot review your own policy" };
+  if (version) {
+    const sodResult = checkSoDConstraint("review", actorUserId, version);
+    if (!sodResult.allowed) {
+      throw { code: sodResult.errors[0].code, message: sodResult.errors[0].message };
+    }
   }
   
   // Update review record
@@ -330,10 +334,13 @@ export function approvePolicy(policyId, versionId, actorUserId, metadata = {}) {
     throw { code: POLICY_ERRORS.UNAUTHORIZED, message: "You do not have permission to approve" };
   }
   
-  // Check self-approval
+  // SoD Check: Approver cannot be the same as creator or reviewer
   const version = getVersion(versionId);
-  if (version && version.createdByUserId === actorUserId && !metadata.allowSelfApproval) {
-    throw { code: POLICY_ERRORS.SELF_APPROVAL_NOT_ALLOWED, message: "You cannot approve your own policy" };
+  if (version) {
+    const sodResult = checkSoDConstraint("approval", actorUserId, version);
+    if (!sodResult.allowed) {
+      throw { code: sodResult.errors[0].code, message: sodResult.errors[0].message };
+    }
   }
   
   // Update approval record
@@ -360,6 +367,12 @@ export function publishPolicy(policyId, versionId, actorUserId, metadata = {}) {
   const version = getVersion(versionId);
   if (!version) {
     throw { code: POLICY_ERRORS.VERSION_NOT_FOUND, message: "Version not found" };
+  }
+  
+  // SoD Check: Publisher cannot be the same as creator, reviewer, or approver
+  const sodResult = checkSoDConstraint("publish", actorUserId, version);
+  if (!sodResult.allowed) {
+    throw { code: sodResult.errors[0].code, message: sodResult.errors[0].message };
   }
   
   // Validate effective date

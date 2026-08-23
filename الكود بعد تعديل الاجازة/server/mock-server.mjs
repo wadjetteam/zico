@@ -8,12 +8,16 @@ import {
   EMAIL_CONFIG, EMAIL_MESSAGES, BACKUP_CONFIG, BACKUP_RECORDS, DOCUMENT_PROGRAM, LINKS,
   daysAgo, daysAhead, levelOf, THRESHOLDS, CRITERIA,
 } from "./mock-data.mjs";
+import * as pwdService from "./services/passwordService.js";
+import * as jwtService from "./services/jwtService.js";
 import {
   GOVERNANCE_AUDIT_LOG,
 } from "./governance-data.js";
 import {
   POLICY_VERSIONS, POLICY_REVIEWS, POLICY_APPROVALS,
 } from "./data/policyVersionData.js";
+import { verifyAuditChainIntegrity } from "./data/policyVersionData.js";
+import * as compliance from "./compliance-data.js";
 import {
   impactFor, riskScoreFor, suggestedResidual, requiresJustification, residualAxesFor,
   DEFAULT_CEF_WEIGHTS, DEFAULT_RESIDUAL_CAP, JUSTIFICATION_MIN_LENGTH, computeRiskScore,
@@ -36,6 +40,7 @@ import {
 import * as lifecycleService from "./services/policyLifecycleService.js";
 import * as validationService from "./services/policyValidationService.js";
 import * as versionService from "./services/policyVersionService.js";
+import * as exceptionExpiryService from "./services/exceptionExpiryService.js";
 
 const PORT = 5000;
 const COLLECTIONS = {
@@ -490,13 +495,14 @@ const handleGovernance = (req, res, handler) => {
 const tokenUser = (req) => {
   const auth = req.headers.authorization || "";
   const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
-  const parts = token.split(".");
-  if (parts.length !== 3 || parts[0] !== "wadjet") return null;
-  const user = USERS.find((u) => u.username === parts[1]);
-  if (!user) return null;
-  const ts = Number(parts[2]);
-  if (!ts || Date.now() - ts > 8 * 3600 * 1000) return null;
-  return user;
+  if (!token) return null;
+
+  const result = jwtService.verify(token);
+  if (!result.valid) return null;
+
+  const payload = result.payload;
+  const user = USERS.find((u) => u.username === payload.username);
+  return user || null;
 };
 
 const readBody = (req) =>
@@ -783,10 +789,26 @@ const handle = async (req, res, url) => {
 
   if (path === "auth/login" && method === "POST") {
     const body = await readBody(req);
-    const user = USERS.find((u) => u.username === body.username && PASSWORDS[u.username] === body.password);
+    const user = USERS.find((u) => u.username === body.username);
     if (!user) return json(res, 401, { message: "Invalid username or password" });
-    const token = `wadjet.${user.username}.${Date.now()}`;
-    return json(res, 200, { token, user });
+
+    const storedPwd = PASSWORDS[user.username];
+    let passwordValid = false;
+
+    if (pwdService.isPlaintext(storedPwd)) {
+      passwordValid = storedPwd === body.password;
+      if (passwordValid) {
+        PASSWORDS[user.username] = pwdService.hashPassword(body.password);
+      }
+    } else {
+      passwordValid = pwdService.verifyPassword(body.password, storedPwd);
+    }
+
+    if (!passwordValid) return json(res, 401, { message: "Invalid username or password" });
+
+    const token = jwtService.sign({ userId: user._id, username: user.username, role: user.role });
+    const { password, passwordHash, ...safeUser } = user;
+    return json(res, 200, { token, user: safeUser });
   }
   if (path === "auth/logout") return json(res, 200, { ok: true });
 
@@ -1554,6 +1576,20 @@ const handle = async (req, res, url) => {
     res.writeHead(200, { "Content-Type": "text/csv", "Content-Disposition": 'attachment; filename="assets.csv"' });
     return res.end(csv);
   }
+  if (path === "assets/stats" && method === "GET") {
+    const byCriticality = {};
+    const byStatus = {};
+    const byType = {};
+    for (const a of ASSETS) {
+      const crit = a.criticality || "Unknown";
+      const stat = a.status || "Unknown";
+      const typ = a.type || "Unknown";
+      byCriticality[crit] = (byCriticality[crit] || 0) + 1;
+      byStatus[stat] = (byStatus[stat] || 0) + 1;
+      byType[typ] = (byType[typ] || 0) + 1;
+    }
+    return json(res, 200, { total: ASSETS.length, byCriticality, byStatus, byType });
+  }
   if (path === "assets/import" && method === "POST") {
     return json(res, 200, { imported: 0, errors: [], message: "Import accepted (demo server: no rows parsed)." });
   }
@@ -1819,30 +1855,6 @@ const handle = async (req, res, url) => {
     });
   }
 
-  if (path === "compliance/dashboard" && method === "GET") {
-    const implemented = (c) => c.implementationStatus === "Fully Implemented" || c.implementationStatus === "Largely Implemented";
-    const domains = [...new Set(CONTROLS.map((c) => c.domain).filter(Boolean))];
-    const heatmapFrameworks = FRAMEWORKS.map((f) => ({ id: f._id, name: f.name }));
-    const heatmap = domains.map((domain) => {
-      const row = { domain };
-      for (const f of FRAMEWORKS) {
-        const ctrl = CONTROLS.filter((c) => c.domain === domain && c.framework?._id === f._id);
-        row[String(f._id)] = ctrl.length ? Math.round((ctrl.filter(implemented).length / ctrl.length) * 100) : null;
-      }
-      return row;
-    });
-    const trend = Array.from({ length: 6 }, (_, i) => {
-      const d = new Date();
-      d.setMonth(d.getMonth() - (5 - i));
-      return { label: d.toLocaleString("en", { month: "short" }), percent: Math.min(100, 58 + i * 6) };
-    });
-    const gapsBySeverity = ["Critical", "High", "Medium", "Low"]
-      .map((s) => ({ severity: s, count: GAPS.filter((g) => g.severity === s && g.status !== "Closed").length }))
-      .filter((g) => g.count > 0);
-    const overdueTests = CONTROLS.filter((c) => c.nextTestDueAt && new Date(c.nextTestDueAt) < new Date() && c.testStatus !== "Passed");
-    return json(res, 200, { trend, heatmap, heatmapFrameworks, gapsBySeverity, overdueTests });
-  }
-
   if (path === "impact-analysis" && method === "GET") {
     const { entity_type, entity_id } = query;
     if (!entity_type || !entity_id) return json(res, 400, { message: "entity_type and entity_id are required" });
@@ -2048,8 +2060,8 @@ if (parts.length === 5 && parts[0] === "governance" && parts[1] === "roles" && p
   }
 
   const LIFECYCLE_SUBS = ["versions", "audit-history", "audit-chain", "workflow-config", "version-compare", "lifecycle"];
-  const GOVERNANCE_SUBS = ["exceptions"];
-  if (parts.length >= 2 && NESTED_SUBS.includes(parts[parts.length - 1]) && !COLLECTIONS[path] && !(parts[0] === "policies" && LIFECYCLE_SUBS.includes(parts[parts.length - 1])) && !(parts[0] === "governance" && GOVERNANCE_SUBS.includes(parts[parts.length - 1]))) {
+  const GOVERNANCE_SUBS = ["exceptions", "process-expirations", "audit-chain-verify"];
+  if (parts.length >= 2 && NESTED_SUBS.includes(parts[parts.length - 1]) && !COLLECTIONS[path] && !(parts[0] === "policies" && LIFECYCLE_SUBS.includes(parts[parts.length - 1])) && !(parts[0] === "governance" && GOVERNANCE_SUBS.includes(parts[parts.length - 1])) && !(parts[0] === "compliance")) {
     const parentPath = parts.slice(0, -2).join("/");
     const parentId = parts[parts.length - 2];
     const sub = parts[parts.length - 1];
@@ -2758,10 +2770,14 @@ if (parts.length === 5 && parts[0] === "governance" && parts[1] === "roles" && p
   }
 
   // Verify audit chain integrity
-  if (path === "policies/audit-chain/verify" && method === "GET") {
-    const { verifyAuditChainIntegrity } = await import("./data/policyVersionData.js");
+  if (path === "audit/verify-chain-integrity" && method === "GET") {
     const result = verifyAuditChainIntegrity(GOVERNANCE_AUDIT_LOG);
-    return json(res, 200, result);
+    return json(res, 200, {
+      valid: result.valid,
+      entriesVerified: result.totalEntries,
+      firstBrokenEntryId: result.issues.length > 0 ? result.issues[0].entryId : null,
+      verificationTimestamp: new Date().toISOString(),
+    });
   }
 
   // Process lifecycle dates (activation/expiration)
@@ -2976,6 +2992,164 @@ if (parts.length === 5 && parts[0] === "governance" && parts[1] === "roles" && p
     return json(res, 200, EXCEPTIONS[idx]);
   }
 
+  // Process exception expirations manually
+  if (path === "governance/exceptions/process-expirations" && method === "POST") {
+    const changes = exceptionExpiryService.processExceptionExpirations();
+    return json(res, 200, { processed: changes.length, changes });
+  }
+
+  // Export audit log
+  if (path === "audit/export" && method === "GET") {
+    const { entityType, entityId, dateFrom, dateTo } = query;
+    let entries = [...GOVERNANCE_AUDIT_LOG];
+
+    if (entityType) entries = entries.filter((e) => e.entityType === entityType);
+    if (entityId) entries = entries.filter((e) => e.entityId === entityId);
+    if (dateFrom) entries = entries.filter((e) => new Date(e.timestamp) >= new Date(dateFrom));
+    if (dateTo) entries = entries.filter((e) => new Date(e.timestamp) <= new Date(dateTo));
+
+    const format = query.format || "csv";
+    if (format === "csv") {
+      const headers = ["Log ID", "Timestamp", "Action", "Entity Type", "Entity ID", "From State", "To State", "Actor", "Actor Role", "Reason", "Previous Hash", "Entry Hash"];
+      const rows = entries.map((e) => [
+        e._id, e.timestamp, e.action, e.entityType || "", e.entityId || "",
+        e.fromState || "", e.toState || "", e.actorUserId || "system",
+        e.actorRoleAtTime || "system", (e.reason || "").replace(/,/g, ";"),
+        e.previousEntryHash || "", e.entryHash || "",
+      ]);
+      const csv = [headers.join(","), ...rows.map((r) => r.map((c) => `"${c}"`).join(","))].join("\n");
+      res.writeHead(200, {
+        "Content-Type": "text/csv",
+        "Content-Disposition": `attachment; filename="audit-log-export-${new Date().toISOString().slice(0, 10)}.csv"`,
+      });
+      return res.end(csv);
+    }
+
+    return json(res, 400, { message: "Unsupported format. Use 'csv'." });
+  }
+
+  // ============================================
+  // COMPLIANCE MODULE ROUTES
+  // ============================================
+  const C = compliance;
+
+  // Compliance Dashboard
+  if (path === "compliance/dashboard" && method === "GET") {
+    return json(res, 200, C.getComplianceDashboard());
+  }
+
+  // Compliance Frameworks
+  if (path === "compliance/frameworks" && method === "GET") {
+    const enriched = C.COMPLIANCE_FRAMEWORKS.map((f) => ({
+      ...f,
+      requirementCount: C.COMPLIANCE_REQUIREMENTS.filter((r) => r.frameworkId === f._id).length,
+    }));
+    return json(res, 200, { items: enriched, total: enriched.length });
+  }
+  if (path === "compliance/frameworks" && method === "POST") {
+    const body = await readBody(req);
+    const newFw = { _id: `cf-${Date.now()}`, code: `FRW-${String(C.COMPLIANCE_FRAMEWORKS.length + 1).padStart(3, "0")}`, ...body };
+    C.COMPLIANCE_FRAMEWORKS.push(newFw);
+    return json(res, 201, newFw);
+  }
+
+  // Compliance Requirements
+  if (path === "compliance/requirements" && method === "GET") {
+    return json(res, 200, { items: C.COMPLIANCE_REQUIREMENTS, total: C.COMPLIANCE_REQUIREMENTS.length });
+  }
+  if (path === "compliance/requirements" && method === "POST") {
+    const body = await readBody(req);
+    const newReq = { _id: `cr-${Date.now()}`, code: `REQ-${String(C.COMPLIANCE_REQUIREMENTS.length + 1).padStart(3, "0")}`, ...body };
+    C.COMPLIANCE_REQUIREMENTS.push(newReq);
+    return json(res, 201, newReq);
+  }
+
+  // Compliance Assessments (append-only)
+  if (path === "compliance/assessments" && method === "GET") {
+    return json(res, 200, { items: C.COMPLIANCE_ASSESSMENTS, total: C.COMPLIANCE_ASSESSMENTS.length });
+  }
+  if (path === "compliance/assessments" && method === "POST") {
+    const body = await readBody(req);
+    const newAsm = { _id: `ca-${Date.now()}`, code: `ASM-${String(C.COMPLIANCE_ASSESSMENTS.length + 1).padStart(3, "0")}`, ...body };
+    C.COMPLIANCE_ASSESSMENTS.push(newAsm);
+    const reqItem = C.COMPLIANCE_REQUIREMENTS.find((r) => r._id === body.requirementId);
+    if (reqItem) reqItem.status = body.status;
+    return json(res, 201, newAsm);
+  }
+
+  // Compliance Evidence
+  if (path === "compliance/evidence" && method === "GET") {
+    return json(res, 200, { items: C.COMPLIANCE_EVIDENCE, total: C.COMPLIANCE_EVIDENCE.length });
+  }
+  if (path === "compliance/evidence" && method === "POST") {
+    const body = await readBody(req);
+    const newEvd = { _id: `ce-${Date.now()}`, code: `EVD-${String(C.COMPLIANCE_EVIDENCE.length + 1).padStart(3, "0")}`, ...body };
+    C.COMPLIANCE_EVIDENCE.push(newEvd);
+    return json(res, 201, newEvd);
+  }
+  if (path.length > 20 && parts[0] === "compliance" && parts[1] === "evidence" && parts[3] === "status" && method === "PATCH") {
+    const idx = C.COMPLIANCE_EVIDENCE.findIndex((e) => e._id === parts[2]);
+    if (idx < 0) return json(res, 404, { message: "Not found" });
+    Object.assign(C.COMPLIANCE_EVIDENCE[idx], await readBody(req));
+    return json(res, 200, C.COMPLIANCE_EVIDENCE[idx]);
+  }
+
+  // Compliance Gaps
+  if (path === "compliance/gaps" && method === "GET") {
+    return json(res, 200, { items: C.COMPLIANCE_GAPS, total: C.COMPLIANCE_GAPS.length });
+  }
+  if (path === "compliance/gaps" && method === "POST") {
+    const body = await readBody(req);
+    const existing = C.COMPLIANCE_GAPS.find((g) => g.requirementId === body.requirementId && !["Resolved", "Closed"].includes(g.status));
+    if (existing) return json(res, 409, { message: "An open gap already exists for this requirement" });
+    const newGap = { _id: `cg-${Date.now()}`, code: `GAP-${String(C.COMPLIANCE_GAPS.length + 1).padStart(3, "0")}`, ...body };
+    C.COMPLIANCE_GAPS.push(newGap);
+    return json(res, 201, newGap);
+  }
+
+  // Compliance Remediation
+  if (path === "compliance/remediation" && method === "GET") {
+    return json(res, 200, { items: C.COMPLIANCE_REMEDIATION, total: C.COMPLIANCE_REMEDIATION.length });
+  }
+  if (path === "compliance/remediation" && method === "POST") {
+    const body = await readBody(req);
+    const newRem = { _id: `cm-${Date.now()}`, code: `REM-${String(C.COMPLIANCE_REMEDIATION.length + 1).padStart(3, "0")}`, ...body, progress: body.progress || 0 };
+    C.COMPLIANCE_REMEDIATION.push(newRem);
+    return json(res, 201, newRem);
+  }
+  if (path.length > 20 && parts[0] === "compliance" && parts[1] === "remediation" && parts[3] === "progress" && method === "PATCH") {
+    const idx = C.COMPLIANCE_REMEDIATION.findIndex((r) => r._id === parts[2]);
+    if (idx < 0) return json(res, 404, { message: "Not found" });
+    const body = await readBody(req);
+    let newStatus = C.COMPLIANCE_REMEDIATION[idx].status;
+    if (body.progress >= 100) newStatus = "Completed";
+    else if (body.progress > 0 && C.COMPLIANCE_REMEDIATION[idx].status === "Open") newStatus = "InProgress";
+    Object.assign(C.COMPLIANCE_REMEDIATION[idx], { progress: body.progress, status: newStatus });
+    return json(res, 200, C.COMPLIANCE_REMEDIATION[idx]);
+  }
+
+  // Compliance Findings
+  if (path === "compliance/findings" && method === "GET") {
+    return json(res, 200, { items: C.COMPLIANCE_FINDINGS, total: C.COMPLIANCE_FINDINGS.length });
+  }
+
+  // Compliance Reference Data
+  if (path === "compliance/reference/controls" && method === "GET") {
+    return json(res, 200, { items: C.COMPLIANCE_CONTROLS });
+  }
+  if (path === "compliance/reference/risks" && method === "GET") {
+    return json(res, 200, { items: C.COMPLIANCE_RISKS });
+  }
+  if (path === "compliance/reference/policies" && method === "GET") {
+    return json(res, 200, { items: C.COMPLIANCE_POLICIES });
+  }
+  if (path === "compliance/reference/assets" && method === "GET") {
+    return json(res, 200, { items: C.COMPLIANCE_ASSETS });
+  }
+  if (path === "compliance/reference/audits" && method === "GET") {
+    return json(res, 200, { items: C.COMPLIANCE_AUDITS });
+  }
+
   const collection = COLLECTIONS[path];
   if (collection && path === "policies" && method === "GET") {
     try {
@@ -3100,4 +3274,7 @@ http
     });
   })
   .listen(PORT, "0.0.0.0", () => {
+    // PLACEHOLDER: Background job for exception expiry. Replace with Cron Job in production.
+    exceptionExpiryService.startExceptionExpiryJob();
+    console.log(`[GRC] Server running on http://0.0.0.0:${PORT}`);
   });

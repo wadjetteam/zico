@@ -205,32 +205,7 @@ export const COMMITTEE_ACTIONS = [
 // GOVERNANCE AUDIT LOG
 // ============================================
 
-export const GOVERNANCE_AUDIT_LOG = [
-  {
-    _id: "gal-1",
-    actorUserId: "u-admin",
-    timestamp: "2025-08-15T10:00:00Z",
-    action: "policy.version.created",
-    entityType: "PolicyVersion",
-    entityId: "pv-1",
-    oldValue: null,
-    newValue: { versionNumber: "3.2", status: "Draft" },
-    reason: null,
-    ipAddress: "192.168.1.100",
-  },
-  {
-    _id: "gal-2",
-    actorUserId: "u-manager",
-    timestamp: "2025-08-20T14:00:00Z",
-    action: "policy.version.approved",
-    entityType: "PolicyVersion",
-    entityId: "pv-1",
-    oldValue: { status: "InReview" },
-    newValue: { status: "Approved" },
-    reason: "Content is comprehensive",
-    ipAddress: "192.168.1.101",
-  },
-];
+export const GOVERNANCE_AUDIT_LOG = [];
 
 // ============================================
 // HELPER FUNCTIONS
