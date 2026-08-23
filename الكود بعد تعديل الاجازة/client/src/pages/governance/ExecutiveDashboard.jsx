@@ -65,7 +65,7 @@ export default function ExecutiveDashboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  useEffect(load, [load]);
+  useEffect(() => { load(); }, [load]);
 
   if (error) return <ErrorState message={error} onRetry={load} />;
   if (loading || !data) return <LoadingState label="Aggregating organization-wide posture…" />;

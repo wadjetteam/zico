@@ -9,7 +9,7 @@ import { Field, Select, TextArea, TextInput } from "../../components/Field";
 import { LoadingState } from "../../components/States";
 import { chipClass } from "../../lib/format";
 
-const EMPTY = { name: "", description: "", status: "Active" };
+const EMPTY = { name: "", description: "", email: "", status: "Active" };
 
 const MODULE_LABELS = { policy: "Policy", compliance: "Compliance", audit: "Audit", context: "Context Org", governance: "Governance" };
 
@@ -46,7 +46,7 @@ export default function RolesPermissions() {
 
   const openEdit = (row) => {
     setEditing(row);
-    setForm({ name: row.name, description: row.description || "", status: row.status });
+    setForm({ name: row.name, description: row.description || "", email: row.email || "", status: row.status });
     setOpen(true);
   };
 
@@ -75,7 +75,7 @@ export default function RolesPermissions() {
     }
   };
 
-  const assignments = items.reduce((a, r) => a + r.usersAssigned, 0);
+  const assignments = items.reduce((a, r) => a + (r.usersAssignedCount || r.usersAssigned || 0), 0);
 
   if (loading) return <LoadingState label="Loading roles…" />;
 
@@ -119,6 +119,11 @@ export default function RolesPermissions() {
             ),
           },
           {
+            key: "email",
+            header: "Email",
+            render: (r) => <span className="text-neutral-400 text-xs">{r.email || "—"}</span>,
+          },
+          {
             key: "usersAssigned",
             header: "Users assigned",
             render: (r) => <span className="font-semibold text-neutral-200">{r.usersAssigned}</span>,
@@ -128,7 +133,7 @@ export default function RolesPermissions() {
             header: "Modules with access",
             render: (r) => (
               <div className="flex max-w-[340px] flex-wrap gap-1.5">
-                {r.modulesWithAccess.map((m) => (
+                {(r.modulesWithAccess || []).map((m) => (
                   <span key={m} className="chip border-gold/30 bg-gold/5 text-[10px] text-gold-light">{MODULE_LABELS[m] || m}</span>
                 ))}
               </div>
@@ -188,6 +193,9 @@ export default function RolesPermissions() {
           </Field>
           <Field label="Description">
             <TextArea value={form.description} onChange={(e) => setForm((s) => ({ ...s, description: e.target.value }))} placeholder="What is this role responsible for?" />
+          </Field>
+          <Field label="Email">
+            <TextInput value={form.email} onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))} placeholder='e.g. "compliance@company.com"' />
           </Field>
           <Field label="Status">
             <Select value={form.status} onChange={(e) => setForm((s) => ({ ...s, status: e.target.value }))} options={["Active", "Inactive"].map((v) => ({ value: v, label: v }))} />

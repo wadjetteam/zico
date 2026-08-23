@@ -446,22 +446,6 @@ export default function ControlManagement() {
             </div>
 
             <div>
-              <h4 className="mb-2 text-sm font-semibold text-neutral-200">Effectiveness</h4>
-              <div className="grid grid-cols-4 gap-3">
-                {["design", "operating", "coverage", "testing"].map((f) => (
-                  <div key={f} className="rounded-lg border border-line p-3 text-center">
-                    <div className="text-lg font-bold text-gold">{detailView.effectiveness?.[f] ?? 0}%</div>
-                    <div className="text-xs capitalize text-neutral-500">{f}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-3 rounded-lg border border-gold/30 bg-gold/5 p-3 text-center">
-                <div className="text-xl font-bold text-gold">{detailView.effectiveness?.overall ?? 0}%</div>
-                <div className="text-xs text-neutral-500">Overall Effectiveness</div>
-              </div>
-            </div>
-
-            <div>
               <h4 className="mb-2 text-sm font-semibold text-neutral-200">Target Assets ({detailView.targetAssets?.length || 0})</h4>
               <div className="flex flex-wrap gap-2">
                 {(detailView.targetAssets || []).map((a) => {

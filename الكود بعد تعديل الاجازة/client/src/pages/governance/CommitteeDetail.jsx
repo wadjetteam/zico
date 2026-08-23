@@ -44,7 +44,7 @@ export default function CommitteeDetail() {
     }
   }, [id]);
 
-  useEffect(load, [load]);
+  useEffect(() => { load(); }, [load]);
 
   if (error) return <ErrorState message={error} onRetry={load} />;
   if (loading || !committee) return <LoadingState label="Loading committee…" />;

@@ -26,6 +26,7 @@ export default function DocumentProgram() {
   const [settings, setSettings] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [__v] = useState(Date.now());
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -33,7 +34,10 @@ export default function DocumentProgram() {
       const { data } = await api.get("/governance/document-program");
       setSettings({
         classificationSchema: [],
-        retentionSchema: [],
+        retentionRules: [],
+        numberingConventions: [],
+        versioningRules: { majorTrigger: "", minorTrigger: "", majorRequiresReapproval: true },
+        allowedFileTypes: ["pdf", "docx"],
         approvalWorkflow: false,
         autoVersioning: false,
         reviewReminders: false,
@@ -41,7 +45,10 @@ export default function DocumentProgram() {
         retentionYears: 7,
         ...data,
         classificationSchema: Array.isArray(data?.classificationSchema) ? data.classificationSchema : [],
-        retentionSchema: Array.isArray(data?.retentionSchema) ? data.retentionSchema : [],
+        retentionRules: Array.isArray(data?.retentionRules) ? data.retentionRules : [],
+        numberingConventions: Array.isArray(data?.numberingConventions) ? data.numberingConventions : [],
+        versioningRules: data?.versioningRules ? data.versioningRules : { majorTrigger: "", minorTrigger: "", majorRequiresReapproval: true },
+        allowedFileTypes: Array.isArray(data?.allowedFileTypes) ? data.allowedFileTypes : [],
       });
     } catch (err) {
       alert(err?.response?.data?.message || err.message);

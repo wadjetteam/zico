@@ -37,6 +37,7 @@ export default function ExceptionRegister() {
   const [statusFilter, setStatusFilter] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [editing, setEditing] = useState(null);
+  const [viewing, setViewing] = useState(null);
   const [form, setForm] = useState(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
 
@@ -64,6 +65,24 @@ export default function ExceptionRegister() {
   const clearFilters = () => setStatusFilter("");
 
   const openCreate = () => { setForm(EMPTY_FORM); setEditing("new"); };
+  const openView = (row) => setViewing(row);
+  const openEdit = (row) => {
+    setEditing(row);
+    setForm({
+      title: row.title || "",
+      description: row.description || "",
+      relatedPolicyId: row.relatedPolicyId || "",
+      relatedControlId: row.relatedControlId || "",
+      relatedRiskId: row.relatedRiskId || "",
+      exceptionEffectivenessOverride: row.exceptionEffectivenessOverride || "",
+      businessJustification: row.businessJustification || "",
+      compensatingControls: row.compensatingControls || "",
+      ownerUserId: row.ownerUserId || "",
+      requestedFrom: row.requestedFrom?.slice(0, 10) || "",
+      requestedUntil: row.requestedUntil?.slice(0, 10) || "",
+      reviewDate: row.reviewDate?.slice(0, 10) || "",
+    });
+  };
 
   const save = async (e) => {
     e.preventDefault();
@@ -185,66 +204,152 @@ export default function ExceptionRegister() {
               <th className="px-4 py-3">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {filtered.length === 0 ? (
-              <tr><td colSpan={5} className="px-4 py-8 text-center text-neutral-500">No exceptions found.</td></tr>
-            ) : (
-              filtered.map((r) => (
-                <tr key={r._id} className="border-b border-line/50 hover:bg-white/[0.02]">
-                  <td className="px-4 py-3">
-                    <div className="font-medium text-neutral-100">{r.title}</div>
-                    <div className="text-xs text-neutral-500">{r.exceptionCode}</div>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className={`chip ${STATUS_STYLES[r.status] || STATUS_STYLES.Draft}`}>{r.status}</span>
-                  </td>
-                  <td className="px-4 py-3 text-neutral-300">{r.requestedByUser?.fullName || r.requestedByUserId}</td>
-                  <td className="px-4 py-3 text-neutral-400">{fmtDate(r.requestedUntil)}</td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-2">
-                      {r.status === "UnderReview" && (
-                        <button className="btn-ghost p-1.5 text-emerald-400" onClick={() => approve(r)} title="Approve">
-                          <CheckCircle2 className="h-4 w-4" />
-                        </button>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
+              <tbody>
+                {filtered.length === 0 ? (
+                  <tr><td colSpan={5} className="px-4 py-8 text-center text-neutral-500">No exceptions found. Click "New Exception" to create one.</td></tr>
+                ) : (
+                  filtered.map((r) => (
+                    <tr key={r._id} className="border-b border-line/50 hover:bg-white/[0.02] cursor-pointer" onClick={() => openView(r)}>
+                      <td className="px-4 py-3">
+                        <div className="font-medium text-neutral-100">{r.title}</div>
+                        <div className="text-xs text-neutral-500">{r.exceptionCode}</div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className={`chip ${STATUS_STYLES[r.status] || STATUS_STYLES.Draft}`}>{r.status}</span>
+                      </td>
+                      <td className="px-4 py-3 text-neutral-300">{r.requestedByUser?.fullName || r.requestedByUserId}</td>
+                      <td className="px-4 py-3 text-neutral-400">{fmtDate(r.requestedUntil)}</td>
+                      <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex items-center gap-2">
+                          <button className="btn-ghost text-xs gap-1 px-2 py-1 text-gold" onClick={() => openView(r)} title="View Details">
+                            <Eye className="h-3 w-3" /> View
+                          </button>
+                          {r.status === "UnderReview" && (
+                            <button className="btn-ghost text-xs gap-1 px-2 py-1 text-emerald-400" onClick={() => approve(r)} title="Approve">
+                              <CheckCircle2 className="h-3 w-3" /> Approve
+                            </button>
+                          )}
+                          {r.status !== "Approved" && r.status !== "Active" && r.status !== "Expired" && r.status !== "Closed" && (
+                            <button className="btn-ghost text-xs gap-1 px-2 py-1 text-sky-400" onClick={() => openEdit(r)} title="Edit">
+                              Edit
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
         </table>
       </div>
 
       {/* Create/Edit Modal */}
       {editing && (
-        <Modal title={editing === "new" ? "Create Exception" : "Edit Exception"} onClose={() => setEditing(null)} wide>
+        <Modal open={true} title={editing === "new" ? "Create New Exception" : "Edit Exception"} onClose={() => setEditing(null)} wide>
           <form onSubmit={save} className="space-y-4">
-            <Field label="Title">
-              <TextInput value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required />
+            <Field label="Title *">
+              <TextInput value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required placeholder="Short descriptive title" />
             </Field>
-            <Field label="Description">
-              <TextArea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={3} />
+            <Field label="Description *">
+              <TextArea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={3} required placeholder="What is this exception about?" />
             </Field>
-            <Field label="Business Justification">
-              <TextArea value={form.businessJustification} onChange={(e) => setForm({ ...form, businessJustification: e.target.value })} rows={3} required />
+            <Field label="Business Justification *">
+              <TextArea value={form.businessJustification} onChange={(e) => setForm({ ...form, businessJustification: e.target.value })} rows={3} required placeholder="Why is this exception needed?" />
             </Field>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <Field label="Requested Until">
+              <Field label="Requested Until *">
                 <input type="date" className="input" value={form.requestedUntil?.slice(0, 10) || ""} onChange={(e) => setForm({ ...form, requestedUntil: e.target.value })} required />
               </Field>
               <Field label="Effectiveness Override (%)">
-                <input type="number" min={0} max={100} className="input" value={form.exceptionEffectivenessOverride} onChange={(e) => setForm({ ...form, exceptionEffectivenessOverride: e.target.value })} />
+                <input type="number" min={0} max={100} className="input" value={form.exceptionEffectivenessOverride} onChange={(e) => setForm({ ...form, exceptionEffectivenessOverride: e.target.value })} placeholder="Leave empty for no override" />
               </Field>
             </div>
             <Field label="Compensating Controls">
-              <TextArea value={form.compensatingControls} onChange={(e) => setForm({ ...form, compensatingControls: e.target.value })} rows={2} />
+              <TextArea value={form.compensatingControls} onChange={(e) => setForm({ ...form, compensatingControls: e.target.value })} rows={2} placeholder="What controls are in place to mitigate the risk?" />
             </Field>
             <div className="flex justify-end gap-3 border-t border-line pt-4">
               <button type="button" className="btn-ghost" onClick={() => setEditing(null)}>Cancel</button>
-              <button type="submit" className="btn-primary" disabled={saving}>{saving ? "Saving..." : "Save"}</button>
+              <button type="submit" className="btn-primary" disabled={saving}>{saving ? "Saving..." : (editing === "new" ? "Create Exception" : "Save Changes")}</button>
             </div>
           </form>
+        </Modal>
+      )}
+
+      {/* View Details Modal */}
+      {viewing && (
+        <Modal open={true} title={`Exception Details — ${viewing.exceptionCode || viewing._id}`} onClose={() => setViewing(null)} wide>
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <span className="text-xs text-neutral-500">Title</span>
+                <p className="text-sm text-neutral-100">{viewing.title}</p>
+              </div>
+              <div>
+                <span className="text-xs text-neutral-500">Status</span>
+                <p><span className={`chip mt-1 ${STATUS_STYLES[viewing.status] || STATUS_STYLES.Draft}`}>{viewing.status}</span></p>
+              </div>
+            </div>
+            <div>
+              <span className="text-xs text-neutral-500">Description</span>
+              <p className="text-sm text-neutral-100">{viewing.description || "—"}</p>
+            </div>
+            <div>
+              <span className="text-xs text-neutral-500">Business Justification</span>
+              <p className="text-sm text-neutral-100">{viewing.businessJustification || "—"}</p>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <span className="text-xs text-neutral-500">Requested By</span>
+                <p className="text-sm text-neutral-100">{viewing.requestedByUser?.fullName || viewing.requestedByUserId || "—"}</p>
+              </div>
+              <div>
+                <span className="text-xs text-neutral-500">Owner</span>
+                <p className="text-sm text-neutral-100">{viewing.ownerUser?.fullName || viewing.ownerUserId || "—"}</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <span className="text-xs text-neutral-500">Requested From</span>
+                <p className="text-sm text-neutral-100">{fmtDate(viewing.requestedFrom)}</p>
+              </div>
+              <div>
+                <span className="text-xs text-neutral-500">Requested Until</span>
+                <p className="text-sm text-neutral-100">{fmtDate(viewing.requestedUntil)}</p>
+              </div>
+              <div>
+                <span className="text-xs text-neutral-500">Review Date</span>
+                <p className="text-sm text-neutral-100">{fmtDate(viewing.reviewDate)}</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <span className="text-xs text-neutral-500">Effectiveness Override</span>
+                <p className="text-sm text-neutral-100">{viewing.exceptionEffectivenessOverride ? `${viewing.exceptionEffectivenessOverride}%` : "—"}</p>
+              </div>
+              <div>
+                <span className="text-xs text-neutral-500">Compensating Controls</span>
+                <p className="text-sm text-neutral-100">{viewing.compensatingControls || "—"}</p>
+              </div>
+            </div>
+            {viewing.approvedBy && (
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <span className="text-xs text-neutral-500">Approved By</span>
+                  <p className="text-sm text-neutral-100">{viewing.approvedBy}</p>
+                </div>
+                <div>
+                  <span className="text-xs text-neutral-500">Approved At</span>
+                  <p className="text-sm text-neutral-100">{fmtDate(viewing.approvedAt)}</p>
+                </div>
+              </div>
+            )}
+            <div className="flex justify-end gap-3 border-t border-line pt-4">
+              <button type="button" className="btn-ghost" onClick={() => setViewing(null)}>Close</button>
+              {(viewing.status !== "Approved" && viewing.status !== "Active" && viewing.status !== "Expired" && viewing.status !== "Closed") && (
+                <button type="button" className="btn-primary" onClick={() => { setViewing(null); openEdit(viewing); }}>Edit</button>
+              )}
+            </div>
+          </div>
         </Modal>
       )}
     </>

@@ -1,4 +1,4 @@
-﻿import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { resource } from "../../../api/client";
 import DataTable from "../../../components/DataTable";
 import { Select } from "../../../components/Field";
@@ -27,7 +27,7 @@ export default function AuditTab({ policy }) {
     api.get(`${policy._id}/audit-logs`).then((d) => setRows(d.items)).finally(() => setLoading(false));
   }, [policy._id]);
 
-  useEffect(load, [load]);
+  useEffect(() => { load(); }, [load]);
 
   const users = useMemo(() => [...new Set(rows.map((r) => r.actor || "system"))].sort(), [rows]);
   const actions = useMemo(() => [...new Set(rows.map((r) => r.actionType))].sort(), [rows]);
@@ -68,7 +68,7 @@ export default function AuditTab({ policy }) {
               </span>
             ),
           },
-          { key: "details", header: "Details", render: (r) => <span className="max-w-[340px] font-mono text-[11px] leading-relaxed text-neutral-500">{fmtMeta(r.details) || "—"}</span> },
+          { key: "details", header: "Details", render: (r) => <span className="max-w-[340px] font-mono text-[11px] leading-relaxed text-neutral-500">{fmtMeta(r.details) || "�"}</span> },
         ]}
         rows={filtered}
         loading={loading}

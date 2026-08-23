@@ -1,4 +1,4 @@
-﻿import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { FileDiff, Loader2, Plus, Trash2 } from "lucide-react";
 import { resource } from "../../../api/client";
 import DataTable from "../../../components/DataTable";
@@ -34,7 +34,7 @@ export default function VersionsTab({ policy, reload, compareOnly }) {
     api.get(`${policy._id}/versions`).then((d) => setRows(d.items)).finally(() => setLoading(false));
   }, [policy._id]);
 
-  useEffect(load, [load]);
+  useEffect(() => { load(); }, [load]);
 
   const versions = useMemo(() => [...rows].sort((a, b) => cmpVersion(a.version, b.version)), [rows]);
 
@@ -87,7 +87,7 @@ export default function VersionsTab({ policy, reload, compareOnly }) {
     <div>
       {!compareOnly ? (
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <p className="label">Version History ({rows.length}) — current: <span className="font-mono text-gold">v{current}</span></p>
+          <p className="label">Version History ({rows.length}) � current: <span className="font-mono text-gold">v{current}</span></p>
           <button className="btn-primary" onClick={() => setOpen(true)}>
             <Plus className="h-4 w-4" /> Create Version
           </button>
@@ -136,10 +136,10 @@ export default function VersionsTab({ policy, reload, compareOnly }) {
         <div>
           <div className="card mb-4 flex flex-wrap items-end gap-3">
             <Field label="Older version" className="min-w-[200px] flex-1">
-              <Select value={older} onChange={(e) => setOlder(e.target.value)} options={versions.map((v) => ({ value: v._id, label: `v${v.version} — ${v.changeType} (${fmtDateTime(v.createdAt)})` }))} />
+              <Select value={older} onChange={(e) => setOlder(e.target.value)} options={versions.map((v) => ({ value: v._id, label: `v${v.version} � ${v.changeType} (${fmtDateTime(v.createdAt)})` }))} />
             </Field>
             <Field label="Newer version" className="min-w-[200px] flex-1">
-              <Select value={newer} onChange={(e) => setNewer(e.target.value)} options={versions.map((v) => ({ value: v._id, label: `v${v.version} — ${v.changeType} (${fmtDateTime(v.createdAt)})` }))} />
+              <Select value={newer} onChange={(e) => setNewer(e.target.value)} options={versions.map((v) => ({ value: v._id, label: `v${v.version} � ${v.changeType} (${fmtDateTime(v.createdAt)})` }))} />
             </Field>
             <button className="btn-primary" onClick={runCompare} disabled={!older || !newer || older === newer}>
               <FileDiff className="h-4 w-4" /> Compare
@@ -163,19 +163,19 @@ export default function VersionsTab({ policy, reload, compareOnly }) {
       >
         <form id="version-form" onSubmit={save} className="grid grid-cols-1 gap-4">
           <p className="text-xs text-neutral-500">
-            Current version: <span className="font-mono text-gold">v{current}</span> â†’ next:{" "}
+            Current version: <span className="font-mono text-gold">v{current}</span> → next:{" "}
             <span className="font-mono text-gold">{nextVersion(current, form.changeType)}</span>
           </p>
           <Field label="Change type">
             <Select value={form.changeType} onChange={(e) => setForm((s) => ({ ...s, changeType: e.target.value }))} options={["Minor", "Major"].map((t) => ({ value: t, label: t }))} />
           </Field>
           <Field label="Change summary *">
-            <TextArea value={form.changeSummary} onChange={(e) => setForm((s) => ({ ...s, changeSummary: e.target.value }))} required placeholder="What changed in this version”¦" />
+            <TextArea value={form.changeSummary} onChange={(e) => setForm((s) => ({ ...s, changeSummary: e.target.value }))} required placeholder="What changed in this version��" />
           </Field>
         </form>
       </Modal>
 
-      <Modal open={diffOpen} onClose={() => setDiffOpen(false)} title={`Compare v${diff?.a?.versionNumber} â†’ v${diff?.b?.versionNumber}`} width="max-w-2xl"
+      <Modal open={diffOpen} onClose={() => setDiffOpen(false)} title={`Compare v${diff?.a?.versionNumber} → v${diff?.b?.versionNumber}`} width="max-w-2xl"
         footer={<button className="btn-ghost" onClick={() => setDiffOpen(false)} type="button">Close</button>}
       >
         <div className="grid grid-cols-1 gap-3">
@@ -187,7 +187,7 @@ export default function VersionsTab({ policy, reload, compareOnly }) {
                 ? "border-red-900/60 bg-red-950/40 text-red-300"
                 : "border-transparent text-neutral-400"
             }`}>
-              {l.type === "add" ? "+ " : l.type === "del" ? "− " : "  "}
+              {l.type === "add" ? "+ " : l.type === "del" ? "- " : "  "}
               {l.text || "\u00A0"}
             </div>
           ))}

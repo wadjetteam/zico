@@ -1,4 +1,4 @@
-ï»¿import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Loader2, Plus, Trash2 } from "lucide-react";
 import { resource } from "../../../api/client";
 import DataTable from "../../../components/DataTable";
@@ -29,7 +29,7 @@ export default function RiskMappingsTab({ policy }) {
     api.get(`${policy._id}/risk-mappings`).then((d) => setRows(d.items)).finally(() => setLoading(false));
   }, [policy._id]);
 
-  useEffect(load, [load]);
+  useEffect(() => { load(); }, [load]);
 
   useEffect(() => {
     risks.list().then((d) => setRiskOptions(d.items));
@@ -67,12 +67,12 @@ export default function RiskMappingsTab({ policy }) {
 
       <DataTable
         columns={[
-          { key: "riskId", header: "Risk ID", render: (r) => <span className="whitespace-nowrap font-mono text-xs text-gold">{r.risk?.riskId || "â€”"}</span> },
-          { key: "riskTitle", header: "Risk title", render: (r) => <span className="font-medium text-neutral-100">{r.risk?.title || "â€”"}</span> },
-          { key: "riskLevel", header: "Risk level", render: (r) => <span className={`chip ${LEVEL_STYLES[r.risk?.overallRisk] || LEVEL_STYLES.Low}`}>{r.risk?.overallRisk || "â€”"}</span> },
+          { key: "riskId", header: "Risk ID", render: (r) => <span className="whitespace-nowrap font-mono text-xs text-gold">{r.risk?.riskId || "—"}</span> },
+          { key: "riskTitle", header: "Risk title", render: (r) => <span className="font-medium text-neutral-100">{r.risk?.title || "—"}</span> },
+          { key: "riskLevel", header: "Risk level", render: (r) => <span className={`chip ${LEVEL_STYLES[r.risk?.overallRisk] || LEVEL_STYLES.Low}`}>{r.risk?.overallRisk || "—"}</span> },
           { key: "mappingType", header: "Mapping type", render: (r) => <span className="chip">{r.mappingType}</span> },
           { key: "rationale", header: "Rationale", render: (r) => <span className="text-neutral-400">{orDash(r.rationale)}</span> },
-          { key: "mappedBy", header: "Mapped by", render: (r) => <span className="whitespace-nowrap text-neutral-300">{r.mappedBy?.fullName || r.mappedBy?.username || "â€”"}</span> },
+          { key: "mappedBy", header: "Mapped by", render: (r) => <span className="whitespace-nowrap text-neutral-300">{r.mappedBy?.fullName || r.mappedBy?.username || "—"}</span> },
           { key: "createdAt", header: "Mapped at", render: (r) => <span className="whitespace-nowrap text-neutral-400">{fmtDateTime(r.createdAt)}</span> },
           {
             key: "__a",
@@ -103,12 +103,12 @@ export default function RiskMappingsTab({ policy }) {
         }
       >
         <form id="risk-map-form" onSubmit={save} className="grid grid-cols-1 gap-4">
-          <Field label="Search risk by ID or titleâ€Â¦">
+          <Field label="Search risk by ID or title”¦">
             <select className="input" value={form.risk} onChange={(e) => setForm((s) => ({ ...s, risk: e.target.value }))}>
-              <option value="">â€” Select risk â€”</option>
+              <option value="">— Select risk —</option>
               {riskOptions.map((r) => (
                 <option key={r._id} value={r._id} className="bg-ink-deep">
-                  {r.riskId} â€” {r.title}
+                  {r.riskId} — {r.title}
                 </option>
               ))}
             </select>
@@ -117,7 +117,7 @@ export default function RiskMappingsTab({ policy }) {
             <Select value={form.mappingType} onChange={(e) => setForm((s) => ({ ...s, mappingType: e.target.value }))} options={["Primary", "Support"].map((t) => ({ value: t, label: t }))} />
           </Field>
           <Field label="Rationale">
-            <TextArea value={form.rationale} onChange={(e) => setForm((s) => ({ ...s, rationale: e.target.value }))} placeholder="Why this risk relates to this policyâ€Â¦" />
+            <TextArea value={form.rationale} onChange={(e) => setForm((s) => ({ ...s, rationale: e.target.value }))} placeholder="Why this risk relates to this policy”¦" />
           </Field>
         </form>
       </Modal>

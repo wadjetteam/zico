@@ -1,4 +1,4 @@
-ï»¿import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Loader2, Plus, Trash2 } from "lucide-react";
 import { resource } from "../../../api/client";
 import DataTable from "../../../components/DataTable";
@@ -22,7 +22,7 @@ export default function ControlMappingsTab({ policy }) {
     api.get(`${policy._id}/control-mappings`).then((d) => setRows(d.items)).finally(() => setLoading(false));
   }, [policy._id]);
 
-  useEffect(load, [load]);
+  useEffect(() => { load(); }, [load]);
 
   useEffect(() => {
     frameworks.list().then((d) => setFrameworkOptions(d.items));
@@ -77,9 +77,9 @@ export default function ControlMappingsTab({ policy }) {
 
       <DataTable
         columns={[
-          { key: "controlId", header: "Control ID", render: (r) => <span className="whitespace-nowrap font-mono text-xs text-gold">{r.controlId || "â€”"}</span> },
+          { key: "controlId", header: "Control ID", render: (r) => <span className="whitespace-nowrap font-mono text-xs text-gold">{r.controlId || "—"}</span> },
           { key: "controlName", header: "Control name", render: (r) => <span className="font-medium text-neutral-100">{orDash(r.controlName)}</span> },
-          { key: "framework", header: "Framework", render: (r) => <span className="chip">{r.framework || "â€”"}</span> },
+          { key: "framework", header: "Framework", render: (r) => <span className="chip">{r.framework || "—"}</span> },
           { key: "domain", header: "Domain", render: (r) => <span className="text-neutral-400">{orDash(r.domain)}</span> },
           { key: "mappingType", header: "Mapping type", render: (r) => <span className="chip">{r.mappingType}</span> },
           { key: "rationale", header: "Rationale", render: (r) => <span className="text-neutral-400">{orDash(r.rationale)}</span> },
@@ -114,14 +114,14 @@ export default function ControlMappingsTab({ policy }) {
       >
         <form id="control-map-form" onSubmit={save} className="grid grid-cols-1 gap-4">
           <Field label="Framework">
-            <Select value={form.framework} onChange={(e) => setForm((s) => ({ ...s, framework: e.target.value, control: "" }))} options={[{ value: "", label: "â€” Select framework â€”" }, ...frameworkOptions.map((f) => ({ value: f._id, label: f.name }))]} />
+            <Select value={form.framework} onChange={(e) => setForm((s) => ({ ...s, framework: e.target.value, control: "" }))} options={[{ value: "", label: "— Select framework —" }, ...frameworkOptions.map((f) => ({ value: f._id, label: f.name }))]} />
           </Field>
-          <Field label="Search control by ID or titleâ€Â¦">
+          <Field label="Search control by ID or title”¦">
             <select className="input" value={form.control} onChange={(e) => setForm((s) => ({ ...s, control: e.target.value }))}>
-              <option value="">â€” Select control â€”</option>
+              <option value="">— Select control —</option>
               {controls.map((c) => (
                 <option key={c.id} value={c.id} className="bg-ink-deep">
-                  {c.id} â€” {c.name}
+                  {c.id} — {c.name}
                 </option>
               ))}
             </select>
@@ -130,7 +130,7 @@ export default function ControlMappingsTab({ policy }) {
             <Select value={form.mappingType} onChange={(e) => setForm((s) => ({ ...s, mappingType: e.target.value }))} options={["Direct", "Indirect", "Partial"].map((t) => ({ value: t, label: t }))} />
           </Field>
           <Field label="Rationale">
-            <TextArea value={form.rationale} onChange={(e) => setForm((s) => ({ ...s, rationale: e.target.value }))} placeholder="How this control supports the policyâ€Â¦" />
+            <TextArea value={form.rationale} onChange={(e) => setForm((s) => ({ ...s, rationale: e.target.value }))} placeholder="How this control supports the policy”¦" />
           </Field>
         </form>
       </Modal>

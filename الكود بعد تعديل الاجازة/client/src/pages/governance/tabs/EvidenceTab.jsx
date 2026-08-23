@@ -1,4 +1,4 @@
-ï»¿import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CheckCircle2, FileText, Loader2, Plus, Trash2, Undo2, Upload, X } from "lucide-react";
 import { resource } from "../../../api/client";
 import DataTable from "../../../components/DataTable";
@@ -12,7 +12,7 @@ const frameworks = resource("frameworks");
 const EMPTY = { controlId: "", controlName: "", framework: "", evidenceDescription: "", documentIds: "" };
 
 const humanSize = (b) => {
-  if (!b) return "â€”";
+  if (!b) return "—";
   if (b < 1024) return `${b} B`;
   if (b < 1048576) return `${(b / 1024).toFixed(1)} KB`;
   return `${(b / 1048576).toFixed(1)} MB`;
@@ -33,7 +33,7 @@ export default function EvidenceTab({ policy }) {
     api.get(`${policy._id}/evidence`).then((d) => setRows(d.items)).finally(() => setLoading(false));
   }, [policy._id]);
 
-  useEffect(load, [load]);
+  useEffect(() => { load(); }, [load]);
 
   useEffect(() => {
     frameworks.list().then((d) => setFrameworkOptions(d.items));
@@ -96,7 +96,7 @@ export default function EvidenceTab({ policy }) {
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div>
           <p className="label">Evidence Traceability ({rows.length})</p>
-          <p className="mt-1 text-[11px] text-neutral-600">Policy â†’ Compliance Control â†’ Evidence</p>
+          <p className="mt-1 text-[11px] text-neutral-600">Policy ? Compliance Control ? Evidence</p>
         </div>
         <button className="btn-primary" onClick={() => setOpen(true)}>
           <Plus className="h-4 w-4" /> Add Evidence
@@ -106,7 +106,7 @@ export default function EvidenceTab({ policy }) {
       <DataTable
         columns={[
           { key: "controlId", header: "Control", render: (r) => <span className="whitespace-nowrap font-mono text-xs text-gold">{orDash(r.controlId)}</span> },
-          { key: "framework", header: "Framework", render: (r) => <span className="chip">{r.framework || "â€”"}</span> },
+          { key: "framework", header: "Framework", render: (r) => <span className="chip">{r.framework || "—"}</span> },
           { key: "evidenceDescription", header: "Evidence description", render: (r) => <span className="max-w-[280px] text-neutral-400">{orDash(r.evidenceDescription)}</span> },
           {
             key: "attachments",
@@ -125,7 +125,7 @@ export default function EvidenceTab({ policy }) {
                   <span className="truncate">{a.filename}</span>
                 </a>
               ) : (
-                <span className="text-neutral-600">â€”</span>
+                <span className="text-neutral-600">—</span>
               );
             },
           },
@@ -177,9 +177,9 @@ export default function EvidenceTab({ policy }) {
             <TextInput value={form.controlName} onChange={(e) => setForm((s) => ({ ...s, controlName: e.target.value }))} />
           </Field>
           <Field label="Framework" className="sm:col-span-2">
-            <Select value={form.framework} onChange={(e) => setForm((s) => ({ ...s, framework: e.target.value }))} options={[{ value: "", label: "â€” Select framework â€”" }, ...frameworkOptions.map((f) => ({ value: f.name, label: f.name }))]} />
+            <Select value={form.framework} onChange={(e) => setForm((s) => ({ ...s, framework: e.target.value }))} options={[{ value: "", label: "— Select framework —" }, ...frameworkOptions.map((f) => ({ value: f.name, label: f.name }))]} />
           </Field>
-          <Field label="Evidence file" hint="Image, PDF, screenshot, document â€” up to 25 MB" className="sm:col-span-2">
+          <Field label="Evidence file" hint="Image, PDF, screenshot, document — up to 25 MB" className="sm:col-span-2">
             <input ref={fileRef} type="file" className="hidden" onChange={(e) => pickFile(e.target.files?.[0] || null)} />
             {file ? (
               <div className="flex items-center justify-between rounded-lg border border-gold/40 bg-gold/5 px-3 py-2">
@@ -199,7 +199,7 @@ export default function EvidenceTab({ policy }) {
             )}
           </Field>
           <Field label="Evidence description" className="sm:col-span-2">
-            <TextArea value={form.evidenceDescription} onChange={(e) => setForm((s) => ({ ...s, evidenceDescription: e.target.value }))} placeholder="What proves this control is in forceâ€¦" />
+            <TextArea value={form.evidenceDescription} onChange={(e) => setForm((s) => ({ ...s, evidenceDescription: e.target.value }))} placeholder="What proves this control is in force…" />
           </Field>
           <Field label="Document IDs" hint="Comma-separated" className="sm:col-span-2">
             <TextInput value={form.documentIds} onChange={(e) => setForm((s) => ({ ...s, documentIds: e.target.value }))} placeholder="DOC-001, DOC-002" />

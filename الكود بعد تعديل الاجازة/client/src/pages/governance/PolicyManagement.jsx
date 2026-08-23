@@ -91,7 +91,7 @@ export default function PolicyManagement() {
       .finally(() => setLoading(false));
   }, [statusFilter, categoryFilter, ownerFilter]);
 
-  useEffect(load, [load]);
+  useEffect(() => { load(); }, [load]);
 
   const ownerOptions = useMemo(() => [...new Set(rows.map((r) => r.owner).filter(Boolean))], [rows]);
   const categoryOptions = useMemo(() => [...new Set([...CATEGORIES, ...rows.map((r) => r.category).filter(Boolean)])], [rows]);

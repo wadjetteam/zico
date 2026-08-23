@@ -1,4 +1,4 @@
-Ôªøimport { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Eye, FileText, Loader2, Pencil, Plus, Tag, Trash2, Upload, X } from "lucide-react";
 import { resource } from "../../../api/client";
 import DataTable from "../../../components/DataTable";
@@ -11,7 +11,7 @@ const api = resource("policies");
 const EMPTY = { fileName: "", displayName: "", tags: "", version: "1.0", size: 0, classification: "Internal", role: "", fileType: "" };
 
 const humanSize = (b) => {
-  if (!b) return "‚Äî";
+  if (!b) return "ó";
   if (b < 1024) return `${b} B`;
   if (b < 1048576) return `${(b / 1024).toFixed(1)} KB`;
   return `${(b / 1048576).toFixed(1)} MB`;
@@ -35,7 +35,7 @@ export default function DocumentsTab({ policy }) {
     api.get(`${policy._id}/documents`).then((d) => setRows(d.items)).finally(() => setLoading(false));
   }, [policy._id]);
 
-  useEffect(load, [load]);
+  useEffect(() => { load(); }, [load]);
 
   const types = useMemo(() => [...new Set(rows.map((r) => r.fileType).filter(Boolean))], [rows]);
   const roles = useMemo(() => [...new Set(rows.map((r) => r.role).filter(Boolean))], [rows]);
@@ -130,7 +130,7 @@ export default function DocumentsTab({ policy }) {
         columns={[
           { key: "fileName", header: "File", render: (r) => <span className="font-mono text-xs text-neutral-300">{orDash(r.fileName)}</span> },
           { key: "displayName", header: "Display name", render: (r) => <span className="font-medium text-neutral-100">{orDash(r.displayName)}</span> },
-          { key: "tags", header: "Tags", render: (r) => (r.tags?.length ? r.tags.map((t) => <span key={t} className="chip mr-1">{t}</span>) : <span className="text-neutral-600">‚Äî</span>) },
+          { key: "tags", header: "Tags", render: (r) => (r.tags?.length ? r.tags.map((t) => <span key={t} className="chip mr-1">{t}</span>) : <span className="text-neutral-600">ó</span>) },
           { key: "version", header: "Versions", render: (r) => <span className="font-mono text-xs">v{r.version}</span> },
           { key: "size", header: "Size", render: (r) => humanSize(r.size) },
           {
@@ -168,7 +168,7 @@ export default function DocumentsTab({ policy }) {
         rows={visible}
         loading={loading}
         searchable
-        searchPlaceholder="Search documents‚Äù¬¶"
+        searchPlaceholder="Search documentsî¶"
         emptyHint="No documents uploaded yet."
         toolbar={
           <>
@@ -191,7 +191,7 @@ export default function DocumentsTab({ policy }) {
       >
         <form id="doc-form" onSubmit={save} className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {editing === "new" && (
-            <Field label="Choose file" hint="PDF, image, Word, Excel ‚Äî up to 25 MB" className="sm:col-span-3">
+            <Field label="Choose file" hint="PDF, image, Word, Excel ó up to 25 MB" className="sm:col-span-3">
               <input ref={fileRef} type="file" className="hidden" onChange={(e) => pickFile(e.target.files?.[0] || null)} />
               {file ? (
                 <div className="flex items-center justify-between rounded-lg border border-gold/40 bg-gold/5 px-3 py-2">

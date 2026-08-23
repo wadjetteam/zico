@@ -2821,8 +2821,10 @@ if (parts.length === 5 && parts[0] === "governance" && parts[1] === "roles" && p
       _id: `r-${Date.now()}`,
       name: body.name,
       description: body.description,
+      email: body.email || "",
       status: "Active",
       permissions,
+      modulesWithAccess: body.modulesWithAccess || [],
       approvalAuthority: body.approvalAuthority || { canApprovePolicyClassification: ["Public", "Internal"], canApproveExceptions: false },
       createdAt: new Date().toISOString(),
     };
@@ -2955,6 +2957,23 @@ if (parts.length === 5 && parts[0] === "governance" && parts[1] === "roles" && p
     };
     EXCEPTIONS.push(newException);
     return json(res, 201, newException);
+  }
+
+  if (parts.length === 3 && parts[0] === "governance" && parts[1] === "exceptions" && method === "PUT") {
+    const idx = EXCEPTIONS.findIndex((x) => x._id === parts[2]);
+    if (idx < 0) return json(res, 404, { message: "Exception not found" });
+    const body = await readBody(req);
+    Object.assign(EXCEPTIONS[idx], body, { updatedAt: new Date().toISOString() });
+    return json(res, 200, EXCEPTIONS[idx]);
+  }
+
+  if (parts.length === 4 && parts[0] === "governance" && parts[1] === "exceptions" && parts[3] === "approve" && method === "POST") {
+    const idx = EXCEPTIONS.findIndex((x) => x._id === parts[2]);
+    if (idx < 0) return json(res, 404, { message: "Exception not found" });
+    EXCEPTIONS[idx].status = "Approved";
+    EXCEPTIONS[idx].approvedBy = tokenUser(req)?._id || "u-admin";
+    EXCEPTIONS[idx].approvedAt = new Date().toISOString();
+    return json(res, 200, EXCEPTIONS[idx]);
   }
 
   const collection = COLLECTIONS[path];

@@ -15,10 +15,10 @@ export const PASSWORDS = {
 };
 
 export const ROLES = [
-  { _id: "r-admin", name: "Admin", description: "Full access to all modules", status: "Active", permissionsMatrix: { grc: "manage", audit: "manage", settings: "manage" }, approvalAuthority: "Tier 3" },
-  { _id: "r-user", name: "User", description: "Standard analyst access", status: "Active", permissionsMatrix: { grc: "edit", audit: "view", settings: "view" }, approvalAuthority: "None" },
-  { _id: "r-auditor", name: "Auditor", description: "Audit module access", status: "Active", permissionsMatrix: { grc: "view", audit: "manage", settings: "view" }, approvalAuthority: "Tier 2" },
-  { _id: "r-viewer", name: "Viewer", description: "Read-only access", status: "Active", permissionsMatrix: { grc: "view", audit: "view", settings: "none" }, approvalAuthority: "None" },
+  { _id: "r-admin", name: "Admin", description: "Full access to all modules", status: "Active", permissionsMatrix: { grc: "manage", audit: "manage", settings: "manage" }, approvalAuthority: "Tier 3", email: "admin@wadjet.local", modulesWithAccess: ["policy", "compliance", "audit", "context", "governance"] },
+  { _id: "r-user", name: "User", description: "Standard analyst access", status: "Active", permissionsMatrix: { grc: "edit", audit: "view", settings: "view" }, approvalAuthority: "None", email: "analyst@wadjet.local", modulesWithAccess: ["policy", "compliance", "context"] },
+  { _id: "r-auditor", name: "Auditor", description: "Audit module access", status: "Active", permissionsMatrix: { grc: "view", audit: "manage", settings: "view" }, approvalAuthority: "Tier 2", email: "auditor@wadjet.local", modulesWithAccess: ["audit", "compliance"] },
+  { _id: "r-viewer", name: "Viewer", description: "Read-only access", status: "Active", permissionsMatrix: { grc: "view", audit: "view", settings: "none" }, approvalAuthority: "None", email: "viewer@wadjet.local", modulesWithAccess: ["policy", "audit"] },
 ];
 
 export const daysAgo = (n) => new Date(Date.now() - n * 86400000).toISOString();

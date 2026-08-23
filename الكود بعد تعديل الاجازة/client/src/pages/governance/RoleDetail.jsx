@@ -44,7 +44,7 @@ export default function RoleDetail() {
     }
   }, [id]);
 
-  useEffect(load, [load]);
+  useEffect(() => { load(); }, [load]);
 
   const saveMatrix = async () => {
     setSaving(true);
@@ -273,7 +273,7 @@ function AssignedUsersTab({ role, reload }) {
 }
 
 function AuthorityTab({ role, reload }) {
-  const [entries, setEntries] = useState(role.approvalAuthority || []);
+  const [entries, setEntries] = useState(Array.isArray(role.approvalAuthority) ? role.approvalAuthority : []);
   const [form, setForm] = useState({ module: "policy", workflowStage: "" });
   const [saving, setSaving] = useState(false);
 
