@@ -1,0 +1,814 @@
+- generic [ref=f31e9]:
+  - banner [ref=f31e10]:
+    - button "Toggle navigation" [ref=f31e11] [cursor=pointer]
+    - generic [ref=f31e14]:
+      - img "WADJET" [ref=f31e16]
+      - generic [ref=f31e17]:
+        - generic [ref=f31e18]: WADJET
+        - generic [ref=f31e19]: Eyes on Risk. Control in Action.
+    - textbox "Search modules" [ref=f31e21]:
+      - /placeholder: Search modules…
+    - generic [ref=f31e22]:
+      - button "Help" [ref=f31e23] [cursor=pointer]
+      - button "Settings" [ref=f31e27] [cursor=pointer]
+      - button "S admin" [ref=f31e32] [cursor=pointer]:
+        - generic [ref=f31e33]: S
+        - generic [ref=f31e34]: admin
+  - generic [ref=f31e35]:
+    - complementary [ref=f31e36]:
+      - navigation [ref=f31e37]:
+        - generic [ref=f31e38]:
+          - link "Dashboard" [ref=f31e39] [cursor=pointer]:
+            - /url: /dashboard
+          - button "Context Organization" [ref=f31e47] [cursor=pointer]
+          - button "Governance" [ref=f31e57] [cursor=pointer]
+          - generic [ref=f31e64]:
+            - button "Risk Management" [ref=f31e65] [cursor=pointer]
+            - list [ref=f31e72]:
+              - listitem [ref=f31e73]:
+                - link "Submit Risk" [ref=f31e74] [cursor=pointer]:
+                  - /url: /risk/submit
+              - listitem [ref=f31e75]:
+                - link "View Risks" [ref=f31e76] [cursor=pointer]:
+                  - /url: /risk/view
+              - listitem [ref=f31e77]:
+                - link "Risk Scoring" [ref=f31e78] [cursor=pointer]:
+                  - /url: /risk/scoring
+              - listitem [ref=f31e79]:
+                - link "Management Reviews" [ref=f31e80] [cursor=pointer]:
+                  - /url: /risk/reviews
+              - listitem [ref=f31e81]:
+                - link "Close Risks" [ref=f31e82] [cursor=pointer]:
+                  - /url: /risk/close
+              - listitem [ref=f31e83]:
+                - link "Plan of Action & Milestones" [ref=f31e84] [cursor=pointer]:
+                  - /url: /risk/poam
+              - listitem [ref=f31e85]:
+                - link "Score History" [ref=f31e86] [cursor=pointer]:
+                  - /url: /risk/score-history
+          - button "Compliance" [ref=f31e88] [cursor=pointer]
+          - button "Audit" [ref=f31e98] [cursor=pointer]
+          - button "Asset Management" [ref=f31e108] [cursor=pointer]
+          - button "Artificial Intelligence" [ref=f31e124] [cursor=pointer]
+          - button "Assessments" [ref=f31e132] [cursor=pointer]
+          - button "Reporting" [ref=f31e141] [cursor=pointer]
+          - button "Settings" [ref=f31e149] [cursor=pointer]
+        - generic [ref=f31e157]: Eyes on Risk. Control in Action.
+    - main [ref=f31e158]:
+      - generic [ref=f31e159]:
+        - generic [ref=f31e161]:
+          - heading "Submit New Risk" [level=1] [ref=f31e162]
+          - paragraph [ref=f31e163]: Record a new risk with full assessment, control mapping, treatment plan, and governance approval.
+        - generic [ref=f31e164]:
+          - generic [ref=f31e165]:
+            - paragraph [ref=f31e166]: 1. Risk Identification
+            - generic [ref=f31e167]:
+              - generic [ref=f31e168]:
+                - generic [ref=f31e169]: Risk Title
+                - textbox "Risk Title Short descriptive title" [ref=f31e170]
+                - generic [ref=f31e171]: Short descriptive title
+              - generic [ref=f31e172]:
+                - generic [ref=f31e173]: Domain / Business Unit
+                - combobox "Domain / Business Unit Determines scoring rules" [ref=f31e174]:
+                  - option "Information Security" [selected]
+                  - option "Operational"
+                  - option "Compliance"
+                  - option "Cybersecurity"
+                  - option "Third Party Risk"
+                  - option "Financial"
+                - generic [ref=f31e175]: Determines scoring rules
+              - generic [ref=f31e176]:
+                - generic [ref=f31e177]: Parameter Version
+                - combobox "Parameter Version Active parameter for this domain" [ref=f31e178]:
+                  - option "Information Security (v1)" [selected]
+                - generic [ref=f31e179]: Active parameter for this domain
+              - generic [ref=f31e180]:
+                - generic [ref=f31e181]: Risk Description
+                - textbox "Risk Description Full threat scenario" [ref=f31e182]
+                - generic [ref=f31e183]: Full threat scenario
+              - generic [ref=f31e184]:
+                - generic [ref=f31e185]: Risk Category
+                - combobox "Risk Category" [ref=f31e186]:
+                  - option "Cybersecurity" [selected]
+                  - option "Information Security"
+                  - option "Compliance/Legal"
+                  - option "Operational/BCP"
+                  - option "Third-Party Risk"
+                  - option "Human Risk"
+                  - option "Application/Mobile Security"
+                  - option "Cloud/Physical/AI"
+                  - option "Risk Management/GRC"
+              - generic [ref=f31e187]:
+                - generic [ref=f31e188]: Process
+                - textbox "Process" [ref=f31e189]
+              - generic [ref=f31e190]:
+                - generic [ref=f31e191]: Sub-Process
+                - textbox "Sub-Process" [ref=f31e192]
+              - generic [ref=f31e193]:
+                - generic [ref=f31e194]: Asset / System
+                - combobox "Asset / System" [ref=f31e195]:
+                  - option "— None —" [selected]
+                  - option "Core Banking System"
+                  - option "Mobile Banking App"
+                  - option "Customer Database"
+                  - option "Email Gateway"
+                  - option "Payment Hub"
+                  - option "Branch Network"
+                  - option "HR System"
+                  - option "AI Scoring Engine"
+              - generic [ref=f31e196]:
+                - generic [ref=f31e197]: Threat
+                - textbox "Threat" [ref=f31e198]
+              - generic [ref=f31e199]:
+                - generic [ref=f31e200]: Vulnerability
+                - textbox "Vulnerability" [ref=f31e201]
+              - generic [ref=f31e202]:
+                - generic [ref=f31e203]: Risk Owner
+                - textbox "Risk Owner Select existing user or type a new name to create" [ref=f31e205]:
+                  - /placeholder: Select or type owner name…
+                - generic [ref=f31e206]: Select existing user or type a new name to create
+              - generic [ref=f31e207]:
+                - generic [ref=f31e208]: Owner Team
+                - textbox "Owner Team" [ref=f31e209]
+              - generic [ref=f31e210]:
+                - generic [ref=f31e211]: Risk Source
+                - combobox "Risk Source" [ref=f31e212]:
+                  - option "— Select —" [selected]
+                  - option "Audit"
+                  - option "Incident"
+                  - option "Regulatory"
+                  - option "Risk Workshop"
+                  - option "Vendor Assessment"
+                  - option "Scan"
+              - generic [ref=f31e213]:
+                - generic [ref=f31e214]: Date Identified
+                - textbox "Date Identified" [ref=f31e215]: 2026-08-22
+          - generic [ref=f31e216]:
+            - paragraph [ref=f31e217]: 2. Domain Parameters (Read-Only)
+            - generic [ref=f31e218]:
+              - generic [ref=f31e219]: Impact Method
+              - generic [ref=f31e221]: Risk Score Method
+              - generic [ref=f31e223]: Thresholds
+              - generic [ref=f31e225]: Risk Appetite
+              - generic [ref=f31e227]: Parameter Version
+              - generic [ref=f31e229]: Residual Cap
+            - generic [ref=f31e231]:
+              - generic [ref=f31e232]: Impact Weights
+              - generic [ref=f31e233]:
+                - generic [ref=f31e234]: "Financial: 0.125"
+                - generic [ref=f31e235]: "Regulatory: 0.125"
+                - generic [ref=f31e236]: "Reputational: 0.125"
+                - generic [ref=f31e237]: "Safety: 0.125"
+                - generic [ref=f31e238]: "Operational: 0.125"
+                - generic [ref=f31e239]: "Confidentiality: 0.125"
+                - generic [ref=f31e240]: "Integrity: 0.125"
+                - generic [ref=f31e241]: "Availability: 0.125"
+          - generic [ref=f31e242]:
+            - paragraph [ref=f31e243]: 3. Risk Analysis
+            - generic [ref=f31e244]:
+              - generic [ref=f31e245]:
+                - generic [ref=f31e246]:
+                  - paragraph [ref=f31e247]: Likelihood (User Input)
+                  - generic [ref=f31e248]:
+                    - button "1 Rare" [ref=f31e249] [cursor=pointer]:
+                      - generic [ref=f31e250]: "1"
+                      - text: Rare
+                    - button "2 Unlikely" [ref=f31e251] [cursor=pointer]:
+                      - generic [ref=f31e252]: "2"
+                      - text: Unlikely
+                    - button "3 Possible" [ref=f31e253] [cursor=pointer]:
+                      - generic [ref=f31e254]: "3"
+                      - text: Possible
+                    - button "4 Likely" [ref=f31e255] [cursor=pointer]:
+                      - generic [ref=f31e256]: "4"
+                      - text: Likely
+                    - button "5 Almost Certain" [ref=f31e257] [cursor=pointer]:
+                      - generic [ref=f31e258]: "5"
+                      - text: Almost Certain
+                - generic [ref=f31e259]:
+                  - generic [ref=f31e260]:
+                    - paragraph [ref=f31e261]: Impact Criteria
+                    - generic [ref=f31e262]:
+                      - generic [ref=f31e263]: "Total: 1.000"
+                      - button "Reset defaults" [ref=f31e264] [cursor=pointer]
+                  - generic [ref=f31e265]:
+                    - generic [ref=f31e266]:
+                      - generic [ref=f31e267]: Financial
+                      - generic [ref=f31e268]:
+                        - generic [ref=f31e269]:
+                          - generic [ref=f31e270]: Weight
+                          - spinbutton [ref=f31e271]: "0.125"
+                        - generic [ref=f31e272]:
+                          - generic [ref=f31e273]: Rate (1-5)
+                          - combobox [ref=f31e274]:
+                            - option "1"
+                            - option "2"
+                            - option "3" [selected]
+                            - option "4"
+                            - option "5"
+                      - generic [ref=f31e275]:
+                        - text: Contribution
+                        - generic [ref=f31e276]: "0.375"
+                    - generic [ref=f31e277]:
+                      - generic [ref=f31e278]: Regulatory
+                      - generic [ref=f31e279]:
+                        - generic [ref=f31e280]:
+                          - generic [ref=f31e281]: Weight
+                          - spinbutton [ref=f31e282]: "0.125"
+                        - generic [ref=f31e283]:
+                          - generic [ref=f31e284]: Rate (1-5)
+                          - combobox [ref=f31e285]:
+                            - option "1"
+                            - option "2"
+                            - option "3" [selected]
+                            - option "4"
+                            - option "5"
+                      - generic [ref=f31e286]:
+                        - text: Contribution
+                        - generic [ref=f31e287]: "0.375"
+                    - generic [ref=f31e288]:
+                      - generic [ref=f31e289]: Reputational
+                      - generic [ref=f31e290]:
+                        - generic [ref=f31e291]:
+                          - generic [ref=f31e292]: Weight
+                          - spinbutton [ref=f31e293]: "0.125"
+                        - generic [ref=f31e294]:
+                          - generic [ref=f31e295]: Rate (1-5)
+                          - combobox [ref=f31e296]:
+                            - option "1"
+                            - option "2"
+                            - option "3" [selected]
+                            - option "4"
+                            - option "5"
+                      - generic [ref=f31e297]:
+                        - text: Contribution
+                        - generic [ref=f31e298]: "0.375"
+                    - generic [ref=f31e299]:
+                      - generic [ref=f31e300]: Safety
+                      - generic [ref=f31e301]:
+                        - generic [ref=f31e302]:
+                          - generic [ref=f31e303]: Weight
+                          - spinbutton [ref=f31e304]: "0.125"
+                        - generic [ref=f31e305]:
+                          - generic [ref=f31e306]: Rate (1-5)
+                          - combobox [ref=f31e307]:
+                            - option "1"
+                            - option "2"
+                            - option "3" [selected]
+                            - option "4"
+                            - option "5"
+                      - generic [ref=f31e308]:
+                        - text: Contribution
+                        - generic [ref=f31e309]: "0.375"
+                    - generic [ref=f31e310]:
+                      - generic [ref=f31e311]: Operational
+                      - generic [ref=f31e312]:
+                        - generic [ref=f31e313]:
+                          - generic [ref=f31e314]: Weight
+                          - spinbutton [ref=f31e315]: "0.125"
+                        - generic [ref=f31e316]:
+                          - generic [ref=f31e317]: Rate (1-5)
+                          - combobox [ref=f31e318]:
+                            - option "1"
+                            - option "2"
+                            - option "3" [selected]
+                            - option "4"
+                            - option "5"
+                      - generic [ref=f31e319]:
+                        - text: Contribution
+                        - generic [ref=f31e320]: "0.375"
+                    - generic [ref=f31e321]:
+                      - generic [ref=f31e322]: Confidentiality
+                      - generic [ref=f31e323]:
+                        - generic [ref=f31e324]:
+                          - generic [ref=f31e325]: Weight
+                          - spinbutton [ref=f31e326]: "0.125"
+                        - generic [ref=f31e327]:
+                          - generic [ref=f31e328]: Rate (1-5)
+                          - combobox [ref=f31e329]:
+                            - option "1"
+                            - option "2"
+                            - option "3" [selected]
+                            - option "4"
+                            - option "5"
+                      - generic [ref=f31e330]:
+                        - text: Contribution
+                        - generic [ref=f31e331]: "0.375"
+                    - generic [ref=f31e332]:
+                      - generic [ref=f31e333]: Integrity
+                      - generic [ref=f31e334]:
+                        - generic [ref=f31e335]:
+                          - generic [ref=f31e336]: Weight
+                          - spinbutton [ref=f31e337]: "0.125"
+                        - generic [ref=f31e338]:
+                          - generic [ref=f31e339]: Rate (1-5)
+                          - combobox [ref=f31e340]:
+                            - option "1"
+                            - option "2"
+                            - option "3" [selected]
+                            - option "4"
+                            - option "5"
+                      - generic [ref=f31e341]:
+                        - text: Contribution
+                        - generic [ref=f31e342]: "0.375"
+                    - generic [ref=f31e343]:
+                      - generic [ref=f31e344]: Availability
+                      - generic [ref=f31e345]:
+                        - generic [ref=f31e346]:
+                          - generic [ref=f31e347]: Weight
+                          - spinbutton [ref=f31e348]: "0.125"
+                        - generic [ref=f31e349]:
+                          - generic [ref=f31e350]: Rate (1-5)
+                          - combobox [ref=f31e351]:
+                            - option "1"
+                            - option "2"
+                            - option "3" [selected]
+                            - option "4"
+                            - option "5"
+                      - generic [ref=f31e352]:
+                        - text: Contribution
+                        - generic [ref=f31e353]: "0.375"
+              - generic [ref=f31e354]:
+                - generic [ref=f31e355]:
+                  - paragraph [ref=f31e356]: Inherent Risk Score
+                  - generic [ref=f31e357]:
+                    - generic [ref=f31e358]: "9"
+                    - generic [ref=f31e359]: Medium
+                  - paragraph [ref=f31e360]: L 3 × I 3
+                - generic [ref=f31e361]:
+                  - paragraph [ref=f31e362]: Residual Score (Current)
+                  - generic [ref=f31e363]:
+                    - generic [ref=f31e364]: "7"
+                    - generic [ref=f31e365]: Medium
+                  - paragraph [ref=f31e366]: After controls · Combined CE 0%
+                - generic [ref=f31e367]:
+                  - paragraph [ref=f31e368]: Escalation Path
+                  - paragraph [ref=f31e369]: Risk Owner + CISO
+          - generic [ref=f31e370]:
+            - paragraph [ref=f31e371]: 4. Current Controls & Residual (As-Is)
+            - generic [ref=f31e372]:
+              - generic [ref=f31e373]:
+                - generic [ref=f31e374]: Linked controls (Risk ↔ Control mapping)
+                - button "Close picker" [active] [ref=f31e375] [cursor=pointer]
+              - generic [ref=f31e378]:
+                - textbox "Search by control ID, name, domain, framework…" [ref=f31e380]
+                - generic [ref=f31e381]:
+                  - button "All domains" [ref=f31e382] [cursor=pointer]
+                  - button "Organizational" [ref=f31e383] [cursor=pointer]
+                  - button "People" [ref=f31e387] [cursor=pointer]
+                  - button "Physical" [ref=f31e393] [cursor=pointer]
+                  - button "Technological" [ref=f31e396] [cursor=pointer]
+                - generic [ref=f31e400]:
+                  - generic [ref=f31e401] [cursor=pointer]:
+                    - checkbox "ORG-01 Fully Implemented Organizational 91% Information Security Policy ISO 27001:2022 (A.5.1) · CBE Cybersecurity Requirements (Section 3.1)" [checked] [ref=f31e402]
+                    - generic [ref=f31e403]:
+                      - generic [ref=f31e404]:
+                        - generic [ref=f31e405]: ORG-01
+                        - generic [ref=f31e406]: Fully Implemented
+                        - generic [ref=f31e407]: Organizational
+                        - generic [ref=f31e411]: 91%
+                      - generic [ref=f31e412]: Information Security Policy
+                      - text: ISO 27001:2022 (A.5.1) · CBE Cybersecurity Requirements (Section 3.1)
+                  - generic [ref=f31e413] [cursor=pointer]:
+                    - checkbox "ORG-02 Fully Implemented Organizational 95% Access Control Policy ISO 27001:2022 (A.5.15) · PCI DSS 4.0 (Req 7)" [ref=f31e414]
+                    - generic [ref=f31e415]:
+                      - generic [ref=f31e416]:
+                        - generic [ref=f31e417]: ORG-02
+                        - generic [ref=f31e418]: Fully Implemented
+                        - generic [ref=f31e419]: Organizational
+                        - generic [ref=f31e423]: 95%
+                      - generic [ref=f31e424]: Access Control Policy
+                      - text: ISO 27001:2022 (A.5.15) · PCI DSS 4.0 (Req 7)
+                  - generic [ref=f31e425] [cursor=pointer]:
+                    - checkbox "ORG-03 Fully Implemented Organizational 86% Risk Assessment Process ISO 27001:2022 (A.5.1) · NIST CSF 2.0 (ID.RA)" [ref=f31e426]
+                    - generic [ref=f31e427]:
+                      - generic [ref=f31e428]:
+                        - generic [ref=f31e429]: ORG-03
+                        - generic [ref=f31e430]: Fully Implemented
+                        - generic [ref=f31e431]: Organizational
+                        - generic [ref=f31e435]: 86%
+                      - generic [ref=f31e436]: Risk Assessment Process
+                      - text: ISO 27001:2022 (A.5.1) · NIST CSF 2.0 (ID.RA)
+                  - generic [ref=f31e437] [cursor=pointer]:
+                    - checkbox "ORG-04 Partially Implemented Organizational 69% Supplier Security Assessment ISO 27001:2022 (A.5.19) · CBE Cybersecurity Requirements (Section 4.2)" [ref=f31e438]
+                    - generic [ref=f31e439]:
+                      - generic [ref=f31e440]:
+                        - generic [ref=f31e441]: ORG-04
+                        - generic [ref=f31e442]: Partially Implemented
+                        - generic [ref=f31e443]: Organizational
+                        - generic [ref=f31e447]: 69%
+                      - generic [ref=f31e448]: Supplier Security Assessment
+                      - text: ISO 27001:2022 (A.5.19) · CBE Cybersecurity Requirements (Section 4.2)
+                  - generic [ref=f31e449] [cursor=pointer]:
+                    - checkbox "ORG-05 Largely Implemented Organizational 81% Data Classification Policy ISO 27001:2022 (A.5.12) · PCI DSS 4.0 (Req 3)" [ref=f31e450]
+                    - generic [ref=f31e451]:
+                      - generic [ref=f31e452]:
+                        - generic [ref=f31e453]: ORG-05
+                        - generic [ref=f31e454]: Largely Implemented
+                        - generic [ref=f31e455]: Organizational
+                        - generic [ref=f31e459]: 81%
+                      - generic [ref=f31e460]: Data Classification Policy
+                      - text: ISO 27001:2022 (A.5.12) · PCI DSS 4.0 (Req 3)
+                  - generic [ref=f31e461] [cursor=pointer]:
+                    - checkbox "ORG-06 Largely Implemented Organizational 76% Business Continuity Policy ISO 27001:2022 (A.5.2) · CBE Cybersecurity Requirements (Section 5.1)" [ref=f31e462]
+                    - generic [ref=f31e463]:
+                      - generic [ref=f31e464]:
+                        - generic [ref=f31e465]: ORG-06
+                        - generic [ref=f31e466]: Largely Implemented
+                        - generic [ref=f31e467]: Organizational
+                        - generic [ref=f31e471]: 76%
+                      - generic [ref=f31e472]: Business Continuity Policy
+                      - text: ISO 27001:2022 (A.5.2) · CBE Cybersecurity Requirements (Section 5.1)
+                  - generic [ref=f31e473] [cursor=pointer]:
+                    - checkbox "ORG-07 Fully Implemented Organizational 91% Incident Response Policy ISO 27001:2022 (A.5.2) · CBE Cybersecurity Requirements (Section 5.2)" [ref=f31e474]
+                    - generic [ref=f31e475]:
+                      - generic [ref=f31e476]:
+                        - generic [ref=f31e477]: ORG-07
+                        - generic [ref=f31e478]: Fully Implemented
+                        - generic [ref=f31e479]: Organizational
+                        - generic [ref=f31e483]: 91%
+                      - generic [ref=f31e484]: Incident Response Policy
+                      - text: ISO 27001:2022 (A.5.2) · CBE Cybersecurity Requirements (Section 5.2)
+                  - generic [ref=f31e485] [cursor=pointer]:
+                    - checkbox "PEO-01 Fully Implemented People 92% Security Awareness Training ISO 27001:2022 (A.6.3) · CBE Cybersecurity Requirements (Section 6.1)" [ref=f31e486]
+                    - generic [ref=f31e487]:
+                      - generic [ref=f31e488]:
+                        - generic [ref=f31e489]: PEO-01
+                        - generic [ref=f31e490]: Fully Implemented
+                        - generic [ref=f31e491]: People
+                        - generic [ref=f31e497]: 92%
+                      - generic [ref=f31e498]: Security Awareness Training
+                      - text: ISO 27001:2022 (A.6.3) · CBE Cybersecurity Requirements (Section 6.1)
+                  - generic [ref=f31e499] [cursor=pointer]:
+                    - checkbox "PEO-02 Largely Implemented People 86% Phishing Simulation ISO 27001:2022 (A.6.3) · NIST CSF 2.0 (PR.AT)" [ref=f31e500]
+                    - generic [ref=f31e501]:
+                      - generic [ref=f31e502]:
+                        - generic [ref=f31e503]: PEO-02
+                        - generic [ref=f31e504]: Largely Implemented
+                        - generic [ref=f31e505]: People
+                        - generic [ref=f31e511]: 86%
+                      - generic [ref=f31e512]: Phishing Simulation
+                      - text: ISO 27001:2022 (A.6.3) · NIST CSF 2.0 (PR.AT)
+                  - generic [ref=f31e513] [cursor=pointer]:
+                    - checkbox "PEO-03 Fully Implemented People 97% Background Verification ISO 27001:2022 (A.6.1)" [ref=f31e514]
+                    - generic [ref=f31e515]:
+                      - generic [ref=f31e516]:
+                        - generic [ref=f31e517]: PEO-03
+                        - generic [ref=f31e518]: Fully Implemented
+                        - generic [ref=f31e519]: People
+                        - generic [ref=f31e525]: 97%
+                      - generic [ref=f31e526]: Background Verification
+                      - text: ISO 27001:2022 (A.6.1)
+                  - generic [ref=f31e527] [cursor=pointer]:
+                    - checkbox "PEO-04 Fully Implemented People 92% Joiner-Mover-Leaver Process ISO 27001:2022 (A.6.2) · Internal Bank Policy (HR-001)" [ref=f31e528]
+                    - generic [ref=f31e529]:
+                      - generic [ref=f31e530]:
+                        - generic [ref=f31e531]: PEO-04
+                        - generic [ref=f31e532]: Fully Implemented
+                        - generic [ref=f31e533]: People
+                        - generic [ref=f31e539]: 92%
+                      - generic [ref=f31e540]: Joiner-Mover-Leaver Process
+                      - text: ISO 27001:2022 (A.6.2) · Internal Bank Policy (HR-001)
+                  - generic [ref=f31e541] [cursor=pointer]:
+                    - checkbox "PEO-05 Partially Implemented People 72% Privileged User Training ISO 27001:2022 (A.6.3)" [ref=f31e542]
+                    - generic [ref=f31e543]:
+                      - generic [ref=f31e544]:
+                        - generic [ref=f31e545]: PEO-05
+                        - generic [ref=f31e546]: Partially Implemented
+                        - generic [ref=f31e547]: People
+                        - generic [ref=f31e553]: 72%
+                      - generic [ref=f31e554]: Privileged User Training
+                      - text: ISO 27001:2022 (A.6.3)
+                  - generic [ref=f31e555] [cursor=pointer]:
+                    - checkbox "PHY-01 Fully Implemented Physical 97% Data Center Access Control ISO 27001:2022 (A.7.1) · CBE Cybersecurity Requirements (Section 7.1)" [ref=f31e556]
+                    - generic [ref=f31e557]:
+                      - generic [ref=f31e558]:
+                        - generic [ref=f31e559]: PHY-01
+                        - generic [ref=f31e560]: Fully Implemented
+                        - generic [ref=f31e561]: Physical
+                        - generic [ref=f31e564]: 97%
+                      - generic [ref=f31e565]: Data Center Access Control
+                      - text: ISO 27001:2022 (A.7.1) · CBE Cybersecurity Requirements (Section 7.1)
+                  - generic [ref=f31e566] [cursor=pointer]:
+                    - checkbox "PHY-02 Fully Implemented Physical 93% CCTV Surveillance ISO 27001:2022 (A.7.4)" [ref=f31e567]
+                    - generic [ref=f31e568]:
+                      - generic [ref=f31e569]:
+                        - generic [ref=f31e570]: PHY-02
+                        - generic [ref=f31e571]: Fully Implemented
+                        - generic [ref=f31e572]: Physical
+                        - generic [ref=f31e575]: 93%
+                      - generic [ref=f31e576]: CCTV Surveillance
+                      - text: ISO 27001:2022 (A.7.4)
+                  - generic [ref=f31e577] [cursor=pointer]:
+                    - checkbox "PHY-03 Fully Implemented Physical 91% Visitor Management ISO 27001:2022 (A.7.2)" [ref=f31e578]
+                    - generic [ref=f31e579]:
+                      - generic [ref=f31e580]:
+                        - generic [ref=f31e581]: PHY-03
+                        - generic [ref=f31e582]: Fully Implemented
+                        - generic [ref=f31e583]: Physical
+                        - generic [ref=f31e586]: 91%
+                      - generic [ref=f31e587]: Visitor Management
+                      - text: ISO 27001:2022 (A.7.2)
+                  - generic [ref=f31e588] [cursor=pointer]:
+                    - checkbox "PHY-04 Fully Implemented Physical 97% Fire Detection & Suppression ISO 27001:2022 (A.7.1)" [ref=f31e589]
+                    - generic [ref=f31e590]:
+                      - generic [ref=f31e591]:
+                        - generic [ref=f31e592]: PHY-04
+                        - generic [ref=f31e593]: Fully Implemented
+                        - generic [ref=f31e594]: Physical
+                        - generic [ref=f31e597]: 97%
+                      - generic [ref=f31e598]: Fire Detection & Suppression
+                      - text: ISO 27001:2022 (A.7.1)
+                  - generic [ref=f31e599] [cursor=pointer]:
+                    - checkbox "PHY-05 Fully Implemented Physical 94% UPS & Generator ISO 27001:2022 (A.7.1)" [ref=f31e600]
+                    - generic [ref=f31e601]:
+                      - generic [ref=f31e602]:
+                        - generic [ref=f31e603]: PHY-05
+                        - generic [ref=f31e604]: Fully Implemented
+                        - generic [ref=f31e605]: Physical
+                        - generic [ref=f31e608]: 94%
+                      - generic [ref=f31e609]: UPS & Generator
+                      - text: ISO 27001:2022 (A.7.1)
+                  - generic [ref=f31e610] [cursor=pointer]:
+                    - checkbox "PHY-06 Largely Implemented Physical 86% Environmental Monitoring ISO 27001:2022 (A.7.1)" [ref=f31e611]
+                    - generic [ref=f31e612]:
+                      - generic [ref=f31e613]:
+                        - generic [ref=f31e614]: PHY-06
+                        - generic [ref=f31e615]: Largely Implemented
+                        - generic [ref=f31e616]: Physical
+                        - generic [ref=f31e619]: 86%
+                      - generic [ref=f31e620]: Environmental Monitoring
+                      - text: ISO 27001:2022 (A.7.1)
+                  - generic [ref=f31e621] [cursor=pointer]:
+                    - checkbox "TECH-01 Fully Implemented Technological 90% Multi-Factor Authentication (MFA) ISO 27001:2022 (A.8.5) · PCI DSS 4.0 (Req 8) · CBE Cybersecurity Requirements (Section 8.1)" [ref=f31e622]
+                    - generic [ref=f31e623]:
+                      - generic [ref=f31e624]:
+                        - generic [ref=f31e625]: TECH-01
+                        - generic [ref=f31e626]: Fully Implemented
+                        - generic [ref=f31e627]: Technological
+                        - generic [ref=f31e631]: 90%
+                      - generic [ref=f31e632]: Multi-Factor Authentication (MFA)
+                      - text: ISO 27001:2022 (A.8.5) · PCI DSS 4.0 (Req 8) · CBE Cybersecurity Requirements (Section 8.1)
+                  - generic [ref=f31e633] [cursor=pointer]:
+                    - checkbox "TECH-02 Largely Implemented Technological 84% Privileged Access Management (PAM) ISO 27001:2022 (A.8.2) · CBE Cybersecurity Requirements (Section 8.2)" [ref=f31e634]
+                    - generic [ref=f31e635]:
+                      - generic [ref=f31e636]:
+                        - generic [ref=f31e637]: TECH-02
+                        - generic [ref=f31e638]: Largely Implemented
+                        - generic [ref=f31e639]: Technological
+                        - generic [ref=f31e643]: 84%
+                      - generic [ref=f31e644]: Privileged Access Management (PAM)
+                      - text: ISO 27001:2022 (A.8.2) · CBE Cybersecurity Requirements (Section 8.2)
+                  - generic [ref=f31e645] [cursor=pointer]:
+                    - checkbox "TECH-03 Fully Implemented Technological 92% Role-Based Access Control (RBAC) ISO 27001:2022 (A.8.3) · PCI DSS 4.0 (Req 7)" [ref=f31e646]
+                    - generic [ref=f31e647]:
+                      - generic [ref=f31e648]:
+                        - generic [ref=f31e649]: TECH-03
+                        - generic [ref=f31e650]: Fully Implemented
+                        - generic [ref=f31e651]: Technological
+                        - generic [ref=f31e655]: 92%
+                      - generic [ref=f31e656]: Role-Based Access Control (RBAC)
+                      - text: ISO 27001:2022 (A.8.3) · PCI DSS 4.0 (Req 7)
+                  - generic [ref=f31e657] [cursor=pointer]:
+                    - checkbox "TECH-04 Largely Implemented Technological 81% Vulnerability Management ISO 27001:2022 (A.8.8) · PCI DSS 4.0 (Req 11)" [ref=f31e658]
+                    - generic [ref=f31e659]:
+                      - generic [ref=f31e660]:
+                        - generic [ref=f31e661]: TECH-04
+                        - generic [ref=f31e662]: Largely Implemented
+                        - generic [ref=f31e663]: Technological
+                        - generic [ref=f31e667]: 81%
+                      - generic [ref=f31e668]: Vulnerability Management
+                      - text: ISO 27001:2022 (A.8.8) · PCI DSS 4.0 (Req 11)
+                  - generic [ref=f31e669] [cursor=pointer]:
+                    - checkbox "TECH-05 Fully Implemented Technological 95% Firewall ISO 27001:2022 (A.8.2) · NIST CSF 2.0 (PR.AC)" [ref=f31e670]
+                    - generic [ref=f31e671]:
+                      - generic [ref=f31e672]:
+                        - generic [ref=f31e673]: TECH-05
+                        - generic [ref=f31e674]: Fully Implemented
+                        - generic [ref=f31e675]: Technological
+                        - generic [ref=f31e679]: 95%
+                      - generic [ref=f31e680]: Firewall
+                      - text: ISO 27001:2022 (A.8.2) · NIST CSF 2.0 (PR.AC)
+                  - generic [ref=f31e681] [cursor=pointer]:
+                    - checkbox "TECH-06 Fully Implemented Technological 88% Intrusion Detection System (IDS) ISO 27001:2022 (A.8.1) · NIST CSF 2.0 (DE.CM)" [ref=f31e682]
+                    - generic [ref=f31e683]:
+                      - generic [ref=f31e684]:
+                        - generic [ref=f31e685]: TECH-06
+                        - generic [ref=f31e686]: Fully Implemented
+                        - generic [ref=f31e687]: Technological
+                        - generic [ref=f31e691]: 88%
+                      - generic [ref=f31e692]: Intrusion Detection System (IDS)
+                      - text: ISO 27001:2022 (A.8.1) · NIST CSF 2.0 (DE.CM)
+                  - generic [ref=f31e693] [cursor=pointer]:
+                    - checkbox "TECH-07 Largely Implemented Technological 83% Endpoint Detection & Response (EDR) ISO 27001:2022 (A.8.1) · NIST CSF 2.0 (DE.CM)" [ref=f31e694]
+                    - generic [ref=f31e695]:
+                      - generic [ref=f31e696]:
+                        - generic [ref=f31e697]: TECH-07
+                        - generic [ref=f31e698]: Largely Implemented
+                        - generic [ref=f31e699]: Technological
+                        - generic [ref=f31e703]: 83%
+                      - generic [ref=f31e704]: Endpoint Detection & Response (EDR)
+                      - text: ISO 27001:2022 (A.8.1) · NIST CSF 2.0 (DE.CM)
+                  - generic [ref=f31e705] [cursor=pointer]:
+                    - checkbox "TECH-08 Fully Implemented Technological 93% Data Encryption at Rest ISO 27001:2022 (A.8.24) · PCI DSS 4.0 (Req 3)" [ref=f31e706]
+                    - generic [ref=f31e707]:
+                      - generic [ref=f31e708]:
+                        - generic [ref=f31e709]: TECH-08
+                        - generic [ref=f31e710]: Fully Implemented
+                        - generic [ref=f31e711]: Technological
+                        - generic [ref=f31e715]: 93%
+                      - generic [ref=f31e716]: Data Encryption at Rest
+                      - text: ISO 27001:2022 (A.8.24) · PCI DSS 4.0 (Req 3)
+                  - generic [ref=f31e717] [cursor=pointer]:
+                    - checkbox "TECH-09 Fully Implemented Technological 97% Data Encryption in Transit ISO 27001:2022 (A.8.24) · PCI DSS 4.0 (Req 4)" [ref=f31e718]
+                    - generic [ref=f31e719]:
+                      - generic [ref=f31e720]:
+                        - generic [ref=f31e721]: TECH-09
+                        - generic [ref=f31e722]: Fully Implemented
+                        - generic [ref=f31e723]: Technological
+                        - generic [ref=f31e727]: 97%
+                      - generic [ref=f31e728]: Data Encryption in Transit
+                      - text: ISO 27001:2022 (A.8.24) · PCI DSS 4.0 (Req 4)
+                  - generic [ref=f31e729] [cursor=pointer]:
+                    - checkbox "TECH-10 Fully Implemented Technological 87% Security Information & Event Management (SIEM) ISO 27001:2022 (A.8.15) · NIST CSF 2.0 (DE.AE) · CBE Cybersecurity Requirements (Section 8.3)" [ref=f31e730]
+                    - generic [ref=f31e731]:
+                      - generic [ref=f31e732]:
+                        - generic [ref=f31e733]: TECH-10
+                        - generic [ref=f31e734]: Fully Implemented
+                        - generic [ref=f31e735]: Technological
+                        - generic [ref=f31e739]: 87%
+                      - generic [ref=f31e740]: Security Information & Event Management (SIEM)
+                      - text: ISO 27001:2022 (A.8.15) · NIST CSF 2.0 (DE.AE) · CBE Cybersecurity Requirements (Section 8.3)
+                  - generic [ref=f31e741] [cursor=pointer]:
+                    - checkbox "TECH-11 Fully Implemented Technological 92% Backup & Recovery ISO 27001:2022 (A.8.14) · CBE Cybersecurity Requirements (Section 8.4)" [ref=f31e742]
+                    - generic [ref=f31e743]:
+                      - generic [ref=f31e744]:
+                        - generic [ref=f31e745]: TECH-11
+                        - generic [ref=f31e746]: Fully Implemented
+                        - generic [ref=f31e747]: Technological
+                        - generic [ref=f31e751]: 92%
+                      - generic [ref=f31e752]: Backup & Recovery
+                      - text: ISO 27001:2022 (A.8.14) · CBE Cybersecurity Requirements (Section 8.4)
+                  - generic [ref=f31e753] [cursor=pointer]:
+                    - checkbox "TECH-12 Largely Implemented Technological 81% Patch Management ISO 27001:2022 (A.8.8) · PCI DSS 4.0 (Req 6)" [ref=f31e754]
+                    - generic [ref=f31e755]:
+                      - generic [ref=f31e756]:
+                        - generic [ref=f31e757]: TECH-12
+                        - generic [ref=f31e758]: Largely Implemented
+                        - generic [ref=f31e759]: Technological
+                        - generic [ref=f31e763]: 81%
+                      - generic [ref=f31e764]: Patch Management
+                      - text: ISO 27001:2022 (A.8.8) · PCI DSS 4.0 (Req 6)
+                  - generic [ref=f31e765] [cursor=pointer]:
+                    - checkbox "TECH-13 Fully Implemented Technological 96% Multi-Factor Authentication (MFA) ISO 27001:2022 (A.8.5) · PCI DSS 4.0 (Req 8)" [ref=f31e766]
+                    - generic [ref=f31e767]:
+                      - generic [ref=f31e768]:
+                        - generic [ref=f31e769]: TECH-13
+                        - generic [ref=f31e770]: Fully Implemented
+                        - generic [ref=f31e771]: Technological
+                        - generic [ref=f31e775]: 96%
+                      - generic [ref=f31e776]: Multi-Factor Authentication (MFA)
+                      - text: ISO 27001:2022 (A.8.5) · PCI DSS 4.0 (Req 8)
+              - generic [ref=f31e778]:
+                - generic [ref=f31e779]:
+                  - generic [ref=f31e780]:
+                    - generic [ref=f31e781]:
+                      - generic [ref=f31e782]: ORG-01
+                      - generic [ref=f31e783]: Not Assessed
+                      - generic [ref=f31e784]: Lib 91%
+                      - generic [ref=f31e785]: Organizational
+                    - generic [ref=f31e789]: Information Security Policy
+                    - text: ISO 27001:2022 (A.5.1) · CBE Cybersecurity Requirements (Section 3.1)
+                  - combobox "Link type for ORG-01" [ref=f31e790]:
+                    - option "existing" [selected]
+                    - option "proposed"
+                    - option "mitigating"
+                  - combobox "Effectiveness of ORG-01" [ref=f31e791]:
+                    - option "Not Assessed" [selected]
+                    - option "Effective"
+                    - option "Partially Effective"
+                    - option "Ineffective"
+                  - button "Remove ORG-01" [ref=f31e792] [cursor=pointer]
+                - generic [ref=f31e796]:
+                  - generic [ref=f31e797]:
+                    - generic [ref=f31e798]: Weight
+                    - spinbutton "0.33" [ref=f31e799]
+                  - generic [ref=f31e800]:
+                    - generic [ref=f31e801]: Relevance
+                    - spinbutton "0.95" [ref=f31e802]
+                  - generic [ref=f31e803]:
+                    - generic [ref=f31e804]: Role
+                    - combobox [ref=f31e805]:
+                      - option "Both" [selected]
+                      - option "Likelihood"
+                      - option "Impact"
+                - button "Add tested effectiveness" [ref=f31e807] [cursor=pointer]
+            - generic [ref=f31e812]:
+              - generic [ref=f31e813]:
+                - text: Combined CE
+                - generic [ref=f31e814]: 0%
+              - generic [ref=f31e815]:
+                - text: Residual Current
+                - generic [ref=f31e816]: "7"
+                - generic [ref=f31e817]: Medium
+              - generic [ref=f31e818]:
+                - text: Appetite
+                - generic [ref=f31e819]: ≤ 8
+                - generic [ref=f31e820]: "Tolerance: ≤ 12"
+              - generic [ref=f31e821]:
+                - text: Status
+                - generic [ref=f31e822]: Within Appetite
+          - generic [ref=f31e823]:
+            - paragraph [ref=f31e824]: 4.5 Calculation Trace (Audit Trail)
+            - generic [ref=f31e825]:
+              - generic [ref=f31e826]:
+                - text: Likelihood
+                - generic [ref=f31e827]: "3"
+              - generic [ref=f31e828]:
+                - text: Impact
+                - generic [ref=f31e829]: "3"
+                - text: Σ(value × weight) = 3.000 → rounded to 3
+              - generic [ref=f31e830]:
+                - text: Inherent Score
+                - generic [ref=f31e831]: "9"
+                - text: 3 × 3 = 9
+              - generic [ref=f31e832]:
+                - text: Combined CE
+                - generic [ref=f31e833]: 23.8%
+              - generic [ref=f31e834]:
+                - text: Residual Score
+                - generic [ref=f31e835]: "7"
+                - text: "23.8"
+              - generic [ref=f31e836]:
+                - text: Max Risk Reduction
+                - generic [ref=f31e837]: 75%
+                - generic [ref=f31e838]: "Min Residual: 1"
+            - generic [ref=f31e839]:
+              - text: Control Effectiveness Details
+              - generic [ref=f31e840]: "Information Security Policy: 25%"
+          - generic [ref=f31e842]:
+            - paragraph [ref=f31e843]: 5. Treatment Plan & Target Residual
+            - generic [ref=f31e844]:
+              - generic [ref=f31e845]:
+                - generic [ref=f31e846]: Treatment Decision
+                - combobox "Treatment Decision Required — how will this risk be handled?" [ref=f31e847]:
+                  - option "Modify" [selected]
+                  - option "Retain"
+                  - option "Avoid"
+                  - option "Share"
+                - generic [ref=f31e848]: Required — how will this risk be handled?
+              - generic [ref=f31e849]:
+                - generic [ref=f31e850]: Treatment Owner
+                - textbox "Treatment Owner Select existing user or type a new name to create" [ref=f31e852]:
+                  - /placeholder: Select or type owner name…
+                - generic [ref=f31e853]: Select existing user or type a new name to create
+              - generic [ref=f31e854]:
+                - generic [ref=f31e855]: Treatment Actions
+                - textbox "Treatment Actions Describe planned actions" [ref=f31e856]
+                - generic [ref=f31e857]: Describe planned actions
+              - generic [ref=f31e858]:
+                - generic [ref=f31e859]: Estimated Budget
+                - spinbutton "Estimated Budget" [ref=f31e860]
+              - generic [ref=f31e861]:
+                - generic [ref=f31e862]: Target Date
+                - textbox "Target Date" [ref=f31e863]
+              - generic [ref=f31e864]:
+                - generic [ref=f31e865]: Review Frequency
+                - combobox "Review Frequency" [ref=f31e866]:
+                  - option "Monthly"
+                  - option "Quarterly" [selected]
+                  - option "Annually"
+            - generic [ref=f31e867]:
+              - generic [ref=f31e868]:
+                - text: Residual Target
+                - generic [ref=f31e869]: "9"
+              - generic [ref=f31e870]:
+                - text: RAG Status
+                - generic [ref=f31e871]: Green
+              - generic [ref=f31e872]:
+                - text: Target CE
+                - generic [ref=f31e873]: 0%
+          - generic [ref=f31e874]:
+            - paragraph [ref=f31e875]: 6. Approval & Governance
+            - generic [ref=f31e876]:
+              - generic [ref=f31e877]:
+                - generic [ref=f31e878]: Acceptance Justification
+                - textbox "Acceptance Justification Optional" [ref=f31e879]
+                - generic [ref=f31e880]: Optional
+              - generic [ref=f31e881]:
+                - generic [ref=f31e882]: Next Review Date
+                - textbox "Next Review Date ISO 27005 requires periodic review" [ref=f31e883]
+                - generic [ref=f31e884]: ISO 27005 requires periodic review
+              - generic [ref=f31e885]:
+                - generic [ref=f31e886]: Risk Owner Sign-Off
+                - combobox "Risk Owner Sign-Off Formal acceptance of the risk" [ref=f31e887]:
+                  - option "Select sign-off…" [selected]
+                  - option "System Administrator"
+                  - option "Ana Lyte"
+                  - option "Audrey Tor"
+                  - option "Morgan Lee"
+                  - option "Owen Fischer"
+                - generic [ref=f31e888]: Formal acceptance of the risk
+          - generic [ref=f31e889]:
+            - button "Reset" [ref=f31e890] [cursor=pointer]
+            - button "Submit risk" [ref=f31e891] [cursor=pointer]

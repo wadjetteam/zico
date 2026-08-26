@@ -1,0 +1,302 @@
+- generic [ref=f9e3]:
+  - banner [ref=f9e4]:
+    - button "Toggle navigation" [ref=f9e5] [cursor=pointer]
+    - img "WADJET" [ref=f9e10]
+    - textbox "Search modules" [ref=f9e12]:
+      - /placeholder: Search modules…
+    - generic [ref=f9e13]:
+      - button "Help" [ref=f9e14] [cursor=pointer]
+      - button "Settings" [ref=f9e18] [cursor=pointer]
+      - button "S admin" [ref=f9e23] [cursor=pointer]:
+        - generic [ref=f9e24]: S
+        - generic [ref=f9e25]: admin
+  - main [ref=f9e27]:
+    - generic [ref=f9e28]:
+      - generic [ref=f9e30]:
+        - heading "Submit New Risk" [level=1] [ref=f9e31]
+        - paragraph [ref=f9e32]: Record a new risk with full assessment, control mapping, treatment plan, and governance approval.
+      - generic [ref=f9e33]:
+        - generic [ref=f9e34]:
+          - paragraph [ref=f9e35]: 1. Risk Identification
+          - generic [ref=f9e36]:
+            - generic [ref=f9e37]:
+              - generic [ref=f9e38]: Risk Title
+              - textbox "Risk Title Short descriptive title" [ref=f9e39]
+              - generic [ref=f9e40]: Short descriptive title
+            - generic [ref=f9e41]:
+              - generic [ref=f9e42]: Domain / Business Unit
+              - combobox "Domain / Business Unit Determines scoring rules" [ref=f9e43]
+              - generic [ref=f9e44]: Determines scoring rules
+            - generic [ref=f9e45]:
+              - generic [ref=f9e46]: Parameter Version
+              - combobox "Parameter Version Active parameter for this domain" [ref=f9e47]
+              - generic [ref=f9e48]: Active parameter for this domain
+            - generic [ref=f9e49]:
+              - generic [ref=f9e50]: Risk Description
+              - textbox "Risk Description Full threat scenario" [ref=f9e51]
+              - generic [ref=f9e52]: Full threat scenario
+            - generic [ref=f9e53]:
+              - generic [ref=f9e54]: Risk Category
+              - combobox "Risk Category" [ref=f9e55]:
+                - option "Cybersecurity" [selected]
+                - option "Information Security"
+                - option "Compliance/Legal"
+                - option "Operational/BCP"
+                - option "Third-Party Risk"
+                - option "Human Risk"
+                - option "Application/Mobile Security"
+                - option "Cloud/Physical/AI"
+                - option "Risk Management/GRC"
+            - generic [ref=f9e56]:
+              - generic [ref=f9e57]: Process
+              - textbox "Process" [ref=f9e58]
+            - generic [ref=f9e59]:
+              - generic [ref=f9e60]: Sub-Process
+              - textbox "Sub-Process" [ref=f9e61]
+            - generic [ref=f9e62]:
+              - generic [ref=f9e63]: Asset / System
+              - combobox "Asset / System" [ref=f9e64]:
+                - option "— None —" [selected]
+            - generic [ref=f9e65]:
+              - generic [ref=f9e66]: Threat
+              - textbox "Threat" [ref=f9e67]
+            - generic [ref=f9e68]:
+              - generic [ref=f9e69]: Vulnerability
+              - textbox "Vulnerability" [ref=f9e70]
+            - generic [ref=f9e71]:
+              - generic [ref=f9e72]: Risk Owner
+              - textbox "Risk Owner Select existing user or type a new name to create" [ref=f9e74]:
+                - /placeholder: Select or type owner name…
+              - generic [ref=f9e75]: Select existing user or type a new name to create
+            - generic [ref=f9e76]:
+              - generic [ref=f9e77]: Owner Team
+              - textbox "Owner Team" [ref=f9e78]
+            - generic [ref=f9e79]:
+              - generic [ref=f9e80]: Risk Source
+              - combobox "Risk Source" [ref=f9e81]:
+                - option "— Select —" [selected]
+                - option "Audit"
+                - option "Incident"
+                - option "Regulatory"
+                - option "Risk Workshop"
+                - option "Vendor Assessment"
+                - option "Scan"
+            - generic [ref=f9e82]:
+              - generic [ref=f9e83]: Date Identified
+              - textbox "Date Identified" [ref=f9e84]: 2026-08-22
+        - generic [ref=f9e85]:
+          - paragraph [ref=f9e86]: 3. Risk Analysis
+          - generic [ref=f9e87]:
+            - generic [ref=f9e88]:
+              - generic [ref=f9e89]:
+                - paragraph [ref=f9e90]: Likelihood (User Input)
+                - generic [ref=f9e91]:
+                  - button "1 Rare" [ref=f9e92] [cursor=pointer]:
+                    - generic [ref=f9e93]: "1"
+                    - text: Rare
+                  - button "2 Unlikely" [ref=f9e94] [cursor=pointer]:
+                    - generic [ref=f9e95]: "2"
+                    - text: Unlikely
+                  - button "3 Possible" [ref=f9e96] [cursor=pointer]:
+                    - generic [ref=f9e97]: "3"
+                    - text: Possible
+                  - button "4 Likely" [ref=f9e98] [cursor=pointer]:
+                    - generic [ref=f9e99]: "4"
+                    - text: Likely
+                  - button "5 Almost Certain" [ref=f9e100] [cursor=pointer]:
+                    - generic [ref=f9e101]: "5"
+                    - text: Almost Certain
+              - generic [ref=f9e102]:
+                - generic [ref=f9e103]:
+                  - paragraph [ref=f9e104]: Impact Criteria
+                  - generic [ref=f9e105]:
+                    - generic [ref=f9e106]: "Total: 0.000"
+                    - button "Reset defaults" [ref=f9e107] [cursor=pointer]
+                - generic [ref=f9e108]:
+                  - generic [ref=f9e109]:
+                    - generic [ref=f9e110]:
+                      - generic [ref=f9e111]:
+                        - generic [ref=f9e112]: Weight
+                        - spinbutton [ref=f9e113]
+                      - generic [ref=f9e114]:
+                        - generic [ref=f9e115]: Rate (1-5)
+                        - combobox [ref=f9e116]:
+                          - option "1" [selected]
+                          - option "2"
+                          - option "3"
+                          - option "4"
+                          - option "5"
+                    - generic [ref=f9e117]:
+                      - text: Contribution
+                      - generic [ref=f9e118]: NaN
+                  - generic [ref=f9e119]:
+                    - generic [ref=f9e120]:
+                      - generic [ref=f9e121]:
+                        - generic [ref=f9e122]: Weight
+                        - spinbutton [ref=f9e123]
+                      - generic [ref=f9e124]:
+                        - generic [ref=f9e125]: Rate (1-5)
+                        - combobox [ref=f9e126]:
+                          - option "1" [selected]
+                          - option "2"
+                          - option "3"
+                          - option "4"
+                          - option "5"
+                    - generic [ref=f9e127]:
+                      - text: Contribution
+                      - generic [ref=f9e128]: NaN
+                  - generic [ref=f9e129]:
+                    - generic [ref=f9e130]:
+                      - generic [ref=f9e131]:
+                        - generic [ref=f9e132]: Weight
+                        - spinbutton [ref=f9e133]
+                      - generic [ref=f9e134]:
+                        - generic [ref=f9e135]: Rate (1-5)
+                        - combobox [ref=f9e136]:
+                          - option "1" [selected]
+                          - option "2"
+                          - option "3"
+                          - option "4"
+                          - option "5"
+                    - generic [ref=f9e137]:
+                      - text: Contribution
+                      - generic [ref=f9e138]: NaN
+                  - generic [ref=f9e139]:
+                    - generic [ref=f9e140]:
+                      - generic [ref=f9e141]:
+                        - generic [ref=f9e142]: Weight
+                        - spinbutton [ref=f9e143]
+                      - generic [ref=f9e144]:
+                        - generic [ref=f9e145]: Rate (1-5)
+                        - combobox [ref=f9e146]:
+                          - option "1" [selected]
+                          - option "2"
+                          - option "3"
+                          - option "4"
+                          - option "5"
+                    - generic [ref=f9e147]:
+                      - text: Contribution
+                      - generic [ref=f9e148]: NaN
+                  - generic [ref=f9e149]:
+                    - generic [ref=f9e150]:
+                      - generic [ref=f9e151]:
+                        - generic [ref=f9e152]: Weight
+                        - spinbutton [ref=f9e153]
+                      - generic [ref=f9e154]:
+                        - generic [ref=f9e155]: Rate (1-5)
+                        - combobox [ref=f9e156]:
+                          - option "1" [selected]
+                          - option "2"
+                          - option "3"
+                          - option "4"
+                          - option "5"
+                    - generic [ref=f9e157]:
+                      - text: Contribution
+                      - generic [ref=f9e158]: NaN
+                  - generic [ref=f9e159]:
+                    - generic [ref=f9e160]:
+                      - generic [ref=f9e161]:
+                        - generic [ref=f9e162]: Weight
+                        - spinbutton [ref=f9e163]
+                      - generic [ref=f9e164]:
+                        - generic [ref=f9e165]: Rate (1-5)
+                        - combobox [ref=f9e166]:
+                          - option "1" [selected]
+                          - option "2"
+                          - option "3"
+                          - option "4"
+                          - option "5"
+                    - generic [ref=f9e167]:
+                      - text: Contribution
+                      - generic [ref=f9e168]: NaN
+                  - generic [ref=f9e169]:
+                    - generic [ref=f9e170]:
+                      - generic [ref=f9e171]:
+                        - generic [ref=f9e172]: Weight
+                        - spinbutton [ref=f9e173]
+                      - generic [ref=f9e174]:
+                        - generic [ref=f9e175]: Rate (1-5)
+                        - combobox [ref=f9e176]:
+                          - option "1" [selected]
+                          - option "2"
+                          - option "3"
+                          - option "4"
+                          - option "5"
+                    - generic [ref=f9e177]:
+                      - text: Contribution
+                      - generic [ref=f9e178]: NaN
+                  - generic [ref=f9e179]:
+                    - generic [ref=f9e180]:
+                      - generic [ref=f9e181]:
+                        - generic [ref=f9e182]: Weight
+                        - spinbutton [ref=f9e183]
+                      - generic [ref=f9e184]:
+                        - generic [ref=f9e185]: Rate (1-5)
+                        - combobox [ref=f9e186]:
+                          - option "1" [selected]
+                          - option "2"
+                          - option "3"
+                          - option "4"
+                          - option "5"
+                    - generic [ref=f9e187]:
+                      - text: Contribution
+                      - generic [ref=f9e188]: NaN
+            - generic [ref=f9e189]: Select a domain and enter values to see live scores.
+        - generic [ref=f9e191]:
+          - paragraph [ref=f9e192]: 4. Current Controls & Residual (As-Is)
+          - generic [ref=f9e193]:
+            - generic [ref=f9e194]:
+              - generic [ref=f9e195]: Linked controls (Risk ↔ Control mapping)
+              - button "Browse controls" [ref=f9e196] [cursor=pointer]
+            - paragraph [ref=f9e199]: No controls linked yet. Open the picker to attach the controls that mitigate this risk — they feed the SoA and control-coverage views.
+        - generic [ref=f9e200]:
+          - paragraph [ref=f9e201]: 5. Treatment Plan & Target Residual
+          - generic [ref=f9e202]:
+            - generic [ref=f9e203]:
+              - generic [ref=f9e204]: Treatment Decision
+              - combobox "Treatment Decision Required — how will this risk be handled?" [ref=f9e205]:
+                - option "Modify" [selected]
+                - option "Retain"
+                - option "Avoid"
+                - option "Share"
+              - generic [ref=f9e206]: Required — how will this risk be handled?
+            - generic [ref=f9e207]:
+              - generic [ref=f9e208]: Treatment Owner
+              - textbox "Treatment Owner Select existing user or type a new name to create" [ref=f9e210]:
+                - /placeholder: Select or type owner name…
+              - generic [ref=f9e211]: Select existing user or type a new name to create
+            - generic [ref=f9e212]:
+              - generic [ref=f9e213]: Treatment Actions
+              - textbox "Treatment Actions Describe planned actions" [ref=f9e214]
+              - generic [ref=f9e215]: Describe planned actions
+            - generic [ref=f9e216]:
+              - generic [ref=f9e217]: Estimated Budget
+              - spinbutton "Estimated Budget" [ref=f9e218]
+            - generic [ref=f9e219]:
+              - generic [ref=f9e220]: Target Date
+              - textbox "Target Date" [ref=f9e221]
+            - generic [ref=f9e222]:
+              - generic [ref=f9e223]: Review Frequency
+              - combobox "Review Frequency" [ref=f9e224]:
+                - option "Monthly"
+                - option "Quarterly" [selected]
+                - option "Annually"
+        - generic [ref=f9e225]:
+          - paragraph [ref=f9e226]: 6. Approval & Governance
+          - generic [ref=f9e227]:
+            - generic [ref=f9e228]:
+              - generic [ref=f9e229]: Acceptance Justification
+              - textbox "Acceptance Justification Optional" [ref=f9e230]
+              - generic [ref=f9e231]: Optional
+            - generic [ref=f9e232]:
+              - generic [ref=f9e233]: Next Review Date
+              - textbox "Next Review Date ISO 27005 requires periodic review" [ref=f9e234]
+              - generic [ref=f9e235]: ISO 27005 requires periodic review
+            - generic [ref=f9e236]:
+              - generic [ref=f9e237]: Risk Owner Sign-Off
+              - combobox "Risk Owner Sign-Off Formal acceptance of the risk" [ref=f9e238]:
+                - option "Select sign-off…" [selected]
+              - generic [ref=f9e239]: Formal acceptance of the risk
+        - generic [ref=f9e240]:
+          - button "Reset" [ref=f9e241] [cursor=pointer]
+          - button "Submit risk" [ref=f9e242] [cursor=pointer]

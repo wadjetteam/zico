@@ -1,0 +1,216 @@
+- generic [ref=f24e3]:
+  - banner [ref=f24e4]:
+    - button "Toggle navigation" [ref=f24e5] [cursor=pointer]
+    - generic [ref=f24e8]:
+      - img "WADJET" [ref=f24e10]
+      - generic [ref=f24e11]:
+        - generic [ref=f24e12]: WADJET
+        - generic [ref=f24e13]: Eyes on Risk. Control in Action.
+    - textbox "Search modules" [ref=f24e15]:
+      - /placeholder: Search modules…
+    - generic [ref=f24e16]:
+      - button "Help" [ref=f24e17] [cursor=pointer]
+      - button "Settings" [ref=f24e21] [cursor=pointer]
+      - button "S admin" [ref=f24e26] [cursor=pointer]:
+        - generic [ref=f24e27]: S
+        - generic [ref=f24e28]: admin
+  - generic [ref=f24e29]:
+    - complementary [ref=f24e30]:
+      - navigation [ref=f24e31]:
+        - generic [ref=f24e32]:
+          - link "Dashboard" [ref=f24e33] [cursor=pointer]:
+            - /url: /dashboard
+          - button "Context Organization" [ref=f24e41] [cursor=pointer]
+          - button "Governance" [ref=f24e51] [cursor=pointer]
+          - generic [ref=f24e58]:
+            - button "Risk Management" [ref=f24e59] [cursor=pointer]
+            - list [ref=f24e66]:
+              - listitem [ref=f24e67]:
+                - link "Submit Risk" [ref=f24e68] [cursor=pointer]:
+                  - /url: /risk/submit
+              - listitem [ref=f24e69]:
+                - link "View Risks" [ref=f24e70] [cursor=pointer]:
+                  - /url: /risk/view
+              - listitem [ref=f24e71]:
+                - link "Risk Scoring" [ref=f24e72] [cursor=pointer]:
+                  - /url: /risk/scoring
+              - listitem [ref=f24e73]:
+                - link "Management Reviews" [ref=f24e74] [cursor=pointer]:
+                  - /url: /risk/reviews
+              - listitem [ref=f24e75]:
+                - link "Close Risks" [ref=f24e76] [cursor=pointer]:
+                  - /url: /risk/close
+              - listitem [ref=f24e77]:
+                - link "Plan of Action & Milestones" [ref=f24e78] [cursor=pointer]:
+                  - /url: /risk/poam
+              - listitem [ref=f24e79]:
+                - link "Score History" [ref=f24e80] [cursor=pointer]:
+                  - /url: /risk/score-history
+          - button "Compliance" [ref=f24e82] [cursor=pointer]
+          - button "Audit" [ref=f24e92] [cursor=pointer]
+          - button "Asset Management" [ref=f24e102] [cursor=pointer]
+          - button "Artificial Intelligence" [ref=f24e118] [cursor=pointer]
+          - button "Assessments" [ref=f24e126] [cursor=pointer]
+          - button "Reporting" [ref=f24e135] [cursor=pointer]
+          - button "Settings" [ref=f24e143] [cursor=pointer]
+        - generic [ref=f24e151]: Eyes on Risk. Control in Action.
+    - main [ref=f24e152]:
+      - generic [ref=f24e153]:
+        - generic [ref=f24e155]:
+          - heading "Submit New Risk" [level=1] [ref=f24e156]
+          - paragraph [ref=f24e157]: Record a new risk with full assessment, control mapping, treatment plan, and governance approval.
+        - generic [ref=f24e158]:
+          - generic [ref=f24e159]:
+            - paragraph [ref=f24e160]: 1. Risk Identification
+            - generic [ref=f24e161]:
+              - generic [ref=f24e162]:
+                - generic [ref=f24e163]: Risk Title
+                - textbox "Risk Title Short descriptive title" [ref=f24e164]
+                - generic [ref=f24e165]: Short descriptive title
+              - generic [ref=f24e166]:
+                - generic [ref=f24e167]: Domain / Business Unit
+                - combobox "Domain / Business Unit Determines scoring rules" [ref=f24e168]
+                - generic [ref=f24e169]: Determines scoring rules
+              - generic [ref=f24e170]:
+                - generic [ref=f24e171]: Parameter Version
+                - combobox "Parameter Version Active parameter for this domain" [ref=f24e172]
+                - generic [ref=f24e173]: Active parameter for this domain
+              - generic [ref=f24e174]:
+                - generic [ref=f24e175]: Risk Description
+                - textbox "Risk Description Full threat scenario" [ref=f24e176]
+                - generic [ref=f24e177]: Full threat scenario
+              - generic [ref=f24e178]:
+                - generic [ref=f24e179]: Risk Category
+                - combobox "Risk Category" [ref=f24e180]:
+                  - option "Cybersecurity" [selected]
+                  - option "Information Security"
+                  - option "Compliance/Legal"
+                  - option "Operational/BCP"
+                  - option "Third-Party Risk"
+                  - option "Human Risk"
+                  - option "Application/Mobile Security"
+                  - option "Cloud/Physical/AI"
+                  - option "Risk Management/GRC"
+              - generic [ref=f24e181]:
+                - generic [ref=f24e182]: Process
+                - textbox "Process" [ref=f24e183]
+              - generic [ref=f24e184]:
+                - generic [ref=f24e185]: Sub-Process
+                - textbox "Sub-Process" [ref=f24e186]
+              - generic [ref=f24e187]:
+                - generic [ref=f24e188]: Asset / System
+                - combobox "Asset / System" [ref=f24e189]:
+                  - option "— None —" [selected]
+              - generic [ref=f24e190]:
+                - generic [ref=f24e191]: Threat
+                - textbox "Threat" [ref=f24e192]
+              - generic [ref=f24e193]:
+                - generic [ref=f24e194]: Vulnerability
+                - textbox "Vulnerability" [ref=f24e195]
+              - generic [ref=f24e196]:
+                - generic [ref=f24e197]: Risk Owner
+                - textbox "Risk Owner Select existing user or type a new name to create" [ref=f24e199]:
+                  - /placeholder: Select or type owner name…
+                - generic [ref=f24e200]: Select existing user or type a new name to create
+              - generic [ref=f24e201]:
+                - generic [ref=f24e202]: Owner Team
+                - textbox "Owner Team" [ref=f24e203]
+              - generic [ref=f24e204]:
+                - generic [ref=f24e205]: Risk Source
+                - combobox "Risk Source" [ref=f24e206]:
+                  - option "— Select —" [selected]
+                  - option "Audit"
+                  - option "Incident"
+                  - option "Regulatory"
+                  - option "Risk Workshop"
+                  - option "Vendor Assessment"
+                  - option "Scan"
+              - generic [ref=f24e207]:
+                - generic [ref=f24e208]: Date Identified
+                - textbox "Date Identified" [ref=f24e209]: 2026-08-22
+          - generic [ref=f24e210]:
+            - paragraph [ref=f24e211]: 3. Risk Analysis
+            - generic [ref=f24e212]:
+              - generic [ref=f24e213]:
+                - generic [ref=f24e214]:
+                  - paragraph [ref=f24e215]: Likelihood (User Input)
+                  - generic [ref=f24e216]:
+                    - button "1 Rare" [ref=f24e217] [cursor=pointer]:
+                      - generic [ref=f24e218]: "1"
+                      - text: Rare
+                    - button "2 Unlikely" [ref=f24e219] [cursor=pointer]:
+                      - generic [ref=f24e220]: "2"
+                      - text: Unlikely
+                    - button "3 Possible" [ref=f24e221] [cursor=pointer]:
+                      - generic [ref=f24e222]: "3"
+                      - text: Possible
+                    - button "4 Likely" [ref=f24e223] [cursor=pointer]:
+                      - generic [ref=f24e224]: "4"
+                      - text: Likely
+                    - button "5 Almost Certain" [ref=f24e225] [cursor=pointer]:
+                      - generic [ref=f24e226]: "5"
+                      - text: Almost Certain
+                - generic [ref=f24e228]:
+                  - paragraph [ref=f24e229]: Impact Criteria
+                  - generic [ref=f24e230]:
+                    - generic [ref=f24e231]: "Total: 0.000"
+                    - button "Reset defaults" [ref=f24e234] [cursor=pointer]
+              - generic [ref=f24e235]: Select a domain and enter values to see live scores.
+          - generic [ref=f24e237]:
+            - paragraph [ref=f24e238]: 4. Current Controls & Residual (As-Is)
+            - generic [ref=f24e239]:
+              - generic [ref=f24e240]:
+                - generic [ref=f24e241]: Linked controls (Risk ↔ Control mapping)
+                - button "Browse controls" [ref=f24e242] [cursor=pointer]
+              - paragraph [ref=f24e245]: No controls linked yet. Open the picker to attach the controls that mitigate this risk — they feed the SoA and control-coverage views.
+          - generic [ref=f24e246]:
+            - paragraph [ref=f24e247]: 5. Treatment Plan & Target Residual
+            - generic [ref=f24e248]:
+              - generic [ref=f24e249]:
+                - generic [ref=f24e250]: Treatment Decision
+                - combobox "Treatment Decision Required — how will this risk be handled?" [ref=f24e251]:
+                  - option "Modify" [selected]
+                  - option "Retain"
+                  - option "Avoid"
+                  - option "Share"
+                - generic [ref=f24e252]: Required — how will this risk be handled?
+              - generic [ref=f24e253]:
+                - generic [ref=f24e254]: Treatment Owner
+                - textbox "Treatment Owner Select existing user or type a new name to create" [ref=f24e256]:
+                  - /placeholder: Select or type owner name…
+                - generic [ref=f24e257]: Select existing user or type a new name to create
+              - generic [ref=f24e258]:
+                - generic [ref=f24e259]: Treatment Actions
+                - textbox "Treatment Actions Describe planned actions" [ref=f24e260]
+                - generic [ref=f24e261]: Describe planned actions
+              - generic [ref=f24e262]:
+                - generic [ref=f24e263]: Estimated Budget
+                - spinbutton "Estimated Budget" [ref=f24e264]
+              - generic [ref=f24e265]:
+                - generic [ref=f24e266]: Target Date
+                - textbox "Target Date" [ref=f24e267]
+              - generic [ref=f24e268]:
+                - generic [ref=f24e269]: Review Frequency
+                - combobox "Review Frequency" [ref=f24e270]:
+                  - option "Monthly"
+                  - option "Quarterly" [selected]
+                  - option "Annually"
+          - generic [ref=f24e271]:
+            - paragraph [ref=f24e272]: 6. Approval & Governance
+            - generic [ref=f24e273]:
+              - generic [ref=f24e274]:
+                - generic [ref=f24e275]: Acceptance Justification
+                - textbox "Acceptance Justification Optional" [ref=f24e276]
+                - generic [ref=f24e277]: Optional
+              - generic [ref=f24e278]:
+                - generic [ref=f24e279]: Next Review Date
+                - textbox "Next Review Date ISO 27005 requires periodic review" [ref=f24e280]
+                - generic [ref=f24e281]: ISO 27005 requires periodic review
+              - generic [ref=f24e282]:
+                - generic [ref=f24e283]: Risk Owner Sign-Off
+                - combobox "Risk Owner Sign-Off Formal acceptance of the risk" [ref=f24e284]:
+                  - option "Select sign-off…" [selected]
+                - generic [ref=f24e285]: Formal acceptance of the risk
+          - generic [ref=f24e286]:
+            - button "Reset" [ref=f24e287] [cursor=pointer]
+            - button "Submit risk" [ref=f24e288] [cursor=pointer]
