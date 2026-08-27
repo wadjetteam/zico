@@ -1,0 +1,11 @@
+{
+  "smtpHost": "smtp.gmail.com",
+  "smtpPort": 587,
+  "smtpUser": "wadjetteam@gmail.com",
+  "smtpAppPassword": "feur ggwr egoa glul",
+  "fromEmail": "wadjetteam@gmail.com",
+  "fromName": "Wadjet GRC",
+  "secure": false,
+  "enabled": true,
+  "replyTo": ""
+}

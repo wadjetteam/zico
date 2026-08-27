@@ -29,7 +29,6 @@ import {
 } from "../client/src/lib/riskEngine.js";
 
 const DEFAULT_CEF_WEIGHTS = { Effective: 0.75, "Partially Effective": 0.5, Ineffective: 0.25, "Not Assessed": 0 };
-const DEFAULT_RESIDUAL_CAP = 0.75;
 const EMAIL_CONFIG_FILE = fileURLToPath(new URL("./data/email-config.json", import.meta.url));
 const RISKS_FILE = fileURLToPath(new URL("./data/risks.json", import.meta.url));
 
@@ -174,9 +173,10 @@ const saveDatabase = async () => {
     collections[name] = collection;
   }
   await fs.mkdir(new URL("./data/", import.meta.url), { recursive: true });
-  await fs.writeFile(DATABASE_FILE, JSON.stringify({ version: 1, savedAt: new Date().toISOString(), collections, nested: Object.fromEntries(nested.entries()) }, null, 2), { encoding: "utf8", mode: 0o600 });
+  const temporaryFile = `${DATABASE_FILE}.tmp`;
+  await fs.writeFile(temporaryFile, JSON.stringify({ version: 1, savedAt: new Date().toISOString(), collections, nested: Object.fromEntries(nested.entries()) }, null, 2), { encoding: "utf8", mode: 0o600 });
+  await fs.rename(temporaryFile, DATABASE_FILE);
 };
-
 const normalizeTags = (v) =>
   Array.isArray(v) ? v.filter(Boolean) : String(v || "").split(",").map((s) => s.trim()).filter(Boolean);
 
@@ -3656,3 +3656,22 @@ http
     exceptionExpiryService.startExceptionExpiryJob();
     console.log(`[GRC] Server running on http://0.0.0.0:${PORT}`);
   });
+
+let shuttingDown = false;
+const shutdown = async (signal) => {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  try {
+    await saveDatabase();
+    await saveRisks();
+    console.log(`[GRC] Saved data before ${signal}.`);
+  } catch (error) {
+    console.error("[GRC] Could not save data during shutdown:", error.message);
+    process.exitCode = 1;
+  } finally {
+    process.exit();
+  }
+};
+
+process.on("SIGINT", () => void shutdown("SIGINT"));
+process.on("SIGTERM", () => void shutdown("SIGTERM"));

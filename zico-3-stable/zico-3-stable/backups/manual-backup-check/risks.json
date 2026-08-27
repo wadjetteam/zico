@@ -1,0 +1,6571 @@
+[
+  {
+    "_id": "risk-import-r-001",
+    "riskId": "R-001",
+    "title": "Credential Theft Through Phishing",
+    "description": "Employees may disclose credentials through phishing emails leading to unauthorized access.",
+    "process": "Information Security Management",
+    "subProcess": "Email Security",
+    "riskCategory": "Cybersecurity",
+    "category": "Cybersecurity",
+    "assetSystem": "Microsoft Exchange",
+    "ownerTeam": "SOC Team",
+    "riskOwnerId": "u-import-soc.manager",
+    "owner": "SOC Manager",
+    "dateIdentified": "2026-03-20",
+    "riskDate": "2026-03-20",
+    "likelihood": 5,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 3
+      }
+    ],
+    "impact": 4,
+    "inherentScore": 20,
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "effectiveCE": 0,
+    "calculationTrace": {
+      "likelihood": 5,
+      "impact": 4,
+      "rawImpactValue": 3.5,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.500 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "5 × 4 = 20",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 5,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 5,
+      "residualImpact": 4
+    },
+    "escalationPath": "Risk Owner",
+    "domain": {
+      "_id": "d-4",
+      "name": "Cybersecurity",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-4",
+      "name": "Cybersecurity",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Conduct quarterly phishing simulations and awareness campaigns",
+    "treatmentActions": "Conduct quarterly phishing simulations and awareness campaigns",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "SOC Manager",
+    "treatmentOwnerId": "u-import-soc.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "3",
+    "createdAt": "2026-08-25T13:12:58.805Z",
+    "updatedAt": "2026-08-25T13:12:58.805Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 20,
+    "sourceResidualScore": 10,
+    "methodVersionAtAssessment": 1,
+    "lastAssessedAt": "2026-08-25T14:44:57.319Z",
+    "changeTriggerPending": false,
+    "changeTriggerReason": null,
+    "residualOverridden": false,
+    "residualJustification": null,
+    "overriddenBy": null,
+    "overriddenAt": null,
+    "organization": {
+      "_id": "o-2",
+      "name": "Wadjet Digital Ltd"
+    }
+  },
+  {
+    "_id": "risk-import-r-002",
+    "riskId": "R-002",
+    "title": "Ransomware Attack",
+    "description": "Malware encrypts business-critical data causing service disruption",
+    "process": "Endpoint Security",
+    "subProcess": "Malware Protection",
+    "riskCategory": "Cybersecurity",
+    "category": "Cybersecurity",
+    "assetSystem": "End User Devices",
+    "ownerTeam": "SOC Team",
+    "threat": "Ransomware",
+    "vulnerability": "Unpatched Endpoints",
+    "riskOwnerId": "u-import-soc.manager",
+    "owner": "SOC Manager",
+    "dateIdentified": "2026-03-24",
+    "riskDate": "2026-03-24",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 5
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 5
+      },
+      {
+        "name": "Confidentiality",
+        "value": 4
+      },
+      {
+        "name": "Integrity",
+        "value": 5
+      },
+      {
+        "name": "Availability",
+        "value": 5
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 4.25,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 4.250 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-4",
+      "name": "Cybersecurity",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-4",
+      "name": "Cybersecurity",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Monthly vulnerability management and backup testing",
+    "treatmentActions": "Monthly vulnerability management and backup testing",
+    "deadline": "2026-12-12",
+    "targetDate": "2026-12-12",
+    "treatmentDueDate": "2026-12-12",
+    "treatmentOwner": "SOC Manager",
+    "treatmentOwnerId": "u-import-soc.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "5",
+    "createdAt": "2026-08-25T13:12:58.805Z",
+    "updatedAt": "2026-08-25T13:12:58.805Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 20,
+    "sourceResidualScore": 12,
+    "organization": {
+      "_id": "o-2",
+      "name": "Wadjet Digital Ltd"
+    }
+  },
+  {
+    "_id": "risk-import-r-003",
+    "riskId": "R-003",
+    "title": "Unauthorized Privileged Access",
+    "description": "Unauthorized users gain elevated privileges",
+    "process": "Access Management",
+    "subProcess": "Privileged Access Management",
+    "riskCategory": "Information Security",
+    "category": "Information Security",
+    "assetSystem": "Active Directory",
+    "ownerTeam": "IAM Team",
+    "threat": "Privilege Escalation",
+    "vulnerability": "Excessive User Permissions",
+    "riskOwnerId": "u-import-iam.manager",
+    "owner": "IAM Manager",
+    "dateIdentified": "2026-04-01",
+    "riskDate": "2026-04-01",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 5
+      },
+      {
+        "name": "Availability",
+        "value": 3
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 3.875,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.875 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Quarterly privileged access review",
+    "treatmentActions": "Quarterly privileged access review",
+    "deadline": "2026-11-30",
+    "targetDate": "2026-11-30",
+    "treatmentDueDate": "2026-11-30",
+    "treatmentOwner": "IAM Manager",
+    "treatmentOwnerId": "u-import-iam.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "3",
+    "createdAt": "2026-08-25T13:12:58.805Z",
+    "updatedAt": "2026-08-25T13:12:58.805Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 16,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-004",
+    "riskId": "R-004",
+    "title": "Regulatory Non-Compliance",
+    "description": "Failure to comply with CBE or PCI DSS requirements",
+    "process": "Compliance Management",
+    "subProcess": "Regulatory Monitoring",
+    "riskCategory": "Compliance",
+    "category": "Compliance",
+    "assetSystem": "Compliance Platform",
+    "ownerTeam": "Compliance Team",
+    "threat": "Missing Regulatory Requirements",
+    "vulnerability": "Lack of Continuous Monitoring",
+    "riskOwnerId": "u-import-compliance.manager",
+    "owner": "Compliance Manager",
+    "dateIdentified": "2026-04-05",
+    "riskDate": "2026-04-05",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 2
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 5,
+    "impact": 5,
+    "riskScore": 15,
+    "inherentScore": 15,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 15,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 15,
+    "calculatedResidualScore": 15,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 5,
+      "rawImpactValue": 5,
+      "impactMethod": "max",
+      "impactCalcDetail": "max(4, 5, 4, 1, 3, 2, 4, 2) = 5",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 5 = 15",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 5,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 5
+    },
+    "escalationPath": "CRO + Legal Counsel",
+    "domain": {
+      "_id": "d-3",
+      "name": "Compliance",
+      "scoringMethod": "max"
+    },
+    "parameter": {
+      "_id": "p-3",
+      "name": "Compliance",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Closed",
+    "mitigationActions": "Continuous compliance monitoring",
+    "treatmentActions": "Continuous compliance monitoring",
+    "deadline": "2026-10-31",
+    "targetDate": "2026-10-31",
+    "treatmentDueDate": "2026-10-31",
+    "treatmentOwner": "Compliance Manager",
+    "treatmentOwnerId": "u-import-compliance.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.805Z",
+    "updatedAt": "2026-08-25T13:12:58.805Z",
+    "closedAt": "2026-08-25T13:12:58.805Z",
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 2,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-005",
+    "riskId": "R-005",
+    "title": "Customer Data Leakage",
+    "description": "Sensitive customer data may be exposed",
+    "process": "Data Protection",
+    "subProcess": "Data Handling",
+    "riskCategory": "Information Security",
+    "category": "Information Security",
+    "assetSystem": "Customer Database",
+    "ownerTeam": "Data Governance Team",
+    "threat": "Data Exposure",
+    "vulnerability": "Misconfigured Permissions",
+    "riskOwnerId": "u-import-data.protection.officer",
+    "owner": "Data Protection Officer",
+    "dateIdentified": "2026-04-10",
+    "riskDate": "2026-04-10",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 5
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 4,
+      "rawImpactValue": 3.75,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.750 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 4 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Access reviews and DLP tuning",
+    "treatmentActions": "Access reviews and DLP tuning",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Data Protection Officer",
+    "treatmentOwnerId": "u-import-data.protection.officer",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.805Z",
+    "updatedAt": "2026-08-25T13:12:58.805Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 15,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-006",
+    "riskId": "R-006",
+    "title": "Third Party Security Breach",
+    "description": "Vendor compromise affecting bank data",
+    "process": "Third Party Risk Management",
+    "subProcess": "Vendor Assessment",
+    "riskCategory": "Third Party Risk",
+    "category": "Third Party Risk",
+    "assetSystem": "Vendor Portal",
+    "ownerTeam": "TPRM Team",
+    "threat": "Supply Chain Attack",
+    "vulnerability": "Weak Vendor Security",
+    "riskOwnerId": "u-import-vendor.risk.manager",
+    "owner": "Vendor Risk Manager",
+    "dateIdentified": "2026-04-30",
+    "riskDate": "2026-04-30",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 3
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 4,
+      "rawImpactValue": 3.75,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.750 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 4 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4
+    },
+    "escalationPath": "CRO + Procurement",
+    "domain": {
+      "_id": "d-5",
+      "name": "Third Party Risk",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-5",
+      "name": "Third Party Risk",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Annual vendor reassessment",
+    "treatmentActions": "Annual vendor reassessment",
+    "deadline": "2026-09-30",
+    "targetDate": "2026-09-30",
+    "treatmentDueDate": "2026-09-30",
+    "treatmentOwner": "Vendor Risk Manager",
+    "treatmentOwnerId": "u-import-vendor.risk.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "3",
+    "createdAt": "2026-08-25T13:12:58.805Z",
+    "updatedAt": "2026-08-25T13:12:58.805Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-007",
+    "riskId": "R-007",
+    "title": "Backup and Recovery Failure",
+    "description": "Inability to restore critical systems after an incident",
+    "process": "Business Continuity",
+    "subProcess": "Backup Management",
+    "riskCategory": "Operational",
+    "category": "Operational",
+    "assetSystem": "Backup Server",
+    "ownerTeam": "IT Operations",
+    "threat": "Backup Failure",
+    "vulnerability": "Lack of Backup Validation",
+    "riskOwnerId": "u-import-it.operations.manager",
+    "owner": "IT Operations Manager",
+    "dateIdentified": "2026-05-02",
+    "riskDate": "2026-05-02",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 3
+      },
+      {
+        "name": "Reputational",
+        "value": 3
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 5
+      },
+      {
+        "name": "Confidentiality",
+        "value": 2
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 5
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 9,
+    "inherentScore": 9,
+    "inherentLevel": "Medium",
+    "severityLevel": "Medium",
+    "residualScore": 9,
+    "residualLevel": "Medium",
+    "overallRisk": "Medium",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 9,
+    "calculatedResidualScore": 9,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 3,
+      "rawImpactValue": 3.375,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.375 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 3 = 9",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3
+    },
+    "escalationPath": "Process Owner + COO",
+    "domain": {
+      "_id": "d-2",
+      "name": "Operational",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-2",
+      "name": "Operational",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Quarterly restoration testing",
+    "treatmentActions": "Quarterly restoration testing",
+    "deadline": "2026-11-30",
+    "targetDate": "2026-11-30",
+    "treatmentDueDate": "2026-11-30",
+    "treatmentOwner": "IT Operations Manager",
+    "treatmentOwnerId": "u-import-it.operations.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "5",
+    "createdAt": "2026-08-25T13:12:58.805Z",
+    "updatedAt": "2026-08-25T13:12:58.805Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-008",
+    "riskId": "R-008",
+    "title": "Insider Threat Activity",
+    "description": "Employees misuse authorized access",
+    "process": "Human Resources Security",
+    "subProcess": "Employee Monitoring",
+    "riskCategory": "Information Security",
+    "category": "Information Security",
+    "assetSystem": "Internal Systems",
+    "ownerTeam": "HR & Security",
+    "threat": "Malicious Insider",
+    "vulnerability": "Excessive Privileges",
+    "riskOwnerId": "u-import-information.security.manager",
+    "owner": "Information Security Manager",
+    "dateIdentified": "2026-05-09",
+    "riskDate": "2026-05-09",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 3
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 4,
+      "rawImpactValue": 3.625,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.625 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 4 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Closed",
+    "mitigationActions": "User behavior analytics deployment",
+    "treatmentActions": "User behavior analytics deployment",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Information Security Manager",
+    "treatmentOwnerId": "u-import-information.security.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "3",
+    "createdAt": "2026-08-25T13:12:58.805Z",
+    "updatedAt": "2026-08-25T13:12:58.805Z",
+    "closedAt": "2026-08-25T13:12:58.805Z",
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 1,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-009",
+    "riskId": "R-009",
+    "title": "Unpatched Critical Vulnerability",
+    "description": "Attackers exploit known vulnerabilities",
+    "process": "Vulnerability Management",
+    "subProcess": "Patch Management",
+    "riskCategory": "Cybersecurity",
+    "category": "Cybersecurity",
+    "assetSystem": "Production Servers",
+    "ownerTeam": "IT Security Team",
+    "threat": "Exploitation of Vulnerabilities",
+    "vulnerability": "Missing Security Updates",
+    "riskOwnerId": "u-import-vulnerability.management.lead",
+    "owner": "Vulnerability Management Lead",
+    "dateIdentified": "2026-05-15",
+    "riskDate": "2026-05-15",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 5
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 5
+      },
+      {
+        "name": "Availability",
+        "value": 4
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 4,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 4.000 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-4",
+      "name": "Cybersecurity",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-4",
+      "name": "Cybersecurity",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Weekly vulnerability scans",
+    "treatmentActions": "Weekly vulnerability scans",
+    "deadline": "2026-10-31",
+    "targetDate": "2026-10-31",
+    "treatmentDueDate": "2026-10-31",
+    "treatmentOwner": "Vulnerability Management Lead",
+    "treatmentOwnerId": "u-import-vulnerability.management.lead",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "4",
+    "createdAt": "2026-08-25T13:12:58.805Z",
+    "updatedAt": "2026-08-25T13:12:58.805Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 16,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-2",
+      "name": "Wadjet Digital Ltd"
+    }
+  },
+  {
+    "_id": "risk-import-r-010",
+    "riskId": "R-010",
+    "title": "Incident Response Failure",
+    "description": "Security incidents are not contained in a timely manner",
+    "process": "Incident Management",
+    "subProcess": "Security Incident Handling",
+    "riskCategory": "Operational",
+    "category": "Operational",
+    "assetSystem": "SIEM Platform",
+    "ownerTeam": "SOC Team",
+    "threat": "Delayed Incident Response",
+    "vulnerability": "Lack of IR Procedures",
+    "riskOwnerId": "u-import-soc.manager",
+    "owner": "SOC Manager",
+    "dateIdentified": "2026-05-28",
+    "riskDate": "2026-05-28",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 5
+      },
+      {
+        "name": "Confidentiality",
+        "value": 4
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 5
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 4,
+      "rawImpactValue": 3.875,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.875 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 4 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4
+    },
+    "escalationPath": "COO + CRO",
+    "domain": {
+      "_id": "d-2",
+      "name": "Operational",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-2",
+      "name": "Operational",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Conduct tabletop exercises every quarter",
+    "treatmentActions": "Conduct tabletop exercises every quarter",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "SOC Manager",
+    "treatmentOwnerId": "u-import-soc.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "5",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-011",
+    "riskId": "R-011",
+    "title": "Absence of Multi-Factor Authentication",
+    "description": "Attackers may gain unauthorized access using stolen credentials.",
+    "process": "Access Management",
+    "subProcess": "Authentication Management",
+    "riskCategory": "Information Security",
+    "category": "Information Security",
+    "assetSystem": "Identity Management System",
+    "ownerTeam": "IAM Team",
+    "threat": "Credential Compromise",
+    "vulnerability": "MFA Not Enforced",
+    "riskOwnerId": "u-import-iam.manager",
+    "owner": "IAM Manager",
+    "dateIdentified": "2026-06-03",
+    "riskDate": "2026-06-03",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 3
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 3.5,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.500 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Enforce MFA for all users.",
+    "treatmentActions": "Enforce MFA for all users.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "IAM Manager",
+    "treatmentOwnerId": "u-import-iam.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "3",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 16,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-012",
+    "riskId": "R-012",
+    "title": "Failure to Detect Security Incidents",
+    "description": "Security events may remain unnoticed due to insufficient monitoring.",
+    "process": "Security Monitoring",
+    "subProcess": "Log Monitoring",
+    "riskCategory": "Cybersecurity",
+    "category": "Cybersecurity",
+    "assetSystem": "SIEM Platform",
+    "ownerTeam": "SOC Team",
+    "threat": "Undetected Attack",
+    "vulnerability": "Incomplete Log Collection",
+    "riskOwnerId": "u-import-soc.manager",
+    "owner": "SOC Manager",
+    "dateIdentified": "2026-06-11",
+    "riskDate": "2026-06-11",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 5
+      },
+      {
+        "name": "Confidentiality",
+        "value": 4
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 5
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 4,
+      "rawImpactValue": 3.875,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.875 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 4 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-4",
+      "name": "Cybersecurity",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-4",
+      "name": "Cybersecurity",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Enable centralized logging and alert tuning.",
+    "treatmentActions": "Enable centralized logging and alert tuning.",
+    "deadline": "2026-11-30",
+    "targetDate": "2026-11-30",
+    "treatmentDueDate": "2026-11-30",
+    "treatmentOwner": "SOC Manager",
+    "treatmentOwnerId": "u-import-soc.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "5",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-2",
+      "name": "Wadjet Digital Ltd"
+    }
+  },
+  {
+    "_id": "risk-import-r-013",
+    "riskId": "R-013",
+    "title": "Improper Data Retention Management",
+    "description": "Failure to retain or dispose of data according to regulations.",
+    "process": "Data Governance",
+    "subProcess": "Data Retention",
+    "riskCategory": "Compliance",
+    "category": "Compliance",
+    "assetSystem": "Customer Information Database",
+    "ownerTeam": "Compliance Team",
+    "threat": "Regulatory Violation",
+    "vulnerability": "Missing Retention Policy",
+    "riskOwnerId": "u-import-compliance.manager",
+    "owner": "Compliance Manager",
+    "dateIdentified": "2026-06-17",
+    "riskDate": "2026-06-17",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 3
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 4
+      },
+      {
+        "name": "Integrity",
+        "value": 3
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 5,
+    "impact": 5,
+    "riskScore": 15,
+    "inherentScore": 15,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 15,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 15,
+    "calculatedResidualScore": 15,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 5,
+      "rawImpactValue": 5,
+      "impactMethod": "max",
+      "impactCalcDetail": "max(3, 5, 4, 1, 3, 4, 3, 2) = 5",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 5 = 15",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 5,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 5
+    },
+    "escalationPath": "CRO + Legal Counsel",
+    "domain": {
+      "_id": "d-3",
+      "name": "Compliance",
+      "scoringMethod": "max"
+    },
+    "parameter": {
+      "_id": "p-3",
+      "name": "Compliance",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement retention and disposal procedures.",
+    "treatmentActions": "Implement retention and disposal procedures.",
+    "deadline": "2026-10-31",
+    "targetDate": "2026-10-31",
+    "treatmentDueDate": "2026-10-31",
+    "treatmentOwner": "Compliance Manager",
+    "treatmentOwnerId": "u-import-compliance.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-014",
+    "riskId": "R-014",
+    "title": "Business Continuity Failure",
+    "description": "Critical services may not recover after a major disruption.",
+    "process": "Business Continuity Management",
+    "subProcess": "Disaster Recovery",
+    "riskCategory": "Business Continuity",
+    "category": "Business Continuity",
+    "assetSystem": "Core Banking Infrastructure",
+    "ownerTeam": "IT Operations",
+    "threat": "Disaster Event",
+    "vulnerability": "Untested Recovery Plan",
+    "riskOwnerId": "u-import-business.continuity.manager",
+    "owner": "Business Continuity Manager",
+    "dateIdentified": "2026-06-23",
+    "riskDate": "2026-06-23",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 5
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 5
+      },
+      {
+        "name": "Confidentiality",
+        "value": 3
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 5
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 4,
+      "rawImpactValue": 4,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 4.000 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 4 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Perform annual DR testing.",
+    "treatmentActions": "Perform annual DR testing.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Business Continuity Manager",
+    "treatmentOwnerId": "u-import-business.continuity.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "5",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 15,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-015",
+    "riskId": "R-015",
+    "title": "Unauthorized System Changes",
+    "description": "Unapproved changes may disrupt business services.",
+    "process": "Change Management",
+    "subProcess": "Change Approval",
+    "riskCategory": "Operational",
+    "category": "Operational",
+    "assetSystem": "Production Systems",
+    "ownerTeam": "IT Operations",
+    "threat": "Unauthorized Changes",
+    "vulnerability": "Weak Change Control Process",
+    "riskOwnerId": "u-import-change.manager",
+    "owner": "Change Manager",
+    "dateIdentified": "2026-06-27",
+    "riskDate": "2026-06-27",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 3
+      },
+      {
+        "name": "Regulatory",
+        "value": 3
+      },
+      {
+        "name": "Reputational",
+        "value": 3
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 5
+      },
+      {
+        "name": "Confidentiality",
+        "value": 2
+      },
+      {
+        "name": "Integrity",
+        "value": 5
+      },
+      {
+        "name": "Availability",
+        "value": 4
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 9,
+    "inherentScore": 9,
+    "inherentLevel": "Medium",
+    "severityLevel": "Medium",
+    "residualScore": 9,
+    "residualLevel": "Medium",
+    "overallRisk": "Medium",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 9,
+    "calculatedResidualScore": 9,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 3,
+      "rawImpactValue": 3.25,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.250 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 3 = 9",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3
+    },
+    "escalationPath": "Process Owner + COO",
+    "domain": {
+      "_id": "d-2",
+      "name": "Operational",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-2",
+      "name": "Operational",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Enforce change approval workflow.",
+    "treatmentActions": "Enforce change approval workflow.",
+    "deadline": "2026-09-30",
+    "targetDate": "2026-09-30",
+    "treatmentDueDate": "2026-09-30",
+    "treatmentOwner": "Change Manager",
+    "treatmentOwnerId": "u-import-change.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "4",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 9,
+    "sourceResidualScore": 4,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-016",
+    "riskId": "R-016",
+    "title": "Database Security Misconfiguration",
+    "description": "Sensitive data may become accessible due to incorrect settings.",
+    "process": "Database Security Management",
+    "subProcess": "Database Configuration",
+    "riskCategory": "Information Security",
+    "category": "Information Security",
+    "assetSystem": "Customer Database",
+    "ownerTeam": "Database Administration Team",
+    "threat": "Data Exposure",
+    "vulnerability": "Misconfigured Database Settings",
+    "riskOwnerId": "u-import-database.manager",
+    "owner": "Database Manager",
+    "dateIdentified": "2026-06-29",
+    "riskDate": "2026-06-29",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 5
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 4,
+      "rawImpactValue": 3.75,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.750 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 4 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Quarterly database configuration review.",
+    "treatmentActions": "Quarterly database configuration review.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Database Manager",
+    "treatmentOwnerId": "u-import-database.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 15,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-017",
+    "riskId": "R-017",
+    "title": "Misuse of Privileged Accounts",
+    "description": "Administrative accounts may be abused intentionally or accidentally.",
+    "process": "Privileged Access Management",
+    "subProcess": "Admin Account Management",
+    "riskCategory": "Information Security",
+    "category": "Information Security",
+    "assetSystem": "Active Directory",
+    "ownerTeam": "IAM Team",
+    "threat": "Insider Abuse",
+    "vulnerability": "Lack of PAM Controls",
+    "riskOwnerId": "u-import-iam.manager",
+    "owner": "IAM Manager",
+    "dateIdentified": "2026-07-01",
+    "riskDate": "2026-07-01",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 5
+      },
+      {
+        "name": "Availability",
+        "value": 3
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 4,
+      "rawImpactValue": 3.75,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.750 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 4 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement PAM solution.",
+    "treatmentActions": "Implement PAM solution.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "IAM Manager",
+    "treatmentOwnerId": "u-import-iam.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "3",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-018",
+    "riskId": "R-018",
+    "title": "Delayed Vulnerability Remediation",
+    "description": "Known vulnerabilities remain exposed for extended periods.",
+    "process": "Vulnerability Management",
+    "subProcess": "Remediation Tracking",
+    "riskCategory": "Cybersecurity",
+    "category": "Cybersecurity",
+    "assetSystem": "Enterprise Servers",
+    "ownerTeam": "Vulnerability Management Team",
+    "threat": "Vulnerability Exploitation",
+    "vulnerability": "Delayed Patch Deployment",
+    "riskOwnerId": "u-import-vulnerability.management.lead",
+    "owner": "Vulnerability Management Lead",
+    "dateIdentified": "2026-07-04",
+    "riskDate": "2026-07-04",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 5
+      },
+      {
+        "name": "Availability",
+        "value": 4
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 3.875,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.875 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-4",
+      "name": "Cybersecurity",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-4",
+      "name": "Cybersecurity",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Weekly remediation tracking.",
+    "treatmentActions": "Weekly remediation tracking.",
+    "deadline": "2026-10-31",
+    "targetDate": "2026-10-31",
+    "treatmentDueDate": "2026-10-31",
+    "treatmentOwner": "Vulnerability Management Lead",
+    "treatmentOwnerId": "u-import-vulnerability.management.lead",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "4",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 16,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-2",
+      "name": "Wadjet Digital Ltd"
+    }
+  },
+  {
+    "_id": "risk-import-r-019",
+    "riskId": "R-019",
+    "title": "Insufficient Security Awareness",
+    "description": "Employees may fall victim to social engineering attacks.",
+    "process": "Security Awareness Program",
+    "subProcess": "Employee Training",
+    "riskCategory": "Human Risk",
+    "category": "Human Risk",
+    "assetSystem": "Workforce",
+    "ownerTeam": "HR & Security Team",
+    "threat": "Social Engineering",
+    "vulnerability": "Lack of Security Training",
+    "riskOwnerId": "u-import-security.awareness.lead",
+    "owner": "Security Awareness Lead",
+    "dateIdentified": "2026-07-08",
+    "riskDate": "2026-07-08",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 3
+      },
+      {
+        "name": "Regulatory",
+        "value": 3
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 4
+      },
+      {
+        "name": "Integrity",
+        "value": 3
+      },
+      {
+        "name": "Availability",
+        "value": 3
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 3,
+      "rawImpactValue": 3.125,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.125 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 3 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Conduct quarterly awareness campaigns.",
+    "treatmentActions": "Conduct quarterly awareness campaigns.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Security Awareness Lead",
+    "treatmentOwnerId": "u-import-security.awareness.lead",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "3",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-020",
+    "riskId": "R-020",
+    "title": "Third Party Data Exposure",
+    "description": "Customer data may be exposed through a compromised vendor.",
+    "process": "Third Party Risk Management",
+    "subProcess": "Vendor Data Management",
+    "riskCategory": "Third Party Risk",
+    "category": "Third Party Risk",
+    "assetSystem": "Vendor Integrated Systems",
+    "ownerTeam": "TPRM Team",
+    "threat": "Vendor Breach",
+    "vulnerability": "Weak Vendor Security Controls",
+    "riskOwnerId": "u-import-third.party.risk.manager",
+    "owner": "Third Party Risk Manager",
+    "dateIdentified": "2026-07-11",
+    "riskDate": "2026-07-11",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 4,
+      "rawImpactValue": 3.625,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.625 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 4 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4
+    },
+    "escalationPath": "CRO + Procurement",
+    "domain": {
+      "_id": "d-5",
+      "name": "Third Party Risk",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-5",
+      "name": "Third Party Risk",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Annual vendor security audit and continuous monitoring.",
+    "treatmentActions": "Annual vendor security audit and continuous monitoring.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Third Party Risk Manager",
+    "treatmentOwnerId": "u-import-third.party.risk.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-021",
+    "riskId": "R-021",
+    "title": "Cloud Security Misconfiguration",
+    "description": "Sensitive customer and banking data may be exposed due to improperly configured cloud resources such as public storage buckets or databases.",
+    "process": "Cloud Security Management",
+    "subProcess": "Cloud Resource Provisioning",
+    "riskCategory": "Cloud Security",
+    "category": "Cloud Security",
+    "assetSystem": "AWS / Azure Environment",
+    "ownerTeam": "Cloud Infrastructure Team",
+    "threat": "Data Breach",
+    "vulnerability": "Public Storage Bucket Configuration",
+    "riskOwnerId": "u-import-cloud.architect",
+    "owner": "Cloud Architect",
+    "dateIdentified": "2026-07-14",
+    "riskDate": "2026-07-14",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 5
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 3
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 4,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 4.000 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Deploy CSPM, perform cloud configuration reviews, enforce least privilege.",
+    "treatmentActions": "Deploy CSPM, perform cloud configuration reviews, enforce least privilege.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Cloud Architect",
+    "treatmentOwnerId": "u-import-cloud.architect",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "3",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 20,
+    "sourceResidualScore": 10,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-022",
+    "riskId": "R-022",
+    "title": "AI Model Data Exposure",
+    "description": "Employees may unintentionally expose sensitive customer information while using public AI tools.",
+    "process": "AI Governance",
+    "subProcess": "AI Usage Monitoring",
+    "riskCategory": "Emerging Technology / AI",
+    "category": "Emerging Technology / AI",
+    "assetSystem": "AI Services and Customer Data",
+    "ownerTeam": "Information Security Team",
+    "threat": "Data Leakage",
+    "vulnerability": "Employees Using Public AI Models",
+    "riskOwnerId": "u-import-ciso",
+    "owner": "CISO",
+    "dateIdentified": "2026-07-16",
+    "riskDate": "2026-07-16",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 3
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 3.5,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.500 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement AI governance policy, DLP controls and employee awareness.",
+    "treatmentActions": "Implement AI governance policy, DLP controls and employee awareness.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "CISO",
+    "treatmentOwnerId": "u-import-ciso",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 16,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-023",
+    "riskId": "R-023",
+    "title": "Physical Security Breach – Data Center",
+    "description": "Unauthorized individuals may gain physical access to critical banking infrastructure, resulting in theft, sabotage or service disruption.",
+    "process": "Physical Security Management",
+    "subProcess": "Data Center Access Control",
+    "riskCategory": "Physical Security",
+    "category": "Physical Security",
+    "assetSystem": "Data Center Infrastructure",
+    "ownerTeam": "Facilities Security Team",
+    "threat": "Unauthorized Physical Access",
+    "vulnerability": "Weak Access Control Mechanisms",
+    "riskOwnerId": "u-import-facilities.security.manager",
+    "owner": "Facilities Security Manager",
+    "dateIdentified": "2026-07-19",
+    "riskDate": "2026-07-19",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 5
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 2
+      },
+      {
+        "name": "Operational",
+        "value": 5
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 5
+      },
+      {
+        "name": "Availability",
+        "value": 5
+      }
+    ],
+    "impactScore": 5,
+    "impact": 5,
+    "riskScore": 20,
+    "inherentScore": 20,
+    "inherentLevel": "Critical",
+    "severityLevel": "Critical",
+    "residualScore": 20,
+    "residualLevel": "Critical",
+    "overallRisk": "Critical",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 20,
+    "calculatedResidualScore": 20,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 5,
+      "rawImpactValue": 4.5,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 4.500 → rounded to 5",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 5 = 20",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 5,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 5
+    },
+    "escalationPath": "Board of Directors via Enterprise Risk Register",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement biometric access, visitor management and periodic physical audits.",
+    "treatmentActions": "Implement biometric access, visitor management and periodic physical audits.",
+    "deadline": "2026-10-31",
+    "targetDate": "2026-10-31",
+    "treatmentDueDate": "2026-10-31",
+    "treatmentOwner": "Facilities Security Manager",
+    "treatmentOwnerId": "u-import-facilities.security.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "5",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 20,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-024",
+    "riskId": "R-024",
+    "title": "ATM Skimming Attack",
+    "description": "Criminals may install skimming devices on ATMs to capture card information and PINs.",
+    "process": "ATM Security Management",
+    "subProcess": "ATM Fraud Prevention",
+    "riskCategory": "Physical Security / Fraud",
+    "category": "Physical Security / Fraud",
+    "assetSystem": "ATM Network",
+    "ownerTeam": "Cards & Payments Team",
+    "threat": "Card Data Theft",
+    "vulnerability": "Lack of Anti-Skimming Controls",
+    "riskOwnerId": "u-import-cards.payments.manager",
+    "owner": "Cards & Payments Manager",
+    "dateIdentified": "2026-07-21",
+    "riskDate": "2026-07-21",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 3
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 3
+      },
+      {
+        "name": "Availability",
+        "value": 1
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 9,
+    "inherentScore": 9,
+    "inherentLevel": "Medium",
+    "severityLevel": "Medium",
+    "residualScore": 9,
+    "residualLevel": "Medium",
+    "overallRisk": "Medium",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 9,
+    "calculatedResidualScore": 9,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 3,
+      "rawImpactValue": 3,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.000 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 3 = 9",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3
+    },
+    "escalationPath": "Risk Owner + CISO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Install anti-skimming devices and increase ATM inspections.",
+    "treatmentActions": "Install anti-skimming devices and increase ATM inspections.",
+    "deadline": "2026-11-30",
+    "targetDate": "2026-11-30",
+    "treatmentDueDate": "2026-11-30",
+    "treatmentOwner": "Cards & Payments Manager",
+    "treatmentOwnerId": "u-import-cards.payments.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "1",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-025",
+    "riskId": "R-025",
+    "title": "API Security Breach",
+    "description": "Attackers may exploit insecure APIs to gain unauthorized access to customer data and banking services.",
+    "process": "Application Security Management",
+    "subProcess": "API Security Monitoring",
+    "riskCategory": "Application Security",
+    "category": "Application Security",
+    "assetSystem": "Open Banking APIs",
+    "ownerTeam": "Application Security Team",
+    "threat": "API Abuse / Injection",
+    "vulnerability": "No API Gateway and Rate Limiting",
+    "riskOwnerId": "u-import-api.security.lead",
+    "owner": "API Security Lead",
+    "dateIdentified": "2026-07-25",
+    "riskDate": "2026-07-25",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 5
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 5
+      },
+      {
+        "name": "Availability",
+        "value": 3
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 4.125,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 4.125 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Deploy API Gateway, WAF, API monitoring and rate limiting controls.",
+    "treatmentActions": "Deploy API Gateway, WAF, API monitoring and rate limiting controls.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "API Security Lead",
+    "treatmentOwnerId": "u-import-api.security.lead",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "3",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 20,
+    "sourceResidualScore": 10,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-026",
+    "riskId": "R-026",
+    "title": "Software Supply Chain Attack",
+    "description": "Malicious code may be introduced into banking applications through compromised open-source libraries or third-party software components.",
+    "process": "Secure Software Development Lifecycle",
+    "subProcess": "Third-Party Dependency Management",
+    "riskCategory": "Third Party Risk / Cybersecurity",
+    "category": "Third Party Risk / Cybersecurity",
+    "assetSystem": "Banking Applications",
+    "ownerTeam": "DevSecOps Team",
+    "threat": "Malicious Code Injection",
+    "vulnerability": "No Software Composition Analysis (SCA)",
+    "riskOwnerId": "u-import-devsecops.lead",
+    "owner": "DevSecOps Lead",
+    "dateIdentified": "2026-07-27",
+    "riskDate": "2026-07-27",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 5
+      },
+      {
+        "name": "Availability",
+        "value": 4
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 4,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 4.000 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Deploy SCA tools, vendor security validation, dependency scanning.",
+    "treatmentActions": "Deploy SCA tools, vendor security validation, dependency scanning.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "DevSecOps Lead",
+    "treatmentOwnerId": "u-import-devsecops.lead",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "4",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 16,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-027",
+    "riskId": "R-027",
+    "title": "Mobile Banking Application Vulnerability",
+    "description": "Attackers may reverse engineer the banking application to extract secrets, API keys, or bypass security controls.",
+    "process": "Mobile Application Security",
+    "subProcess": "Secure Mobile Development",
+    "riskCategory": "Application Security",
+    "category": "Application Security",
+    "assetSystem": "Mobile Banking Application",
+    "ownerTeam": "Mobile Security Team",
+    "threat": "Reverse Engineering",
+    "vulnerability": "Lack of Code Obfuscation",
+    "riskOwnerId": "u-import-mobile.security.lead",
+    "owner": "Mobile Security Lead",
+    "dateIdentified": "2026-07-29",
+    "riskDate": "2026-07-29",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 3.5,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.500 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement code obfuscation, root detection, anti-tampering controls.",
+    "treatmentActions": "Implement code obfuscation, root detection, anti-tampering controls.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Mobile Security Lead",
+    "treatmentOwnerId": "u-import-mobile.security.lead",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 16,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-028",
+    "riskId": "R-028",
+    "title": "Vishing Attack",
+    "description": "Attackers may impersonate IT support, management, or trusted parties to obtain credentials or sensitive information.",
+    "process": "Security Awareness Management",
+    "subProcess": "Social Engineering Defense",
+    "riskCategory": "Human Risk",
+    "category": "Human Risk",
+    "assetSystem": "Employees and Internal Systems",
+    "ownerTeam": "Security Awareness Team",
+    "threat": "Voice-Based Social Engineering",
+    "vulnerability": "No Verification Procedure for Phone Requests",
+    "riskOwnerId": "u-import-security.awareness.lead",
+    "owner": "Security Awareness Lead",
+    "dateIdentified": "2026-08-01",
+    "riskDate": "2026-08-01",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 3
+      },
+      {
+        "name": "Regulatory",
+        "value": 3
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 4
+      },
+      {
+        "name": "Integrity",
+        "value": 3
+      },
+      {
+        "name": "Availability",
+        "value": 3
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 3,
+      "rawImpactValue": 3.125,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.125 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 3 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement call verification procedures and regular vishing simulations.",
+    "treatmentActions": "Implement call verification procedures and regular vishing simulations.",
+    "deadline": "2026-10-31",
+    "targetDate": "2026-10-31",
+    "treatmentDueDate": "2026-10-31",
+    "treatmentOwner": "Security Awareness Lead",
+    "treatmentOwnerId": "u-import-security.awareness.lead",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "3",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-029",
+    "riskId": "R-029",
+    "title": "Data Residency Violation",
+    "description": "Banking or customer data may be stored outside Egypt in violation of applicable laws and regulations.",
+    "process": "Data Governance",
+    "subProcess": "Data Residency Compliance",
+    "riskCategory": "Compliance / Legal",
+    "category": "Compliance / Legal",
+    "assetSystem": "Customer Data Repository",
+    "ownerTeam": "Compliance Team",
+    "threat": "Cross-Border Data Transfer",
+    "vulnerability": "Incorrect Cloud Region Selection",
+    "riskOwnerId": "u-import-compliance.manager",
+    "owner": "Compliance Manager",
+    "dateIdentified": "2026-08-03",
+    "riskDate": "2026-08-03",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 5
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 3.875,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.875 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Continuous data residency monitoring and cloud region validation.",
+    "treatmentActions": "Continuous data residency monitoring and cloud region validation.",
+    "deadline": "2026-09-30",
+    "targetDate": "2026-09-30",
+    "treatmentDueDate": "2026-09-30",
+    "treatmentOwner": "Compliance Manager",
+    "treatmentOwnerId": "u-import-compliance.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 20,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-030",
+    "riskId": "R-030",
+    "title": "Credential Stuffing Attack",
+    "description": "Attackers may use leaked credentials from other services to gain unauthorized access to customer accounts.",
+    "process": "Identity and Access Management",
+    "subProcess": "Authentication Security",
+    "riskCategory": "Cybersecurity",
+    "category": "Cybersecurity",
+    "assetSystem": "Internet Banking Platform",
+    "ownerTeam": "IAM Team",
+    "threat": "Credential Stuffing",
+    "vulnerability": "Password Reuse and Weak Authentication Controls",
+    "riskOwnerId": "u-import-iam.manager",
+    "owner": "IAM Manager",
+    "dateIdentified": "2026-08-04",
+    "riskDate": "2026-08-04",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 3
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 3,
+      "rawImpactValue": 3.25,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.250 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 3 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-4",
+      "name": "Cybersecurity",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-4",
+      "name": "Cybersecurity",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Enforce MFA, password blacklist, account lockout, and rate limiting.",
+    "treatmentActions": "Enforce MFA, password blacklist, account lockout, and rate limiting.",
+    "deadline": "2026-10-31",
+    "targetDate": "2026-10-31",
+    "treatmentDueDate": "2026-10-31",
+    "treatmentOwner": "IAM Manager",
+    "treatmentOwnerId": "u-import-iam.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-2",
+      "name": "Wadjet Digital Ltd"
+    }
+  },
+  {
+    "_id": "risk-import-r-031",
+    "riskId": "R-031",
+    "title": "Failure to Report PDPL Breach within 72 Hours",
+    "description": "Failure to notify the Personal Data Protection Center within the required timeframe may result in penalties and legal action.",
+    "process": "Incident Management",
+    "subProcess": "Regulatory Breach Notification",
+    "riskCategory": "Compliance / Legal",
+    "category": "Compliance / Legal",
+    "assetSystem": "Personal Data Processing Systems",
+    "ownerTeam": "Compliance & Privacy Team",
+    "threat": "Regulatory Sanctions",
+    "vulnerability": "No Automated Breach Reporting Process",
+    "riskOwnerId": "u-import-dpo",
+    "owner": "DPO",
+    "dateIdentified": "2026-08-05",
+    "riskDate": "2026-08-05",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 5
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 4
+      },
+      {
+        "name": "Integrity",
+        "value": 3
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 3,
+      "rawImpactValue": 3.375,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.375 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 3 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement automated breach notification workflow and escalation procedures.",
+    "treatmentActions": "Implement automated breach notification workflow and escalation procedures.",
+    "deadline": "2026-09-30",
+    "targetDate": "2026-09-30",
+    "treatmentDueDate": "2026-09-30",
+    "treatmentOwner": "DPO",
+    "treatmentOwnerId": "u-import-dpo",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 20,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-032",
+    "riskId": "R-032",
+    "title": "Cross-Border Data Transfer Without PDPC License",
+    "description": "Personal data may be transferred outside Egypt without required regulatory approval.",
+    "process": "Data Governance",
+    "subProcess": "Cross-Border Data Transfer",
+    "riskCategory": "Compliance / Legal",
+    "category": "Compliance / Legal",
+    "assetSystem": "Customer Data Platforms",
+    "ownerTeam": "Compliance Team",
+    "threat": "Regulatory Penalties",
+    "vulnerability": "Uncontrolled International Data Transfer",
+    "riskOwnerId": "u-import-dpo.ciso",
+    "owner": "DPO / CISO",
+    "dateIdentified": "2026-08-08",
+    "riskDate": "2026-08-08",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 5
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 3.75,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.750 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement data residency monitoring and transfer approval workflows.",
+    "treatmentActions": "Implement data residency monitoring and transfer approval workflows.",
+    "deadline": "2026-10-31",
+    "targetDate": "2026-10-31",
+    "treatmentDueDate": "2026-10-31",
+    "treatmentOwner": "DPO / CISO",
+    "treatmentOwnerId": "u-import-dpo.ciso",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 20,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-033",
+    "riskId": "R-033",
+    "title": "Failure to Meet NIS2 Equivalent Security Baseline",
+    "description": "Security controls may not meet international cybersecurity requirements, resulting in compliance gaps.",
+    "process": "Information Security Management",
+    "subProcess": "Regulatory Compliance",
+    "riskCategory": "Compliance / Cybersecurity",
+    "category": "Compliance / Cybersecurity",
+    "assetSystem": "Enterprise Security Program",
+    "ownerTeam": "Information Security Team",
+    "threat": "Regulatory Non-Compliance",
+    "vulnerability": "Incomplete Security Controls",
+    "riskOwnerId": "u-import-ciso",
+    "owner": "CISO",
+    "dateIdentified": "2026-08-10",
+    "riskDate": "2026-08-10",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 3
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 4
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 4
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 4,
+      "rawImpactValue": 3.625,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.625 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 4 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Conduct NIS2 gap assessment and formal compliance program.",
+    "treatmentActions": "Conduct NIS2 gap assessment and formal compliance program.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "CISO",
+    "treatmentOwnerId": "u-import-ciso",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "4",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-034",
+    "riskId": "R-034",
+    "title": "ICT Supply Chain Dependency",
+    "description": "Excessive reliance on a single cloud provider may cause significant operational disruption if the provider becomes unavailable.",
+    "process": "Third Party Risk Management",
+    "subProcess": "Cloud Provider Management",
+    "riskCategory": "Operational / Third Party",
+    "category": "Operational / Third Party",
+    "assetSystem": "Cloud Infrastructure",
+    "ownerTeam": "IT Operations",
+    "threat": "Service Disruption",
+    "vulnerability": "Single Cloud Provider Dependency",
+    "riskOwnerId": "u-import-cto",
+    "owner": "CTO",
+    "dateIdentified": "2026-08-12",
+    "riskDate": "2026-08-12",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 3
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 5
+      },
+      {
+        "name": "Confidentiality",
+        "value": 2
+      },
+      {
+        "name": "Integrity",
+        "value": 3
+      },
+      {
+        "name": "Availability",
+        "value": 5
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 3,
+      "rawImpactValue": 3.375,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.375 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 3 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Develop multi-cloud strategy and alternative vendor plans.",
+    "treatmentActions": "Develop multi-cloud strategy and alternative vendor plans.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "CTO",
+    "treatmentOwnerId": "u-import-cto",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "5",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 16,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-035",
+    "riskId": "R-035",
+    "title": "Failure to Conduct Digital Operational Resilience Testing",
+    "description": "Critical systems may fail during major incidents due to insufficient resilience testing.",
+    "process": "Business Continuity Management",
+    "subProcess": "Resilience Testing",
+    "riskCategory": "Operational / BCP",
+    "category": "Operational / BCP",
+    "assetSystem": "Critical Banking Services",
+    "ownerTeam": "Business Continuity Team",
+    "threat": "Service Outage",
+    "vulnerability": "Inadequate Testing Program",
+    "riskOwnerId": "u-import-bcp.manager",
+    "owner": "BCP Manager",
+    "dateIdentified": "2026-08-17",
+    "riskDate": "2026-08-17",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 3
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 5
+      },
+      {
+        "name": "Confidentiality",
+        "value": 2
+      },
+      {
+        "name": "Integrity",
+        "value": 3
+      },
+      {
+        "name": "Availability",
+        "value": 5
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 3,
+      "rawImpactValue": 3.375,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.375 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 3 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement quarterly resilience exercises and threat-led testing.",
+    "treatmentActions": "Implement quarterly resilience exercises and threat-led testing.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "BCP Manager",
+    "treatmentOwnerId": "u-import-bcp.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "5",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 16,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-036",
+    "riskId": "R-036",
+    "title": "Deepfake-Based Social Engineering Attack",
+    "description": "Attackers may use AI-generated voice or video impersonation of executives to trick employees into transferring funds or disclosing sensitive information.",
+    "process": "Security Awareness Management",
+    "subProcess": "Social Engineering Defense",
+    "riskCategory": "Human Risk / Emerging Technology",
+    "category": "Human Risk / Emerging Technology",
+    "assetSystem": "Employees and Communication Channels",
+    "ownerTeam": "SOC Team / Security Awareness Team",
+    "threat": "AI-Generated Voice or Video Impersonation",
+    "vulnerability": "No Verification Procedure for High-Risk Requests",
+    "riskOwnerId": "u-import-soc.manager",
+    "owner": "SOC Manager",
+    "dateIdentified": "2026-08-18",
+    "riskDate": "2026-08-18",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 5
+      },
+      {
+        "name": "Regulatory",
+        "value": 3
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 4
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 3.5,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.500 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement callback verification procedures and deepfake awareness training.",
+    "treatmentActions": "Implement callback verification procedures and deepfake awareness training.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "SOC Manager",
+    "treatmentOwnerId": "u-import-soc.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 20,
+    "sourceResidualScore": 10,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-037",
+    "riskId": "R-037",
+    "title": "Mobile Banking Trojan Infection",
+    "description": "Malware installed on customer devices may intercept banking credentials and OTP codes.",
+    "process": "Mobile Security Management",
+    "subProcess": "Mobile Threat Protection",
+    "riskCategory": "Application Security / Mobile",
+    "category": "Application Security / Mobile",
+    "assetSystem": "Mobile Banking Application",
+    "ownerTeam": "Mobile Security Team",
+    "threat": "Banking Malware",
+    "vulnerability": "Lack of Runtime Application Protection",
+    "riskOwnerId": "u-import-mobile.security.lead",
+    "owner": "Mobile Security Lead",
+    "dateIdentified": "2026-08-20",
+    "riskDate": "2026-08-20",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 3
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 3,
+      "rawImpactValue": 3.375,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.375 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 3 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement RASP, anti-tampering, and root/jailbreak detection.",
+    "treatmentActions": "Implement RASP, anti-tampering, and root/jailbreak detection.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Mobile Security Lead",
+    "treatmentOwnerId": "u-import-mobile.security.lead",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 16,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-038",
+    "riskId": "R-038",
+    "title": "DPO Not Formally Appointed or Registered",
+    "description": "Failure to appoint and register a Data Protection Officer may result in non-compliance with privacy regulations.",
+    "process": "Privacy Governance",
+    "subProcess": "Data Protection Compliance",
+    "riskCategory": "Compliance / Legal",
+    "category": "Compliance / Legal",
+    "assetSystem": "Privacy Management Program",
+    "ownerTeam": "Compliance Department",
+    "threat": "Regulatory Penalties",
+    "vulnerability": "No Formal DPO Registration",
+    "riskOwnerId": "u-import-compliance.manager",
+    "owner": "Compliance Manager",
+    "dateIdentified": "2026-08-22",
+    "riskDate": "2026-08-22",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 3
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 3
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 2
+      },
+      {
+        "name": "Integrity",
+        "value": 2
+      },
+      {
+        "name": "Availability",
+        "value": 1
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 9,
+    "inherentScore": 9,
+    "inherentLevel": "Medium",
+    "severityLevel": "Medium",
+    "residualScore": 9,
+    "residualLevel": "Medium",
+    "overallRisk": "Medium",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 9,
+    "calculatedResidualScore": 9,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 3,
+      "rawImpactValue": 2.5,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 2.500 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 3 = 9",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3
+    },
+    "escalationPath": "Risk Owner + CISO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Appoint and register DPO and establish governance procedures.",
+    "treatmentActions": "Appoint and register DPO and establish governance procedures.",
+    "deadline": "2026-10-31",
+    "targetDate": "2026-10-31",
+    "treatmentDueDate": "2026-10-31",
+    "treatmentOwner": "Compliance Manager",
+    "treatmentOwnerId": "u-import-compliance.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "1",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-039",
+    "riskId": "R-039",
+    "title": "Lack of Records of Processing Activities (ROPA)",
+    "description": "The organization may fail to demonstrate compliance due to missing records of personal data processing activities.",
+    "process": "Data Governance",
+    "subProcess": "Data Inventory Management",
+    "riskCategory": "Compliance",
+    "category": "Compliance",
+    "assetSystem": "Personal Data Repositories",
+    "ownerTeam": "Data Governance Team",
+    "threat": "Regulatory Inspection Failure",
+    "vulnerability": "No Centralized Data Processing Inventory",
+    "riskOwnerId": "u-import-data.governance.lead",
+    "owner": "Data Governance Lead",
+    "dateIdentified": "2026-08-24",
+    "riskDate": "2026-08-24",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 3
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 3
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 3
+      },
+      {
+        "name": "Integrity",
+        "value": 3
+      },
+      {
+        "name": "Availability",
+        "value": 1
+      }
+    ],
+    "impactScore": 5,
+    "impact": 5,
+    "riskScore": 15,
+    "inherentScore": 15,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 15,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 15,
+    "calculatedResidualScore": 15,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 5,
+      "rawImpactValue": 5,
+      "impactMethod": "max",
+      "impactCalcDetail": "max(3, 5, 3, 1, 3, 3, 3, 1) = 5",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 5 = 15",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 5,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 5
+    },
+    "escalationPath": "CRO + Legal Counsel",
+    "domain": {
+      "_id": "d-3",
+      "name": "Compliance",
+      "scoringMethod": "max"
+    },
+    "parameter": {
+      "_id": "p-3",
+      "name": "Compliance",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement automated data discovery and maintain ROPA records within GRC platform.",
+    "treatmentActions": "Implement automated data discovery and maintain ROPA records within GRC platform.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Data Governance Lead",
+    "treatmentOwnerId": "u-import-data.governance.lead",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "1",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-040",
+    "riskId": "R-040",
+    "title": "Account Takeover via SIM Swap Attack",
+    "description": "Attackers may gain control of customer accounts by hijacking phone numbers used for SMS-based authentication.",
+    "process": "Identity and Access Management",
+    "subProcess": "Customer Authentication",
+    "riskCategory": "Cybersecurity / Fraud",
+    "category": "Cybersecurity / Fraud",
+    "assetSystem": "Digital Banking Platform",
+    "ownerTeam": "IAM Team / Fraud Team",
+    "threat": "SIM Swap Fraud",
+    "vulnerability": "Reliance on SMS OTP as Sole Authentication Factor",
+    "riskOwnerId": "u-import-fraud.manager",
+    "owner": "Fraud Manager",
+    "dateIdentified": "2026-09-01",
+    "riskDate": "2026-09-01",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 5
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 5
+      },
+      {
+        "name": "Availability",
+        "value": 3
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 4,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 4.000 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement authenticator-based MFA, biometric authentication and SIM swap detection controls.",
+    "treatmentActions": "Implement authenticator-based MFA, biometric authentication and SIM swap detection controls.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Fraud Manager",
+    "treatmentOwnerId": "u-import-fraud.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "3",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 20,
+    "sourceResidualScore": 10,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-041",
+    "riskId": "R-041",
+    "title": "Failure to Submit DPIA for High-Risk Processing",
+    "description": "High-risk personal data processing activities may be implemented without conducting a Data Protection Impact Assessment, resulting in regulatory violations.",
+    "process": "Privacy Risk Management",
+    "subProcess": "DPIA Management",
+    "riskCategory": "Compliance / Legal",
+    "category": "Compliance / Legal",
+    "assetSystem": "Personal Data Processing Activities",
+    "ownerTeam": "Privacy & Compliance Team",
+    "threat": "Regulatory Non-Compliance",
+    "vulnerability": "No Formal DPIA Process",
+    "riskOwnerId": "u-import-dpo",
+    "owner": "DPO",
+    "dateIdentified": "2026-09-04",
+    "riskDate": "2026-09-04",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 3
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 3
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 3
+      },
+      {
+        "name": "Integrity",
+        "value": 3
+      },
+      {
+        "name": "Availability",
+        "value": 1
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 9,
+    "inherentScore": 9,
+    "inherentLevel": "Medium",
+    "severityLevel": "Medium",
+    "residualScore": 9,
+    "residualLevel": "Medium",
+    "overallRisk": "Medium",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 9,
+    "calculatedResidualScore": 9,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 3,
+      "rawImpactValue": 2.75,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 2.750 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 3 = 9",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3
+    },
+    "escalationPath": "Risk Owner + CISO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Formalize DPIA process and integrate with project lifecycle.",
+    "treatmentActions": "Formalize DPIA process and integrate with project lifecycle.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "DPO",
+    "treatmentOwnerId": "u-import-dpo",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "1",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-042",
+    "riskId": "R-042",
+    "title": "Insufficient Network Segmentation",
+    "description": "Attackers may move laterally across the network after an initial compromise due to insufficient segmentation between critical systems.",
+    "process": "Network Security Management",
+    "subProcess": "Network Segmentation",
+    "riskCategory": "Cybersecurity",
+    "category": "Cybersecurity",
+    "assetSystem": "Internal Banking Network",
+    "ownerTeam": "Network Security Team",
+    "threat": "Lateral Movement",
+    "vulnerability": "Flat Network Architecture",
+    "riskOwnerId": "u-import-network.security.manager",
+    "owner": "Network Security Manager",
+    "dateIdentified": "2026-09-06",
+    "riskDate": "2026-09-06",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 5
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 5
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 5
+      },
+      {
+        "name": "Availability",
+        "value": 4
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 16,
+    "inherentScore": 16,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 16,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 16,
+    "calculatedResidualScore": 16,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 4,
+      "rawImpactValue": 4.25,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 4.250 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 4 = 16",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-4",
+      "name": "Cybersecurity",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-4",
+      "name": "Cybersecurity",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement micro-segmentation and zero-trust network architecture.",
+    "treatmentActions": "Implement micro-segmentation and zero-trust network architecture.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Network Security Manager",
+    "treatmentOwnerId": "u-import-network.security.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "4",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 20,
+    "sourceResidualScore": 10,
+    "organization": {
+      "_id": "o-2",
+      "name": "Wadjet Digital Ltd"
+    }
+  },
+  {
+    "_id": "risk-import-r-043",
+    "riskId": "R-043",
+    "title": "ICT Incident Reporting Delay",
+    "description": "Critical cybersecurity incidents may not be reported within regulatory timelines due to inefficient reporting processes.",
+    "process": "Incident Management",
+    "subProcess": "Regulatory Incident Reporting",
+    "riskCategory": "Compliance / Cybersecurity",
+    "category": "Compliance / Cybersecurity",
+    "assetSystem": "SIEM / Incident Management Platform",
+    "ownerTeam": "SOC Team / Compliance Team",
+    "threat": "Regulatory Breach",
+    "vulnerability": "Manual Incident Escalation Process",
+    "riskOwnerId": "u-import-soc.manager",
+    "owner": "SOC Manager",
+    "dateIdentified": "2026-09-07",
+    "riskDate": "2026-09-07",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 2
+      },
+      {
+        "name": "Integrity",
+        "value": 3
+      },
+      {
+        "name": "Availability",
+        "value": 3
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 3,
+      "rawImpactValue": 3.25,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.250 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 3 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 3
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Automate incident notification and reporting workflows.",
+    "treatmentActions": "Automate incident notification and reporting workflows.",
+    "deadline": "2026-11-30",
+    "targetDate": "2026-11-30",
+    "treatmentDueDate": "2026-11-30",
+    "treatmentOwner": "SOC Manager",
+    "treatmentOwnerId": "u-import-soc.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "3",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 16,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-044",
+    "riskId": "R-044",
+    "title": "Supply Chain Security Assessment Failure",
+    "description": "Critical vendors may introduce cybersecurity risks due to insufficient security assessments and monitoring.",
+    "process": "Third Party Risk Management",
+    "subProcess": "Vendor Security Assessment",
+    "riskCategory": "Third Party Risk",
+    "category": "Third Party Risk",
+    "assetSystem": "External Suppliers and Service Providers",
+    "ownerTeam": "Vendor Risk Management Team",
+    "threat": "Supply Chain Compromise",
+    "vulnerability": "No Formal Vendor Security Assessment Program",
+    "riskOwnerId": "u-import-vendor.risk.manager",
+    "owner": "Vendor Risk Manager",
+    "dateIdentified": "2026-09-14",
+    "riskDate": "2026-09-14",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 4
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 4
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 4,
+      "rawImpactValue": 3.625,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.625 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 4 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4
+    },
+    "escalationPath": "CRO + Procurement",
+    "domain": {
+      "_id": "d-5",
+      "name": "Third Party Risk",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-5",
+      "name": "Third Party Risk",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Establish vendor security assessment framework and periodic audits.",
+    "treatmentActions": "Establish vendor security assessment framework and periodic audits.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Vendor Risk Manager",
+    "treatmentOwnerId": "u-import-vendor.risk.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "4",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-045",
+    "riskId": "R-045",
+    "title": "Insider Threat Detection Failure",
+    "description": "Malicious or negligent employees may access or exfiltrate sensitive information without detection.",
+    "process": "Security Monitoring",
+    "subProcess": "User Activity Monitoring",
+    "riskCategory": "Human Risk / Security Monitoring",
+    "category": "Human Risk / Security Monitoring",
+    "assetSystem": "Internal Banking Systems",
+    "ownerTeam": "Security Operations Center",
+    "threat": "Insider Threat",
+    "vulnerability": "Lack of User Behavior Analytics (UEBA)",
+    "riskOwnerId": "u-import-soc.manager",
+    "owner": "SOC Manager",
+    "dateIdentified": "2026-09-25",
+    "riskDate": "2026-09-25",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 4
+      },
+      {
+        "name": "Reputational",
+        "value": 5
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 5
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 4,
+    "impact": 4,
+    "riskScore": 12,
+    "inherentScore": 12,
+    "inherentLevel": "High",
+    "severityLevel": "High",
+    "residualScore": 12,
+    "residualLevel": "High",
+    "overallRisk": "High",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 12,
+    "calculatedResidualScore": 12,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 4,
+      "rawImpactValue": 3.625,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.625 → rounded to 4",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 4 = 12",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 4
+    },
+    "escalationPath": "CISO + CRO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Deploy UEBA and DLP solutions with continuous monitoring.",
+    "treatmentActions": "Deploy UEBA and DLP solutions with continuous monitoring.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "SOC Manager",
+    "treatmentOwnerId": "u-import-soc.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-046",
+    "riskId": "R-046",
+    "title": "Compliance Mapping Failure",
+    "description": "Incorrect mapping between regulations and controls may lead to inaccurate compliance reports and audit findings.",
+    "process": "Compliance Management",
+    "subProcess": "Control Mapping",
+    "riskCategory": "Compliance",
+    "category": "Compliance",
+    "assetSystem": "Wadjet GRC Platform",
+    "ownerTeam": "Compliance Team",
+    "threat": "Incorrect Compliance Assessment",
+    "vulnerability": "Incorrect Framework Mapping",
+    "riskOwnerId": "u-import-compliance.manager",
+    "owner": "Compliance Manager",
+    "dateIdentified": "2026-09-26",
+    "riskDate": "2026-09-26",
+    "likelihood": 4,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 4
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 1
+      },
+      {
+        "name": "Integrity",
+        "value": 5
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 5,
+    "impact": 5,
+    "riskScore": 20,
+    "inherentScore": 20,
+    "inherentLevel": "Critical",
+    "severityLevel": "Critical",
+    "residualScore": 20,
+    "residualLevel": "Critical",
+    "overallRisk": "Critical",
+    "appetiteStatus": "Outside Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 20,
+    "calculatedResidualScore": 20,
+    "calculationTrace": {
+      "likelihood": 4,
+      "impact": 5,
+      "rawImpactValue": 5,
+      "impactMethod": "max",
+      "impactCalcDetail": "max(4, 5, 4, 1, 4, 1, 5, 2) = 5",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "4 × 5 = 20",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 5,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 4,
+      "residualImpact": 5
+    },
+    "escalationPath": "Board of Directors via Regulatory Risk Register",
+    "domain": {
+      "_id": "d-3",
+      "name": "Compliance",
+      "scoringMethod": "max"
+    },
+    "parameter": {
+      "_id": "p-3",
+      "name": "Compliance",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Automated mapping validation and periodic compliance reviews.",
+    "treatmentActions": "Automated mapping validation and periodic compliance reviews.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Compliance Manager",
+    "treatmentOwnerId": "u-import-compliance.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 16,
+    "sourceResidualScore": 8,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-047",
+    "riskId": "R-047",
+    "title": "Automated Evidence Collection Failure",
+    "description": "Automated evidence collection processes may fail, resulting in incomplete audit evidence and compliance gaps.",
+    "process": "Compliance Automation",
+    "subProcess": "Evidence Collection",
+    "riskCategory": "Operational",
+    "category": "Operational",
+    "assetSystem": "n8n Workflows / Integrations",
+    "ownerTeam": "Automation Team",
+    "threat": "Missing Audit Evidence",
+    "vulnerability": "Workflow Failure or Integration Failure",
+    "riskOwnerId": "u-import-automation.lead",
+    "owner": "Automation Lead",
+    "dateIdentified": "2026-09-27",
+    "riskDate": "2026-09-27",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 3
+      },
+      {
+        "name": "Regulatory",
+        "value": 5
+      },
+      {
+        "name": "Reputational",
+        "value": 3
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 1
+      },
+      {
+        "name": "Integrity",
+        "value": 4
+      },
+      {
+        "name": "Availability",
+        "value": 4
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 9,
+    "inherentScore": 9,
+    "inherentLevel": "Medium",
+    "severityLevel": "Medium",
+    "residualScore": 9,
+    "residualLevel": "Medium",
+    "overallRisk": "Medium",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 9,
+    "calculatedResidualScore": 9,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 3,
+      "rawImpactValue": 3.125,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 3.125 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 3 = 9",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3
+    },
+    "escalationPath": "Process Owner + COO",
+    "domain": {
+      "_id": "d-2",
+      "name": "Operational",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-2",
+      "name": "Operational",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement workflow health monitoring, alerting, and failover mechanisms.",
+    "treatmentActions": "Implement workflow health monitoring, alerting, and failover mechanisms.",
+    "deadline": "2026-11-30",
+    "targetDate": "2026-11-30",
+    "treatmentDueDate": "2026-11-30",
+    "treatmentOwner": "Automation Lead",
+    "treatmentOwnerId": "u-import-automation.lead",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "4",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-import-r-048",
+    "riskId": "R-048",
+    "title": "Risk Heatmap Inaccuracy",
+    "description": "Risk calculations may be inaccurate due to incorrect formulas or scoring logic, leading to poor management decisions.",
+    "process": "Risk Management",
+    "subProcess": "Risk Scoring & Reporting",
+    "riskCategory": "Risk Management",
+    "category": "Risk Management",
+    "assetSystem": "Risk Dashboard",
+    "ownerTeam": "Enterprise Risk Team",
+    "threat": "Incorrect Executive Decision Making",
+    "vulnerability": "Incorrect Risk Scoring Logic",
+    "riskOwnerId": "u-import-risk.manager",
+    "owner": "Risk Manager",
+    "dateIdentified": "2026-09-28",
+    "riskDate": "2026-09-28",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 4
+      },
+      {
+        "name": "Regulatory",
+        "value": 3
+      },
+      {
+        "name": "Reputational",
+        "value": 3
+      },
+      {
+        "name": "Safety",
+        "value": 1
+      },
+      {
+        "name": "Operational",
+        "value": 4
+      },
+      {
+        "name": "Confidentiality",
+        "value": 1
+      },
+      {
+        "name": "Integrity",
+        "value": 5
+      },
+      {
+        "name": "Availability",
+        "value": 2
+      }
+    ],
+    "impactScore": 3,
+    "impact": 3,
+    "riskScore": 9,
+    "inherentScore": 9,
+    "inherentLevel": "Medium",
+    "severityLevel": "Medium",
+    "residualScore": 9,
+    "residualLevel": "Medium",
+    "overallRisk": "Medium",
+    "appetiteStatus": "Above Appetite / Within Tolerance",
+    "appetiteLimit": 8,
+    "toleranceLimit": 12,
+    "combinedCE": 0,
+    "effectiveCE": 0,
+    "suggestedResidual": 9,
+    "calculatedResidualScore": 9,
+    "calculationTrace": {
+      "likelihood": 3,
+      "impact": 3,
+      "rawImpactValue": 2.875,
+      "impactMethod": "weighted",
+      "impactCalcDetail": "Σ(value × weight) = 2.875 → rounded to 3",
+      "riskScoreMethod": "multiplicative",
+      "inherentCalcDetail": "3 × 3 = 9",
+      "ceDetails": [],
+      "rawCE": 0,
+      "effectiveCE": 0,
+      "capApplied": false,
+      "residualMethod": "overall_ce",
+      "residualCalcDetail": 0,
+      "minResidualScore": 1,
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3,
+      "thresholds": {
+        "critical": 20,
+        "high": 12,
+        "medium": 6
+      },
+      "appetiteLimit": 8,
+      "toleranceLimit": 12
+    },
+    "reductionDetail": {
+      "likelihoodReduction": 0,
+      "impactReduction": 0,
+      "residualLikelihood": 3,
+      "residualImpact": 3
+    },
+    "escalationPath": "Risk Owner + CISO",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security",
+      "scoringMethod": "advanced"
+    },
+    "parameter": {
+      "_id": "p-1",
+      "name": "Information Security",
+      "methodVersion": 1
+    },
+    "treatmentDecision": "Mitigate",
+    "treatment": "Mitigate",
+    "status": "Open",
+    "mitigationActions": "Implement automated validation checks and independent risk model reviews.",
+    "treatmentActions": "Implement automated validation checks and independent risk model reviews.",
+    "deadline": "2026-12-31",
+    "targetDate": "2026-12-31",
+    "treatmentDueDate": "2026-12-31",
+    "treatmentOwner": "Risk Manager",
+    "treatmentOwnerId": "u-import-risk.manager",
+    "treatmentEffectiveness": "Not Assessed",
+    "existingControls": "2",
+    "createdAt": "2026-08-25T13:12:58.806Z",
+    "updatedAt": "2026-08-25T13:12:58.806Z",
+    "closedAt": null,
+    "source": "Risk_Assessment_v3.xlsx",
+    "sourceRiskScore": 12,
+    "sourceResidualScore": 6,
+    "organization": {
+      "_id": "o-1",
+      "name": "Wadjet Bank Plc"
+    }
+  },
+  {
+    "_id": "risk-mt9w5mv5-9",
+    "riskId": "R-049",
+    "title": "r6yu6",
+    "description": "tyetr",
+    "process": "rteyt",
+    "subProcess": "etyr",
+    "riskCategory": "Cybersecurity",
+    "assetSystem": "a-1",
+    "threat": "erty",
+    "vulnerability": "ertye",
+    "riskOwnerId": "user-mt9w4wq6-8",
+    "ownerTeam": "wtye",
+    "riskSource": "Incident",
+    "dateIdentified": "2026-08-26",
+    "likelihood": 3,
+    "impacts": [
+      {
+        "name": "Financial",
+        "value": 3
+      },
+      {
+        "name": "Regulatory",
+        "value": 3
+      },
+      {
+        "name": "Reputational",
+        "value": 3
+      },
+      {
+        "name": "Safety",
+        "value": 3
+      },
+      {
+        "name": "Operational",
+        "value": 3
+      },
+      {
+        "name": "Confidentiality",
+        "value": 3
+      },
+      {
+        "name": "Integrity",
+        "value": 3
+      },
+      {
+        "name": "Availability",
+        "value": 3
+      }
+    ],
+    "escalationPath": "Risk Owner",
+    "domain": {
+      "_id": "d-1",
+      "name": "Information Security"
+    },
+    "parameter": "p-1",
+    "treatmentDecision": "Modify",
+    "treatmentActions": "",
+    "estimatedBudget": null,
+    "plannedControls": [],
+    "treatmentOwnerId": "admin",
+    "targetDate": "2026-09-25T09:28:24.065Z",
+    "reviewFrequency": "Quarterly",
+    "acceptanceJustification": null,
+    "nextReviewDate": "2026-08-28",
+    "riskOwnerSignOff": null,
+    "attachments": [],
+    "status": "Open",
+    "mitigationActions": "",
+    "deadline": "2026-09-25T09:28:24.065Z",
+    "asset": null,
+    "treatmentOwner": "admin",
+    "treatmentDueDate": "2026-09-25T09:28:24.065Z",
+    "treatmentEffectiveness": "Not Assessed",
+    "createdAt": "2026-08-26T09:28:24.065Z",
+    "closedAt": null,
+    "methodVersionAtAssessment": 1,
+    "residualJustification": null,
+    "overriddenBy": null,
+    "overriddenAt": null,
+    "residualOverridden": false,
+    "lastAssessedAt": "2026-08-26T09:28:24.065Z",
+    "nextReassessmentDue": null,
+    "changeTriggerPending": false,
+    "changeTriggerReason": null,
+    "requiresSecondApproval": false,
+    "secondApprovedBy": null,
+    "secondApprovedAt": null,
+    "acceptedBy": null,
+    "acceptedAt": null,
+    "acceptanceEnteredBy": null,
+    "acceptanceAuthorityLevel": null
+  }
+]

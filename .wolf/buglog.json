@@ -318,4 +318,15 @@
     "occurrences": 1,
     "last_seen": "2026-08-25T00:00:00+03:00"
   }
+  ,{
+    "id": "BUG-20260827-001",
+    "timestamp": "2026-08-27T18:20:00+03:00",
+    "error_message": "start.bat did not start Main API because persistence code was temporarily inserted before initialization; Prisma startup also prompted for a data-loss schema change.",
+    "file": "zico-3-stable/zico-3-stable/start.bat; zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+    "root_cause": "Startup included a destructive db push and the Main API persistence helper had misplaced duplicate code after concurrent edits.",
+    "fix": "Removed db push and seed from startup, added Unicode-safe backup-data.ps1/start-services.ps1 helpers, repaired Main API persistence placement, added atomic writes and graceful shutdown saves, and verified all three service endpoints.",
+    "tags": ["startup", "data-safety", "backup", "prisma", "main-api"],
+    "occurrences": 1,
+    "last_seen": "2026-08-27T18:20:00+03:00"
+  }
 ]
