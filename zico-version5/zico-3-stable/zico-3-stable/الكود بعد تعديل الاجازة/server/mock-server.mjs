@@ -24,6 +24,7 @@ import {
 import { verifyAuditChainIntegrity } from "./data/policyVersionData.js";
 import * as compliance from "./compliance-data.js";
 import { getAllReports, generateReport } from "./services/reportsEngine.js";
+import { addCrossMapping, analyzeCrossMapping, getCrossMappings } from "./services/crossMappingAgent.js";
 import "./services/reportDefinitions.js";
 import {
   impactFor, riskScoreFor, requiresJustification, residualAxesFor,
@@ -3756,6 +3757,46 @@ if (parts.length === 5 && parts[0] === "governance" && parts[1] === "roles" && p
     const newGap = { _id: `cg-${Date.now()}`, code: `GAP-${String(C.COMPLIANCE_GAPS.length + 1).padStart(3, "0")}`, ...body };
     C.COMPLIANCE_GAPS.push(newGap);
     return json(res, 201, newGap);
+  }
+
+  if (path === "compliance/cross-mappings" && method === "GET") {
+    const items = await getCrossMappings();
+    return json(res, 200, { items, total: items.length, source: "Cross_Mapping_Sheet_fixed.xlsx" });
+  }
+  if (path === "compliance/cross-mappings" && method === "POST") {
+    try {
+      const item = await addCrossMapping(await readBody(req));
+      return json(res, 201, item);
+    } catch (error) {
+      return json(res, error.statusCode || 500, { message: error.message });
+    }
+  }
+  if (path === "compliance/ai/cross-mapping" && method === "POST") {
+    try {
+      const body = await readBody(req);
+      const analysis = await analyzeCrossMapping(body);
+      const createdTasks = body.create_remediation === true
+        ? analysis.automated_remediation.map((task, index) => {
+          const remediation = {
+            _id: `cm-ai-${Date.now()}-${index}`,
+            code: `REM-AI-${Date.now()}-${index}`,
+            title: task.task_title,
+            description: analysis.compliance_evaluation.gap_details,
+            owner: task.assigned_to,
+            priority: task.priority,
+            status: "Open",
+            source: "cross_mapping_ai",
+            mapId: analysis.map_id,
+            createdAt: new Date().toISOString(),
+          };
+          compliance.COMPLIANCE_REMEDIATION.push(remediation);
+          return remediation;
+        })
+        : [];
+      return json(res, 200, { system_prompt: "WADJET Compliance AI Agent", analysis, created_tasks: createdTasks });
+    } catch (error) {
+      return json(res, error.statusCode || 500, { message: error.message });
+    }
   }
 
   // Compliance Remediation

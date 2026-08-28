@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import apiClient from "../../api/client";
 import {
-  LayoutGrid, Landmark, Shield, ShieldCheck, ClipboardList, Boxes, Sparkles,
+  LayoutGrid, Landmark, Shield, ShieldCheck, ClipboardList, Boxes,
   BarChart3, Settings, Search, HelpCircle, ChevronRight, ChevronDown, X,
   Plus, Filter as FilterIcon, ArrowUpDown, Pencil, Link2, CheckCircle2,
   Clock, CircleDashed, AlertTriangle, Building2, Menu, Trash2, Eye,
@@ -830,20 +830,81 @@ function CrossMappingPage({ data }) {
   const { requirements, frameworks, evidence } = data;
   const [search, setSearch] = useState("");
   const [frameworkFilter, setFrameworkFilter] = useState("All");
+  const [activeTab, setActiveTab] = useState("legacy");
+  const [catalog, setCatalog] = useState([]);
+  const [showCatalog, setShowCatalog] = useState(true);
+  const [showAddMapping, setShowAddMapping] = useState(false);
+  const [catalogSearch, setCatalogSearch] = useState("");
+  const [catalogError, setCatalogError] = useState("");
+  const emptyMapping = { mapId: "", isoControl: "", isoObjective: "", cbeDomain: "", cbeControlId: "", supportingCbeControls: "", pciRequirement: "", mappingStrength: "Partial", coverage: "0%", gap: "", controlOwner: "", auditFrequency: "", typicalAuditEvidence: "", rationale: "" };
+  const [newMapping, setNewMapping] = useState(emptyMapping);
+  const [platformLists, setPlatformLists] = useState({ controls: [], policies: [], risks: [] });
+  useEffect(() => {
+    apiClient.get("/compliance/cross-mappings").then((response) => setCatalog(response.data.items || [])).catch(() => setCatalogError("Could not load the live mapping catalog"));
+    Promise.all(["/controls", "/policies", "/risks"].map((endpoint) => apiClient.get(endpoint)))
+      .then(([controls, policies, risks]) => setPlatformLists({
+        controls: controls.data.items || controls.data || [],
+        policies: policies.data.items || policies.data || [],
+        risks: risks.data.items || risks.data || [],
+      }))
+      .catch(() => setCatalogError("Could not load platform reference lists"));
+  }, []);
   const filtered = requirements.filter((r) => {
     const q = search.trim().toLowerCase();
     return (!q || r.title.toLowerCase().includes(q) || r.id.toLowerCase().includes(q)) && (frameworkFilter === "All" || r.frameworkId === frameworkFilter);
   });
+  const filteredCatalog = catalog.filter((row) => !catalogSearch.trim() || Object.values(row).join(" ").toLowerCase().includes(catalogSearch.trim().toLowerCase()));
+  const addMapping = async () => {
+    setCatalogError("");
+    try {
+      const response = await apiClient.post("/compliance/cross-mappings", newMapping);
+      setCatalog((items) => [...items, response.data]);
+      setNewMapping(emptyMapping);
+      setShowAddMapping(false);
+    } catch (error) {
+      setCatalogError(error.response?.data?.message || "Could not add mapping");
+    }
+  };
   return (
     <div>
       <PageHeading title="Cross-Mapping" subtitle="Requirement → Control → Policy → Risk → Asset → Evidence → Compliance Status, in one traceable chain." />
-      <Toolbar search={search} onSearch={setSearch} placeholder="Search requirement…" resultCount={filtered.length} totalCount={requirements.length} right={<FilterSelect label="" value={frameworkFilter} options={["All", ...frameworks.map((f) => f.id)]} onChange={setFrameworkFilter} />} />
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {filtered.length === 0 && <EmptyState label="No requirements match your search or filters." />}
-        {filtered.map((r) => (
-          <MappingChain key={r.id} requirement={r} framework={frameworks.find((f) => f.id === r.frameworkId)} evidenceItems={evidence.filter((e) => e.requirementId === r.id)} />
-        ))}
+      <div style={{ display: "flex", gap: 8, marginBottom: 16, borderBottom: `1px solid ${T.panelBorder}`, paddingBottom: 10 }}>
+        <button onClick={() => setActiveTab("legacy")} style={activeTab === "legacy" ? primaryBtnStyle : secondaryBtnStyle}>Existing Cross-Mapping</button>
+        <button onClick={() => setActiveTab("catalog")} style={activeTab === "catalog" ? primaryBtnStyle : secondaryBtnStyle}>Excel Mapping Catalog</button>
       </div>
+      {activeTab === "legacy" && <div>
+        <Toolbar search={search} onSearch={setSearch} placeholder="Search requirement…" resultCount={filtered.length} totalCount={requirements.length} right={<FilterSelect label="" value={frameworkFilter} options={["All", ...frameworks.map((f) => f.id)]} onChange={setFrameworkFilter} />} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          {filtered.length === 0 && <EmptyState label="No requirements match your search or filters." />}
+          {filtered.map((r) => (
+            <MappingChain key={r.id} requirement={r} framework={frameworks.find((f) => f.id === r.frameworkId)} evidenceItems={evidence.filter((e) => e.requirementId === r.id)} />
+          ))}
+        </div>
+      </div>}
+      {activeTab === "catalog" && <section style={{ marginTop: 8, background: T.panelBg, border: `1px solid ${T.panelBorder}`, borderRadius: 10, padding: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, marginBottom: 12 }}>
+          <div><h2 style={{ fontSize: 15, margin: 0 }}>Framework Mapping Catalog</h2><p style={{ color: T.textMuted, fontSize: 11, margin: "4px 0 0" }}>Live catalog from the Excel baseline plus mappings added in the platform.</p></div>
+          <div style={{ display: "flex", gap: 8 }}><button onClick={() => setShowCatalog((open) => !open)} style={secondaryBtnStyle}>{showCatalog ? "Hide" : "Show"} Catalog</button><button onClick={() => setShowAddMapping((open) => !open)} style={primaryBtnStyle}>{showAddMapping ? "Cancel" : "Add Mapping"}</button></div>
+        </div>
+        {showAddMapping && <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 8, padding: 12, marginBottom: 12, background: T.cardBg, border: `1px solid ${T.panelBorder}`, borderRadius: 8 }}>
+          <input value={newMapping.mapId} onChange={(e) => setNewMapping((current) => ({ ...current, mapId: e.target.value }))} placeholder="Map ID (e.g. M-046)" style={inputStyle()} />
+          <select value={newMapping.isoControl} onChange={(e) => setNewMapping((current) => ({ ...current, isoControl: e.target.value }))} style={selectStyle()}><option value="">Select platform requirement / ISO control</option>{requirements.map((item) => <option key={item.id} value={`${item.id} — ${item.title}`}>{item.id} — {item.title}</option>)}</select>
+          <select value={newMapping.cbeControlId} onChange={(e) => setNewMapping((current) => ({ ...current, cbeControlId: e.target.value }))} style={selectStyle()}><option value="">Select internal control</option>{platformLists.controls.map((item) => <option key={item._id || item.id || item.controlId} value={item.controlId || item._id || item.id}>{item.controlId || item._id || item.id} — {item.name || item.title}</option>)}</select>
+          <select value={newMapping.pciRequirement} onChange={(e) => setNewMapping((current) => ({ ...current, pciRequirement: e.target.value }))} style={selectStyle()}><option value="">Select mapped policy</option>{platformLists.policies.map((item) => <option key={item._id || item.id || item.policyId} value={item.policyId || item._id || item.id}>{item.policyId || item._id || item.id} — {item.title || item.name}</option>)}</select>
+          <select value={newMapping.cbeDomain} onChange={(e) => setNewMapping((current) => ({ ...current, cbeDomain: e.target.value }))} style={selectStyle()}><option value="">Select linked risk</option>{platformLists.risks.map((item) => <option key={item._id || item.id || item.riskId} value={item.riskId || item._id || item.id}>{item.riskId || item._id || item.id} — {item.title || item.name}</option>)}</select>
+          <select value={newMapping.controlOwner} onChange={(e) => setNewMapping((current) => ({ ...current, controlOwner: e.target.value }))} style={selectStyle()}><option value="">Select owner from platform users</option>{["owner", "ownerTeam", "department"].flatMap((key) => platformLists.controls.map((item) => item[key])).filter(Boolean).filter((owner, index, items) => items.indexOf(owner) === index).map((owner) => <option key={owner} value={owner}>{owner}</option>)}</select>
+          {["isoObjective", "supportingCbeControls", "mappingStrength", "coverage", "auditFrequency"].map((key) => <input key={key} value={newMapping[key]} onChange={(e) => setNewMapping((current) => ({ ...current, [key]: e.target.value }))} placeholder={key} style={inputStyle()} />)}
+          <textarea value={newMapping.gap} onChange={(e) => setNewMapping((current) => ({ ...current, gap: e.target.value }))} placeholder="gap / coverage notes" rows={2} style={inputStyle({ resize: "vertical" })} />
+          <textarea value={newMapping.typicalAuditEvidence} onChange={(e) => setNewMapping((current) => ({ ...current, typicalAuditEvidence: e.target.value }))} placeholder="typical audit evidence (one item per line)" rows={2} style={inputStyle({ resize: "vertical" })} />
+          <textarea value={newMapping.rationale} onChange={(e) => setNewMapping((current) => ({ ...current, rationale: e.target.value }))} placeholder="rationale" rows={2} style={{ ...inputStyle({ resize: "vertical" }), gridColumn: "1 / -1" }} />
+          <button onClick={addMapping} style={{ ...primaryBtnStyle, gridColumn: "1 / -1" }}>Save Mapping</button>
+        </div>}
+        {catalogError && <div style={{ color: T.red, fontSize: 12, marginBottom: 8 }}>{catalogError}</div>}
+        {showCatalog && <div>
+          <input value={catalogSearch} onChange={(e) => setCatalogSearch(e.target.value)} placeholder="Search Map ID, ISO, CBE, PCI, owner…" style={{ ...inputStyle(), width: "100%", marginBottom: 10 }} />
+          <div style={{ overflowX: "auto" }}><table style={{ width: "100%", borderCollapse: "collapse", fontSize: 11 }}><thead><tr>{["Map ID", "ISO Control", "CBE Control", "PCI DSS", "Strength", "Coverage", "Owner", "Audit Frequency"].map((header) => <th key={header} style={{ textAlign: "left", padding: "8px 6px", color: T.textMuted, borderBottom: `1px solid ${T.panelBorder}` }}>{header}</th>)}</tr></thead><tbody>{filteredCatalog.map((row) => <tr key={row.mapId}><td style={{ padding: "8px 6px", color: T.accent }}>{row.mapId}</td><td style={{ padding: "8px 6px" }}>{row.isoControl}</td><td style={{ padding: "8px 6px" }}>{row.cbeControlId || row.cbeDomain || "—"}</td><td style={{ padding: "8px 6px" }}>{row.pciRequirement}</td><td style={{ padding: "8px 6px" }}>{row.mappingStrength}</td><td style={{ padding: "8px 6px" }}>{row.coverage}</td><td style={{ padding: "8px 6px" }}>{row.controlOwner || "—"}</td><td style={{ padding: "8px 6px" }}>{row.auditFrequency || "—"}</td></tr>)}</tbody></table></div>
+        </div>}
+      </section>}
     </div>
   );
 }

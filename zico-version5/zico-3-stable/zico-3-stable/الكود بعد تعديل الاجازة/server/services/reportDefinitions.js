@@ -24,6 +24,7 @@ import {
   GOVERNANCE_AUDIT_LOG, POLICY_VERSIONS, POLICY_ACKNOWLEDGEMENTS,
   COMMITTEE_MEETINGS, COMMITTEE_DECISIONS, COMMITTEE_ACTIONS,
 } from "../governance-data.js";
+import { getCrossMappings } from "./crossMappingAgent.js";
 
 const fwName = (fwId) => COMPLIANCE_FRAMEWORKS.find((f) => f._id === fwId)?.name || fwId;
 const fwNameMain = (fwId) => FRAMEWORKS.find((f) => f._id === fwId)?.name || fwId;
@@ -155,6 +156,33 @@ registerReport({
       verificationStatus: e.verificationStatus,
       reviewer: e.reviewer || "—",
     })),
+});
+
+registerReport({
+  id: "cross_mapping_analysis",
+  name: "Cross-Mapping Analysis",
+  module: "compliance",
+  description: "ISO, CBE, and PCI DSS mappings with coverage, ownership, evidence, and gap rationale",
+  icon: "GitCompare",
+  supportedFormats: ["xlsx", "pdf", "csv"],
+  colorColumns: ["mappingStrength", "coverage"],
+  columns: [
+    { key: "mapId", header: "Map ID" },
+    { key: "isoControl", header: "ISO Control" },
+    { key: "cbeControlId", header: "CBE Control" },
+    { key: "pciRequirement", header: "PCI DSS Requirement" },
+    { key: "mappingStrength", header: "Mapping Strength" },
+    { key: "coverage", header: "Coverage" },
+    { key: "gap", header: "Gap / Coverage Notes" },
+    { key: "controlOwner", header: "Control Owner" },
+    { key: "auditFrequency", header: "Audit Frequency" },
+    { key: "typicalAuditEvidence", header: "Typical Audit Evidence" },
+    { key: "rationale", header: "Rationale" },
+  ],
+  dataSource: async () => (await getCrossMappings()).map((row) => ({
+    ...row,
+    typicalAuditEvidence: row.typicalAuditEvidence.join("; "),
+  })),
 });
 
 // ══════════════════════════════════════════════
