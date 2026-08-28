@@ -176,6 +176,17 @@
       "tags": ["frontend", "dependencies", "vite"],
       "occurrences": 1,
       "last_seen": "2026-08-28T14:00:00+03:00"
+    },
+    {
+      "id": "start-bat-unicode-path-and-main-api-dependencies",
+      "timestamp": "2026-08-28T14:08:36+03:00",
+      "error_message": "start.bat could not locate the application and the main API exited during startup.",
+      "file": "zico-version5/zico-3-stable/zico-3-stable/start.bat",
+      "root_cause": "cmd passed the Unicode app path incorrectly, and the main API root dependencies were not installed.",
+      "fix": "Derive paths from the helper script location, discover the app by stable markers, align backup copying with the current data layout, and install root dependencies.",
+      "tags": ["startup", "windows", "dependencies"],
+      "occurrences": 1,
+      "last_seen": "2026-08-28T14:08:36+03:00"
     }
   ]
 }

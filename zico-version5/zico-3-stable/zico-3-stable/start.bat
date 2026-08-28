@@ -1,7 +1,5 @@
 @echo off
 set "ROOT=%~dp0"
-set "APP=%~dp0الكود بعد تعديل الاجازة"
-set "AUDIT=%~dp0audit-module\backend"
 for /f "delims=" %%T in ('powershell -NoProfile -Command "(Get-Date).ToString('yyyyMMdd-HHmmss')"') do set "STAMP=%%T"
 set "BACKUP=%ROOT%backups\%STAMP%"
 mkdir "%BACKUP%" > nul 2>&1
@@ -14,7 +12,7 @@ echo ==========================================
 
 echo Backup created: %BACKUP%
 echo Starting Audit backend without changing the database schema...
-powershell -NoProfile -ExecutionPolicy Bypass -File "%ROOT%start-services.ps1" -Root "%ROOT%"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%ROOT%start-services.ps1"
 
 echo.
 echo ==========================================
