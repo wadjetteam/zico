@@ -3,9 +3,18 @@ echo ==========================================
 echo   WADJET GRC Platform - Starting...
 echo ==========================================
 
-start "WADJET Backend (API)" cmd /k "cd /d \"%~dp0الكود بعد تعديل الاجازة\server\" && node mock-server.mjs"
+set "APP_DIR="
+for /d %%D in ("%~dp0*") do if exist "%%~fD\server\mock-server.mjs" set "APP_DIR=%%~fD"
+if not defined APP_DIR (
+	echo Could not locate the application directory.
+	pause
+	exit /b 1
+)
+
+start "WADJET Backend (API)" /D "%APP_DIR%\server" cmd /k node mock-server.mjs
+start "WADJET Audit API" /D "%~dp0audit-module\backend" cmd /k npx tsx src/index.ts
 timeout /t 3 /nobreak > nul
-start "WADJET Frontend (UI)" cmd /k "cd /d \"%~dp0الكود بعد تعديل الاجازة\client\" && npm run dev"
+start "WADJET Frontend (UI)" /D "%APP_DIR%\client" cmd /k npm run dev
 
 echo.
 echo ==========================================

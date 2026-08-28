@@ -317,5 +317,49 @@
     "tags": ["compliance", "requirements", "relationships", "ux"],
     "occurrences": 1,
     "last_seen": "2026-08-25T00:00:00+03:00"
+  },
+  {
+    "id": "BUG-20260827-001",
+    "timestamp": "2026-08-27T17:30:00+03:00",
+    "error_message": "ERR_CONNECTION_REFUSED at http://localhost:5173/",
+    "file": "zico-3-stable/zico-3-stable/start.bat",
+    "root_cause": "The startup script launched from a path containing Arabic characters through cmd quoting, while the required frontend and backend dependencies were not installed in their project directories.",
+    "fix": "Installed dependencies in the application root and client directories, and changed start.bat to discover the application directory and use start /D for child processes. Verified frontend and login API HTTP 200 responses.",
+    "tags": ["startup", "vite", "backend", "dependencies", "encoding"],
+    "occurrences": 1,
+    "last_seen": "2026-08-27T17:30:00+03:00"
+  },
+  {
+    "id": "BUG-20260827-002",
+    "timestamp": "2026-08-27T17:45:00+03:00",
+    "error_message": "Audit module at /audit-module could not load data because localhost:5002 refused connection.",
+    "file": "zico-3-stable/zico-3-stable/start.bat",
+    "root_cause": "start.bat started the main API and Vite frontend but omitted the separate Audit API service.",
+    "fix": "Added Audit API startup via npx tsx src/index.ts and verified health, dashboard, and audit page HTTP 200 responses.",
+    "tags": ["audit", "startup", "local-development"],
+    "occurrences": 1,
+    "last_seen": "2026-08-27T17:45:00+03:00"
+  },
+  {
+    "id": "BUG-20260828-001",
+    "timestamp": "2026-08-28T09:00:00+03:00",
+    "error_message": "Audit page /audit-module/audits failed at runtime with a React Query client error.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/src/main.jsx",
+    "root_cause": "Audit pages called useQuery without a QueryClientProvider, and React Query was not declared as a client dependency.",
+    "fix": "Added a shared QueryClientProvider around the application and declared @tanstack/react-query in package manifests.",
+    "tags": ["audit", "react-query", "runtime", "frontend"],
+    "occurrences": 1,
+    "last_seen": "2026-08-28T09:00:00+03:00"
+  },
+  {
+    "id": "BUG-20260828-002",
+    "timestamp": "2026-08-28T09:15:00+03:00",
+    "error_message": "View button on /audit-module/audits did not open audit details.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/src/pages/audit/pages/AuditsPage.tsx",
+    "root_cause": "The existing detail drawer state was never assigned when a row or View button was clicked, and AuditModule did not provide an onOpenAudit callback.",
+    "fix": "Set the selected audit in the existing detail drawer from row and View button clicks, while preserving the optional callback.",
+    "tags": ["audit", "view", "navigation", "frontend"],
+    "occurrences": 1,
+    "last_seen": "2026-08-28T09:15:00+03:00"
   }
 ]

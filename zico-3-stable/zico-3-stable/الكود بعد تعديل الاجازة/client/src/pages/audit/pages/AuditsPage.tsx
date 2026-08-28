@@ -20,6 +20,7 @@ export default function AuditsPage({ onOpenAudit }: any) {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [detail, setDetail] = useState<any>(null);
+  const queryClient = useQueryClient();
   const { sort, toggle, apply } = useSort("auditCode");
 
   const { data, isLoading } = useQuery({
@@ -30,7 +31,7 @@ export default function AuditsPage({ onOpenAudit }: any) {
 
   const statusMutation = useMutation({
     mutationFn: ({ id, status }: any) => auditApi.patch(`/audits/${id}/status`, { status }),
-    onSuccess: () => { useQueryClient().invalidateQueries({ queryKey: ["audit-audits"] }); },
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ["audit-audits"] }); },
   });
 
   const audits = data?.items || [];
@@ -53,9 +54,9 @@ export default function AuditsPage({ onOpenAudit }: any) {
     <div>
       <PageHeading title="Audits" subtitle="All audit engagements." />
       <Toolbar search={search} onSearch={setSearch} placeholder="Search audits…" resultCount={filtered.length} totalCount={audits.length} right={<FilterSelect value={statusFilter} options={["All", ...AUDIT_STATUSES]} onChange={setStatusFilter} />} />
-      <DataTable columns={columns} rows={filtered} sort={sort} onSort={toggle} onRowClick={(r) => onOpenAudit?.(r.id)} renderActions={(r: any) => (
+      <DataTable columns={columns} rows={filtered} sort={sort} onSort={toggle} onRowClick={(r) => { setDetail(r); onOpenAudit?.(r.id); }} renderActions={(r: any) => (
         <div style={{ display: "flex", gap: 6 }}>
-          <button onClick={() => onOpenAudit?.(r.id)} style={iconBtn} title="View"><Eye size={13} color={T.textSecondary} /></button>
+          <button onClick={(event) => { event.stopPropagation(); setDetail(r); onOpenAudit?.(r.id); }} style={iconBtn} title="View"><Eye size={13} color={T.textSecondary} /></button>
           {r.status === "Planned" && <button onClick={() => statusMutation.mutate({ id: r.id, status: "In Progress" })} style={iconBtn} title="Start"><Play size={13} color={T.green} /></button>}
           {r.status === "In Progress" && <button onClick={() => statusMutation.mutate({ id: r.id, status: "Completed" })} style={iconBtn} title="Complete"><CheckCircle2 size={13} color={T.green} /></button>}
         </div>
