@@ -1422,9 +1422,25 @@ const handle = async (req, res, url) => {
 
   if (path === "ai/chat" && method === "POST") {
     const body = await readBody(req);
-    return json(res, 200, {
-      reply: `Noted: "${body.message}". This assistant is in demo mode — the production backend connects to the enterprise LLM gateway.`,
-    });
+    const question = String(body.message || "").trim();
+    if (!question) return json(res, 422, { message: "message is required" });
+
+    const ragUrl = process.env.RAG_API_URL || "http://127.0.0.1:8008/ask";
+    try {
+      const ragRes = await fetch(ragUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question }),
+      });
+      if (!ragRes.ok) throw new Error(`RAG API returned ${ragRes.status}`);
+      const { answer, sources } = await ragRes.json();
+      return json(res, 200, { reply: answer, sources });
+    } catch (error) {
+      console.error("[AI CHAT] RAG API unreachable:", error.message);
+      return json(res, 200, {
+        reply: "The AI assistant service is unavailable right now. Make sure the RAG API (NLP_Rag_final/api.py) is running.",
+      });
+    }
   }
 
   if (path === "risk-score-jobs") {

@@ -19,6 +19,7 @@ echo ==========================================
 echo   Backend:  http://localhost:5000
 echo   Audit API: http://localhost:5002
 echo   Frontend: http://localhost:5173
+echo   RAG API:  http://localhost:8008 (if Python is installed)
 echo ==========================================
 echo.
 echo Login: admin / admin123
