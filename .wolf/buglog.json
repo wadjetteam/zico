@@ -165,6 +165,17 @@
       "tags": ["validation", "build", "workspace-layout"],
       "occurrences": 1,
       "last_seen": "2026-08-28T04:42:00+03:00"
+    },
+    {
+      "id": "ai-assistant-react-query-import",
+      "timestamp": "2026-08-28T14:00:00+03:00",
+      "error_message": "[plugin:vite:import-analysis] Failed to resolve import \"@tanstack/react-query\" from \"src/App.jsx\".",
+      "file": "zico-version5/zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/package.json",
+      "root_cause": "App.jsx imported React Query, but the package was missing from the client dependencies and lockfile.",
+      "fix": "Added @tanstack/react-query as a runtime dependency and regenerated the client lockfile.",
+      "tags": ["frontend", "dependencies", "vite"],
+      "occurrences": 1,
+      "last_seen": "2026-08-28T14:00:00+03:00"
     }
   ]
 }
