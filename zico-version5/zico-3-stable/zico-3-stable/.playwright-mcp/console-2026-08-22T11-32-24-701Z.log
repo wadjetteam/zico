@@ -1,0 +1,57 @@
+[     171ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:21550
+[     258ms] TypeError: Cannot read properties of null (reading 'calculationTrace')
+    at SubmitRisk (http://localhost:5173/src/pages/risk/SubmitRisk.jsx?t=1787398317623:1010:16)
+    at renderWithHooks (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:11548:26)
+    at mountIndeterminateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:14926:21)
+    at beginWork (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:15914:22)
+    at HTMLUnknownElement.callCallback2 (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:3674:22)
+    at Object.invokeGuardedCallbackDev (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:3699:24)
+    at invokeGuardedCallback (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:3733:39)
+    at beginWork$1 (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:19765:15)
+    at performUnitOfWork (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:19198:20)
+    at workLoopSync (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:19137:13)
+[     274ms] TypeError: Cannot read properties of null (reading 'calculationTrace')
+    at SubmitRisk (http://localhost:5173/src/pages/risk/SubmitRisk.jsx?t=1787398317623:1010:16)
+    at renderWithHooks (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:11548:26)
+    at mountIndeterminateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:14926:21)
+    at beginWork (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:15914:22)
+    at HTMLUnknownElement.callCallback2 (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:3674:22)
+    at Object.invokeGuardedCallbackDev (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:3699:24)
+    at invokeGuardedCallback (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:3733:39)
+    at beginWork$1 (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:19765:15)
+    at performUnitOfWork (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:19198:20)
+    at workLoopSync (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:19137:13)
+[     275ms] [ERROR] The above error occurred in the <SubmitRisk> component:
+
+    at SubmitRisk (http://localhost:5173/src/pages/risk/SubmitRisk.jsx?t=1787398317623:78:20)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:6667:26)
+    at Outlet (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:7532:26)
+    at div
+    at MotionComponent (http://localhost:5173/node_modules/.vite/deps/framer-motion.js?v=f1506c5d:945:40)
+    at main
+    at div
+    at div
+    at AppLayout (http://localhost:5173/src/components/AppLayout.jsx:25:39)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:6667:26)
+    at Outlet (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:7532:26)
+    at ProtectedRoute (http://localhost:5173/src/components/ProtectedRoute.jsx:23:29)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:6667:26)
+    at Routes (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:7602:3)
+    at App
+    at AuthProvider (http://localhost:5173/src/context/AuthContext.jsx:21:32)
+    at Router (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:7541:13)
+    at BrowserRouter (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:10857:3)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:14031
+[     275ms] TypeError: Cannot read properties of null (reading 'calculationTrace')
+    at SubmitRisk (http://localhost:5173/src/pages/risk/SubmitRisk.jsx?t=1787398317623:1010:16)
+    at renderWithHooks (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:11548:26)
+    at mountIndeterminateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:14926:21)
+    at beginWork (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:15914:22)
+    at beginWork$1 (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:19753:22)
+    at performUnitOfWork (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:19198:20)
+    at workLoopSync (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:19137:13)
+    at renderRootSync (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:19116:15)
+    at recoverFromConcurrentError (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:18736:28)
+    at performConcurrentWorkOnRoot (http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:18684:30)

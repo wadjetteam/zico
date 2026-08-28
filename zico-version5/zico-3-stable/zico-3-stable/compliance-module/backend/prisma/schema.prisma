@@ -1,0 +1,221 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// AUTH & RBAC
+// Role values: Admin, ComplianceManager, Auditor, Viewer
+// ============================================
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  email     String   @unique
+  fullName  String
+  password  String
+  role      String   @default("Viewer")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================
+// REFERENCE TABLES (from other modules)
+// ============================================
+
+model Control {
+  id          String @id @default(uuid())
+  controlCode String @unique
+  name        String
+  description String @default("")
+  framework   String @default("")
+}
+
+model Risk {
+  id          String @id @default(uuid())
+  riskCode    String @unique
+  title       String
+  description String @default("")
+  level       String @default("Medium")
+}
+
+model Policy {
+  id          String @id @default(uuid())
+  policyCode  String @unique
+  title       String
+  description String @default("")
+  status      String @default("Draft")
+}
+
+model Asset {
+  id          String @id @default(uuid())
+  assetCode   String @unique
+  name        String
+  description String @default("")
+  type        String @default("")
+}
+
+model Audit {
+  id          String @id @default(uuid())
+  auditCode   String @unique
+  name        String
+  description String @default("")
+  auditor     String @default("")
+}
+
+// ============================================
+// CORE COMPLIANCE ENTITIES
+// FrameworkType: Standard, Regulation, InternalPolicyBaseline
+// FrameworkStatus: Active, Draft, Archived
+// ============================================
+
+model Framework {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  type        String   @default("Standard")
+  version     String   @default("")
+  issuer      String   @default("")
+  effectiveDate DateTime?
+  description String   @default("")
+  status      String   @default("Active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  requirements Requirement[]
+  gaps         Gap[]
+}
+
+model Requirement {
+  id              String   @id @default(uuid())
+  code            String   @unique
+  title           String
+  description     String   @default("")
+  frameworkId     String
+  category        String   @default("")
+  applicability   String   @default("Applicable")
+  status          String   @default("NotAssessed")
+  mappedControls  String   @default("[]")
+  relatedPolicies String   @default("[]")
+  relatedRisks    String   @default("[]")
+  relatedAssets   String   @default("[]")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  framework  Framework  @relation(fields: [frameworkId], references: [id])
+  assessments Assessment[]
+  evidence   Evidence[]
+  gaps       Gap[]
+}
+
+// ControlEffectiveness: Effective, PartiallyEffective, NotEffective, NotAssessed
+// ReviewStatus: PendingReview, Reviewed
+
+model Assessment {
+  id                  String   @id @default(uuid())
+  code                String   @unique
+  requirementId       String
+  status              String
+  assessor            String
+  date                DateTime @default(now())
+  comments            String   @default("")
+  findings            String   @default("")
+  evidenceIds         String   @default("[]")
+  controlEffectiveness String   @default("NotAssessed")
+  reviewer            String   @default("")
+  reviewStatus        String   @default("PendingReview")
+  createdAt           DateTime @default(now())
+
+  requirement Requirement @relation(fields: [requirementId], references: [id])
+}
+
+// EvidenceType: Document, Screenshot, LogExport, Policy, Ticket, Attestation
+// EvidenceStatus: Missing, Requested, Submitted, UnderReview, Approved, Rejected, Expired
+// VerificationStatus: Verified, Pending
+
+model Evidence {
+  id                String   @id @default(uuid())
+  code              String   @unique
+  name              String
+  requirementId     String
+  controlId         String   @default("")
+  type              String   @default("Document")
+  owner             String
+  uploadDate        DateTime @default(now())
+  expirationDate    DateTime?
+  status            String   @default("Missing")
+  verificationStatus String   @default("Pending")
+  reviewer          String   @default("")
+  comments          String   @default("")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  requirement Requirement @relation(fields: [requirementId], references: [id])
+}
+
+// GapSeverity: Critical, High, Medium, Low
+// GapStatus: Open, InProgress, Resolved, Accepted, Closed
+
+model Gap {
+  id                String   @id @default(uuid())
+  code              String   @unique
+  requirementId     String
+  frameworkId       String
+  description       String   @default("")
+  currentState      String   @default("")
+  expectedState     String   @default("")
+  severity          String   @default("Medium")
+  owner             String
+  dueDate           DateTime?
+  status            String   @default("Open")
+  relatedRiskId     String   @default("")
+  relatedControlId  String   @default("")
+  remediationPlan   String   @default("")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  requirement Requirement @relation(fields: [requirementId], references: [id])
+  framework   Framework  @relation(fields: [frameworkId], references: [id])
+  remediations Remediation[]
+}
+
+// Priority: Critical, High, Medium, Low
+// RemediationStatus: Open, InProgress, Blocked, Completed, Cancelled
+
+model Remediation {
+  id                String   @id @default(uuid())
+  code              String   @unique
+  gapId             String
+  requirementId     String
+  description       String   @default("")
+  owner             String
+  priority          String   @default("High")
+  dueDate           DateTime?
+  status            String   @default("Open")
+  progress          Int      @default(0)
+  relatedRiskId     String   @default("")
+  relatedControlId  String   @default("")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  gap Gap @relation(fields: [gapId], references: [id])
+}
+
+model Finding {
+  id                String   @id @default(uuid())
+  code              String   @unique
+  auditId           String
+  requirementId     String
+  finding           String   @default("")
+  severity          String   @default("Medium")
+  evidenceId        String   @default("")
+  auditor           String   @default("")
+  status            String   @default("Open")
+  correctiveAction  String   @default("")
+  dueDate           DateTime?
+  createdAt         DateTime @default(now())
+}

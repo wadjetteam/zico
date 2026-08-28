@@ -1,0 +1,76 @@
+[     654ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:21550
+[   32907ms] [ERROR] Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s 
+
+Check the render method of `SubmitRisk`.  
+    at div
+    at SubmitRisk (http://localhost:5173/src/pages/risk/SubmitRisk.jsx?t=1787392658492:85:20)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:6667:26)
+    at Outlet (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:7532:26)
+    at div
+    at MotionComponent (http://localhost:5173/node_modules/.vite/deps/framer-motion.js?v=f1506c5d:945:40)
+    at main
+    at div
+    at div
+    at AppLayout (http://localhost:5173/src/components/AppLayout.jsx:25:39)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:6667:26)
+    at Outlet (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:7532:26)
+    at ProtectedRoute (http://localhost:5173/src/components/ProtectedRoute.jsx:23:29)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:6667:26)
+    at Routes (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:7602:3)
+    at App
+    at AuthProvider (http://localhost:5173/src/context/AuthContext.jsx:21:32)
+    at Router (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:7541:13)
+    at BrowserRouter (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:10857:3) @ http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=f1506c5d:63
+[   32910ms] [ERROR] Warning: Received NaN for the `%s` attribute. If this is expected, cast the value to a string.%s value 
+    at input
+    at div
+    at div
+    at div
+    at div
+    at div
+    at div
+    at div
+    at div
+    at form
+    at SubmitRisk (http://localhost:5173/src/pages/risk/SubmitRisk.jsx?t=1787392658492:85:20)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:6667:26)
+    at Outlet (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:7532:26)
+    at div
+    at MotionComponent (http://localhost:5173/node_modules/.vite/deps/framer-motion.js?v=f1506c5d:945:40)
+    at main
+    at div
+    at div
+    at AppLayout (http://localhost:5173/src/components/AppLayout.jsx:25:39)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:6667:26)
+    at Outlet (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:7532:26)
+    at ProtectedRoute (http://localhost:5173/src/components/ProtectedRoute.jsx:23:29)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:6667:26)
+    at Routes (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:7602:3)
+    at App
+    at AuthProvider (http://localhost:5173/src/context/AuthContext.jsx:21:32)
+    at Router (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:7541:13)
+    at BrowserRouter (http://localhost:5173/node_modules/.vite/deps/react-router.js?v=f1506c5d:10857:3) @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:520
+[   32948ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32949ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32949ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32949ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32949ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32949ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32949ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32950ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32952ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32952ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32953ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32953ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32953ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32953ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32953ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[   32953ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[  153442ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[  153443ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[  153443ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[  153443ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[  153443ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[  153444ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[  153444ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860
+[  153444ms] [WARNING] The specified value "NaN" cannot be parsed, or is out of range. @ http://localhost:5173/node_modules/.vite/deps/chunk-PJEEZAML.js?v=f1506c5d:1860

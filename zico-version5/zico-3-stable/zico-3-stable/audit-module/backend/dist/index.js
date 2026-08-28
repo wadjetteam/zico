@@ -1,0 +1,36 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.prisma = void 0;
+const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+const client_1 = require("@prisma/client");
+const auditPlans_1 = require("./routes/auditPlans");
+const audits_1 = require("./routes/audits");
+const checklist_1 = require("./routes/checklist");
+const evidence_1 = require("./routes/evidence");
+const findings_1 = require("./routes/findings");
+const correctiveActions_1 = require("./routes/correctiveActions");
+const dashboard_1 = require("./routes/dashboard");
+const reference_1 = require("./routes/reference");
+const errorHandler_1 = require("./middleware/errorHandler");
+exports.prisma = new client_1.PrismaClient();
+const app = (0, express_1.default)();
+const PORT = process.env.PORT || 5002;
+app.use((0, cors_1.default)());
+app.use(express_1.default.json());
+app.use("/api/audit/plans", auditPlans_1.auditPlansRouter);
+app.use("/api/audit/audits", audits_1.auditsRouter);
+app.use("/api/audit/checklist", checklist_1.checklistRouter);
+app.use("/api/audit/evidence", evidence_1.evidenceRouter);
+app.use("/api/audit/findings", findings_1.findingsRouter);
+app.use("/api/audit/corrective-actions", correctiveActions_1.correctiveActionsRouter);
+app.use("/api/audit/dashboard", dashboard_1.dashboardRouter);
+app.use("/api/audit/reference", reference_1.referenceRouter);
+app.get("/api/audit/health", (req, res) => res.json({ ok: true }));
+app.use(errorHandler_1.errorHandler);
+app.listen(PORT, () => {
+    console.log(`[WADJET Audit] API running on http://localhost:${PORT}`);
+});

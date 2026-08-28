@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "bugs": [
+    {
+      "id": "2026-08-27-powershell-validation-assertion",
+      "timestamp": "2026-08-27T00:00:00+03:00",
+      "error_message": "PowerShell test handling did not surface the expected JSON body for a 400 validation response.",
+      "file": "server/mock-server.mjs",
+      "root_cause": "Invoke-RestMethod exposes a generic WebException message for non-2xx responses.",
+      "fix": "The API correctly returned HTTP 400; use an HTTP client that captures the response body when asserting the message.",
+      "tags": ["test", "powershell", "api"],
+      "occurrences": 1,
+      "last_seen": "2026-08-27T00:00:00+03:00"
+    },
+    {
+      "id": "2026-08-27-server-syntax-wrong-workdir",
+      "timestamp": "2026-08-27T00:00:00+03:00",
+      "error_message": "node --check could not find mock-server.mjs from the client working directory.",
+      "file": "server/mock-server.mjs",
+      "root_cause": "The server syntax check used the client workdir.",
+      "fix": "Run the check from the server directory.",
+      "tags": ["tooling", "path", "validation"],
+      "occurrences": 1,
+      "last_seen": "2026-08-27T00:00:00+03:00"
+    },
+    {
+      "id": "2026-08-27-apply-patch-multi-operation",
+      "timestamp": "2026-08-27T00:00:00+03:00",
+      "error_message": "apply_patch rejected a combined delete-and-add operation on RiskTreatment.jsx.",
+      "file": "client/src/pages/risk/RiskTreatment.jsx",
+      "root_cause": "The patch tool does not allow multiple operations on the same file in one patch.",
+      "fix": "Delete and add the file in separate patches.",
+      "tags": ["tooling", "patch"],
+      "occurrences": 1,
+      "last_seen": "2026-08-27T00:00:00+03:00"
+    },
+    {
+      "id": "2026-08-27-path-resolution",
+      "timestamp": "2026-08-27T00:00:00+03:00",
+      "error_message": "Project paths were resolved relative to the client directory instead of the workspace root.",
+      "file": "N/A",
+      "root_cause": "Incorrect relative path used after changing the command working directory.",
+      "fix": "Use paths relative to the selected workdir, or absolute workspace paths.",
+      "tags": ["tooling", "path"],
+      "occurrences": 1,
+      "last_seen": "2026-08-27T00:00:00+03:00"
+    },
+    {
+      "id": "2026-08-27-client-vite-config-load",
+      "timestamp": "2026-08-27T00:00:00+03:00",
+      "error_message": "Vite could not resolve client/vite.config.js and reported an access-denied directory read during build.",
+      "file": "zico-version5/zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/vite.config.js",
+      "root_cause": "The workspace file sandbox prevented Vite/esbuild from traversing directories while loading its local configuration.",
+      "fix": "Run the Vite build with the required sandbox escalation; the build then completed successfully.",
+      "tags": ["build", "vite", "configuration"],
+      "occurrences": 2,
+      "last_seen": "2026-08-27T00:00:00+03:00"
+    },
+    {
+      "id": "2026-08-27-missing-client-dependencies",
+      "timestamp": "2026-08-27T00:00:00+03:00",
+      "error_message": "vite is not recognized as an internal or external command.",
+      "file": "zico-version5/zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/package.json",
+      "root_cause": "The main client has no installed node_modules dependencies.",
+      "fix": "Run npm.cmd install in the client directory before building or serving it.",
+      "tags": ["tooling", "npm", "dependencies"],
+      "occurrences": 1,
+      "last_seen": "2026-08-27T00:00:00+03:00"
+    },
+    {
+      "id": "2026-08-27-powershell-npm-policy",
+      "timestamp": "2026-08-27T00:00:00+03:00",
+      "error_message": "npm.ps1 cannot be loaded because running scripts is disabled on this system.",
+      "file": "client/package.json",
+      "root_cause": "PowerShell execution policy blocks the npm PowerShell shim.",
+      "fix": "Invoke npm.cmd from PowerShell.",
+      "tags": ["tooling", "npm", "powershell"],
+      "occurrences": 1,
+      "last_seen": "2026-08-27T00:00:00+03:00"
+    },
+    {
+      "id": "2026-08-27-treatment-complete-progress-only",
+      "timestamp": "2026-08-27T22:03:00+03:00",
+      "error_message": "Risk treatments could be marked complete solely by reaching 100% progress, which bypassed effectiveness evidence and closure gates.",
+      "file": "server/mock-server.mjs",
+      "root_cause": "The progress patch endpoint set status to COMPLETED whenever progress reached 100 without validating independent review or closure conditions.",
+      "fix": "Require evidence-backed effectiveness review before a treatment can be marked complete, and keep workflow state distinct from overdue_flag and escalation metadata.",
+      "tags": ["workflow", "risk-treatment", "validation"],
+      "occurrences": 1,
+      "last_seen": "2026-08-27T22:03:00+03:00"
+    },
+    {
+      "id": "2026-08-27-treatment-ui-prompt-blocker",
+      "timestamp": "2026-08-27T22:46:00+03:00",
+      "error_message": "The treatment UI crashed because browser prompt() is not supported in the shared app runtime.",
+      "file": "client/src/pages/risk/RiskTreatment.jsx",
+      "root_cause": "Approval, evidence, and review actions called window.prompt() directly from React click handlers.",
+      "fix": "Replace prompt-based inputs with modal dialogs and explicit form validation for decision comments, evidence references, and effectiveness review scores.",
+      "tags": ["ui", "risk-treatment", "modal"],
+      "occurrences": 1,
+      "last_seen": "2026-08-27T22:46:00+03:00"
+    },
+    {
+      "id": "2026-08-28-treatment-effectiveness-deadlock",
+      "timestamp": "2026-08-28T03:55:00+03:00",
+      "error_message": "Treatment progress could not reach 100% because the endpoint required an effectiveness review, while effectiveness review was only available for COMPLETED treatments.",
+      "file": "server/mock-server.mjs; client/src/pages/risk/RiskTreatment.jsx",
+      "root_cause": "Implementation completion and independent effectiveness validation were enforced in the wrong order.",
+      "fix": "Allow progress 100% to transition to COMPLETED, then require evidence and an independent non-owner review before closure monitoring; also corrected overdue workflow status normalization and GovernanceEngine import.",
+      "tags": ["workflow", "risk-treatment", "governance"],
+      "occurrences": 1,
+      "last_seen": "2026-08-28T03:55:00+03:00"
+    },
+    {
+      "id": "2026-08-28-client-no-test-files",
+      "timestamp": "2026-08-28T03:52:10+03:00",
+      "error_message": "npm test exits with code 1 because no client test files are present.",
+      "file": "client/package.json",
+      "root_cause": "The configured Vitest include pattern has no matching test files in the client workspace.",
+      "fix": "No test tooling changes made; rely on the successful Vite production build and Node syntax checks for this change.",
+      "tags": ["testing", "tooling"],
+      "occurrences": 1,
+      "last_seen": "2026-08-28T03:52:10+03:00"
+    },
+    {
+      "id": "2026-08-28-report-dashboard-zero-metrics",
+      "timestamp": "2026-08-28T04:05:40+03:00",
+      "error_message": "Executive report dashboard showed zero compliance, framework coverage, and control effectiveness despite populated controls.",
+      "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+      "root_cause": "dashboardSummary read a nonexistent implementationStatus field and derived effectiveness from an empty risk-control link collection instead of the populated control records.",
+      "fix": "Calculate implementation from control status/progress, calculate effectiveness from control effectiveness scores, expose the shared effectiveness percentage, and use the same snapshot in the frontend radar and platform executive exports.",
+      "tags": ["reporting", "dashboard", "data-consistency"],
+      "occurrences": 1,
+      "last_seen": "2026-08-28T04:05:40+03:00"
+    },
+    {
+      "id": "2026-08-28-audit-report-object-serialization",
+      "timestamp": "2026-08-28T04:32:05+03:00",
+      "error_message": "Audit engagement exports serialized the lead auditor object as [object Object].",
+      "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/services/reportDefinitions.js",
+      "root_cause": "The report mapped the nested leadAuditor object directly instead of selecting its display name.",
+      "fix": "Map leadAuditor.fullName, then username, before rendering XLSX/PDF/CSV.",
+      "tags": ["reporting", "audit", "serialization"],
+      "occurrences": 1,
+      "last_seen": "2026-08-28T04:32:05+03:00"
+    },
+    {
+      "id": "report-build-validation-cwd",
+      "timestamp": "2026-08-28T04:41:00+03:00",
+      "error_message": "npm run build failed with Missing script because the command ran outside the frontend project directory.",
+      "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/package.json",
+      "root_cause": "The validation shell starts in the workspace root rather than the application directory.",
+      "fix": "Rerun the existing build script with an explicit Set-Location to the frontend project.",
+      "tags": ["validation", "build"],
+      "occurrences": 1,
+      "last_seen": "2026-08-28T04:41:00+03:00"
+    },
+    {
+      "id": "report-build-validation-entry",
+      "timestamp": "2026-08-28T04:42:00+03:00",
+      "error_message": "The frontend build failed because it was run from the repository wrapper instead of the client directory; router entry was not found.",
+      "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/package.json",
+      "root_cause": "The application has separate server and client directories with the Vite package manifest under client.",
+      "fix": "Run the existing frontend build from the client directory.",
+      "tags": ["validation", "build", "workspace-layout"],
+      "occurrences": 1,
+      "last_seen": "2026-08-28T04:42:00+03:00"
+    }
+  ]
+}

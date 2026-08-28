@@ -1,0 +1,32 @@
+controlId,name,domain,status,progress,maturityLevel
+"ORG-01","Information Security Policy","Administrative","Active / Implemented",100,4
+"ORG-02","Access Control Policy","Administrative","Active / Implemented",100,4
+"ORG-03","Risk Assessment Process","Administrative","Active / Implemented",100,4
+"ORG-04","Supplier Security Assessment","Administrative","In Progress / Under Implementation",65,2
+"ORG-05","Data Classification Policy","Administrative","Active / Implemented",100,3
+"ORG-06","Business Continuity Policy","Administrative","Active / Implemented",100,3
+"ORG-07","Incident Response Policy","Administrative","Active / Implemented",100,4
+"PEO-01","Security Awareness Training","Administrative","Active / Implemented",100,4
+"PEO-02","Phishing Simulation","Administrative","Active / Implemented",100,3
+"PEO-03","Background Verification","Administrative","Active / Implemented",100,4
+"PEO-04","Joiner-Mover-Leaver Process","Administrative","Active / Implemented",100,4
+"PEO-05","Privileged User Training","Administrative","In Progress / Under Implementation",45,2
+"PHY-01","Data Center Access Control","Physical","Active / Implemented",100,5
+"PHY-02","CCTV Surveillance","Physical","Active / Implemented",100,4
+"PHY-03","Visitor Management","Physical","Active / Implemented",100,4
+"PHY-04","Fire Detection & Suppression","Physical","Active / Implemented",100,4
+"PHY-05","UPS & Generator","Physical","Active / Implemented",100,4
+"PHY-06","Environmental Monitoring","Physical","In Progress / Under Implementation",80,3
+"TECH-01","Multi-Factor Authentication (MFA)","Technical","Active / Implemented",100,4
+"TECH-02","Privileged Access Management (PAM)","Technical","In Progress / Under Implementation",85,3
+"TECH-03","Role-Based Access Control (RBAC)","Technical","Active / Implemented",100,4
+"TECH-04","Vulnerability Management","Technical","In Progress / Under Implementation",75,3
+"TECH-05","Firewall","Technical","Active / Implemented",100,4
+"TECH-06","Intrusion Detection System (IDS)","Technical","Active / Implemented",100,4
+"TECH-07","Endpoint Detection & Response (EDR)","Technical","In Progress / Under Implementation",70,3
+"TECH-08","Data Encryption at Rest","Technical","Active / Implemented",100,4
+"TECH-09","Data Encryption in Transit","Technical","Active / Implemented",100,4
+"TECH-10","Security Information & Event Management (SIEM)","Technical","Active / Implemented",100,4
+"TECH-11","Backup & Recovery","Technical","Active / Implemented",100,4
+"TECH-12","Patch Management","Technical","In Progress / Under Implementation",60,3
+"TECH-13","Multi-Factor Authentication (MFA)","Technical","Active / Implemented",100,5

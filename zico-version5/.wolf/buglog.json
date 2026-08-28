@@ -1,0 +1,332 @@
+[
+  {
+    "id": "BUG-20260824-001",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "Failed to Load Page ERR_CONNECTION_REFUSED (-102) at http://localhost:5173/",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client",
+    "root_cause": "No process was listening on TCP port 5173.",
+    "fix": "Start the Vite frontend from the client directory and verify that port 5173 responds.",
+    "tags": ["frontend", "vite", "local-development"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-002",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "STATUS.md patch context did not match because the file contains mojibake-encoded heading text.",
+    "file": ".wolf/STATUS.md",
+    "root_cause": "Automated patch context used display-decoded characters that differ from the file's stored text.",
+    "fix": "Use ASCII-only patch context when editing OpenWolf handoff files with encoding artifacts.",
+    "tags": ["openwolf", "encoding", "tooling"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-003",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "Unable to sign in. Please try again.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+    "root_cause": "The frontend proxies authentication requests to port 5000, but no backend process was listening on that port.",
+    "fix": "Start the mock API server from the application root and verify the login endpoint.",
+    "tags": ["authentication", "backend", "local-development"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-004",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "Audit module at /audit-module shows no data.",
+    "file": "zico-3-stable/zico-3-stable/audit-module/backend/src/index.ts",
+    "root_cause": "The Audit API is configured on port 5002, but no process was listening on that port.",
+    "fix": "Start the Audit API and confirm its seeded data endpoints respond before performing any destructive reseed.",
+    "tags": ["audit", "backend", "local-development"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-005",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "tsx watch src/index.ts fails with ERR_SYSTEM_ERROR: uv_os_get_passwd returned ENOMEM.",
+    "file": "zico-3-stable/zico-3-stable/audit-module/backend/package.json",
+    "root_cause": "The tsx watch runtime calls Node's os.userInfo(), which fails in this environment with ENOMEM.",
+    "fix": "Compile with TypeScript and start the generated Node server without tsx watch mode.",
+    "tags": ["audit", "tsx", "node", "environment"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-006",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "node dist/index.js fails with ERR_MODULE_NOT_FOUND for dist/routes/auditPlans.",
+    "file": "zico-3-stable/zico-3-stable/audit-module/backend/dist/index.js",
+    "root_cause": "TypeScript output retains extensionless ESM imports, which Node's ESM resolver does not resolve.",
+    "fix": "Run the TypeScript entrypoint with the tsx loader instead of using the generated output directly.",
+    "tags": ["audit", "typescript", "esm", "node"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-007",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "Audit API resource endpoints returned HTTP 500 while health returned HTTP 200.",
+    "file": "zico-3-stable/zico-3-stable/audit-module/backend/.env",
+    "root_cause": "The server was launched with DATABASE_URL=file:./prisma/dev.db; Prisma resolves this relative to its schema directory, producing a nonexistent nested path.",
+    "fix": "Launch with DATABASE_URL=file:./dev.db, which resolves to the existing prisma/dev.db database.",
+    "tags": ["audit", "prisma", "database", "configuration"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-008",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "Risk asset selection was not enforced as a backend relationship to Asset Management records.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+    "root_cause": "The client used assetSystem as an unvalidated string, so the backend did not maintain a durable asset identifier or reject unknown assets.",
+    "fix": "Store and validate assetId against the Asset Management collection; retain the asset name only as a display value.",
+    "tags": ["risk", "assets", "data-integrity", "relationship"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-009",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "Browser reported ERR_CONNECTION_REFUSED for localhost.",
+    "file": "zico-3-stable/zico-3-stable/start.bat",
+    "root_cause": "The Vite frontend and mock API processes were not running.",
+    "fix": "Started the frontend with npm run dev and the mock API with node mock-server.mjs.",
+    "tags": ["startup", "vite", "localhost", "frontend", "backend"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-010",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "riskOwnerId must reference an active user when assigning the active lol user.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/src/pages/risk/SubmitRisk.jsx",
+    "root_cause": "The actual risk creation page used a CreatableSelect whose value was the owner's name, while the API requires the active user's _id.",
+    "fix": "Use a standard Select filtered to active users and submit each user's _id as riskOwnerId.",
+    "tags": ["risk", "risk-owner", "users", "foreign-key", "frontend"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-011",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "Mail settings showed Connected but sender fields were not loaded and test emails were falsely accepted.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+    "root_cause": "The UI and API used different SMTP field names, recent activity used logs instead of items, and the mock test endpoint always returned success.",
+    "fix": "Align SMTP status/config fields, load recent items, report truthful disconnected status, and reject test sending when no SMTP transport is configured.",
+    "tags": ["mail", "smtp", "settings", "configuration"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-012",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "SMTP transport is not enabled in this local mock server.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+    "root_cause": "The email test endpoint was a placeholder and always returned HTTP 501 instead of using an SMTP transport.",
+    "fix": "Installed Nodemailer and implemented SMTP verification and real test-email delivery using the configured mailbox credentials.",
+    "tags": ["mail", "smtp", "nodemailer", "email"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-013",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "SMTP configuration disappeared after refreshing the Mail settings page or restarting the backend.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+    "root_cause": "EMAIL_CONFIG was stored only in the in-memory mock data object.",
+    "fix": "Persist SMTP configuration to server/data/email-config.json, load it at startup, preserve a saved app password when the password field is left blank, and ignore the file in Git.",
+    "tags": ["mail", "smtp", "persistence", "security"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-014",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "SMTP configuration saved. Verifying connection… remained visible for too long.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/src/pages/settings/Mail.jsx",
+    "root_cause": "The UI delayed the status refresh and the SMTP transport allowed a long network timeout.",
+    "fix": "Await the status check directly, show its result in the UI, and cap SMTP connection/greeting timeouts at 3 seconds.",
+    "tags": ["mail", "smtp", "ux", "timeout"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-015",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "ReferenceError: CreatableSelect is not defined on /risk/submit.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/src/pages/risk/SubmitRisk.jsx",
+    "root_cause": "The Risk Owner field was changed from CreatableSelect to Select, but CreatableSelect was still used by the Risk Owner sign-off field.",
+    "fix": "Restore the CreatableSelect import while keeping the Risk Owner assignment field as an active-user ID Select.",
+    "tags": ["risk", "submit", "react", "runtime-error"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-016",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "R-017 was assigned to an owner with a valid email but no notification was sent.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+    "root_cause": "Risk creation did not invoke the SMTP notification service; email settings only configured the transport.",
+    "fix": "Send a real assignment email after risk creation and provide a manual Notify owner action for existing risks.",
+    "tags": ["risk", "email", "notification", "smtp"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-017",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "Created risk R-017 disappeared after the mock backend restarted.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+    "root_cause": "The RISKS collection was held only in memory and was reinitialized from mock-data.mjs on every server restart.",
+    "fix": "Persist RISKS to server/data/risks.json on create and update, load the saved collection at startup, and ignore the local file in Git.",
+    "tags": ["risks", "persistence", "mock-server", "data-loss"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260824-018",
+    "timestamp": "2026-08-24T00:00:00+03:00",
+    "error_message": "Risk Owner data disappeared after restarting the mock backend.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+    "root_cause": "The application used in-memory arrays for all generic models, so writes from any form were lost when the Node process restarted.",
+    "fix": "Added a centralized JSON database snapshot for all registered collections and nested records, saved after every mutating API request and loaded at startup; protected the local file with .gitignore.",
+    "tags": ["persistence", "database", "models", "data-loss", "risk-owners"],
+    "occurrences": 1,
+    "last_seen": "2026-08-24T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260825-019",
+    "timestamp": "2026-08-25T00:00:00+03:00",
+    "error_message": "Risk specification calculation request using criteriaScores and riskControls was rejected or unsupported.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+    "root_cause": "The calculation adapter accepted only the UI payload names impacts and linkedControls, while the functional specification uses criteriaScores and riskControls.",
+    "fix": "Accept both payload shapes and expose POST /api/risks/calculate through the existing RiskEngine pipeline.",
+    "tags": ["risk", "api", "specification", "calculation"],
+    "occurrences": 1,
+    "last_seen": "2026-08-25T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260825-020",
+    "timestamp": "2026-08-25T00:00:00+03:00",
+    "error_message": "Following Up page was blank: Objects are not valid as a React child.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/src/pages/risk/FollowingUp.jsx",
+    "root_cause": "The enriched riskOwner object was rendered directly inside the Owner table cell.",
+    "fix": "Render riskOwner.name with compatible fallbacks instead of the object value.",
+    "tags": ["risk", "following-up", "react", "runtime-error"],
+    "occurrences": 1,
+    "last_seen": "2026-08-25T00:00:00+03:00"
+  },
+  {
+    "id": "BUG-20260825-021",
+    "timestamp": "2026-08-25T00:00:00+03:00",
+    "error_message": "Organization detail displayed all platform risks, assets, and domains.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+    "root_cause": "The organization rollup used global collection lengths and persisted records lacked consistent organization links.",
+    "fix": "Added organization links with persisted-data backfill, filtered rollups and resource lists, and preserved organization query navigation.",
+    "tags": ["organization", "scoping", "context"],
+    "occurrences": 1,
+    "last_seen": "2026-08-25T00:00:00+03:00"
+  },
+  {
+    "id": "BUG-20260825-022",
+    "timestamp": "2026-08-25T00:00:00+03:00",
+    "error_message": "Organization hierarchy displayed only the selected organization without its subsidiaries.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+    "root_cause": "The hierarchy endpoint returned the selected organization directly and never constructed children from parentOrg references.",
+    "fix": "Build a recursive children tree while supporting both string and object parentOrg values.",
+    "tags": ["organization", "hierarchy", "context"],
+    "occurrences": 1,
+    "last_seen": "2026-08-25T00:00:00+03:00"
+  },
+  {
+    "id": "BUG-20260825-023",
+    "timestamp": "2026-08-25T00:00:00+03:00",
+    "error_message": "Compliance workflow stages were displayed but their state was local and not traceable across the lifecycle.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/src/pages/compliance-full/ComplianceModule.tsx",
+    "root_cause": "Frameworks, assessments, evidence, gaps, and remediation used transient component state without lifecycle transitions.",
+    "fix": "Persisted the compliance workspace, linked assessment outcomes to automatic gaps, and linked completed remediation tasks to gap resolution.",
+    "tags": ["compliance", "workflow", "traceability"],
+    "occurrences": 1,
+    "last_seen": "2026-08-25T00:00:00+03:00"
+  },
+  {
+    "id": "BUG-20260825-024",
+    "timestamp": "2026-08-25T00:00:00+03:00",
+    "error_message": "Policy detail uploads, workflow approval, audit history, and control mapping were UI-only or non-functional.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/src/pages/governance/PolicyDetail.jsx",
+    "root_cause": "Tabs called unsupported methods on the resource helper, Evidence Mapping was redundant, and policy detail lifecycle responses omitted complete policy data.",
+    "fix": "Switched policy tabs to Axios endpoints, removed Evidence Mapping, added real control dropdowns and links, combined audit records, normalized policy detail state, and preserved document uploads and workflow transitions.",
+    "tags": ["governance", "policy", "workflow", "audit", "upload", "controls"],
+    "occurrences": 1,
+    "last_seen": "2026-08-25T00:00:00+03:00"
+  },
+  {
+    "id": "BUG-20260825-025",
+    "timestamp": "2026-08-25T00:00:00+03:00",
+    "error_message": "Additional policy detail tabs used unsupported resource helper methods and did not persist actions.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/src/pages/governance/tabs",
+    "root_cause": "Versions, risk mappings, hierarchy, and attestations called get/create/update/remove on a collection helper instead of the Axios client.",
+    "fix": "Switched remaining tabs to Axios endpoints, removed the obsolete Evidence Mapping implementation, and validated the complete frontend build.",
+    "tags": ["governance", "policy", "tabs", "persistence"],
+    "occurrences": 1,
+    "last_seen": "2026-08-25T00:00:00+03:00"
+  },
+  {
+    "id": "BUG-20260825-026",
+    "timestamp": "2026-08-25T00:00:00+03:00",
+    "error_message": "RiskMappingsTab.jsx: Uncaught ReferenceError: resource is not defined.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/src/pages/governance/tabs/RiskMappingsTab.jsx",
+    "root_cause": "The resource import was removed while the risks collection declaration still referenced resource().",
+    "fix": "Removed the stale collection declaration and loaded risks through the configured Axios client.",
+    "tags": ["governance", "policy", "risk-mapping", "runtime-error"],
+    "occurrences": 1,
+    "last_seen": "2026-08-25T00:00:00+03:00"
+  },
+  {
+    "id": "BUG-20260825-027",
+    "timestamp": "2026-08-25T00:00:00+03:00",
+    "error_message": "WorkflowTab retained a stale api.put reference after migration to Axios.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/src/pages/governance/tabs/WorkflowTab.jsx",
+    "root_cause": "One workflow stage-save call was not updated with the rest of the API migration.",
+    "fix": "Changed the call to apiClient.put and verified all policy tabs for stale resource-helper calls.",
+    "tags": ["governance", "policy", "workflow", "runtime-error"],
+    "occurrences": 1,
+    "last_seen": "2026-08-25T00:00:00+03:00"
+  },
+  {
+    "id": "BUG-20260825-028",
+    "timestamp": "2026-08-25T00:00:00+03:00",
+    "error_message": "Requirement details crashed with ReferenceError: DetailStat is not defined.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/src/pages/compliance-full/ComplianceModule.tsx",
+    "root_cause": "The relationship detail view referenced a missing wrapper component.",
+    "fix": "Defined DetailStat and verified the requirement detail drawer in the browser.",
+    "tags": ["compliance", "requirements", "runtime-error"],
+    "occurrences": 1,
+    "last_seen": "2026-08-25T00:00:00+03:00"
+  },
+  {
+    "id": "BUG-20260825-029",
+    "timestamp": "2026-08-25T00:00:00+03:00",
+    "error_message": "Requirement relationship editor required Ctrl for multi-select and displayed malformed live identifiers.",
+    "file": "zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/client/src/pages/compliance-full/ComplianceModule.tsx",
+    "root_cause": "Native multi-select interaction was not discoverable and persisted demo collections contain mixed identifier formats.",
+    "fix": "Replaced multi-select elements with checkboxes and normalized live options with validated identifier prefixes and seeded fallbacks.",
+    "tags": ["compliance", "requirements", "relationships", "ux"],
+    "occurrences": 1,
+    "last_seen": "2026-08-25T00:00:00+03:00"
+  }
+  ,{
+    "id": "BUG-20260827-001",
+    "timestamp": "2026-08-27T18:20:00+03:00",
+    "error_message": "start.bat did not start Main API because persistence code was temporarily inserted before initialization; Prisma startup also prompted for a data-loss schema change.",
+    "file": "zico-3-stable/zico-3-stable/start.bat; zico-3-stable/zico-3-stable/الكود بعد تعديل الاجازة/server/mock-server.mjs",
+    "root_cause": "Startup included a destructive db push and the Main API persistence helper had misplaced duplicate code after concurrent edits.",
+    "fix": "Removed db push and seed from startup, added Unicode-safe backup-data.ps1/start-services.ps1 helpers, repaired Main API persistence placement, added atomic writes and graceful shutdown saves, and verified all three service endpoints.",
+    "tags": ["startup", "data-safety", "backup", "prisma", "main-api"],
+    "occurrences": 1,
+    "last_seen": "2026-08-27T18:20:00+03:00"
+  }
+]

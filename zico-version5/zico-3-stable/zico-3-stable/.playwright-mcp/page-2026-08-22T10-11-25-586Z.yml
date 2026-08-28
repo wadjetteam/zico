@@ -1,0 +1,40 @@
+- generic [ref=f7e3]:
+  - banner [ref=f7e4]:
+    - button "Toggle navigation" [ref=f7e5] [cursor=pointer]
+    - img "WADJET" [ref=f7e10]
+    - textbox "Search modules" [ref=f7e12]:
+      - /placeholder: Search modules…
+    - generic [ref=f7e13]:
+      - button "Help" [ref=f7e14] [cursor=pointer]
+      - button "Settings" [ref=f7e18] [cursor=pointer]
+      - button "S admin" [ref=f7e23] [cursor=pointer]:
+        - generic [ref=f7e24]: S
+        - generic [ref=f7e25]: admin
+  - main [ref=f7e27]:
+    - generic [ref=f7e28]:
+      - generic [ref=f7e29]:
+        - generic [ref=f7e30]:
+          - heading "Domains" [level=1] [ref=f7e31]
+          - paragraph [ref=f7e32]: Domains scope the risk universe inside an organization. The scoring method is fixed per domain; every risk inside is scored consistently. Domains may nest under a parent domain.
+        - button "New domain" [ref=f7e34] [cursor=pointer]
+      - generic [ref=f7e36]:
+        - generic [ref=f7e44]:
+          - paragraph [ref=f7e45]: "0"
+          - paragraph [ref=f7e46]: Total domains
+        - generic [ref=f7e54]:
+          - paragraph [ref=f7e55]: "0"
+          - paragraph [ref=f7e56]: Active
+        - generic [ref=f7e64]:
+          - paragraph [ref=f7e65]: "0"
+          - paragraph [ref=f7e66]: Advanced scoring (70/30)
+        - generic [ref=f7e74]:
+          - paragraph [ref=f7e75]: "0"
+          - paragraph [ref=f7e76]: Total record references
+      - generic [ref=f7e77]:
+        - generic [ref=f7e78]:
+          - textbox "Search domains…" [ref=f7e80]
+          - generic [ref=f7e81]:
+            - combobox [ref=f7e82]:
+              - option "All organizations" [selected]
+            - button "Refresh" [ref=f7e83] [cursor=pointer]
+        - paragraph [ref=f7e92]: Loading data…

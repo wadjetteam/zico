@@ -1,0 +1,11 @@
+policyId,title,category,owner,status,version
+"POL-001","Information Security Policy","Information Security","CISO","Published","3.2"
+"POL-002","Data Privacy Policy","Data Privacy","Data Protection Officer","Review","2.1"
+"POL-003","Acceptable Use Policy","IT","Head of IT Security","Published","1.8"
+"POL-004","Incident Response Policy","Information Security","CISO","Approval","2.0"
+"POL-005","Third-Party Risk Management Policy","Third-Party","Procurement Director","Draft","1.3"
+"POL-006","Business Continuity Policy","Operational","CISO","Review","1.0"
+"POL-007","Access Control Policy","Information Security","IT Security Manager","Approval","2.0"
+"POL-008","Data Classification Policy","Data Privacy","Data Protection Officer","Published","1.0"
+"POL-009","Legacy Password Policy","Information Security","CISO","Expired","1.0"
+"POL-010","Outdated IT Security Policy","Information Security","CISO","Archived","1.0"

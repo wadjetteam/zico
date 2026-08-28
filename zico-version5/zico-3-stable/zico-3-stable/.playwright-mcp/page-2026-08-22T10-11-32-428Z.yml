@@ -1,0 +1,194 @@
+- generic [ref=f7e1]:
+  - generic [ref=f7e3]:
+    - banner [ref=f7e4]:
+      - button "Toggle navigation" [ref=f7e5] [cursor=pointer]
+      - img "WADJET" [ref=f7e10]
+      - textbox "Search modules" [ref=f7e12]:
+        - /placeholder: Search modules…
+      - generic [ref=f7e13]:
+        - button "Help" [ref=f7e14] [cursor=pointer]
+        - button "Settings" [ref=f7e18] [cursor=pointer]
+        - button "S admin" [ref=f7e23] [cursor=pointer]:
+          - generic [ref=f7e24]: S
+          - generic [ref=f7e25]: admin
+    - main [ref=f7e27]:
+      - generic [ref=f7e28]:
+        - generic [ref=f7e29]:
+          - generic [ref=f7e30]:
+            - heading "Domains" [level=1] [ref=f7e31]
+            - paragraph [ref=f7e32]: Domains scope the risk universe inside an organization. The scoring method is fixed per domain; every risk inside is scored consistently. Domains may nest under a parent domain.
+          - button "New domain" [active] [ref=f7e34] [cursor=pointer]
+        - generic [ref=f7e36]:
+          - generic [ref=f7e44]:
+            - paragraph [ref=f7e45]: "6"
+            - paragraph [ref=f7e46]: Total domains
+          - generic [ref=f7e54]:
+            - paragraph [ref=f7e55]: "6"
+            - paragraph [ref=f7e56]: Active
+          - generic [ref=f7e64]:
+            - paragraph [ref=f7e65]: "4"
+            - paragraph [ref=f7e66]: Advanced scoring (70/30)
+          - generic [ref=f7e74]:
+            - paragraph [ref=f7e75]: "16"
+            - paragraph [ref=f7e76]: Total record references
+        - generic [ref=f7e77]:
+          - generic [ref=f7e78]:
+            - textbox "Search domains…" [ref=f7e80]
+            - generic [ref=f7e81]:
+              - combobox [ref=f7e82]:
+                - option "All organizations" [selected]
+                - option "Wadjet Bank Plc"
+                - option "Wadjet Digital Ltd"
+                - option "Wadjet Capital"
+              - button "Refresh" [ref=f7e83] [cursor=pointer]
+          - table [ref=f7e94]:
+            - rowgroup [ref=f7e95]:
+              - row [ref=f7e96]:
+                - columnheader [ref=f7e97]:
+                  - button "Domain" [ref=f7e98] [cursor=pointer]
+                - columnheader [ref=f7e99]:
+                  - button "Organization" [ref=f7e100] [cursor=pointer]
+                - columnheader [ref=f7e101]:
+                  - button "Parent domain" [ref=f7e102] [cursor=pointer]
+                - columnheader [ref=f7e103]:
+                  - button "Scoring method" [ref=f7e104] [cursor=pointer]
+                - columnheader [ref=f7e105]:
+                  - button "Used in" [ref=f7e106] [cursor=pointer]
+                - columnheader [ref=f7e107]:
+                  - button "Status" [ref=f7e108] [cursor=pointer]
+                - columnheader [ref=f7e109]
+            - rowgroup [ref=f7e110]:
+              - row [ref=f7e111]:
+                - cell [ref=f7e112]:
+                  - generic [ref=f7e113]:
+                    - text: Information Security
+                    - paragraph [ref=f7e114]: —
+                - cell "—" [ref=f7e115]
+                - cell "—" [ref=f7e116]
+                - cell "Advanced 70/30" [ref=f7e117]
+                - cell "5" [ref=f7e119]
+                - cell "active" [ref=f7e120]
+                - cell [ref=f7e122]:
+                  - generic [ref=f7e123]:
+                    - button "Edit" [ref=f7e124] [cursor=pointer]
+                    - button "Delete" [ref=f7e128] [cursor=pointer]
+              - row [ref=f7e132]:
+                - cell [ref=f7e133]:
+                  - generic [ref=f7e134]:
+                    - text: Operational
+                    - paragraph [ref=f7e135]: —
+                - cell "—" [ref=f7e136]
+                - cell "—" [ref=f7e137]
+                - cell "Advanced 70/30" [ref=f7e138]
+                - cell "2" [ref=f7e140]
+                - cell "active" [ref=f7e141]
+                - cell [ref=f7e143]:
+                  - generic [ref=f7e144]:
+                    - button "Edit" [ref=f7e145] [cursor=pointer]
+                    - button "Delete" [ref=f7e149] [cursor=pointer]
+              - row [ref=f7e153]:
+                - cell [ref=f7e154]:
+                  - generic [ref=f7e155]:
+                    - text: Compliance
+                    - paragraph [ref=f7e156]: —
+                - cell "—" [ref=f7e157]
+                - cell "—" [ref=f7e158]
+                - cell "Default max" [ref=f7e159]
+                - cell "2" [ref=f7e161]
+                - cell "active" [ref=f7e162]
+                - cell [ref=f7e164]:
+                  - generic [ref=f7e165]:
+                    - button "Edit" [ref=f7e166] [cursor=pointer]
+                    - button "Delete" [ref=f7e170] [cursor=pointer]
+              - row [ref=f7e174]:
+                - cell [ref=f7e175]:
+                  - generic [ref=f7e176]:
+                    - text: Cybersecurity
+                    - paragraph [ref=f7e177]: —
+                - cell "—" [ref=f7e178]
+                - cell "—" [ref=f7e179]
+                - cell "Advanced 70/30" [ref=f7e180]
+                - cell "4" [ref=f7e182]
+                - cell "active" [ref=f7e183]
+                - cell [ref=f7e185]:
+                  - generic [ref=f7e186]:
+                    - button "Edit" [ref=f7e187] [cursor=pointer]
+                    - button "Delete" [ref=f7e191] [cursor=pointer]
+              - row [ref=f7e195]:
+                - cell [ref=f7e196]:
+                  - generic [ref=f7e197]:
+                    - text: Third Party Risk
+                    - paragraph [ref=f7e198]: —
+                - cell "—" [ref=f7e199]
+                - cell "—" [ref=f7e200]
+                - cell "Advanced 70/30" [ref=f7e201]
+                - cell "2" [ref=f7e203]
+                - cell "active" [ref=f7e204]
+                - cell [ref=f7e206]:
+                  - generic [ref=f7e207]:
+                    - button "Edit" [ref=f7e208] [cursor=pointer]
+                    - button "Delete" [ref=f7e212] [cursor=pointer]
+              - row [ref=f7e216]:
+                - cell [ref=f7e217]:
+                  - generic [ref=f7e218]:
+                    - text: Financial
+                    - paragraph [ref=f7e219]: —
+                - cell "—" [ref=f7e220]
+                - cell "—" [ref=f7e221]
+                - cell "Default max" [ref=f7e222]
+                - cell "1" [ref=f7e224]
+                - cell "active" [ref=f7e225]
+                - cell [ref=f7e227]:
+                  - generic [ref=f7e228]:
+                    - button "Edit" [ref=f7e229] [cursor=pointer]
+                    - button "Delete" [ref=f7e233] [cursor=pointer]
+          - generic [ref=f7e237]:
+            - generic [ref=f7e238]: 1–6 of 6
+            - generic [ref=f7e239]:
+              - button [disabled] [ref=f7e240]
+              - generic [ref=f7e243]: Page 1 / 1
+              - button [disabled] [ref=f7e244]
+  - generic [ref=f7e249]:
+    - generic [ref=f7e250]:
+      - generic [ref=f7e251]:
+        - heading "New domain" [level=2] [ref=f7e252]
+        - paragraph [ref=f7e253]: Domains belong to an organization; the scoring method is locked per domain.
+      - button "Close" [ref=f7e254] [cursor=pointer]
+    - generic [ref=f7e259]:
+      - generic [ref=f7e260]:
+        - generic [ref=f7e261]: Organization
+        - combobox "Organization" [ref=f7e262]:
+          - option "— Select organization —" [selected]
+          - option "Wadjet Bank Plc"
+          - option "Wadjet Digital Ltd"
+          - option "Wadjet Capital"
+      - generic [ref=f7e263]:
+        - generic [ref=f7e264]: Domain name
+        - textbox "Domain name" [ref=f7e265]:
+          - /placeholder: e.g. Digital Channels
+      - generic [ref=f7e266]:
+        - generic [ref=f7e267]: Domain ID
+        - textbox "Domain ID Optional internal code" [ref=f7e268]:
+          - /placeholder: e.g. DMN-002
+        - generic [ref=f7e269]: Optional internal code
+      - generic [ref=f7e270]:
+        - generic [ref=f7e271]: Parent domain
+        - combobox "Parent domain Only domains of the same organization" [disabled] [ref=f7e272]:
+          - option "— No parent —" [selected]
+        - generic [ref=f7e273]: Only domains of the same organization
+      - generic [ref=f7e274]:
+        - generic [ref=f7e275]: Scoring method
+        - combobox "Scoring method" [ref=f7e276]:
+          - option "Advanced — blended 70/30 impact" [selected]
+          - option "Default — plain max impact"
+      - generic [ref=f7e277]:
+        - generic [ref=f7e278]: Status
+        - combobox "Status" [ref=f7e279]:
+          - option "active" [selected]
+          - option "inactive"
+      - generic [ref=f7e280]:
+        - generic [ref=f7e281]: Description
+        - textbox "Description" [ref=f7e282]
+    - generic [ref=f7e283]:
+      - button "Cancel" [ref=f7e284] [cursor=pointer]
+      - button "Save" [ref=f7e285] [cursor=pointer]
