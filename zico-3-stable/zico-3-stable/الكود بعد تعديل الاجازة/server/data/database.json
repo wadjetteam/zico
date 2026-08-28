@@ -1,0 +1,4950 @@
+{
+  "version": 1,
+  "savedAt": "2026-08-28T10:57:11.487Z",
+  "collections": {
+    "users": [
+      {
+        "_id": "u-admin",
+        "username": "admin",
+        "fullName": "System Administrator",
+        "name": "System Administrator",
+        "email": "admin@wadjet.local",
+        "department": "GRC",
+        "is_active": true,
+        "role": "board"
+      },
+      {
+        "_id": "u-analyst",
+        "username": "analyst",
+        "fullName": "Ana Lyte",
+        "name": "Ana Lyte",
+        "email": "analyst@wadjet.local",
+        "department": "Risk",
+        "is_active": true,
+        "role": "risk_owner"
+      },
+      {
+        "_id": "u-auditor",
+        "username": "auditor",
+        "fullName": "Audrey Tor",
+        "name": "Audrey Tor",
+        "email": "auditor@wadjet.local",
+        "department": "Audit",
+        "is_active": true,
+        "role": "ciso"
+      },
+      {
+        "_id": "u-manager",
+        "username": "manager",
+        "fullName": "Morgan Lee",
+        "name": "Morgan Lee",
+        "email": "manager@wadjet.local",
+        "department": "Operations",
+        "is_active": true,
+        "role": "cro"
+      },
+      {
+        "_id": "u-officer",
+        "username": "officer",
+        "fullName": "Owen Fischer",
+        "name": "Owen Fischer",
+        "email": "officer@wadjet.local",
+        "department": "Risk",
+        "is_active": true,
+        "role": "risk_owner"
+      }
+    ],
+    "groups": [
+      {
+        "_id": "g-1",
+        "name": "IT Security Team",
+        "description": "Security operations group",
+        "status": "Active",
+        "members": [
+          "u-admin",
+          "u-officer"
+        ],
+        "notificationRules": [
+          {
+            "event": "risk.created",
+            "channel": "email"
+          }
+        ]
+      },
+      {
+        "_id": "g-2",
+        "name": "Risk Committee",
+        "description": "Enterprise risk committee",
+        "status": "Active",
+        "members": [
+          "u-admin",
+          "u-manager"
+        ],
+        "notificationRules": [
+          {
+            "event": "risk.escalated",
+            "channel": "email"
+          }
+        ]
+      },
+      {
+        "_id": "g-3",
+        "name": "Audit Team",
+        "description": "Internal audit group",
+        "status": "Active",
+        "members": [
+          "u-auditor"
+        ],
+        "notificationRules": []
+      }
+    ],
+    "domains": [
+      {
+        "_id": "d-1",
+        "name": "Information Security",
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "status": "active",
+        "scoringMethod": "advanced",
+        "description": "CIA triad and security operations",
+        "escalationMatrix": {
+          "Low": "Risk Owner",
+          "Medium": "Risk Owner + CISO",
+          "High": "CISO + CRO",
+          "Critical": "Board of Directors via Enterprise Risk Register"
+        }
+      },
+      {
+        "_id": "d-2",
+        "name": "Operational",
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "status": "active",
+        "scoringMethod": "advanced",
+        "description": "Process and service delivery",
+        "escalationMatrix": {
+          "Low": "Process Owner",
+          "Medium": "Process Owner + COO",
+          "High": "COO + CRO",
+          "Critical": "Board of Directors via Enterprise Risk Register"
+        }
+      },
+      {
+        "_id": "d-3",
+        "name": "Compliance",
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "status": "active",
+        "scoringMethod": "max",
+        "description": "Regulatory and legal obligations",
+        "escalationMatrix": {
+          "Low": "Compliance Officer",
+          "Medium": "Head of Compliance + CRO",
+          "High": "CRO + Legal Counsel",
+          "Critical": "Board of Directors via Regulatory Risk Register"
+        }
+      },
+      {
+        "_id": "d-4",
+        "name": "Cybersecurity",
+        "organization": {
+          "_id": "o-2",
+          "name": "Wadjet Digital Ltd"
+        },
+        "status": "active",
+        "scoringMethod": "advanced",
+        "description": "Cyber threats and incidents",
+        "escalationMatrix": {
+          "Low": "IT Security Team",
+          "Medium": "CISO + IT Security",
+          "High": "CISO + CRO",
+          "Critical": "Board of Directors via Cyber Risk Committee"
+        }
+      },
+      {
+        "_id": "d-5",
+        "name": "Third Party Risk",
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "status": "active",
+        "scoringMethod": "advanced",
+        "description": "Vendor and supplier exposure",
+        "escalationMatrix": {
+          "Low": "Vendor Manager",
+          "Medium": "Procurement Director + CRO",
+          "High": "CRO + Procurement",
+          "Critical": "Board of Directors via Third Party Risk Committee"
+        }
+      },
+      {
+        "_id": "d-6",
+        "name": "Financial",
+        "organization": {
+          "_id": "o-3",
+          "name": "Wadjet Capital"
+        },
+        "status": "active",
+        "scoringMethod": "max",
+        "description": "Financial loss and liquidity",
+        "escalationMatrix": {
+          "Low": "Finance Manager",
+          "Medium": "CFO + CRO",
+          "High": "CFO + Board",
+          "Critical": "Board of Directors via Financial Risk Committee"
+        }
+      }
+    ],
+    "parameters": [
+      {
+        "_id": "p-1",
+        "name": "Information Security",
+        "domain": {
+          "_id": "d-1",
+          "name": "Information Security"
+        },
+        "description": "Risk methodology for Information Security domain",
+        "status": "active",
+        "methodVersion": 1,
+        "scoringMethod": "advanced",
+        "impactMethod": "weighted",
+        "criteria": [
+          {
+            "name": "Financial",
+            "weight": 0.125
+          },
+          {
+            "name": "Regulatory",
+            "weight": 0.125
+          },
+          {
+            "name": "Reputational",
+            "weight": 0.125
+          },
+          {
+            "name": "Safety",
+            "weight": 0.125
+          },
+          {
+            "name": "Operational",
+            "weight": 0.125
+          },
+          {
+            "name": "Confidentiality",
+            "weight": 0.125
+          },
+          {
+            "name": "Integrity",
+            "weight": 0.125
+          },
+          {
+            "name": "Availability",
+            "weight": 0.125
+          }
+        ],
+        "riskScoreMethod": "multiplicative",
+        "riskScoreWeights": {
+          "likelihood": 0.5,
+          "impact": 0.5
+        },
+        "matrixLookupTable": null,
+        "thresholds": {
+          "critical": 20,
+          "high": 12,
+          "medium": 6
+        },
+        "appetiteLimit": 8,
+        "toleranceLimit": 12,
+        "residualMethod": "overall_ce",
+        "maximumRiskReduction": 0.75,
+        "minResidualScore": 1,
+        "controlEffectivenessModel": {
+          "version": "CE-V1",
+          "factors": {
+            "design": 0.25,
+            "operating": 0.35,
+            "coverage": 0.25,
+            "testing": 0.15
+          }
+        },
+        "controlEffectivenessWeights": {
+          "Effective": 0.75,
+          "Partially Effective": 0.5,
+          "Ineffective": 0.25,
+          "Not Assessed": 0
+        },
+        "recommendedControls": [],
+        "governanceRules": {
+          "justificationThreshold": 0.2,
+          "approvalThreshold": 0.4,
+          "minJustificationLength": 20,
+          "requireJustification": true,
+          "requireApproval": true
+        },
+        "createdBy": "admin",
+        "createdAt": "2026-02-08T14:29:21.873Z",
+        "updatedAt": "2026-07-28T14:29:21.885Z"
+      },
+      {
+        "_id": "p-2",
+        "name": "Operational",
+        "domain": {
+          "_id": "d-2",
+          "name": "Operational"
+        },
+        "description": "Risk methodology for Operational domain",
+        "status": "active",
+        "methodVersion": 1,
+        "scoringMethod": "advanced",
+        "impactMethod": "weighted",
+        "criteria": [
+          {
+            "name": "Financial",
+            "weight": 0.125
+          },
+          {
+            "name": "Regulatory",
+            "weight": 0.125
+          },
+          {
+            "name": "Reputational",
+            "weight": 0.125
+          },
+          {
+            "name": "Safety",
+            "weight": 0.125
+          },
+          {
+            "name": "Operational",
+            "weight": 0.125
+          },
+          {
+            "name": "Confidentiality",
+            "weight": 0.125
+          },
+          {
+            "name": "Integrity",
+            "weight": 0.125
+          },
+          {
+            "name": "Availability",
+            "weight": 0.125
+          }
+        ],
+        "riskScoreMethod": "multiplicative",
+        "riskScoreWeights": {
+          "likelihood": 0.5,
+          "impact": 0.5
+        },
+        "matrixLookupTable": null,
+        "thresholds": {
+          "critical": 20,
+          "high": 12,
+          "medium": 6
+        },
+        "appetiteLimit": 8,
+        "toleranceLimit": 12,
+        "residualMethod": "overall_ce",
+        "maximumRiskReduction": 0.75,
+        "minResidualScore": 1,
+        "controlEffectivenessModel": {
+          "version": "CE-V1",
+          "factors": {
+            "design": 0.25,
+            "operating": 0.35,
+            "coverage": 0.25,
+            "testing": 0.15
+          }
+        },
+        "controlEffectivenessWeights": {
+          "Effective": 0.75,
+          "Partially Effective": 0.5,
+          "Ineffective": 0.25,
+          "Not Assessed": 0
+        },
+        "recommendedControls": [],
+        "governanceRules": {
+          "justificationThreshold": 0.2,
+          "approvalThreshold": 0.4,
+          "minJustificationLength": 20,
+          "requireJustification": true,
+          "requireApproval": true
+        },
+        "createdBy": "admin",
+        "createdAt": "2026-02-08T14:29:21.885Z",
+        "updatedAt": "2026-07-28T14:29:21.885Z"
+      },
+      {
+        "_id": "p-3",
+        "name": "Compliance",
+        "domain": {
+          "_id": "d-3",
+          "name": "Compliance"
+        },
+        "description": "Risk methodology for Compliance domain",
+        "status": "active",
+        "methodVersion": 1,
+        "scoringMethod": "max",
+        "impactMethod": "max",
+        "criteria": [
+          {
+            "name": "Financial",
+            "weight": 0.125
+          },
+          {
+            "name": "Regulatory",
+            "weight": 0.125
+          },
+          {
+            "name": "Reputational",
+            "weight": 0.125
+          },
+          {
+            "name": "Safety",
+            "weight": 0.125
+          },
+          {
+            "name": "Operational",
+            "weight": 0.125
+          },
+          {
+            "name": "Confidentiality",
+            "weight": 0.125
+          },
+          {
+            "name": "Integrity",
+            "weight": 0.125
+          },
+          {
+            "name": "Availability",
+            "weight": 0.125
+          }
+        ],
+        "riskScoreMethod": "multiplicative",
+        "riskScoreWeights": {
+          "likelihood": 0.5,
+          "impact": 0.5
+        },
+        "matrixLookupTable": null,
+        "thresholds": {
+          "critical": 20,
+          "high": 12,
+          "medium": 6
+        },
+        "appetiteLimit": 8,
+        "toleranceLimit": 12,
+        "residualMethod": "overall_ce",
+        "maximumRiskReduction": 0.75,
+        "minResidualScore": 1,
+        "controlEffectivenessModel": {
+          "version": "CE-V1",
+          "factors": {
+            "design": 0.25,
+            "operating": 0.35,
+            "coverage": 0.25,
+            "testing": 0.15
+          }
+        },
+        "controlEffectivenessWeights": {
+          "Effective": 0.75,
+          "Partially Effective": 0.5,
+          "Ineffective": 0.25,
+          "Not Assessed": 0
+        },
+        "recommendedControls": [],
+        "governanceRules": {
+          "justificationThreshold": 0.2,
+          "approvalThreshold": 0.4,
+          "minJustificationLength": 20,
+          "requireJustification": true,
+          "requireApproval": true
+        },
+        "createdBy": "admin",
+        "createdAt": "2026-02-08T14:29:21.885Z",
+        "updatedAt": "2026-07-28T14:29:21.885Z"
+      },
+      {
+        "_id": "p-4",
+        "name": "Cybersecurity",
+        "domain": {
+          "_id": "d-4",
+          "name": "Cybersecurity"
+        },
+        "description": "Risk methodology for Cybersecurity domain",
+        "status": "active",
+        "methodVersion": 1,
+        "scoringMethod": "advanced",
+        "impactMethod": "weighted",
+        "criteria": [
+          {
+            "name": "Financial",
+            "weight": 0.125
+          },
+          {
+            "name": "Regulatory",
+            "weight": 0.125
+          },
+          {
+            "name": "Reputational",
+            "weight": 0.125
+          },
+          {
+            "name": "Safety",
+            "weight": 0.125
+          },
+          {
+            "name": "Operational",
+            "weight": 0.125
+          },
+          {
+            "name": "Confidentiality",
+            "weight": 0.125
+          },
+          {
+            "name": "Integrity",
+            "weight": 0.125
+          },
+          {
+            "name": "Availability",
+            "weight": 0.125
+          }
+        ],
+        "riskScoreMethod": "multiplicative",
+        "riskScoreWeights": {
+          "likelihood": 0.5,
+          "impact": 0.5
+        },
+        "matrixLookupTable": null,
+        "thresholds": {
+          "critical": 20,
+          "high": 12,
+          "medium": 6
+        },
+        "appetiteLimit": 8,
+        "toleranceLimit": 12,
+        "residualMethod": "overall_ce",
+        "maximumRiskReduction": 0.75,
+        "minResidualScore": 1,
+        "controlEffectivenessModel": {
+          "version": "CE-V1",
+          "factors": {
+            "design": 0.25,
+            "operating": 0.35,
+            "coverage": 0.25,
+            "testing": 0.15
+          }
+        },
+        "controlEffectivenessWeights": {
+          "Effective": 0.75,
+          "Partially Effective": 0.5,
+          "Ineffective": 0.25,
+          "Not Assessed": 0
+        },
+        "recommendedControls": [],
+        "governanceRules": {
+          "justificationThreshold": 0.2,
+          "approvalThreshold": 0.4,
+          "minJustificationLength": 20,
+          "requireJustification": true,
+          "requireApproval": true
+        },
+        "createdBy": "admin",
+        "createdAt": "2026-02-08T14:29:21.885Z",
+        "updatedAt": "2026-07-28T14:29:21.885Z"
+      },
+      {
+        "_id": "p-5",
+        "name": "Third Party Risk",
+        "domain": {
+          "_id": "d-5",
+          "name": "Third Party Risk"
+        },
+        "description": "Risk methodology for Third Party Risk domain",
+        "status": "active",
+        "methodVersion": 1,
+        "scoringMethod": "advanced",
+        "impactMethod": "weighted",
+        "criteria": [
+          {
+            "name": "Financial",
+            "weight": 0.125
+          },
+          {
+            "name": "Regulatory",
+            "weight": 0.125
+          },
+          {
+            "name": "Reputational",
+            "weight": 0.125
+          },
+          {
+            "name": "Safety",
+            "weight": 0.125
+          },
+          {
+            "name": "Operational",
+            "weight": 0.125
+          },
+          {
+            "name": "Confidentiality",
+            "weight": 0.125
+          },
+          {
+            "name": "Integrity",
+            "weight": 0.125
+          },
+          {
+            "name": "Availability",
+            "weight": 0.125
+          }
+        ],
+        "riskScoreMethod": "multiplicative",
+        "riskScoreWeights": {
+          "likelihood": 0.5,
+          "impact": 0.5
+        },
+        "matrixLookupTable": null,
+        "thresholds": {
+          "critical": 20,
+          "high": 12,
+          "medium": 6
+        },
+        "appetiteLimit": 8,
+        "toleranceLimit": 12,
+        "residualMethod": "overall_ce",
+        "maximumRiskReduction": 0.75,
+        "minResidualScore": 1,
+        "controlEffectivenessModel": {
+          "version": "CE-V1",
+          "factors": {
+            "design": 0.25,
+            "operating": 0.35,
+            "coverage": 0.25,
+            "testing": 0.15
+          }
+        },
+        "controlEffectivenessWeights": {
+          "Effective": 0.75,
+          "Partially Effective": 0.5,
+          "Ineffective": 0.25,
+          "Not Assessed": 0
+        },
+        "recommendedControls": [],
+        "governanceRules": {
+          "justificationThreshold": 0.2,
+          "approvalThreshold": 0.4,
+          "minJustificationLength": 20,
+          "requireJustification": true,
+          "requireApproval": true
+        },
+        "createdBy": "admin",
+        "createdAt": "2026-02-08T14:29:21.885Z",
+        "updatedAt": "2026-07-28T14:29:21.885Z"
+      },
+      {
+        "_id": "p-6",
+        "name": "Financial",
+        "domain": {
+          "_id": "d-6",
+          "name": "Financial"
+        },
+        "description": "Risk methodology for Financial domain",
+        "status": "active",
+        "methodVersion": 1,
+        "scoringMethod": "max",
+        "impactMethod": "max",
+        "criteria": [
+          {
+            "name": "Financial",
+            "weight": 0.125
+          },
+          {
+            "name": "Regulatory",
+            "weight": 0.125
+          },
+          {
+            "name": "Reputational",
+            "weight": 0.125
+          },
+          {
+            "name": "Safety",
+            "weight": 0.125
+          },
+          {
+            "name": "Operational",
+            "weight": 0.125
+          },
+          {
+            "name": "Confidentiality",
+            "weight": 0.125
+          },
+          {
+            "name": "Integrity",
+            "weight": 0.125
+          },
+          {
+            "name": "Availability",
+            "weight": 0.125
+          }
+        ],
+        "riskScoreMethod": "multiplicative",
+        "riskScoreWeights": {
+          "likelihood": 0.5,
+          "impact": 0.5
+        },
+        "matrixLookupTable": null,
+        "thresholds": {
+          "critical": 20,
+          "high": 12,
+          "medium": 6
+        },
+        "appetiteLimit": 8,
+        "toleranceLimit": 12,
+        "residualMethod": "overall_ce",
+        "maximumRiskReduction": 0.75,
+        "minResidualScore": 1,
+        "controlEffectivenessModel": {
+          "version": "CE-V1",
+          "factors": {
+            "design": 0.25,
+            "operating": 0.35,
+            "coverage": 0.25,
+            "testing": 0.15
+          }
+        },
+        "controlEffectivenessWeights": {
+          "Effective": 0.75,
+          "Partially Effective": 0.5,
+          "Ineffective": 0.25,
+          "Not Assessed": 0
+        },
+        "recommendedControls": [],
+        "governanceRules": {
+          "justificationThreshold": 0.2,
+          "approvalThreshold": 0.4,
+          "minJustificationLength": 20,
+          "requireJustification": true,
+          "requireApproval": true
+        },
+        "createdBy": "admin",
+        "createdAt": "2026-02-08T14:29:21.885Z",
+        "updatedAt": "2026-07-28T14:29:21.885Z"
+      }
+    ],
+    "organizations": [
+      {
+        "_id": "o-1",
+        "orgId": "ORG-001",
+        "name": "Wadjet Bank Plc",
+        "type": "parent",
+        "region": "East Africa",
+        "industry": "Banking",
+        "status": "active",
+        "createdAt": "2025-07-23T14:29:21.885Z",
+        "description": "Parent holding entity"
+      },
+      {
+        "_id": "o-2",
+        "orgId": "ORG-002",
+        "name": "Wadjet Digital Ltd",
+        "type": "subsidiary",
+        "parentOrg": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "region": "East Africa",
+        "industry": "Fintech",
+        "status": "active",
+        "createdAt": "2025-10-31T14:29:21.885Z",
+        "description": "Digital banking subsidiary"
+      },
+      {
+        "_id": "o-3",
+        "orgId": "ORG-003",
+        "name": "Wadjet Capital",
+        "type": "subsidiary",
+        "parentOrg": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "region": "West Africa",
+        "industry": "Banking",
+        "status": "active",
+        "createdAt": "2025-12-20T14:29:21.885Z",
+        "description": "Capital markets arm"
+      }
+    ],
+    "frameworks": [
+      {
+        "_id": "f-1",
+        "name": "ISO 27001:2022",
+        "version": "2022",
+        "status": "Active",
+        "description": "Information security management system"
+      },
+      {
+        "_id": "f-2",
+        "name": "ISO 27002:2022",
+        "version": "2022",
+        "status": "Active",
+        "description": "Information security controls guidance"
+      },
+      {
+        "_id": "f-3",
+        "name": "NIST CSF 2.0",
+        "version": "2.0",
+        "status": "Active",
+        "description": "Cybersecurity framework"
+      },
+      {
+        "_id": "f-4",
+        "name": "PCI DSS 4.0",
+        "version": "4.0",
+        "status": "Active",
+        "description": "Payment card industry data security standard"
+      },
+      {
+        "_id": "f-5",
+        "name": "CBE Cybersecurity Requirements",
+        "version": "2023",
+        "status": "Active",
+        "description": "Central Bank of Egypt cybersecurity regulations"
+      },
+      {
+        "_id": "f-6",
+        "name": "Internal Bank Policy",
+        "version": "1.0",
+        "status": "Active",
+        "description": "Bank internal security policies and procedures"
+      }
+    ],
+    "policies": [
+      {
+        "_id": "pol-1",
+        "policyId": "POL-001",
+        "title": "Information Security Policy",
+        "description": "Enterprise information security framework",
+        "category": "Information Security",
+        "classification": "Internal",
+        "version": "3.2",
+        "content": "This policy establishes the enterprise information security framework...",
+        "tags": [
+          "security",
+          "iso27001"
+        ],
+        "status": "Published",
+        "owner": "CISO",
+        "ownerUserId": "u-admin",
+        "department": "IT",
+        "effectiveDate": "2026-04-29T14:29:21.886Z",
+        "expirationDate": "2028-07-27T14:29:21.886Z",
+        "reviewPeriodDays": 365,
+        "nextReviewDate": "2027-04-29T14:29:21.886Z",
+        "createdAt": "2025-07-23T14:29:21.886Z",
+        "updatedAt": "2026-08-17T14:29:21.886Z"
+      },
+      {
+        "_id": "pol-2",
+        "policyId": "POL-002",
+        "title": "Data Privacy Policy",
+        "description": "Handling of personal data",
+        "category": "Data Privacy",
+        "classification": "Internal",
+        "version": "2.1",
+        "content": "This policy governs the collection and processing of personal data...",
+        "tags": [
+          "privacy",
+          "gdpr"
+        ],
+        "status": "Review",
+        "owner": "Data Protection Officer",
+        "ownerUserId": "u-officer",
+        "department": "Legal",
+        "effectiveDate": "2026-02-08T14:29:21.886Z",
+        "expirationDate": "2027-10-01T14:29:21.886Z",
+        "reviewPeriodDays": 365,
+        "nextReviewDate": "2026-08-12T14:29:21.886Z",
+        "createdAt": "2025-04-14T14:29:21.886Z",
+        "updatedAt": "2026-08-11T14:29:21.886Z"
+      },
+      {
+        "_id": "pol-3",
+        "policyId": "POL-003",
+        "title": "Acceptable Use Policy",
+        "description": "Acceptable use of company assets",
+        "category": "IT",
+        "classification": "Internal",
+        "version": "1.8",
+        "content": "Users must use company systems for authorised business purposes...",
+        "tags": [
+          "aup",
+          "users"
+        ],
+        "status": "Published",
+        "owner": "Head of IT Security",
+        "ownerUserId": "u-admin",
+        "department": "IT",
+        "effectiveDate": "2025-10-31T14:29:21.886Z",
+        "expirationDate": "2026-10-31T14:29:21.886Z",
+        "reviewPeriodDays": 365,
+        "nextReviewDate": "2026-08-22T14:29:21.886Z",
+        "createdAt": "2025-01-04T14:29:21.886Z",
+        "updatedAt": "2026-08-20T14:29:21.886Z"
+      },
+      {
+        "_id": "pol-4",
+        "policyId": "POL-004",
+        "title": "Incident Response Policy",
+        "description": "Security incident handling",
+        "category": "Information Security",
+        "classification": "Internal",
+        "version": "2.0",
+        "content": "All security incidents must be reported to the SOC within 30 minutes...",
+        "tags": [
+          "incident",
+          "soc"
+        ],
+        "status": "Approval",
+        "owner": "CISO",
+        "ownerUserId": "u-admin",
+        "department": "IT",
+        "effectiveDate": null,
+        "expirationDate": null,
+        "reviewPeriodDays": 365,
+        "nextReviewDate": null,
+        "createdAt": "2026-07-28T14:29:21.886Z",
+        "updatedAt": "2026-08-25T14:29:21.886Z"
+      },
+      {
+        "_id": "pol-5",
+        "policyId": "POL-005",
+        "title": "Third-Party Risk Management Policy",
+        "description": "Vendor due diligence",
+        "category": "Third-Party",
+        "classification": "Internal",
+        "version": "1.3",
+        "content": "All vendors with access to bank data must complete due diligence...",
+        "tags": [
+          "vendor",
+          "tprm"
+        ],
+        "status": "Draft",
+        "owner": "Procurement Director",
+        "ownerUserId": "u-manager",
+        "department": "Procurement",
+        "effectiveDate": null,
+        "expirationDate": null,
+        "reviewPeriodDays": 365,
+        "nextReviewDate": null,
+        "createdAt": "2026-08-15T14:29:21.886Z",
+        "updatedAt": "2026-08-26T14:29:21.886Z"
+      },
+      {
+        "_id": "pol-6",
+        "policyId": "POL-006",
+        "title": "Business Continuity Policy",
+        "description": "BCP framework and disaster recovery",
+        "category": "Operational",
+        "classification": "Internal",
+        "version": "1.0",
+        "content": "The organization shall maintain business continuity plans...",
+        "tags": [
+          "bcp",
+          "dr"
+        ],
+        "status": "Review",
+        "owner": "CISO",
+        "ownerUserId": "u-admin",
+        "department": "IT",
+        "effectiveDate": null,
+        "expirationDate": null,
+        "reviewPeriodDays": 365,
+        "nextReviewDate": null,
+        "createdAt": "2026-08-17T14:29:21.886Z",
+        "updatedAt": "2026-08-26T14:29:21.886Z"
+      },
+      {
+        "_id": "pol-7",
+        "policyId": "POL-007",
+        "title": "Access Control Policy",
+        "description": "User access management and privileged accounts",
+        "category": "Information Security",
+        "classification": "Internal",
+        "version": "2.0",
+        "content": "Access to systems shall be granted based on least privilege principle...",
+        "tags": [
+          "access",
+          "privilege"
+        ],
+        "status": "Approval",
+        "owner": "IT Security Manager",
+        "ownerUserId": "u-manager",
+        "department": "IT",
+        "effectiveDate": null,
+        "expirationDate": null,
+        "reviewPeriodDays": 365,
+        "nextReviewDate": null,
+        "createdAt": "2026-08-10T14:29:21.886Z",
+        "updatedAt": "2026-08-25T14:29:21.886Z"
+      },
+      {
+        "_id": "pol-8",
+        "policyId": "POL-008",
+        "title": "Data Classification Policy",
+        "description": "Data classification and handling requirements",
+        "category": "Data Privacy",
+        "classification": "Internal",
+        "version": "1.0",
+        "content": "All data shall be classified according to sensitivity levels...",
+        "tags": [
+          "data",
+          "classification"
+        ],
+        "status": "Published",
+        "owner": "Data Protection Officer",
+        "ownerUserId": "u-officer",
+        "department": "Legal",
+        "effectiveDate": "2026-09-06T14:29:21.886Z",
+        "expirationDate": "2027-09-06T14:29:21.886Z",
+        "reviewPeriodDays": 365,
+        "nextReviewDate": null,
+        "createdAt": "2026-08-23T14:29:21.886Z",
+        "updatedAt": "2026-08-26T14:29:21.886Z"
+      },
+      {
+        "_id": "pol-9",
+        "policyId": "POL-009",
+        "title": "Legacy Password Policy",
+        "description": "Password requirements (deprecated)",
+        "category": "Information Security",
+        "classification": "Internal",
+        "version": "1.0",
+        "content": "Passwords must be at least 8 characters...",
+        "tags": [
+          "password",
+          "legacy"
+        ],
+        "status": "Expired",
+        "owner": "CISO",
+        "ownerUserId": "u-admin",
+        "department": "IT",
+        "effectiveDate": "2023-09-02T14:29:21.886Z",
+        "expirationDate": "2026-02-08T14:29:21.886Z",
+        "reviewPeriodDays": 365,
+        "nextReviewDate": "2024-08-27T14:29:21.886Z",
+        "createdAt": "2023-05-15T14:29:21.886Z",
+        "updatedAt": "2026-02-08T14:29:21.886Z"
+      },
+      {
+        "_id": "pol-10",
+        "policyId": "POL-010",
+        "title": "Outdated IT Security Policy",
+        "description": "Replaced by Information Security Policy",
+        "category": "Information Security",
+        "classification": "Internal",
+        "version": "1.0",
+        "content": "This policy has been archived...",
+        "tags": [
+          "legacy",
+          "archived"
+        ],
+        "status": "Archived",
+        "owner": "CISO",
+        "ownerUserId": "u-admin",
+        "department": "IT",
+        "effectiveDate": "2024-03-10T14:29:21.886Z",
+        "expirationDate": "2025-07-23T14:29:21.886Z",
+        "reviewPeriodDays": 365,
+        "nextReviewDate": "2025-04-14T14:29:21.886Z",
+        "createdAt": "2023-12-01T14:29:21.886Z",
+        "updatedAt": "2025-07-23T14:29:21.886Z"
+      }
+    ],
+    "exceptions": [
+      {
+        "_id": "exc-1",
+        "title": "Legacy TLS on payment gateway",
+        "description": "Temporary exception pending TLS 1.3 migration",
+        "status": "Pending",
+        "exceptionType": "Technical",
+        "owner": "Head of Payments",
+        "expiryDate": "2026-09-26T14:29:21.886Z",
+        "createdAt": "2026-08-22T14:29:21.886Z"
+      },
+      {
+        "_id": "exc-2",
+        "title": "USB ports on branch terminals",
+        "description": "Exception for card reader terminals",
+        "status": "Approved",
+        "exceptionType": "Operational",
+        "owner": "Branch Operations",
+        "expiryDate": "2026-11-25T14:29:21.886Z",
+        "createdAt": "2026-07-18T14:29:21.886Z"
+      },
+      {
+        "_id": "exc-3",
+        "title": "Shared service account",
+        "description": "Legacy shared account for batch jobs",
+        "status": "Expired",
+        "exceptionType": "Technical",
+        "owner": "IT Operations",
+        "expiryDate": "2026-08-17T14:29:21.886Z",
+        "createdAt": "2026-02-08T14:29:21.886Z"
+      },
+      {
+        "_id": "exc-4",
+        "title": "Vendor remote access",
+        "description": "Remote access for payment vendor support",
+        "status": "Approved",
+        "exceptionType": "Third-Party",
+        "owner": "Procurement Director",
+        "expiryDate": "2026-09-11T14:29:21.886Z",
+        "createdAt": "2026-06-28T14:29:21.886Z"
+      }
+    ],
+    "documents": [
+      {
+        "_id": "doc-1",
+        "title": "Risk Management Framework",
+        "category": "Framework",
+        "status": "Published",
+        "owner": "Chief Risk Officer",
+        "version": "2.0",
+        "uploadedAt": "2026-05-29T14:29:21.886Z"
+      },
+      {
+        "_id": "doc-2",
+        "title": "BCP Manual",
+        "category": "Procedure",
+        "status": "Draft",
+        "owner": "BCP Coordinator",
+        "version": "1.4",
+        "uploadedAt": "2026-08-07T14:29:21.886Z"
+      },
+      {
+        "_id": "doc-3",
+        "title": "Access Review Process",
+        "category": "Procedure",
+        "status": "Published",
+        "owner": "Head of IT Security",
+        "version": "1.1",
+        "uploadedAt": "2026-03-30T14:29:21.886Z"
+      }
+    ],
+    "risks": [
+      {
+        "_id": "risk-1",
+        "riskId": "R-001",
+        "title": "Unauthorised access to customer data",
+        "process": "Customer Onboarding",
+        "subProcess": "KYC Verification",
+        "assetSystem": "Core Banking System",
+        "ownerTeam": "Digital Banking",
+        "category": "Cybersecurity",
+        "threat": "Insider or external attacker",
+        "vulnerability": "Weak access controls on admin consoles",
+        "riskDate": "2026-02-08T14:29:21.885Z",
+        "owner": "Head of IT Security",
+        "likelihood": 4,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 5
+          },
+          {
+            "name": "Regulatory",
+            "value": 4
+          },
+          {
+            "name": "Reputational",
+            "value": 3
+          },
+          {
+            "name": "Safety",
+            "value": 2
+          },
+          {
+            "name": "Operational",
+            "value": 2
+          },
+          {
+            "name": "Confidentiality",
+            "value": 4
+          },
+          {
+            "name": "Integrity",
+            "value": 4
+          },
+          {
+            "name": "Availability",
+            "value": 5
+          }
+        ],
+        "impactScore": 5,
+        "riskScore": 20,
+        "inherentLevel": "Critical",
+        "severityLevel": "Critical",
+        "domain": {
+          "_id": "d-4",
+          "name": "Cybersecurity"
+        },
+        "organization": {
+          "_id": "o-2",
+          "name": "Wadjet Digital Ltd"
+        },
+        "treatment": "Mitigate",
+        "status": "Open",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-09-26T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "Head of IT Security",
+        "treatmentDueDate": "2026-09-26T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-02-08T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-2",
+        "riskId": "R-002",
+        "title": "Phishing campaign targeting staff",
+        "process": "IT Operations",
+        "subProcess": "Email Gateway",
+        "assetSystem": "Email Infrastructure",
+        "ownerTeam": "IT Operations",
+        "category": "Human Risk",
+        "threat": "Spear phishers",
+        "vulnerability": "Low security awareness",
+        "riskDate": "2026-02-17T14:29:21.885Z",
+        "owner": "CISO",
+        "likelihood": 4,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 3
+          },
+          {
+            "name": "Regulatory",
+            "value": 3
+          },
+          {
+            "name": "Reputational",
+            "value": 4
+          },
+          {
+            "name": "Safety",
+            "value": 2
+          },
+          {
+            "name": "Operational",
+            "value": 3
+          },
+          {
+            "name": "Confidentiality",
+            "value": 3
+          },
+          {
+            "name": "Integrity",
+            "value": 3
+          },
+          {
+            "name": "Availability",
+            "value": 4
+          }
+        ],
+        "impactScore": 4,
+        "riskScore": 16,
+        "inherentLevel": "High",
+        "severityLevel": "High",
+        "domain": {
+          "_id": "d-1",
+          "name": "Information Security"
+        },
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "treatment": "Mitigate",
+        "status": "In Progress",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-10-11T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "CISO",
+        "treatmentDueDate": "2026-10-11T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-02-17T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-3",
+        "riskId": "R-003",
+        "title": "Cloud misconfiguration exposure",
+        "process": "Cloud Services",
+        "subProcess": "IaaS Provisioning",
+        "assetSystem": "Public Cloud Tenant",
+        "ownerTeam": "Cloud Engineering",
+        "category": "Cloud Security",
+        "threat": "Automated scanners",
+        "vulnerability": "Default security groups",
+        "riskDate": "2026-02-26T14:29:21.885Z",
+        "owner": "Head of Cloud",
+        "likelihood": 3,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 4
+          },
+          {
+            "name": "Regulatory",
+            "value": 4
+          },
+          {
+            "name": "Reputational",
+            "value": 3
+          },
+          {
+            "name": "Safety",
+            "value": 2
+          },
+          {
+            "name": "Operational",
+            "value": 4
+          },
+          {
+            "name": "Confidentiality",
+            "value": 5
+          },
+          {
+            "name": "Integrity",
+            "value": 4
+          },
+          {
+            "name": "Availability",
+            "value": 4
+          }
+        ],
+        "impactScore": 5,
+        "riskScore": 15,
+        "inherentLevel": "High",
+        "severityLevel": "High",
+        "domain": {
+          "_id": "d-4",
+          "name": "Cybersecurity"
+        },
+        "organization": {
+          "_id": "o-2",
+          "name": "Wadjet Digital Ltd"
+        },
+        "treatment": "Mitigate",
+        "status": "Open",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-10-26T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "Head of Cloud",
+        "treatmentDueDate": "2026-10-26T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-02-26T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-4",
+        "riskId": "R-004",
+        "title": "Third-party vendor data breach",
+        "process": "Procurement",
+        "subProcess": "Vendor Management",
+        "assetSystem": "Payment Processor",
+        "ownerTeam": "Procurement",
+        "category": "Third Party Risk",
+        "threat": "Cybercriminals",
+        "vulnerability": "Insufficient vendor oversight",
+        "riskDate": "2026-03-07T14:29:21.885Z",
+        "owner": "Procurement Director",
+        "likelihood": 4,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 5
+          },
+          {
+            "name": "Regulatory",
+            "value": 5
+          },
+          {
+            "name": "Reputational",
+            "value": 4
+          },
+          {
+            "name": "Safety",
+            "value": 3
+          },
+          {
+            "name": "Operational",
+            "value": 4
+          },
+          {
+            "name": "Confidentiality",
+            "value": 4
+          },
+          {
+            "name": "Integrity",
+            "value": 4
+          },
+          {
+            "name": "Availability",
+            "value": 5
+          }
+        ],
+        "impactScore": 5,
+        "riskScore": 20,
+        "inherentLevel": "Critical",
+        "severityLevel": "Critical",
+        "domain": {
+          "_id": "d-5",
+          "name": "Third Party Risk"
+        },
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "treatment": "Transfer",
+        "status": "Open",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-11-25T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "Procurement Director",
+        "treatmentDueDate": "2026-11-25T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-03-07T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-5",
+        "riskId": "R-005",
+        "title": "Regulatory fine for AML gaps",
+        "process": "Compliance",
+        "subProcess": "AML Monitoring",
+        "assetSystem": "Transaction Monitoring",
+        "ownerTeam": "Compliance",
+        "category": "Compliance",
+        "threat": "Regulator",
+        "vulnerability": "Outdated AML rules",
+        "riskDate": "2026-03-16T14:29:21.885Z",
+        "owner": "Head of Compliance",
+        "likelihood": 3,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 5
+          },
+          {
+            "name": "Regulatory",
+            "value": 5
+          },
+          {
+            "name": "Reputational",
+            "value": 4
+          },
+          {
+            "name": "Safety",
+            "value": 2
+          },
+          {
+            "name": "Operational",
+            "value": 4
+          },
+          {
+            "name": "Confidentiality",
+            "value": 3
+          },
+          {
+            "name": "Integrity",
+            "value": 3
+          },
+          {
+            "name": "Availability",
+            "value": 4
+          }
+        ],
+        "impactScore": 5,
+        "riskScore": 15,
+        "inherentLevel": "High",
+        "severityLevel": "High",
+        "domain": {
+          "_id": "d-3",
+          "name": "Compliance"
+        },
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "treatment": "Mitigate",
+        "status": "Open",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-11-10T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "Head of Compliance",
+        "treatmentDueDate": "2026-11-10T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-03-16T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-6",
+        "riskId": "R-006",
+        "title": "Core system outage during peak",
+        "process": "Operations",
+        "subProcess": "Batch Processing",
+        "assetSystem": "Core Banking System",
+        "ownerTeam": "Operations",
+        "category": "Business Continuity",
+        "threat": "Infrastructure failure",
+        "vulnerability": "Single point of failure",
+        "riskDate": "2026-03-25T14:29:21.885Z",
+        "owner": "COO",
+        "likelihood": 3,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 5
+          },
+          {
+            "name": "Regulatory",
+            "value": 4
+          },
+          {
+            "name": "Reputational",
+            "value": 4
+          },
+          {
+            "name": "Safety",
+            "value": 4
+          },
+          {
+            "name": "Operational",
+            "value": 5
+          },
+          {
+            "name": "Confidentiality",
+            "value": 4
+          },
+          {
+            "name": "Integrity",
+            "value": 4
+          },
+          {
+            "name": "Availability",
+            "value": 5
+          }
+        ],
+        "impactScore": 5,
+        "riskScore": 15,
+        "inherentLevel": "High",
+        "severityLevel": "High",
+        "domain": {
+          "_id": "d-2",
+          "name": "Operational"
+        },
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "treatment": "Mitigate",
+        "status": "Open",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-12-25T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "COO",
+        "treatmentDueDate": "2026-12-25T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-03-25T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-7",
+        "riskId": "R-007",
+        "title": "Fraudulent wire transfers",
+        "process": "Payments",
+        "subProcess": "Wire Transfers",
+        "assetSystem": "Payment Hub",
+        "ownerTeam": "Retail Banking",
+        "category": "Cybersecurity / Fraud",
+        "threat": "Organised fraud rings",
+        "vulnerability": "Weak transaction monitoring",
+        "riskDate": "2026-04-03T14:29:21.885Z",
+        "owner": "Head of Fraud",
+        "likelihood": 3,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 5
+          },
+          {
+            "name": "Regulatory",
+            "value": 5
+          },
+          {
+            "name": "Reputational",
+            "value": 4
+          },
+          {
+            "name": "Safety",
+            "value": 2
+          },
+          {
+            "name": "Operational",
+            "value": 4
+          },
+          {
+            "name": "Confidentiality",
+            "value": 3
+          },
+          {
+            "name": "Integrity",
+            "value": 3
+          },
+          {
+            "name": "Availability",
+            "value": 5
+          }
+        ],
+        "impactScore": 5,
+        "riskScore": 15,
+        "inherentLevel": "High",
+        "severityLevel": "High",
+        "domain": {
+          "_id": "d-4",
+          "name": "Cybersecurity"
+        },
+        "organization": {
+          "_id": "o-2",
+          "name": "Wadjet Digital Ltd"
+        },
+        "treatment": "Mitigate",
+        "status": "In Progress",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-09-26T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "Head of Fraud",
+        "treatmentDueDate": "2026-09-26T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-04-03T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-8",
+        "riskId": "R-008",
+        "title": "Ransomware infection",
+        "process": "IT Operations",
+        "subProcess": "Endpoint Protection",
+        "assetSystem": "Endpoints",
+        "ownerTeam": "IT Operations",
+        "category": "Cybersecurity",
+        "threat": "Ransomware gangs",
+        "vulnerability": "Unpatched endpoints",
+        "riskDate": "2026-04-12T14:29:21.885Z",
+        "owner": "CISO",
+        "likelihood": 4,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 5
+          },
+          {
+            "name": "Regulatory",
+            "value": 4
+          },
+          {
+            "name": "Reputational",
+            "value": 5
+          },
+          {
+            "name": "Safety",
+            "value": 3
+          },
+          {
+            "name": "Operational",
+            "value": 5
+          },
+          {
+            "name": "Confidentiality",
+            "value": 5
+          },
+          {
+            "name": "Integrity",
+            "value": 4
+          },
+          {
+            "name": "Availability",
+            "value": 5
+          }
+        ],
+        "impactScore": 5,
+        "riskScore": 20,
+        "inherentLevel": "Critical",
+        "severityLevel": "Critical",
+        "domain": {
+          "_id": "d-4",
+          "name": "Cybersecurity"
+        },
+        "organization": {
+          "_id": "o-2",
+          "name": "Wadjet Digital Ltd"
+        },
+        "treatment": "Mitigate",
+        "status": "Open",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-09-11T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "CISO",
+        "treatmentDueDate": "2026-09-11T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-04-12T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-9",
+        "riskId": "R-009",
+        "title": "Data privacy complaint volume",
+        "process": "Compliance",
+        "subProcess": "Data Subject Requests",
+        "assetSystem": "Privacy Portal",
+        "ownerTeam": "Legal",
+        "category": "Compliance / Legal",
+        "threat": "Customers / regulators",
+        "vulnerability": "Manual DSR process",
+        "riskDate": "2026-04-21T14:29:21.885Z",
+        "owner": "Data Protection Officer",
+        "likelihood": 2,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 3
+          },
+          {
+            "name": "Regulatory",
+            "value": 4
+          },
+          {
+            "name": "Reputational",
+            "value": 3
+          },
+          {
+            "name": "Safety",
+            "value": 1
+          },
+          {
+            "name": "Operational",
+            "value": 3
+          },
+          {
+            "name": "Confidentiality",
+            "value": 4
+          },
+          {
+            "name": "Integrity",
+            "value": 4
+          },
+          {
+            "name": "Availability",
+            "value": 3
+          }
+        ],
+        "impactScore": 4,
+        "riskScore": 8,
+        "inherentLevel": "Medium",
+        "severityLevel": "Medium",
+        "domain": {
+          "_id": "d-3",
+          "name": "Compliance"
+        },
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "treatment": "Accept",
+        "status": "Open",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-10-26T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "Data Protection Officer",
+        "treatmentDueDate": "2026-10-26T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-04-21T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-10",
+        "riskId": "R-010",
+        "title": "Legacy application end-of-life",
+        "process": "Application Management",
+        "subProcess": "Decommissioning",
+        "assetSystem": "Legacy Lending App",
+        "ownerTeam": "IT Operations",
+        "category": "Application Security",
+        "threat": "Technical debt",
+        "vulnerability": "Unsupported platform",
+        "riskDate": "2026-04-30T14:29:21.885Z",
+        "owner": "Head of Applications",
+        "likelihood": 3,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 4
+          },
+          {
+            "name": "Regulatory",
+            "value": 3
+          },
+          {
+            "name": "Reputational",
+            "value": 3
+          },
+          {
+            "name": "Safety",
+            "value": 2
+          },
+          {
+            "name": "Operational",
+            "value": 4
+          },
+          {
+            "name": "Confidentiality",
+            "value": 4
+          },
+          {
+            "name": "Integrity",
+            "value": 4
+          },
+          {
+            "name": "Availability",
+            "value": 4
+          }
+        ],
+        "impactScore": 4,
+        "riskScore": 12,
+        "inherentLevel": "High",
+        "severityLevel": "High",
+        "domain": {
+          "_id": "d-1",
+          "name": "Information Security"
+        },
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "treatment": "Avoid",
+        "status": "Accepted",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2027-02-23T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "Head of Applications",
+        "treatmentDueDate": "2027-02-23T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-04-30T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-11",
+        "riskId": "R-011",
+        "title": "Business continuity plan untested",
+        "process": "Operations",
+        "subProcess": "BCP Testing",
+        "assetSystem": "DR Site",
+        "ownerTeam": "Operations",
+        "category": "Operational / BCP",
+        "threat": "Regional disruption",
+        "vulnerability": "Stale BCP",
+        "riskDate": "2026-05-09T14:29:21.885Z",
+        "owner": "BCP Coordinator",
+        "likelihood": 2,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 4
+          },
+          {
+            "name": "Regulatory",
+            "value": 3
+          },
+          {
+            "name": "Reputational",
+            "value": 3
+          },
+          {
+            "name": "Safety",
+            "value": 4
+          },
+          {
+            "name": "Operational",
+            "value": 4
+          },
+          {
+            "name": "Confidentiality",
+            "value": 3
+          },
+          {
+            "name": "Integrity",
+            "value": 3
+          },
+          {
+            "name": "Availability",
+            "value": 4
+          }
+        ],
+        "impactScore": 4,
+        "riskScore": 8,
+        "inherentLevel": "Medium",
+        "severityLevel": "Medium",
+        "domain": {
+          "_id": "d-2",
+          "name": "Operational"
+        },
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "treatment": "Mitigate",
+        "status": "Open",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-10-11T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "BCP Coordinator",
+        "treatmentDueDate": "2026-10-11T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-05-09T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-12",
+        "riskId": "R-012",
+        "title": "AI model bias in credit scoring",
+        "process": "Risk Management",
+        "subProcess": "Model Governance",
+        "assetSystem": "AI Scoring Engine",
+        "ownerTeam": "Risk",
+        "category": "Emerging Technology / AI",
+        "threat": "Model drift / bias",
+        "vulnerability": "No model validation",
+        "riskDate": "2026-05-18T14:29:21.885Z",
+        "owner": "Chief Risk Officer",
+        "likelihood": 3,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 4
+          },
+          {
+            "name": "Regulatory",
+            "value": 5
+          },
+          {
+            "name": "Reputational",
+            "value": 4
+          },
+          {
+            "name": "Safety",
+            "value": 2
+          },
+          {
+            "name": "Operational",
+            "value": 4
+          },
+          {
+            "name": "Confidentiality",
+            "value": 4
+          },
+          {
+            "name": "Integrity",
+            "value": 4
+          },
+          {
+            "name": "Availability",
+            "value": 4
+          }
+        ],
+        "impactScore": 5,
+        "riskScore": 15,
+        "inherentLevel": "High",
+        "severityLevel": "High",
+        "domain": {
+          "_id": "d-1",
+          "name": "Information Security"
+        },
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "treatment": "Mitigate",
+        "status": "In Progress",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-11-25T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "Chief Risk Officer",
+        "treatmentDueDate": "2026-11-25T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-05-18T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-13",
+        "riskId": "R-013",
+        "title": "Insider threat from privileged users",
+        "process": "IT Operations",
+        "subProcess": "Privileged Access",
+        "assetSystem": "AD / PAM",
+        "ownerTeam": "IT Operations",
+        "category": "Human Risk / Security Monitoring",
+        "threat": "Disgruntled insider",
+        "vulnerability": "No privileged session monitoring",
+        "riskDate": "2026-05-27T14:29:21.885Z",
+        "owner": "Head of IT Security",
+        "likelihood": 3,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 5
+          },
+          {
+            "name": "Regulatory",
+            "value": 4
+          },
+          {
+            "name": "Reputational",
+            "value": 5
+          },
+          {
+            "name": "Safety",
+            "value": 3
+          },
+          {
+            "name": "Operational",
+            "value": 5
+          },
+          {
+            "name": "Confidentiality",
+            "value": 5
+          },
+          {
+            "name": "Integrity",
+            "value": 5
+          },
+          {
+            "name": "Availability",
+            "value": 5
+          }
+        ],
+        "impactScore": 5,
+        "riskScore": 15,
+        "inherentLevel": "High",
+        "severityLevel": "High",
+        "domain": {
+          "_id": "d-1",
+          "name": "Information Security"
+        },
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "treatment": "Mitigate",
+        "status": "Open",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-10-26T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "Head of IT Security",
+        "treatmentDueDate": "2026-10-26T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-05-27T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-14",
+        "riskId": "R-014",
+        "title": "Supplier concentration risk",
+        "process": "Procurement",
+        "subProcess": "Supplier Diversification",
+        "assetSystem": "Cloud Provider",
+        "ownerTeam": "Procurement",
+        "category": "Operational / Third Party",
+        "threat": "Provider outage",
+        "vulnerability": "Single vendor dependency",
+        "riskDate": "2026-06-05T14:29:21.885Z",
+        "owner": "Procurement Director",
+        "likelihood": 2,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 4
+          },
+          {
+            "name": "Regulatory",
+            "value": 3
+          },
+          {
+            "name": "Reputational",
+            "value": 3
+          },
+          {
+            "name": "Safety",
+            "value": 3
+          },
+          {
+            "name": "Operational",
+            "value": 4
+          },
+          {
+            "name": "Confidentiality",
+            "value": 4
+          },
+          {
+            "name": "Integrity",
+            "value": 3
+          },
+          {
+            "name": "Availability",
+            "value": 4
+          }
+        ],
+        "impactScore": 4,
+        "riskScore": 8,
+        "inherentLevel": "Medium",
+        "severityLevel": "Medium",
+        "domain": {
+          "_id": "d-5",
+          "name": "Third Party Risk"
+        },
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "treatment": "Transfer",
+        "status": "Open",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-12-25T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "Procurement Director",
+        "treatmentDueDate": "2026-12-25T14:29:21.885Z",
+        "treatmentEffectiveness": "Partially Effective",
+        "createdAt": "2026-06-05T14:29:21.885Z",
+        "closedAt": null,
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-15",
+        "riskId": "R-015",
+        "title": "Card data interception in transit",
+        "process": "Payments",
+        "subProcess": "Card Processing",
+        "assetSystem": "POS Gateway",
+        "ownerTeam": "Retail Banking",
+        "category": "Physical Security / Fraud",
+        "threat": "Network sniffing",
+        "vulnerability": "Legacy TLS",
+        "riskDate": "2026-06-14T14:29:21.885Z",
+        "owner": "Head of Payments",
+        "likelihood": 2,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 5
+          },
+          {
+            "name": "Regulatory",
+            "value": 4
+          },
+          {
+            "name": "Reputational",
+            "value": 4
+          },
+          {
+            "name": "Safety",
+            "value": 2
+          },
+          {
+            "name": "Operational",
+            "value": 4
+          },
+          {
+            "name": "Confidentiality",
+            "value": 5
+          },
+          {
+            "name": "Integrity",
+            "value": 4
+          },
+          {
+            "name": "Availability",
+            "value": 4
+          }
+        ],
+        "impactScore": 5,
+        "riskScore": 10,
+        "inherentLevel": "Medium",
+        "severityLevel": "Medium",
+        "domain": {
+          "_id": "d-6",
+          "name": "Financial"
+        },
+        "organization": {
+          "_id": "o-3",
+          "name": "Wadjet Capital"
+        },
+        "treatment": "Mitigate",
+        "status": "Closed",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-09-16T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "Head of Payments",
+        "treatmentDueDate": "2026-09-16T14:29:21.885Z",
+        "treatmentEffectiveness": "Effective",
+        "createdAt": "2026-06-14T14:29:21.885Z",
+        "closedAt": "2026-08-07T14:29:21.885Z",
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      },
+      {
+        "_id": "risk-16",
+        "riskId": "R-016",
+        "title": "Insider data exfiltration via USB",
+        "process": "IT Operations",
+        "subProcess": "Endpoint Controls",
+        "assetSystem": "Endpoints",
+        "ownerTeam": "IT Operations",
+        "category": "Information Security",
+        "threat": "Malicious insider",
+        "vulnerability": "USB ports enabled",
+        "riskDate": "2026-06-23T14:29:21.885Z",
+        "owner": "Head of IT Security",
+        "likelihood": 3,
+        "impacts": [
+          {
+            "name": "Financial",
+            "value": 4
+          },
+          {
+            "name": "Regulatory",
+            "value": 3
+          },
+          {
+            "name": "Reputational",
+            "value": 4
+          },
+          {
+            "name": "Safety",
+            "value": 2
+          },
+          {
+            "name": "Operational",
+            "value": 3
+          },
+          {
+            "name": "Confidentiality",
+            "value": 5
+          },
+          {
+            "name": "Integrity",
+            "value": 4
+          },
+          {
+            "name": "Availability",
+            "value": 3
+          }
+        ],
+        "impactScore": 5,
+        "riskScore": 15,
+        "inherentLevel": "High",
+        "severityLevel": "High",
+        "domain": {
+          "_id": "d-1",
+          "name": "Information Security"
+        },
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "treatment": "Mitigate",
+        "status": "Closed",
+        "mitigationActions": "Implement compensating controls, monitor monthly and report to risk committee.",
+        "deadline": "2026-10-06T14:29:21.885Z",
+        "asset": null,
+        "treatmentOwner": "Head of IT Security",
+        "treatmentDueDate": "2026-10-06T14:29:21.885Z",
+        "treatmentEffectiveness": "Effective",
+        "createdAt": "2026-06-23T14:29:21.885Z",
+        "closedAt": "2026-08-07T14:29:21.885Z",
+        "residualJustification": null,
+        "overriddenBy": null,
+        "overriddenAt": null
+      }
+    ],
+    "management-reviews": [
+      {
+        "_id": "mr-1",
+        "risk": "risk-4",
+        "reviewer": "admin",
+        "decision": "mitigate",
+        "reviewDate": "2026-08-07T14:29:21.886Z",
+        "nextReviewDate": "2027-02-03T14:29:21.886Z",
+        "notes": "Treatment plan approved for the residual above appetite; compensating controls tracked in the POAM."
+      },
+      {
+        "_id": "mr-2",
+        "risk": "risk-8",
+        "reviewer": "auditor",
+        "decision": "defer",
+        "reviewDate": "2026-08-22T14:29:21.886Z",
+        "nextReviewDate": "2027-02-18T14:29:21.886Z",
+        "notes": "Deferred to the Q3 committee; interim monitoring agreed with the risk owner."
+      }
+    ],
+    "poam": [
+      {
+        "_id": "poam-1",
+        "title": "Deploy privileged access management",
+        "description": "Implement PAM for admin consoles",
+        "status": "In Progress",
+        "owner": "Head of IT Security",
+        "dueDate": "2026-10-26T14:29:21.886Z",
+        "riskId": "R-013"
+      },
+      {
+        "_id": "poam-2",
+        "title": "Patch management automation",
+        "description": "Automate endpoint patching",
+        "status": "Planned",
+        "owner": "IT Operations",
+        "dueDate": "2026-11-25T14:29:21.886Z",
+        "riskId": "R-008"
+      },
+      {
+        "_id": "poam-3",
+        "title": "Vendor assessment program",
+        "description": "Annual vendor security assessments",
+        "status": "Closed",
+        "owner": "Procurement Director",
+        "dueDate": "2026-08-17T14:29:21.886Z",
+        "riskId": "R-004"
+      }
+    ],
+    "assets": [
+      {
+        "_id": "a-1",
+        "name": "Core Banking System",
+        "type": "Application",
+        "owner": "IT Operations",
+        "location": "Primary DC",
+        "criticality": "Critical",
+        "status": "Operational",
+        "domain": "Information Security",
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        }
+      },
+      {
+        "_id": "a-2",
+        "name": "Mobile Banking App",
+        "type": "Application",
+        "owner": "Digital Banking",
+        "location": "Cloud",
+        "criticality": "Critical",
+        "status": "Operational",
+        "domain": "Cybersecurity",
+        "organization": {
+          "_id": "o-2",
+          "name": "Wadjet Digital Ltd"
+        }
+      },
+      {
+        "_id": "a-3",
+        "name": "Customer Database",
+        "type": "Database",
+        "owner": "Data Office",
+        "location": "Primary DC",
+        "criticality": "Critical",
+        "status": "Operational",
+        "domain": "Information Security",
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        }
+      },
+      {
+        "_id": "a-4",
+        "name": "Email Gateway",
+        "type": "Infrastructure",
+        "owner": "IT Operations",
+        "location": "Secondary DC",
+        "criticality": "High",
+        "status": "Operational",
+        "domain": "Cybersecurity",
+        "organization": {
+          "_id": "o-2",
+          "name": "Wadjet Digital Ltd"
+        }
+      },
+      {
+        "_id": "a-5",
+        "name": "Payment Hub",
+        "type": "Application",
+        "owner": "Payments",
+        "location": "Primary DC",
+        "criticality": "Critical",
+        "status": "Operational",
+        "domain": "Cybersecurity / Fraud",
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        }
+      },
+      {
+        "_id": "a-6",
+        "name": "Branch Network",
+        "type": "Infrastructure",
+        "owner": "Branch Operations",
+        "location": "Branches",
+        "criticality": "Medium",
+        "status": "Operational",
+        "domain": "Operational",
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        }
+      },
+      {
+        "_id": "a-7",
+        "name": "HR System",
+        "type": "Application",
+        "owner": "Human Resources",
+        "location": "Cloud",
+        "criticality": "High",
+        "status": "Operational",
+        "domain": "Human Risk",
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        }
+      },
+      {
+        "_id": "a-8",
+        "name": "AI Scoring Engine",
+        "type": "Application",
+        "owner": "Risk",
+        "location": "Cloud",
+        "criticality": "High",
+        "status": "In Deployment",
+        "domain": "Emerging Technology / AI",
+        "organization": {
+          "_id": "o-3",
+          "name": "Wadjet Capital"
+        }
+      }
+    ],
+    "asset-groups": [
+      {
+        "_id": "ag-1",
+        "name": "Core Banking",
+        "description": "Systems supporting core banking operations",
+        "status": "Active"
+      },
+      {
+        "_id": "ag-2",
+        "name": "Digital Channels",
+        "description": "Customer-facing digital channels",
+        "status": "Active"
+      },
+      {
+        "_id": "ag-3",
+        "name": "Payments Infrastructure",
+        "description": "Payment processing infrastructure",
+        "status": "Active"
+      }
+    ],
+    "questionnaires": [
+      {
+        "_id": "q-1",
+        "title": "Information Security Baseline",
+        "description": "Standard security assessment questionnaire",
+        "status": "active",
+        "version": "1.0",
+        "owner": "CISO",
+        "createdAt": "2026-04-29T14:29:21.886Z",
+        "sections": [
+          {
+            "id": "sec-1",
+            "title": "Access Control",
+            "questions": [
+              {
+                "id": "qu-1",
+                "text": "Is access reviewed quarterly?",
+                "type": "yesno"
+              },
+              {
+                "id": "qu-2",
+                "text": "Is MFA enforced for admin access?",
+                "type": "yesno"
+              }
+            ]
+          },
+          {
+            "id": "sec-2",
+            "title": "Incident Management",
+            "questions": [
+              {
+                "id": "qu-3",
+                "text": "Is there a documented incident response plan?",
+                "type": "yesno"
+              },
+              {
+                "id": "qu-4",
+                "text": "Are incidents reported to the board?",
+                "type": "yesno"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_id": "q-2",
+        "title": "Data Privacy Assessment",
+        "description": "Privacy controls assessment",
+        "status": "active",
+        "version": "1.1",
+        "owner": "Data Protection Officer",
+        "createdAt": "2026-06-08T14:29:21.886Z",
+        "sections": [
+          {
+            "id": "sec-1",
+            "title": "Data Handling",
+            "questions": [
+              {
+                "id": "qu-1",
+                "text": "Is personal data minimised?",
+                "type": "yesno"
+              },
+              {
+                "id": "qu-2",
+                "text": "Are DSARs processed within 30 days?",
+                "type": "yesno"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "assessments": [
+      {
+        "_id": "as-1",
+        "title": "ISO 27001 Readiness Assessment",
+        "status": "In Progress",
+        "questionnaire": {
+          "_id": "q-1",
+          "title": "Information Security Baseline"
+        },
+        "domain": {
+          "_id": "d-1",
+          "name": "Information Security"
+        },
+        "asset": {
+          "_id": "a-1",
+          "name": "Core Banking System"
+        },
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "respondent": {
+          "_id": "u-officer",
+          "fullName": "Owen Fischer"
+        },
+        "dueDate": "2026-09-26T14:29:21.886Z",
+        "startedAt": "2026-08-17T14:29:21.886Z",
+        "completedAt": null,
+        "risks": [],
+        "approvals": []
+      },
+      {
+        "_id": "as-2",
+        "title": "Mobile Banking App Security Review",
+        "status": "Completed",
+        "questionnaire": {
+          "_id": "q-1",
+          "title": "Information Security Baseline"
+        },
+        "domain": {
+          "_id": "d-4",
+          "name": "Cybersecurity"
+        },
+        "asset": {
+          "_id": "a-2",
+          "name": "Mobile Banking App"
+        },
+        "organization": {
+          "_id": "o-2",
+          "name": "Wadjet Digital Ltd"
+        },
+        "respondent": {
+          "_id": "u-analyst",
+          "fullName": "Ana Lyte"
+        },
+        "dueDate": "2026-08-22T14:29:21.886Z",
+        "startedAt": "2026-06-28T14:29:21.886Z",
+        "completedAt": "2026-08-24T14:29:21.886Z",
+        "risks": [],
+        "approvals": []
+      },
+      {
+        "_id": "as-3",
+        "title": "Vendor Payment Processor Review",
+        "status": "Draft",
+        "questionnaire": {
+          "_id": "q-2",
+          "title": "Data Privacy Assessment"
+        },
+        "domain": {
+          "_id": "d-5",
+          "name": "Third Party Risk"
+        },
+        "asset": null,
+        "organization": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "respondent": {
+          "_id": "u-manager",
+          "fullName": "Morgan Lee"
+        },
+        "dueDate": "2026-10-11T14:29:21.886Z",
+        "startedAt": null,
+        "completedAt": null,
+        "risks": [],
+        "approvals": []
+      }
+    ],
+    "responses": [
+      {
+        "_id": "res-1",
+        "questionnaire": {
+          "_id": "q-1",
+          "title": "Information Security Baseline"
+        },
+        "respondent": {
+          "_id": "u-officer",
+          "fullName": "Owen Fischer"
+        },
+        "status": "In Progress",
+        "answers": [
+          {
+            "questionId": "qu-1",
+            "answer": "Yes"
+          },
+          {
+            "questionId": "qu-2",
+            "answer": ""
+          }
+        ],
+        "submittedAt": null
+      }
+    ],
+    "third-party": [
+      {
+        "_id": "tp-1",
+        "name": "CloudPay Processing Ltd",
+        "category": "Payment Processor",
+        "status": "Active",
+        "riskRating": "High",
+        "owner": "Procurement Director",
+        "contractStart": "2025-07-23T14:29:21.886Z",
+        "contractEnd": "2028-04-18T14:29:21.886Z",
+        "findings": [],
+        "assessments": [],
+        "documents": []
+      },
+      {
+        "_id": "tp-2",
+        "name": "DataCloud Hosting Inc",
+        "category": "Cloud Provider",
+        "status": "Active",
+        "riskRating": "Medium",
+        "owner": "Head of Cloud",
+        "contractStart": "2025-10-31T14:29:21.886Z",
+        "contractEnd": "2027-10-01T14:29:21.886Z",
+        "findings": [],
+        "assessments": [],
+        "documents": []
+      }
+    ],
+    "roles": [
+      {
+        "_id": "r-admin",
+        "name": "Admin",
+        "description": "Full access to all modules",
+        "status": "Active",
+        "permissionsMatrix": {
+          "grc": "manage",
+          "audit": "manage",
+          "settings": "manage"
+        },
+        "approvalAuthority": "Tier 3",
+        "email": "admin@wadjet.local",
+        "modulesWithAccess": [
+          "policy",
+          "compliance",
+          "audit",
+          "context",
+          "governance"
+        ]
+      },
+      {
+        "_id": "r-user",
+        "name": "User",
+        "description": "Standard analyst access",
+        "status": "Active",
+        "permissionsMatrix": {
+          "grc": "edit",
+          "audit": "view",
+          "settings": "view"
+        },
+        "approvalAuthority": "None",
+        "email": "analyst@wadjet.local",
+        "modulesWithAccess": [
+          "policy",
+          "compliance",
+          "context"
+        ]
+      },
+      {
+        "_id": "r-auditor",
+        "name": "Auditor",
+        "description": "Audit module access",
+        "status": "Active",
+        "permissionsMatrix": {
+          "grc": "view",
+          "audit": "manage",
+          "settings": "view"
+        },
+        "approvalAuthority": "Tier 2",
+        "email": "auditor@wadjet.local",
+        "modulesWithAccess": [
+          "audit",
+          "compliance"
+        ]
+      },
+      {
+        "_id": "r-viewer",
+        "name": "Viewer",
+        "description": "Read-only access",
+        "status": "Active",
+        "permissionsMatrix": {
+          "grc": "view",
+          "audit": "view",
+          "settings": "none"
+        },
+        "approvalAuthority": "None",
+        "email": "viewer@wadjet.local",
+        "modulesWithAccess": [
+          "policy",
+          "audit"
+        ]
+      }
+    ],
+    "compliance/controls": [
+      {
+        "_id": "c-1",
+        "controlId": "ORG-01",
+        "annexCode": "A.5.1",
+        "name": "Information Security Policy",
+        "description": "Preventive control for Administrative domain — Information Security Policy.",
+        "category": "Administrative",
+        "domain": "Administrative",
+        "controlType": "Preventive",
+        "owner": "CISO",
+        "testingFrequency": "Annually",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-001",
+          "AST-002",
+          "AST-003"
+        ],
+        "effectiveness": {
+          "design": 90,
+          "operating": 85,
+          "coverage": 95,
+          "testing": 100,
+          "overall": 91
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.5.1"
+          },
+          {
+            "framework": {
+              "_id": "f-5",
+              "name": "CBE Cybersecurity Requirements"
+            },
+            "requirement": "Section 3.1"
+          }
+        ],
+        "lastTestedAt": "2026-06-28T14:29:21.886Z",
+        "nextTestDueAt": "2026-08-17T14:29:21.886Z",
+        "createdAt": "2026-02-08T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-2",
+        "controlId": "ORG-02",
+        "annexCode": "A.5.15",
+        "name": "Access Control Policy",
+        "description": "Preventive control for Administrative domain — Access Control Policy.",
+        "category": "Administrative",
+        "domain": "Administrative",
+        "controlType": "Preventive",
+        "owner": "Head of IT Security",
+        "testingFrequency": "Annually",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-001",
+          "AST-003",
+          "AST-004"
+        ],
+        "effectiveness": {
+          "design": 95,
+          "operating": 90,
+          "coverage": 100,
+          "testing": 100,
+          "overall": 95
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.5.15"
+          },
+          {
+            "framework": {
+              "_id": "f-4",
+              "name": "PCI DSS 4.0"
+            },
+            "requirement": "Req 7"
+          }
+        ],
+        "lastTestedAt": "2026-07-01T14:29:21.886Z",
+        "nextTestDueAt": "2026-10-06T14:29:21.886Z",
+        "createdAt": "2026-02-11T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-3",
+        "controlId": "ORG-03",
+        "annexCode": "A.5.1",
+        "name": "Risk Assessment Process",
+        "description": "Preventive control for Administrative domain — Risk Assessment Process.",
+        "category": "Administrative",
+        "domain": "Administrative",
+        "controlType": "Preventive",
+        "owner": "CISO",
+        "testingFrequency": "Semi-Annual",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-001",
+          "AST-002",
+          "AST-004"
+        ],
+        "effectiveness": {
+          "design": 85,
+          "operating": 80,
+          "coverage": 90,
+          "testing": 95,
+          "overall": 86
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.5.1"
+          },
+          {
+            "framework": {
+              "_id": "f-3",
+              "name": "NIST CSF 2.0"
+            },
+            "requirement": "ID.RA"
+          }
+        ],
+        "lastTestedAt": "2026-07-04T14:29:21.886Z",
+        "nextTestDueAt": "2026-10-16T14:29:21.886Z",
+        "createdAt": "2026-02-14T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-4",
+        "controlId": "ORG-04",
+        "annexCode": "A.5.19",
+        "name": "Supplier Security Assessment",
+        "description": "Preventive control for Administrative domain — Supplier Security Assessment.",
+        "category": "Administrative",
+        "domain": "Administrative",
+        "controlType": "Preventive",
+        "owner": "Procurement Director",
+        "testingFrequency": "Annually",
+        "status": "In Progress / Under Implementation",
+        "progress": 65,
+        "maturityLevel": 2,
+        "targetAssets": [
+          "AST-005",
+          "AST-006"
+        ],
+        "effectiveness": {
+          "design": 70,
+          "operating": 60,
+          "coverage": 75,
+          "testing": 80,
+          "overall": 69
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.5.19"
+          },
+          {
+            "framework": {
+              "_id": "f-5",
+              "name": "CBE Cybersecurity Requirements"
+            },
+            "requirement": "Section 4.2"
+          }
+        ],
+        "lastTestedAt": "2026-07-07T14:29:21.886Z",
+        "nextTestDueAt": "2026-08-17T14:29:21.886Z",
+        "createdAt": "2026-02-17T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-5",
+        "controlId": "ORG-05",
+        "annexCode": "A.5.12",
+        "name": "Data Classification Policy",
+        "description": "Preventive control for Administrative domain — Data Classification Policy.",
+        "category": "Administrative",
+        "domain": "Administrative",
+        "controlType": "Preventive",
+        "owner": "Data Office",
+        "testingFrequency": "Annually",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 3,
+        "targetAssets": [
+          "AST-004",
+          "AST-005"
+        ],
+        "effectiveness": {
+          "design": 80,
+          "operating": 75,
+          "coverage": 85,
+          "testing": 90,
+          "overall": 81
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.5.12"
+          },
+          {
+            "framework": {
+              "_id": "f-4",
+              "name": "PCI DSS 4.0"
+            },
+            "requirement": "Req 3"
+          }
+        ],
+        "lastTestedAt": "2026-07-10T14:29:21.886Z",
+        "nextTestDueAt": "2026-11-05T14:29:21.886Z",
+        "createdAt": "2026-02-20T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-6",
+        "controlId": "ORG-06",
+        "annexCode": "A.5.2",
+        "name": "Business Continuity Policy",
+        "description": "Corrective control for Administrative domain — Business Continuity Policy.",
+        "category": "Administrative",
+        "domain": "Administrative",
+        "controlType": "Corrective",
+        "owner": "BCP Coordinator",
+        "testingFrequency": "Annually",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 3,
+        "targetAssets": [
+          "AST-001",
+          "AST-007"
+        ],
+        "effectiveness": {
+          "design": 75,
+          "operating": 70,
+          "coverage": 80,
+          "testing": 85,
+          "overall": 76
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.5.2"
+          },
+          {
+            "framework": {
+              "_id": "f-5",
+              "name": "CBE Cybersecurity Requirements"
+            },
+            "requirement": "Section 5.1"
+          }
+        ],
+        "lastTestedAt": "2026-07-13T14:29:21.886Z",
+        "nextTestDueAt": "2026-11-15T14:29:21.886Z",
+        "createdAt": "2026-02-23T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-7",
+        "controlId": "ORG-07",
+        "annexCode": "A.5.2",
+        "name": "Incident Response Policy",
+        "description": "Corrective control for Administrative domain — Incident Response Policy.",
+        "category": "Administrative",
+        "domain": "Administrative",
+        "controlType": "Corrective",
+        "owner": "Head of IT Security",
+        "testingFrequency": "Annually",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-001",
+          "AST-002",
+          "AST-003"
+        ],
+        "effectiveness": {
+          "design": 90,
+          "operating": 85,
+          "coverage": 95,
+          "testing": 100,
+          "overall": 91
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.5.2"
+          },
+          {
+            "framework": {
+              "_id": "f-5",
+              "name": "CBE Cybersecurity Requirements"
+            },
+            "requirement": "Section 5.2"
+          }
+        ],
+        "lastTestedAt": "2026-07-16T14:29:21.886Z",
+        "nextTestDueAt": "2026-08-17T14:29:21.886Z",
+        "createdAt": "2026-02-26T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-8",
+        "controlId": "PEO-01",
+        "annexCode": "A.6.3",
+        "name": "Security Awareness Training",
+        "description": "Preventive control for Administrative domain — Security Awareness Training.",
+        "category": "Administrative",
+        "domain": "Administrative",
+        "controlType": "Preventive",
+        "owner": "CISO",
+        "testingFrequency": "Quarterly",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-003",
+          "AST-008"
+        ],
+        "effectiveness": {
+          "design": 90,
+          "operating": 88,
+          "coverage": 95,
+          "testing": 100,
+          "overall": 92
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.6.3"
+          },
+          {
+            "framework": {
+              "_id": "f-5",
+              "name": "CBE Cybersecurity Requirements"
+            },
+            "requirement": "Section 6.1"
+          }
+        ],
+        "lastTestedAt": "2026-07-19T14:29:21.886Z",
+        "nextTestDueAt": "2026-12-05T14:29:21.886Z",
+        "createdAt": "2026-03-01T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-9",
+        "controlId": "PEO-02",
+        "annexCode": "A.6.3",
+        "name": "Phishing Simulation",
+        "description": "Detective control for Administrative domain — Phishing Simulation.",
+        "category": "Administrative",
+        "domain": "Administrative",
+        "controlType": "Detective",
+        "owner": "CISO",
+        "testingFrequency": "Monthly",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 3,
+        "targetAssets": [
+          "AST-003",
+          "AST-008"
+        ],
+        "effectiveness": {
+          "design": 85,
+          "operating": 80,
+          "coverage": 90,
+          "testing": 95,
+          "overall": 86
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.6.3"
+          },
+          {
+            "framework": {
+              "_id": "f-3",
+              "name": "NIST CSF 2.0"
+            },
+            "requirement": "PR.AT"
+          }
+        ],
+        "lastTestedAt": "2026-07-22T14:29:21.886Z",
+        "nextTestDueAt": "2026-12-15T14:29:21.886Z",
+        "createdAt": "2026-03-04T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-10",
+        "controlId": "PEO-03",
+        "annexCode": "A.6.1",
+        "name": "Background Verification",
+        "description": "Preventive control for Administrative domain — Background Verification.",
+        "category": "Administrative",
+        "domain": "Administrative",
+        "controlType": "Preventive",
+        "owner": "HR Director",
+        "testingFrequency": "At Hiring",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-003"
+        ],
+        "effectiveness": {
+          "design": 95,
+          "operating": 95,
+          "coverage": 100,
+          "testing": 100,
+          "overall": 97
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.6.1"
+          }
+        ],
+        "lastTestedAt": "2026-07-25T14:29:21.886Z",
+        "nextTestDueAt": "2026-08-17T14:29:21.886Z",
+        "createdAt": "2026-03-07T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-11",
+        "controlId": "PEO-04",
+        "annexCode": "A.6.2",
+        "name": "Joiner-Mover-Leaver Process",
+        "description": "Preventive control for Administrative domain — Joiner-Mover-Leaver Process.",
+        "category": "Administrative",
+        "domain": "Administrative",
+        "controlType": "Preventive",
+        "owner": "HR Director",
+        "testingFrequency": "Continuous",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-003",
+          "AST-005"
+        ],
+        "effectiveness": {
+          "design": 90,
+          "operating": 85,
+          "coverage": 100,
+          "testing": 100,
+          "overall": 92
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.6.2"
+          },
+          {
+            "framework": {
+              "_id": "f-6",
+              "name": "Internal Bank Policy"
+            },
+            "requirement": "HR-001"
+          }
+        ],
+        "lastTestedAt": "2026-07-28T14:29:21.886Z",
+        "nextTestDueAt": "2027-01-04T14:29:21.886Z",
+        "createdAt": "2026-03-10T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-12",
+        "controlId": "PEO-05",
+        "annexCode": "A.6.3",
+        "name": "Privileged User Training",
+        "description": "Preventive control for Administrative domain — Privileged User Training.",
+        "category": "Administrative",
+        "domain": "Administrative",
+        "controlType": "Preventive",
+        "owner": "Head of IT Security",
+        "testingFrequency": "Semi-Annual",
+        "status": "In Progress / Under Implementation",
+        "progress": 45,
+        "maturityLevel": 2,
+        "targetAssets": [
+          "AST-001",
+          "AST-003"
+        ],
+        "effectiveness": {
+          "design": 70,
+          "operating": 65,
+          "coverage": 80,
+          "testing": 75,
+          "overall": 72
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.6.3"
+          }
+        ],
+        "lastTestedAt": "2026-07-31T14:29:21.886Z",
+        "nextTestDueAt": "2027-01-14T14:29:21.886Z",
+        "createdAt": "2026-03-13T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-13",
+        "controlId": "PHY-01",
+        "annexCode": "A.7.1",
+        "name": "Data Center Access Control",
+        "description": "Preventive control for Physical domain — Data Center Access Control.",
+        "category": "Physical",
+        "domain": "Physical",
+        "controlType": "Preventive",
+        "owner": "Head of IT Security",
+        "testingFrequency": "Continuous",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 5,
+        "targetAssets": [
+          "AST-001",
+          "AST-007"
+        ],
+        "effectiveness": {
+          "design": 95,
+          "operating": 95,
+          "coverage": 100,
+          "testing": 100,
+          "overall": 97
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.7.1"
+          },
+          {
+            "framework": {
+              "_id": "f-5",
+              "name": "CBE Cybersecurity Requirements"
+            },
+            "requirement": "Section 7.1"
+          }
+        ],
+        "lastTestedAt": "2026-08-03T14:29:21.886Z",
+        "nextTestDueAt": "2026-08-17T14:29:21.886Z",
+        "createdAt": "2026-03-16T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-14",
+        "controlId": "PHY-02",
+        "annexCode": "A.7.4",
+        "name": "CCTV Surveillance",
+        "description": "Detective control for Physical domain — CCTV Surveillance.",
+        "category": "Physical",
+        "domain": "Physical",
+        "controlType": "Detective",
+        "owner": "Security Manager",
+        "testingFrequency": "Continuous",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-007"
+        ],
+        "effectiveness": {
+          "design": 90,
+          "operating": 90,
+          "coverage": 95,
+          "testing": 100,
+          "overall": 93
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.7.4"
+          }
+        ],
+        "lastTestedAt": "2026-08-06T14:29:21.886Z",
+        "nextTestDueAt": "2027-02-03T14:29:21.886Z",
+        "createdAt": "2026-03-19T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-15",
+        "controlId": "PHY-03",
+        "annexCode": "A.7.2",
+        "name": "Visitor Management",
+        "description": "Preventive control for Physical domain — Visitor Management.",
+        "category": "Physical",
+        "domain": "Physical",
+        "controlType": "Preventive",
+        "owner": "Security Manager",
+        "testingFrequency": "Continuous",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-007"
+        ],
+        "effectiveness": {
+          "design": 85,
+          "operating": 85,
+          "coverage": 100,
+          "testing": 100,
+          "overall": 91
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.7.2"
+          }
+        ],
+        "lastTestedAt": "2026-08-09T14:29:21.886Z",
+        "nextTestDueAt": "2027-02-13T14:29:21.886Z",
+        "createdAt": "2026-03-22T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-16",
+        "controlId": "PHY-04",
+        "annexCode": "A.7.1",
+        "name": "Fire Detection & Suppression",
+        "description": "Corrective control for Physical domain — Fire Detection & Suppression.",
+        "category": "Physical",
+        "domain": "Physical",
+        "controlType": "Corrective",
+        "owner": "Facilities Manager",
+        "testingFrequency": "Quarterly",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-007"
+        ],
+        "effectiveness": {
+          "design": 95,
+          "operating": 95,
+          "coverage": 100,
+          "testing": 100,
+          "overall": 97
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.7.1"
+          }
+        ],
+        "lastTestedAt": "2026-08-12T14:29:21.886Z",
+        "nextTestDueAt": "2026-08-17T14:29:21.886Z",
+        "createdAt": "2026-03-25T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-17",
+        "controlId": "PHY-05",
+        "annexCode": "A.7.1",
+        "name": "UPS & Generator",
+        "description": "Corrective control for Physical domain — UPS & Generator.",
+        "category": "Physical",
+        "domain": "Physical",
+        "controlType": "Corrective",
+        "owner": "Facilities Manager",
+        "testingFrequency": "Monthly",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-007"
+        ],
+        "effectiveness": {
+          "design": 90,
+          "operating": 90,
+          "coverage": 100,
+          "testing": 100,
+          "overall": 94
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.7.1"
+          }
+        ],
+        "lastTestedAt": "2026-08-15T14:29:21.886Z",
+        "nextTestDueAt": "2027-03-05T14:29:21.886Z",
+        "createdAt": "2026-03-28T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-18",
+        "controlId": "PHY-06",
+        "annexCode": "A.7.1",
+        "name": "Environmental Monitoring",
+        "description": "Detective control for Physical domain — Environmental Monitoring.",
+        "category": "Physical",
+        "domain": "Physical",
+        "controlType": "Detective",
+        "owner": "Facilities Manager",
+        "testingFrequency": "Continuous",
+        "status": "In Progress / Under Implementation",
+        "progress": 80,
+        "maturityLevel": 3,
+        "targetAssets": [
+          "AST-007"
+        ],
+        "effectiveness": {
+          "design": 85,
+          "operating": 80,
+          "coverage": 90,
+          "testing": 95,
+          "overall": 86
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.7.1"
+          }
+        ],
+        "lastTestedAt": "2026-08-18T14:29:21.886Z",
+        "nextTestDueAt": "2027-03-15T14:29:21.886Z",
+        "createdAt": "2026-03-31T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-19",
+        "controlId": "TECH-01",
+        "annexCode": "A.8.5",
+        "name": "Multi-Factor Authentication (MFA)",
+        "description": "Preventive control for Technical domain — Multi-Factor Authentication (MFA).",
+        "category": "Technical",
+        "domain": "Technical",
+        "controlType": "Preventive",
+        "owner": "Head of IT Security",
+        "testingFrequency": "Continuous",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-001",
+          "AST-003",
+          "AST-008"
+        ],
+        "effectiveness": {
+          "design": 90,
+          "operating": 85,
+          "coverage": 92,
+          "testing": 100,
+          "overall": 90
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.8.5"
+          },
+          {
+            "framework": {
+              "_id": "f-4",
+              "name": "PCI DSS 4.0"
+            },
+            "requirement": "Req 8"
+          },
+          {
+            "framework": {
+              "_id": "f-5",
+              "name": "CBE Cybersecurity Requirements"
+            },
+            "requirement": "Section 8.1"
+          }
+        ],
+        "lastTestedAt": "2026-08-21T14:29:21.886Z",
+        "nextTestDueAt": "2026-08-17T14:29:21.886Z",
+        "createdAt": "2026-04-03T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-20",
+        "controlId": "TECH-02",
+        "annexCode": "A.8.2",
+        "name": "Privileged Access Management (PAM)",
+        "description": "Preventive control for Technical domain — Privileged Access Management (PAM).",
+        "category": "Technical",
+        "domain": "Technical",
+        "controlType": "Preventive",
+        "owner": "Head of IT Security",
+        "testingFrequency": "Continuous",
+        "status": "In Progress / Under Implementation",
+        "progress": 85,
+        "maturityLevel": 3,
+        "targetAssets": [
+          "AST-001",
+          "AST-003",
+          "AST-004"
+        ],
+        "effectiveness": {
+          "design": 85,
+          "operating": 80,
+          "coverage": 85,
+          "testing": 90,
+          "overall": 84
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.8.2"
+          },
+          {
+            "framework": {
+              "_id": "f-5",
+              "name": "CBE Cybersecurity Requirements"
+            },
+            "requirement": "Section 8.2"
+          }
+        ],
+        "lastTestedAt": "2026-08-24T14:29:21.886Z",
+        "nextTestDueAt": "2027-04-04T14:29:21.886Z",
+        "createdAt": "2026-04-06T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-21",
+        "controlId": "TECH-03",
+        "annexCode": "A.8.3",
+        "name": "Role-Based Access Control (RBAC)",
+        "description": "Preventive control for Technical domain — Role-Based Access Control (RBAC).",
+        "category": "Technical",
+        "domain": "Technical",
+        "controlType": "Preventive",
+        "owner": "Head of IT Security",
+        "testingFrequency": "Quarterly",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-003",
+          "AST-004",
+          "AST-005"
+        ],
+        "effectiveness": {
+          "design": 90,
+          "operating": 88,
+          "coverage": 95,
+          "testing": 100,
+          "overall": 92
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.8.3"
+          },
+          {
+            "framework": {
+              "_id": "f-4",
+              "name": "PCI DSS 4.0"
+            },
+            "requirement": "Req 7"
+          }
+        ],
+        "lastTestedAt": "2026-08-27T14:29:21.886Z",
+        "nextTestDueAt": "2027-04-14T14:29:21.886Z",
+        "createdAt": "2026-04-09T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-22",
+        "controlId": "TECH-04",
+        "annexCode": "A.8.8",
+        "name": "Vulnerability Management",
+        "description": "Detective control for Technical domain — Vulnerability Management.",
+        "category": "Technical",
+        "domain": "Technical",
+        "controlType": "Detective",
+        "owner": "CISO",
+        "testingFrequency": "Monthly",
+        "status": "In Progress / Under Implementation",
+        "progress": 75,
+        "maturityLevel": 3,
+        "targetAssets": [
+          "AST-001",
+          "AST-002",
+          "AST-004",
+          "AST-007"
+        ],
+        "effectiveness": {
+          "design": 80,
+          "operating": 75,
+          "coverage": 85,
+          "testing": 90,
+          "overall": 81
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.8.8"
+          },
+          {
+            "framework": {
+              "_id": "f-4",
+              "name": "PCI DSS 4.0"
+            },
+            "requirement": "Req 11"
+          }
+        ],
+        "lastTestedAt": "2026-08-30T14:29:21.886Z",
+        "nextTestDueAt": "2026-08-17T14:29:21.886Z",
+        "createdAt": "2026-04-12T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-23",
+        "controlId": "TECH-05",
+        "annexCode": "A.8.2",
+        "name": "Firewall",
+        "description": "Preventive control for Technical domain — Firewall.",
+        "category": "Technical",
+        "domain": "Technical",
+        "controlType": "Preventive",
+        "owner": "Head of IT Security",
+        "testingFrequency": "Quarterly",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-001",
+          "AST-002"
+        ],
+        "effectiveness": {
+          "design": 95,
+          "operating": 90,
+          "coverage": 100,
+          "testing": 100,
+          "overall": 95
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.8.2"
+          },
+          {
+            "framework": {
+              "_id": "f-3",
+              "name": "NIST CSF 2.0"
+            },
+            "requirement": "PR.AC"
+          }
+        ],
+        "lastTestedAt": "2026-09-02T14:29:21.886Z",
+        "nextTestDueAt": "2027-05-04T14:29:21.886Z",
+        "createdAt": "2026-04-15T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-24",
+        "controlId": "TECH-06",
+        "annexCode": "A.8.1",
+        "name": "Intrusion Detection System (IDS)",
+        "description": "Detective control for Technical domain — Intrusion Detection System (IDS).",
+        "category": "Technical",
+        "domain": "Technical",
+        "controlType": "Detective",
+        "owner": "CISO",
+        "testingFrequency": "Continuous",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-001",
+          "AST-002"
+        ],
+        "effectiveness": {
+          "design": 85,
+          "operating": 85,
+          "coverage": 90,
+          "testing": 95,
+          "overall": 88
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.8.1"
+          },
+          {
+            "framework": {
+              "_id": "f-3",
+              "name": "NIST CSF 2.0"
+            },
+            "requirement": "DE.CM"
+          }
+        ],
+        "lastTestedAt": "2026-09-05T14:29:21.886Z",
+        "nextTestDueAt": "2027-05-14T14:29:21.886Z",
+        "createdAt": "2026-04-18T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-25",
+        "controlId": "TECH-07",
+        "annexCode": "A.8.1",
+        "name": "Endpoint Detection & Response (EDR)",
+        "description": "Detective control for Technical domain — Endpoint Detection & Response (EDR).",
+        "category": "Technical",
+        "domain": "Technical",
+        "controlType": "Detective",
+        "owner": "Head of IT Security",
+        "testingFrequency": "Continuous",
+        "status": "In Progress / Under Implementation",
+        "progress": 70,
+        "maturityLevel": 3,
+        "targetAssets": [
+          "AST-008"
+        ],
+        "effectiveness": {
+          "design": 80,
+          "operating": 78,
+          "coverage": 88,
+          "testing": 90,
+          "overall": 83
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.8.1"
+          },
+          {
+            "framework": {
+              "_id": "f-3",
+              "name": "NIST CSF 2.0"
+            },
+            "requirement": "DE.CM"
+          }
+        ],
+        "lastTestedAt": "2026-09-08T14:29:21.886Z",
+        "nextTestDueAt": "2026-08-17T14:29:21.886Z",
+        "createdAt": "2026-04-21T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-26",
+        "controlId": "TECH-08",
+        "annexCode": "A.8.24",
+        "name": "Data Encryption at Rest",
+        "description": "Preventive control for Technical domain — Data Encryption at Rest.",
+        "category": "Technical",
+        "domain": "Technical",
+        "controlType": "Preventive",
+        "owner": "Head of IT Security",
+        "testingFrequency": "Continuous",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-004",
+          "AST-005"
+        ],
+        "effectiveness": {
+          "design": 90,
+          "operating": 90,
+          "coverage": 95,
+          "testing": 100,
+          "overall": 93
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.8.24"
+          },
+          {
+            "framework": {
+              "_id": "f-4",
+              "name": "PCI DSS 4.0"
+            },
+            "requirement": "Req 3"
+          }
+        ],
+        "lastTestedAt": "2026-09-11T14:29:21.886Z",
+        "nextTestDueAt": "2027-06-03T14:29:21.886Z",
+        "createdAt": "2026-04-24T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-27",
+        "controlId": "TECH-09",
+        "annexCode": "A.8.24",
+        "name": "Data Encryption in Transit",
+        "description": "Preventive control for Technical domain — Data Encryption in Transit.",
+        "category": "Technical",
+        "domain": "Technical",
+        "controlType": "Preventive",
+        "owner": "Head of IT Security",
+        "testingFrequency": "Continuous",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-001",
+          "AST-002",
+          "AST-006"
+        ],
+        "effectiveness": {
+          "design": 95,
+          "operating": 95,
+          "coverage": 100,
+          "testing": 100,
+          "overall": 97
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.8.24"
+          },
+          {
+            "framework": {
+              "_id": "f-4",
+              "name": "PCI DSS 4.0"
+            },
+            "requirement": "Req 4"
+          }
+        ],
+        "lastTestedAt": "2026-09-14T14:29:21.886Z",
+        "nextTestDueAt": "2027-06-13T14:29:21.886Z",
+        "createdAt": "2026-04-27T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-28",
+        "controlId": "TECH-10",
+        "annexCode": "A.8.15",
+        "name": "Security Information & Event Management (SIEM)",
+        "description": "Detective control for Technical domain — Security Information & Event Management (SIEM).",
+        "category": "Technical",
+        "domain": "Technical",
+        "controlType": "Detective",
+        "owner": "CISO",
+        "testingFrequency": "Continuous",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-001",
+          "AST-002",
+          "AST-004"
+        ],
+        "effectiveness": {
+          "design": 85,
+          "operating": 82,
+          "coverage": 90,
+          "testing": 95,
+          "overall": 87
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.8.15"
+          },
+          {
+            "framework": {
+              "_id": "f-3",
+              "name": "NIST CSF 2.0"
+            },
+            "requirement": "DE.AE"
+          },
+          {
+            "framework": {
+              "_id": "f-5",
+              "name": "CBE Cybersecurity Requirements"
+            },
+            "requirement": "Section 8.3"
+          }
+        ],
+        "lastTestedAt": "2026-09-17T14:29:21.886Z",
+        "nextTestDueAt": "2026-08-17T14:29:21.886Z",
+        "createdAt": "2026-04-30T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-29",
+        "controlId": "TECH-11",
+        "annexCode": "A.8.14",
+        "name": "Backup & Recovery",
+        "description": "Corrective control for Technical domain — Backup & Recovery.",
+        "category": "Technical",
+        "domain": "Technical",
+        "controlType": "Corrective",
+        "owner": "Head of IT Security",
+        "testingFrequency": "Daily",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 4,
+        "targetAssets": [
+          "AST-004",
+          "AST-005",
+          "AST-007"
+        ],
+        "effectiveness": {
+          "design": 90,
+          "operating": 88,
+          "coverage": 95,
+          "testing": 100,
+          "overall": 92
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.8.14"
+          },
+          {
+            "framework": {
+              "_id": "f-5",
+              "name": "CBE Cybersecurity Requirements"
+            },
+            "requirement": "Section 8.4"
+          }
+        ],
+        "lastTestedAt": "2026-09-20T14:29:21.886Z",
+        "nextTestDueAt": "2027-07-03T14:29:21.886Z",
+        "createdAt": "2026-05-03T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-30",
+        "controlId": "TECH-12",
+        "annexCode": "A.8.8",
+        "name": "Patch Management",
+        "description": "Preventive control for Technical domain — Patch Management.",
+        "category": "Technical",
+        "domain": "Technical",
+        "controlType": "Preventive",
+        "owner": "Head of IT Security",
+        "testingFrequency": "Weekly",
+        "status": "In Progress / Under Implementation",
+        "progress": 60,
+        "maturityLevel": 3,
+        "targetAssets": [
+          "AST-001",
+          "AST-002",
+          "AST-007"
+        ],
+        "effectiveness": {
+          "design": 80,
+          "operating": 75,
+          "coverage": 85,
+          "testing": 90,
+          "overall": 81
+        },
+        "framework": {
+          "_id": "f-1",
+          "name": "ISO 27001:2022"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.8.8"
+          },
+          {
+            "framework": {
+              "_id": "f-4",
+              "name": "PCI DSS 4.0"
+            },
+            "requirement": "Req 6"
+          }
+        ],
+        "lastTestedAt": "2026-09-23T14:29:21.886Z",
+        "nextTestDueAt": "2027-07-13T14:29:21.886Z",
+        "createdAt": "2026-05-06T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      },
+      {
+        "_id": "c-31",
+        "controlId": "TECH-13",
+        "annexCode": "A.8.5",
+        "name": "Multi-Factor Authentication (MFA)",
+        "description": "Preventive control for Technical domain — Multi-Factor Authentication (MFA).",
+        "category": "Technical",
+        "domain": "Technical",
+        "controlType": "Preventive",
+        "owner": "Head of Payments",
+        "testingFrequency": "Continuous",
+        "status": "Active / Implemented",
+        "progress": 100,
+        "maturityLevel": 5,
+        "targetAssets": [
+          "AST-006"
+        ],
+        "effectiveness": {
+          "design": 95,
+          "operating": 92,
+          "coverage": 100,
+          "testing": 100,
+          "overall": 96
+        },
+        "framework": {
+          "_id": "f-3",
+          "name": "NIST CSF 2.0"
+        },
+        "frameworkMappings": [
+          {
+            "framework": {
+              "_id": "f-1",
+              "name": "ISO 27001:2022"
+            },
+            "requirement": "A.8.5"
+          },
+          {
+            "framework": {
+              "_id": "f-4",
+              "name": "PCI DSS 4.0"
+            },
+            "requirement": "Req 8"
+          }
+        ],
+        "lastTestedAt": "2026-09-26T14:29:21.886Z",
+        "nextTestDueAt": "2026-08-17T14:29:21.886Z",
+        "createdAt": "2026-05-09T14:29:21.886Z",
+        "evidence": [],
+        "assessments": []
+      }
+    ],
+    "compliance/gaps": [
+      {
+        "_id": "g-1",
+        "gapId": "G-001",
+        "description": "No formal supplier security assessment program",
+        "control": {
+          "_id": "c-3",
+          "name": "Supplier security assessment"
+        },
+        "severity": "High",
+        "owner": "Procurement Director",
+        "dueDate": "2026-10-11T14:29:21.886Z",
+        "status": "Open",
+        "createdAt": "2026-07-28T14:29:21.886Z"
+      },
+      {
+        "_id": "g-2",
+        "gapId": "G-002",
+        "description": "Recovery plan not tested in last 18 months",
+        "control": {
+          "_id": "c-8",
+          "name": "Recovery plan testing"
+        },
+        "severity": "Critical",
+        "owner": "BCP Coordinator",
+        "dueDate": "2026-08-22T14:29:21.886Z",
+        "status": "In Progress",
+        "createdAt": "2026-06-28T14:29:21.886Z"
+      },
+      {
+        "_id": "g-3",
+        "gapId": "G-003",
+        "description": "Cardholder data access not fully restricted",
+        "control": {
+          "_id": "c-11",
+          "name": "Access restriction to cardholder data"
+        },
+        "severity": "High",
+        "owner": "Head of Payments",
+        "dueDate": "2026-09-26T14:29:21.886Z",
+        "status": "Open",
+        "createdAt": "2026-08-07T14:29:21.886Z"
+      },
+      {
+        "_id": "g-4",
+        "gapId": "G-004",
+        "description": "Incident response playbook outdated",
+        "control": {
+          "_id": "c-7",
+          "name": "Incident response playbook"
+        },
+        "severity": "Medium",
+        "owner": "Head of IT Security",
+        "dueDate": "2026-10-26T14:29:21.886Z",
+        "status": "Open",
+        "createdAt": "2026-08-17T14:29:21.886Z"
+      },
+      {
+        "_id": "g-5",
+        "gapId": "G-005",
+        "description": "Vulnerability scan coverage incomplete",
+        "control": {
+          "_id": "c-2",
+          "name": "Vulnerability management"
+        },
+        "severity": "Medium",
+        "owner": "CISO",
+        "dueDate": "2026-09-16T14:29:21.886Z",
+        "status": "In Progress",
+        "createdAt": "2026-08-12T14:29:21.886Z"
+      },
+      {
+        "_id": "g-6",
+        "gapId": "G-006",
+        "description": "Legacy TLS on payment gateway",
+        "control": {
+          "_id": "c-9",
+          "name": "Encryption of cardholder data"
+        },
+        "severity": "High",
+        "owner": "Head of Payments",
+        "dueDate": "2026-08-15T14:29:21.886Z",
+        "status": "Closed",
+        "createdAt": "2026-05-29T14:29:21.886Z"
+      }
+    ],
+    "compliance/campaigns": [
+      {
+        "_id": "cmp-1",
+        "name": "Q3 ISO 27001 Control Self-Assessment",
+        "status": "Active",
+        "frameworkIds": [
+          "f-1"
+        ],
+        "domainFilter": "",
+        "startDate": "2026-08-07T14:29:21.886Z",
+        "dueDate": "2026-09-06T14:29:21.886Z",
+        "assignedOwners": [
+          "Head of IT Security",
+          "CISO",
+          "Procurement Director"
+        ],
+        "reminderSchedule": [
+          "t-7d",
+          "t-1d"
+        ],
+        "completionPercent": 62,
+        "responses": [
+          {
+            "_id": "rsp-1",
+            "controlId": "c-1",
+            "owner": "Head of IT Security",
+            "status": "Submitted",
+            "result": "Pass",
+            "updatedAt": "2026-08-22T14:29:21.886Z",
+            "comments": "Policy updated and approved."
+          },
+          {
+            "_id": "rsp-2",
+            "controlId": "c-2",
+            "owner": "CISO",
+            "status": "In Progress",
+            "result": "Partial",
+            "updatedAt": "2026-08-24T14:29:21.886Z",
+            "comments": ""
+          },
+          {
+            "_id": "rsp-3",
+            "controlId": "c-3",
+            "owner": "Procurement Director",
+            "status": "Not Started",
+            "result": null,
+            "updatedAt": null,
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "_id": "cmp-2",
+        "name": "PCI DSS 4.0 Annual Assessment",
+        "status": "Draft",
+        "frameworkIds": [
+          "f-3"
+        ],
+        "domainFilter": "Cybersecurity",
+        "startDate": "2026-09-01T14:29:21.886Z",
+        "dueDate": "2026-10-26T14:29:21.886Z",
+        "assignedOwners": [
+          "Head of Payments",
+          "CISO"
+        ],
+        "reminderSchedule": [
+          "t-7d"
+        ],
+        "completionPercent": 0,
+        "responses": [
+          {
+            "_id": "rsp-4",
+            "controlId": "c-9",
+            "owner": "Head of Payments",
+            "status": "Not Started",
+            "result": null,
+            "updatedAt": null,
+            "comments": ""
+          },
+          {
+            "_id": "rsp-5",
+            "controlId": "c-11",
+            "owner": "Head of Payments",
+            "status": "Not Started",
+            "result": null,
+            "updatedAt": null,
+            "comments": ""
+          }
+        ]
+      }
+    ],
+    "compliance/crosswalks": [
+      {
+        "_id": "cw-1",
+        "sourceControl": {
+          "_id": "c-1",
+          "name": "Access control policy"
+        },
+        "sourceFramework": "ISO 27001:2022",
+        "targetFramework": "f-2",
+        "targetControl": {
+          "_id": "c-5",
+          "name": "Asset inventory and classification"
+        },
+        "mappingType": "Equivalent"
+      },
+      {
+        "_id": "cw-2",
+        "sourceControl": {
+          "_id": "c-2",
+          "name": "Vulnerability management"
+        },
+        "sourceFramework": "ISO 27001:2022",
+        "targetFramework": "f-2",
+        "targetControl": {
+          "_id": "c-6",
+          "name": "Continuous monitoring"
+        },
+        "mappingType": "Partial"
+      },
+      {
+        "_id": "cw-3",
+        "sourceControl": {
+          "_id": "c-9",
+          "name": "Encryption of cardholder data"
+        },
+        "sourceFramework": "NIST CSF 2.0",
+        "targetFramework": "f-3",
+        "targetControl": {
+          "_id": "c-9",
+          "name": "Encryption of cardholder data"
+        },
+        "mappingType": "Equivalent"
+      }
+    ],
+    "audit/engagements": [
+      {
+        "_id": "ae-1",
+        "auditId": "A-2026-01",
+        "title": "Core Banking System General Controls Review",
+        "auditType": "IT",
+        "entity": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "auditee": "IT Operations",
+        "leadAuditor": {
+          "_id": "u-auditor",
+          "fullName": "Audrey Tor",
+          "username": "auditor"
+        },
+        "plannedStart": "2026-07-28T14:29:21.886Z",
+        "plannedEnd": "2026-09-16T14:29:21.886Z",
+        "stage": "Fieldwork",
+        "progressPercent": 55,
+        "overallRating": null,
+        "status": "In Progress",
+        "scope": "Access controls, change management, backup"
+      },
+      {
+        "_id": "ae-2",
+        "auditId": "A-2026-02",
+        "title": "Third-Party Vendor Management Audit",
+        "auditType": "Compliance",
+        "entity": {
+          "_id": "o-2",
+          "name": "Wadjet Digital Ltd"
+        },
+        "auditee": "Procurement",
+        "leadAuditor": {
+          "_id": "u-auditor",
+          "fullName": "Audrey Tor",
+          "username": "auditor"
+        },
+        "plannedStart": "2026-08-17T14:29:21.886Z",
+        "plannedEnd": "2026-10-06T14:29:21.886Z",
+        "stage": "Planning",
+        "progressPercent": 10,
+        "overallRating": null,
+        "status": "In Progress",
+        "scope": "Vendor due diligence, contracts, monitoring"
+      },
+      {
+        "_id": "ae-3",
+        "auditId": "A-2025-06",
+        "title": "Information Security Annual Audit",
+        "auditType": "Internal",
+        "entity": {
+          "_id": "o-1",
+          "name": "Wadjet Bank Plc"
+        },
+        "auditee": "IT",
+        "leadAuditor": {
+          "_id": "u-auditor",
+          "fullName": "Audrey Tor",
+          "username": "auditor"
+        },
+        "plannedStart": "2026-04-29T14:29:21.886Z",
+        "plannedEnd": "2026-07-28T14:29:21.886Z",
+        "stage": "Closed",
+        "progressPercent": 100,
+        "overallRating": "Satisfactory",
+        "status": "Completed",
+        "scope": "ISMS controls"
+      }
+    ],
+    "audit/universe": [
+      {
+        "_id": "au-1",
+        "name": "Core Banking System",
+        "type": "IT",
+        "riskRating": "High",
+        "lastAuditedAt": "2026-07-28T14:29:21.886Z",
+        "nextAuditDue": "2027-01-24T14:29:21.886Z",
+        "status": "Scheduled"
+      },
+      {
+        "_id": "au-2",
+        "name": "Procurement & Vendor Management",
+        "type": "Business Process",
+        "riskRating": "High",
+        "lastAuditedAt": "2026-02-08T14:29:21.886Z",
+        "nextAuditDue": "2026-09-26T14:29:21.886Z",
+        "status": "Due"
+      },
+      {
+        "_id": "au-3",
+        "name": "Retail Banking Operations",
+        "type": "Business Unit",
+        "riskRating": "Medium",
+        "lastAuditedAt": "2026-04-29T14:29:21.886Z",
+        "nextAuditDue": "2027-02-23T14:29:21.886Z",
+        "status": "Scheduled"
+      },
+      {
+        "_id": "au-4",
+        "name": "AML Compliance Function",
+        "type": "Business Process",
+        "riskRating": "Critical",
+        "lastAuditedAt": "2025-12-30T14:29:21.886Z",
+        "nextAuditDue": "2026-08-07T14:29:21.886Z",
+        "status": "Overdue"
+      }
+    ],
+    "audit/procedures": [
+      {
+        "_id": "ap-1",
+        "code": "P-001",
+        "title": "Verify access reviews performed quarterly",
+        "type": "Test",
+        "status": "Open",
+        "owner": "IT Operations",
+        "dueDate": "2026-09-11T14:29:21.886Z",
+        "result": null
+      },
+      {
+        "_id": "ap-2",
+        "code": "P-002",
+        "title": "Review change management tickets",
+        "type": "Sampling",
+        "status": "In Progress",
+        "owner": "IT Operations",
+        "dueDate": "2026-09-06T14:29:21.886Z",
+        "result": null
+      }
+    ],
+    "audit/findings": [
+      {
+        "_id": "af-1",
+        "findingId": "F-2026-01",
+        "title": "Privileged access not reviewed for 6 months",
+        "severity": "High",
+        "status": "Open",
+        "owner": "Head of IT Security",
+        "dueDate": "2026-10-11T14:29:21.886Z",
+        "description": "Monthly privileged access reviews not performed since January."
+      },
+      {
+        "_id": "af-2",
+        "findingId": "F-2026-02",
+        "title": "Backup restoration not tested",
+        "severity": "Medium",
+        "status": "In Progress",
+        "owner": "IT Operations",
+        "dueDate": "2026-09-26T14:29:21.886Z",
+        "description": "No restoration test performed in the last 12 months."
+      },
+      {
+        "_id": "af-3",
+        "findingId": "F-2025-11",
+        "title": "Vendor contracts missing SLA clauses",
+        "severity": "High",
+        "status": "Closed",
+        "owner": "Procurement Director",
+        "dueDate": "2026-07-28T14:29:21.886Z",
+        "description": "Three vendor contracts lacked SLA provisions."
+      }
+    ],
+    "audit/capas": [
+      {
+        "_id": "ac-1",
+        "title": "Reinstate monthly privileged access reviews",
+        "status": "In Progress",
+        "owner": "Head of IT Security",
+        "dueDate": "2026-10-11T14:29:21.886Z",
+        "verificationComments": "",
+        "verifiedBy": null
+      },
+      {
+        "_id": "ac-2",
+        "title": "Quarterly backup restoration tests",
+        "status": "Open",
+        "owner": "IT Operations",
+        "dueDate": "2026-10-26T14:29:21.886Z",
+        "verificationComments": "",
+        "verifiedBy": null
+      }
+    ],
+    "audit/reports": [
+      {
+        "_id": "ar-1",
+        "title": "Draft audit report — Core Banking",
+        "status": "Draft",
+        "version": "0.1",
+        "createdAt": "2026-08-22T14:29:21.886Z",
+        "updatedAt": "2026-08-25T14:29:21.886Z"
+      }
+    ],
+    "governance/committees": [
+      {
+        "_id": "cm-1",
+        "name": "Risk Committee",
+        "status": "Active",
+        "mandate": "Oversee enterprise risk",
+        "frequency": "Quarterly",
+        "chair": "Chief Risk Officer",
+        "createdAt": "2025-04-14T14:29:21.886Z",
+        "members": [
+          {
+            "_id": "cm-m1",
+            "user": {
+              "_id": "u-admin",
+              "fullName": "System Administrator",
+              "username": "admin",
+              "email": "admin@wadjet.local"
+            },
+            "memberRole": "Chair"
+          },
+          {
+            "_id": "cm-m2",
+            "user": {
+              "_id": "u-manager",
+              "fullName": "Morgan Lee",
+              "username": "manager",
+              "email": "manager@wadjet.local"
+            },
+            "memberRole": "Member"
+          }
+        ]
+      },
+      {
+        "_id": "cm-2",
+        "name": "Audit Committee",
+        "status": "Active",
+        "mandate": "Oversee internal audit",
+        "frequency": "Quarterly",
+        "chair": "Head of Audit",
+        "createdAt": "2025-06-03T14:29:21.886Z",
+        "members": [
+          {
+            "_id": "cm-m3",
+            "user": {
+              "_id": "u-auditor",
+              "fullName": "Audrey Tor",
+              "username": "auditor",
+              "email": "auditor@wadjet.local"
+            },
+            "memberRole": "Chair"
+          }
+        ]
+      },
+      {
+        "_id": "cm-3",
+        "name": "IT Steering Committee",
+        "status": "Active",
+        "mandate": "Approve IT investments",
+        "frequency": "Monthly",
+        "chair": "CIO",
+        "createdAt": "2025-09-11T14:29:21.886Z",
+        "members": []
+      }
+    ],
+    "governance/exception-types": [
+      {
+        "_id": "et-1",
+        "name": "Technical",
+        "description": "Technical control deviations",
+        "defaultExpiryDays": 90,
+        "status": "Active"
+      },
+      {
+        "_id": "et-2",
+        "name": "Operational",
+        "description": "Operational process deviations",
+        "defaultExpiryDays": 60,
+        "status": "Active"
+      },
+      {
+        "_id": "et-3",
+        "name": "Third-Party",
+        "description": "Vendor-related deviations",
+        "defaultExpiryDays": 45,
+        "status": "Active"
+      }
+    ],
+    "email/messages": [
+      {
+        "_id": "em-1",
+        "to": "risk-committee@wadjet.local",
+        "subject": "Q3 Risk Committee pack",
+        "body": "Please find the Q3 risk pack attached.",
+        "status": "Draft",
+        "attachments": [],
+        "scheduledAt": null,
+        "createdAt": "2026-08-25T14:29:21.886Z"
+      },
+      {
+        "_id": "em-2",
+        "to": "admin@wadjet.local",
+        "subject": "Campaign due reminder",
+        "body": "The ISO self-assessment campaign is due Friday.",
+        "status": "Sent",
+        "attachments": [],
+        "scheduledAt": null,
+        "createdAt": "2026-08-23T14:29:21.886Z"
+      }
+    ],
+    "backup/records": [
+      {
+        "_id": "bk-1",
+        "filename": "wadjet-grc-2026-08-19.zip",
+        "size": "24.1 MB",
+        "status": "Completed",
+        "createdAt": "2026-08-26T14:29:21.886Z"
+      },
+      {
+        "_id": "bk-2",
+        "filename": "wadjet-grc-2026-08-18.zip",
+        "size": "23.8 MB",
+        "status": "Completed",
+        "createdAt": "2026-08-25T14:29:21.886Z"
+      }
+    ],
+    "risk-control-links": []
+  },
+  "nested": {
+    "policies::pol-1::control-mappings": [
+      {
+        "_id": "cm-mtbmcjvd-1",
+        "controlId": "ISO-01",
+        "controlName": "",
+        "framework": "",
+        "domain": "",
+        "mappingType": "Direct",
+        "rationale": "Access control is governed by the Information Security Policy",
+        "createdAt": "2026-08-27T14:29:22.969Z"
+      },
+      {
+        "_id": "cm-mtbmcjvd-2",
+        "controlId": "ISO-04",
+        "controlName": "",
+        "framework": "",
+        "domain": "",
+        "mappingType": "Direct",
+        "rationale": "Awareness and training mandated by the Information Security Policy",
+        "createdAt": "2026-08-27T14:29:22.969Z"
+      }
+    ],
+    "policies::pol-5::control-mappings": [
+      {
+        "_id": "cm-mtbmcjvd-3",
+        "controlId": "ISO-03",
+        "controlName": "",
+        "framework": "",
+        "domain": "",
+        "mappingType": "Direct",
+        "rationale": "Supplier security assessment covered by the Third-Party Risk Policy",
+        "createdAt": "2026-08-27T14:29:22.969Z"
+      }
+    ],
+    "policies::pol-4::control-mappings": [
+      {
+        "_id": "cm-mtbmcjvd-4",
+        "controlId": "ISO-02",
+        "controlName": "",
+        "framework": "",
+        "domain": "",
+        "mappingType": "Direct",
+        "rationale": "Vulnerability management referenced by the BCP policy",
+        "createdAt": "2026-08-27T14:29:22.969Z"
+      }
+    ],
+    "policies::pol-1::exceptions": [],
+    "policies::pol-2::exceptions": [],
+    "policies::pol-3::exceptions": [],
+    "policies::pol-4::exceptions": [],
+    "policies::pol-5::exceptions": [],
+    "policies::pol-6::exceptions": [],
+    "policies::pol-7::exceptions": [],
+    "policies::pol-8::exceptions": [],
+    "policies::pol-9::exceptions": [],
+    "policies::pol-10::exceptions": []
+  }
+}
